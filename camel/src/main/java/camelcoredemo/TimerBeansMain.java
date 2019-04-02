@@ -19,6 +19,7 @@ public class TimerBeansMain extends Main {
 
     static RouteBuilder createRouteBuilder() {
         return new RouteBuilder() {
+            @Override
             public void configure() {
                 from("timer://timer1?period=1000")
                         .to("bean:processByBean1")
@@ -29,12 +30,14 @@ public class TimerBeansMain extends Main {
 
     // Processor beans
     static class Bean1 implements Processor {
+        @Override
         public void process(Exchange msg) {
             LOG.info("First process {}", msg);
         }
     }
 
     static class Bean2 implements Processor {
+        @Override
         public void process(Exchange msg) {
             LOG.info("Second process {}", msg);
         }

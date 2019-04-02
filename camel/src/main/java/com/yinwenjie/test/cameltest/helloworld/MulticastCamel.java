@@ -11,8 +11,7 @@ import org.apache.camel.model.ModelCamelContext;
 import org.apache.camel.model.MulticastDefinition;
 import org.slf4j.Logger;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -42,7 +41,9 @@ public class MulticastCamel extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         // 这个线程池用来进行multicast中各个路由线路的并发执行
-        ExecutorService executorService = Executors.newFixedThreadPool(10);
+        ExecutorService executorService = new ThreadPoolExecutor(10, 10,
+                0L, TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<Runnable>());
         MulticastDefinition multicastDefinition = from("jetty:http://0.0.0.0:8282/multicastCamel").multicast();
 
         // multicast 中的消息路由可以顺序执行也可以并发执行

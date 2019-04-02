@@ -45,6 +45,7 @@ public class MoveAndProcessFileWithCamel {
         CamelContext context = new DefaultCamelContext();
 
         context.addRoutes(new RouteBuilder() {
+            @Override
             public void configure() {
                 Processor processor = new FileConvertProcessor();
                 from("file:d://tmp//inbox?delay=5000").process(processor).to("file:d://tmp//outbox");

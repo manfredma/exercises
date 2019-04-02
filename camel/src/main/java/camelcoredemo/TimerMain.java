@@ -22,6 +22,7 @@ public class TimerMain {
 
 
         Runtime.getRuntime().addShutdownHook(new Thread() {
+            @Override
             public void run() {
                 try {
                     camelContext.stop();

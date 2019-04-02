@@ -12,6 +12,7 @@
         <module>camel</module>
         <module>proxy</module>
         <module>spring</module>
+        <module>rest</module>
     </modules>
     <packaging>pom</packaging>
 

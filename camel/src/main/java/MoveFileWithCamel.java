@@ -6,6 +6,7 @@ public class MoveFileWithCamel {
     public static void main(String args[]) throws Exception {
         CamelContext context = new DefaultCamelContext();
         context.addRoutes(new RouteBuilder() {
+            @Override
             public void configure() {
 
                 from("file:d://tmp//inbox?delay=5000").to("file:d://tmp//outbox");
