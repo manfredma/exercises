@@ -28,4 +28,9 @@ public class StringTest {
         Assert.assertEquals(String.class, a.getClass());
         Assert.assertEquals("parent.toString~~xxx", a.toString());
     }
+
+    @Test
+    public void reverse() {
+        Assert.assertEquals("bxxxxxx", new StringBuffer("xxxxxxb").reverse().toString());
+    }
 }
