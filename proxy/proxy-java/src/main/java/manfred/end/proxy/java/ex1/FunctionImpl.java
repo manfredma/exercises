@@ -1,3 +1,8 @@
+package manfred.end.proxy.java.ex1;
+
+/**
+ * @author maxingfang
+ */
 public class FunctionImpl implements IFunction {
     @Override
     public void doSomething() throws IllegalStateException {

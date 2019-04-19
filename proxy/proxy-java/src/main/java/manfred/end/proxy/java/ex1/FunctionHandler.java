@@ -1,6 +1,11 @@
+package manfred.end.proxy.java.ex1;
+
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
+/**
+ * @author maxingfang
+ */
 public class FunctionHandler implements InvocationHandler {
 
     private Object fun;
