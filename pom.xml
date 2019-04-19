@@ -15,6 +15,7 @@
         <module>rest</module>
         <module>concurrent</module>
         <module>java-io</module>
+        <module>cache</module>
     </modules>
     <packaging>pom</packaging>
 
