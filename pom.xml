@@ -13,6 +13,8 @@
         <module>proxy</module>
         <module>spring</module>
         <module>rest</module>
+        <module>concurrent</module>
+        <module>java-io</module>
     </modules>
     <packaging>pom</packaging>
 
