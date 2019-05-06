@@ -41,5 +41,6 @@ public class StringTest {
         System.out.println("淡淡的蓝20106");
         System.out.println(new String("淡淡的蓝20106".getBytes("UTF-8"), "GBK"));
         System.out.println(new String("张Qq-_".getBytes("UTF-8"), "GBK"));
+        System.out.println(new String("金戈小虔".getBytes("UTF-8"), "GBK"));
     }
 }

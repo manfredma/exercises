@@ -16,6 +16,8 @@
         <module>concurrent</module>
         <module>java-io</module>
         <module>cache</module>
+        <module>i18n</module>
+        <module>jvm</module>
     </modules>
     <packaging>pom</packaging>
 
