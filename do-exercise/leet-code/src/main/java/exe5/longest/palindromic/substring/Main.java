@@ -22,5 +22,11 @@ public class Main {
         System.out.println(solution.longestPalindrome("abcbcbc"));
         System.out.println(solution.longestPalindrome("babad"));
         System.out.println(solution.longestPalindrome("cbbd"));
+
+        Solution2 solution2 = new Solution2();
+        System.out.println(solution2.longestPalindrome("bb"));
+        System.out.println(solution2.longestPalindrome("abcbcbc"));
+        System.out.println(solution2.longestPalindrome("babad"));
+        System.out.println(solution2.longestPalindrome("cbbd"));
     }
 }
