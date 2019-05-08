@@ -31,4 +31,8 @@ package exe6.zig.zag.onversion;
  * @author Manfred since 2019/5/8
  */
 public class Main {
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        System.out.println(solution.convert("01234567890123456789012345678901234", 4));
+    }
 }
