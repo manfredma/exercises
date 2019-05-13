@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zetcode">
+
+    <select id = "getBook" resultType = "manfred.end.rdbms.mybatis.Book">
+        SELECT * FROM MyBooks
+
+        <where>
+            <if test = "_parameter != null">
+                Id = #{id}
+            </if>
+        </where>
+
+    </select>
+
+</mapper>
