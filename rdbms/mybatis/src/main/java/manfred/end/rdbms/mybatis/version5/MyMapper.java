@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import java.util.Date;
 import java.util.List;
 
 public interface MyMapper {
@@ -20,6 +21,6 @@ public interface MyMapper {
     void insertBook(String author, String title, int published,
                     String remark);
 
-    @Update("update MyBooks set created = date_add(created, interval 1 second)")
-    void updateBookCreated();
+    @Update("update MyBooks set created = date_add(created, interval 1 second) where created < #{date}")
+    void updateBookCreated(Date date);
 }

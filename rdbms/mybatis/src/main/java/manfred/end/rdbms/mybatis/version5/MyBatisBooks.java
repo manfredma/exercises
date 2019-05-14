@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.util.Date;
 import java.util.List;
 
 public class MyBatisBooks {
@@ -50,7 +51,7 @@ public class MyBatisBooks {
 
     @Test
     public void updateBookCreated() {
-        int i = session.update("updateBookCreated");
+        int i = session.update("updateBookCreated", new Date());
         System.out.println("update=" + i);
         session.commit();
     }
