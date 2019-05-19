@@ -50,4 +50,15 @@ package exe10.regular.expression.matching;
  * @author Manfred since 2019/5/9
  */
 public class Main {
+    public static void main(String[] args) {
+
+        Solution solution = new Solution();
+        System.out.println("solution.isMatch(\"a\", \".*..a*\")=" + solution.isMatch("a", ".*..a*"));
+        System.out.println("solution.isMatch(\"ab\", \".*c\")=" + solution.isMatch("ab", ".*c"));
+        System.out.println("solution.isMatch(\"aab\", \"c*a*b*\")=" + solution.isMatch("aab", "c*a*b*"));
+        System.out.println("solution.isMatch(\"aa\", \"a\")=" + solution.isMatch("aa", "a"));
+        System.out.println("solution.isMatch(\"aa\", \"a*\")=" + solution.isMatch("aa", "a*"));
+        System.out.println("solution.isMatch(\"ab\", \".*\")=" + solution.isMatch("ab", ".*"));
+        System.out.println("solution.isMatch(\"mississippi\", \"mis*is*p*.\")=" + solution.isMatch("mississippi", "mis*is*p*."));
+    }
 }
