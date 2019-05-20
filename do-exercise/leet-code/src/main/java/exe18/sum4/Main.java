@@ -23,4 +23,10 @@ package exe18.sum4;
  * @author Manfred since 2019/5/20
  */
 public class Main {
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        System.out.println(solution.fourSum(new int[]{1, 0, -1, 0, -2, 2}, 0));
+        System.out.println(solution.fourSum(new int[]{-1,0,-5,-2,-2,-4,0,1,-2}, -9));
+
+    }
 }
