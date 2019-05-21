@@ -1,4 +1,5 @@
-package exe19.remove.nth.node.from.end.of.list;
+package exe24.swap.nodes.in.pairs;
+
 class ListNode {
       int val;
       ListNode next;
