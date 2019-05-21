@@ -17,12 +17,12 @@ class Solution {
                     current.next = l1;
                     current = current.next;
                     l1 = l1.next;
-                    current.next = null;
+//                    current.next = null;
                 } else {
                     current.next = l2;
                     current = current.next;
                     l2 = l2.next;
-                    current.next = null;
+//                    current.next = null;
                 }
             } else if (null != l1) {
                 current.next = l1;
