@@ -9,26 +9,10 @@ class Solution {
     public boolean isValidSudoku(char[][] board) {
         Set<Character> charactersRow = new HashSet<>();
         Set<Character> charactersColumn = new HashSet<>();
-        Set<Character> characters31 = new HashSet<>();
-        Set<Character> characters32 = new HashSet<>();
-        Set<Character> characters33 = new HashSet<>();
-        Set<Character> characters34 = new HashSet<>();
-        Set<Character> characters35 = new HashSet<>();
-        Set<Character> characters36 = new HashSet<>();
-        Set<Character> characters37 = new HashSet<>();
-        Set<Character> characters38 = new HashSet<>();
-        Set<Character> characters39 = new HashSet<>();
         Map<Integer, Set<Character>> character33 = new HashMap<>();
-        character33.put(0, characters31);
-        character33.put(1, characters32);
-        character33.put(2, characters33);
-        character33.put(3, characters34);
-        character33.put(4, characters35);
-        character33.put(5, characters36);
-        character33.put(6, characters37);
-        character33.put(7, characters38);
-        character33.put(8, characters39);
-
+        for (int i = 0; i < 9; i++) {
+            character33.put(i, new HashSet<>());
+        }
 
         // 每一行只能 1-9
         for (int i = 0; i < 9; i++) {
