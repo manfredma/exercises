@@ -43,4 +43,13 @@ public class StringTest {
         System.out.println(new String("张Qq-_".getBytes("UTF-8"), "GBK"));
         System.out.println(new String("金戈小虔".getBytes("UTF-8"), "GBK"));
     }
+
+    @Test
+    public void split() {
+        String aString = "ad_x_2";
+        String[] splitResult = aString.split("_");
+        for (int i = 0; i < splitResult.length; i++) {
+            System.out.print(splitResult[i] + " ");
+        }
+    }
 }
