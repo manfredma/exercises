@@ -20,6 +20,7 @@
         <module>jvm</module>
         <module>do-exercise</module>
         <module>rdbms</module>
+        <module>tomcat</module>
     </modules>
     <packaging>pom</packaging>
 
