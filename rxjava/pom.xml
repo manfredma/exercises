@@ -10,21 +10,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>manfred.end</groupId>
-    <artifactId>tomcat</artifactId>
+    <artifactId>rxjava</artifactId>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>tomcat-connector</module>
-        <module>tomcat-container</module>
+        <module>rxjava2</module>
+        <module>rxjava1</module>
     </modules>
 
     <packaging>pom</packaging>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.apache.tomcat</groupId>
-            <artifactId>tomcat-catalina</artifactId>
-            <version>9.0.21</version>
-        </dependency>
-    </dependencies>
 
 </project>

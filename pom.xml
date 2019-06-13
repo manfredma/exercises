@@ -21,6 +21,7 @@
         <module>do-exercise</module>
         <module>rdbms</module>
         <module>tomcat</module>
+        <module>rxjava</module>
     </modules>
     <packaging>pom</packaging>
 
