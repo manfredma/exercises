@@ -1,174 +1,111 @@
 package exe44.wildcard.matching;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
 
 class Solution {
     private static final char WILD_CARD_ASTERISK = '*';
 
     private static final char WILD_CARD_QUESTION = '?';
 
+    private static final List<Character> ALL_CHAR = new ArrayList<>();
+
+    static {
+        for (int i = 0; i < 26; i++) {
+            ALL_CHAR.add((char) ('a' + i));
+        }
+    }
+
     public boolean isMatch(String s, String p) {
-        if ("".equals(s) && "".equals(p)) {
+        if (isEmpty(s) && isEmpty(p)) {
             return true;
         }
-        p = combineAsterisk(p);
-        if ("".equals(s) && String.valueOf(WILD_CARD_ASTERISK).equals(p)) {
-            return true;
-        } else if ("".equals(s)) {
+        if (isEmpty(p) && !isEmpty(s)) {
             return false;
         }
-        List<Integer> asteriskPosition = new ArrayList<>();
-        Map<Integer, Integer> asteriskPosition2S = new HashMap<>(p.length());
-        int pIndex = 0;
-        int sIndex = 0;
-        while (true) {
-            if (pIndex > p.length() - 1 || sIndex > s.length() - 1) {
-                if (canLookBack(asteriskPosition, asteriskPosition2S)) {
-                    // 回溯一下
-                    pIndex = lookBackP(s, p, asteriskPosition, asteriskPosition2S);
-                    sIndex = lookBackS(s, asteriskPosition, asteriskPosition2S);
-                    printInfo(asteriskPosition, asteriskPosition2S, pIndex, sIndex, "7");
-                    continue;
-                } else {
-                    printInfo(asteriskPosition, asteriskPosition2S, pIndex, sIndex, "8");
-                    return false;
-                }
-            }
-            // 需要判断是否匹配，如果匹配，则返回匹配，
-            // 否则，判断是否能够回溯，如果可以，则回溯；否则，则返回不匹配
-            if (sIndex == s.length() - 1) {
-                if (pIndex >= p.length() - 3 && pIndex < p.length()) {
-                    List<Character> c = new ArrayList<>();
-                    for (int i = pIndex; i < p.length(); i++) {
-                        if (WILD_CARD_ASTERISK != p.charAt(i)) {
-                            c.add(p.charAt(i));
-                        }
-                    }
-                    if (c.size() == 0) {
-                        return true;
-                    } else if (c.size() == 1 && isCharMatch(c.get(0), s.charAt(sIndex))) {
-                        return true;
-                    }
-                }
-                if (canLookBack(asteriskPosition, asteriskPosition2S)) {
-                    // 回溯一下
-                    pIndex = lookBackP(s, p, asteriskPosition, asteriskPosition2S);
-                    sIndex = lookBackS(s, asteriskPosition, asteriskPosition2S);
-                    printInfo(asteriskPosition, asteriskPosition2S, pIndex, sIndex, "2");
-                    continue;
-                } else {
-                    printInfo(asteriskPosition, asteriskPosition2S, pIndex, sIndex, "3");
-                    return false;
-                }
 
-            }
+        List<Map<Character, List<Integer>>> autoMachine = createAutoMachine(combineAsterisk(p));
+//        printAutoMachine(autoMachine);
 
-            if (WILD_CARD_ASTERISK == p.charAt(pIndex)) {
-                if (pIndex == p.length() - 1) {
-                    return true;
-                } else {
-                    if (!asteriskPosition.contains(pIndex)) {
-                        asteriskPosition.add(pIndex);
-                    }
-                    int n = nextPosition(s, sIndex, p.charAt(pIndex + 1));
-                    if (n != -1) {
-                        asteriskPosition2S.put(pIndex, n);
-                        pIndex++;
-                        sIndex = n;
-                    } else {
-                        printInfo(asteriskPosition, asteriskPosition2S, pIndex, sIndex, "4");
-                        return false;
-                    }
+        return judgeMatchMachine(autoMachine, s);
+    }
+
+    private void printAutoMachine(List<Map<Character, List<Integer>>> autoMachine) {
+        String filled = "\t\t";
+        System.out.print(filled);
+        for (int i = 0; i < ALL_CHAR.size(); i++) {
+            System.out.print(ALL_CHAR.get(i) + filled);
+        }
+        System.out.println();
+        for (int i = 0; i < autoMachine.size(); i++) {
+            System.out.print(i + filled);
+            Map<Character, List<Integer>> characterListMap = autoMachine.get(i);
+            for (int j = 0; j < ALL_CHAR.size(); j++) {
+                System.out.print(characterListMap.get(ALL_CHAR.get(j)) + filled);
+            }
+            System.out.println();
+        }
+    }
+
+    private boolean isEmpty(String s) {
+        return null == s || "".equals(s);
+    }
+
+    private boolean judgeMatchMachine(List<Map<Character, List<Integer>>> autoMachine, String s) {
+        Set<Integer> nowState = new HashSet<>();
+        nowState.add(0);
+        for (int i = 0; i < s.length(); i++) {
+            Character now = s.charAt(i);
+            Set<Integer> lastState = new HashSet<>(nowState);
+            nowState.clear();
+            for (Integer integer : lastState) {
+                nowState.addAll(autoMachine.get(integer).get(now));
+            }
+        }
+        return nowState.contains(autoMachine.size() - 1);
+    }
+
+    private List<Map<Character, List<Integer>>> createAutoMachine(String p) {
+        List<Map<Character, List<Integer>>> result = new ArrayList<>();
+        addState(result);
+        if (isEmpty(p)) {
+            return result;
+        }
+
+        int state = 0;
+        for (int i = 0; i < p.length(); i++) {
+            char c = p.charAt(i);
+
+            if (c == WILD_CARD_ASTERISK) {
+                for (Character character : ALL_CHAR) {
+                    result.get(state).get(character).add(state);
                 }
-            } else if (WILD_CARD_QUESTION == p.charAt(pIndex)) {
-                pIndex++;
-                sIndex++;
+            } else if (c == WILD_CARD_QUESTION) {
+                for (Character character : ALL_CHAR) {
+                    result.get(state).get(character).add(state + 1);
+                }
             } else {
-                if (s.charAt(sIndex) == p.charAt(pIndex)) {
-                    pIndex++;
-                    sIndex++;
-                } else {
-                    if (canLookBack(asteriskPosition, asteriskPosition2S)) {
-                        // 回溯一下
-                        pIndex = lookBackP(s, p, asteriskPosition, asteriskPosition2S);
-                        sIndex = lookBackS(s, asteriskPosition, asteriskPosition2S);
-                        printInfo(asteriskPosition, asteriskPosition2S, pIndex, sIndex, "5");
-                    } else {
-                        printInfo(asteriskPosition, asteriskPosition2S, pIndex, sIndex, "6");
-                        return false;
-                    }
-                }
+                result.get(state).get(c).add(state + 1);
+            }
+            if (c != WILD_CARD_ASTERISK) {
+                // 不是*， 增加下一state
+                addState(result);
+                state++;
             }
         }
+        return result;
     }
 
-    private void printInfo(List<Integer> asteriskPosition, Map<Integer, Integer> asteriskPosition2S, int pIndex, int sIndex, String s2) {
-//        System.out.print(s2 + "--");
-//        System.out.print(asteriskPosition + "--");
-//        System.out.print(asteriskPosition2S + "--");
-//        System.out.println("pIndex=" + pIndex + "; sIndex=" + sIndex);
+    private void addState(List<Map<Character, List<Integer>>> autoMachine) {
+        autoMachine.add(createEmptyStateMap());
     }
 
-    private int lookBackS(String s, List<Integer> asteriskPosition, Map<Integer, Integer> asteriskPosition2S) {
-        for (int i = asteriskPosition.size() - 1; i >= 0; i--) {
-            if (asteriskPosition2S.containsKey(asteriskPosition.get(i))) {
-                return asteriskPosition2S.get(asteriskPosition.get(i));
-            }
+    private Map<Character, List<Integer>> createEmptyStateMap() {
+        Map<Character, List<Integer>> initMap = new HashMap<>(ALL_CHAR.size());
+        for (Character character : ALL_CHAR) {
+            initMap.put(character, new ArrayList<>());
         }
-        return s.length();
-    }
-
-    private int lookBackP(String s, String p, List<Integer> asteriskPosition, Map<Integer, Integer> asteriskPosition2S) {
-        for (int i = asteriskPosition.size() - 1; i >= 0; i--) {
-            if (asteriskPosition2S.containsKey(asteriskPosition.get(i))) {
-                int pIndex = asteriskPosition.get(i);
-                int sIndex = asteriskPosition2S.get(pIndex);
-                int n = nextPosition(s, sIndex + 1, p.charAt(pIndex + 1));
-                if (n != -1) {
-                    asteriskPosition2S.put(pIndex, n);
-                    return pIndex + 1;
-                } else {
-                    asteriskPosition2S.remove(pIndex);
-                    return p.length();
-                }
-            }
-        }
-        return p.length();
-    }
-
-    private boolean canLookBack(List<Integer> asteriskPosition,
-                                Map<Integer, Integer> asteriskPosition2S) {
-        if (asteriskPosition.size() > 0) {
-            return asteriskPosition2S.containsKey(asteriskPosition.get(0));
-        }
-        return false;
-    }
-
-    private boolean isCharMatch(char p, char s) {
-        if (WILD_CARD_QUESTION == p) {
-            return true;
-        } else if (WILD_CARD_ASTERISK == p) {
-            return true;
-        }
-        return p == s;
-    }
-
-    private int nextPosition(String s, int i, char p) {
-        if (i > s.length() - 1) {
-            return -1;
-        }
-        if (WILD_CARD_QUESTION == p) {
-            return i;
-        }
-        for (int j = i; j < s.length(); j++) {
-            if (s.charAt(j) == p) {
-                return j;
-            }
-        }
-        return -1;
+        return initMap;
     }
 
     private String combineAsterisk(String p) {
@@ -187,4 +124,5 @@ class Solution {
         }
         return result.toString();
     }
+
 }

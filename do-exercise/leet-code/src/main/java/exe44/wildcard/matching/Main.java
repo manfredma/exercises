@@ -47,7 +47,6 @@ Output: false
  */
 package exe44.wildcard.matching;
 
-import java.util.regex.Pattern;
 
 /**
  * @author Manfred since 2019/5/31
@@ -56,11 +55,13 @@ public class Main {
     public static void main(String[] args) {
         Solution solution = new Solution();
 
+       System.out.println(solution.isMatch("ab", "a*b*") + ", expect = true");
+        System.out.println(solution.isMatch("c", "*?*") + ", expect = true");
+
         System.out.println(solution.isMatch(
                 "aaaaaabbaabaaaaabababbabbaababbaabaababaaaaabaaaabaaaabababbbabbbbaabbababbbbababbaaababbbabbbaaaaaaabbaabbbbababbabbaaabababaaaabaaabaaabbbbbabaaabbbaabbbbbbbaabaaababaaaababbbbbaabaaabbabaabbaabbaaaaba",
                 "*bbb*a*abb*b*a*bbbbaab*b*aaba*a*b*a*abb*aa*b*bb*abbbb*b*bbbabaa*b*ba*a*ba*b*a*a*aaa") + ", expect = true");
         System.out.println(solution.isMatch("abcd", "abc*d") + ", expect = true");
-        System.out.println(solution.isMatch("c", "*?*") + ", expect = true");
         System.out.println(solution.isMatch("a", "a*") + ", expect = true");
         System.out.println(solution.isMatch("mississippi", "m??*ss*?i*pi") + ", expect = false");
         System.out.println(solution.isMatch("aaaa", "**a") + ", expect = true");
@@ -70,7 +71,7 @@ public class Main {
         System.out.println(solution.isMatch("aa", "*") + ", expect = true");
         System.out.println(solution.isMatch("cb", "?a") + ", expect = false");
         System.out.println(solution.isMatch("acdcb", "a*c?b") + ", expect = false");
-        Pattern p2 =  Pattern.compile("*bbb*a*abb*b*a*bbbbaab*b*aaba*a*b*a*abb*aa*b*bb*abbbb*b*bbbabaa*b*ba*a*ba*b*a*a*aaa");
+
 
     }
 }
