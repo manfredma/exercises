@@ -23,14 +23,6 @@ package exe50.pow.x.n;
 
 class Solution {
     public double myPow(double x, int n) {
-        double r = 1;
-        long nl = Math.abs((long) n);
-        for (long i = 0; i < nl; i++) {
-            r = r * x;
-            if (r == 0.0) {
-                return n < 0 ? Double.MAX_VALUE : r;
-            }
-        }
-        return n < 0 ? 1 / r : r;
+        return Math.pow(x, n);
     }
 }
