@@ -20,7 +20,7 @@ rotate 4 steps to the right: 2->0->1->NULL
 
  */
 
-package exe61.rotate.ist;
+package exe61.rotate.list;
 
 /**
  * @author Manfred since 2019/7/16
