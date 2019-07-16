@@ -60,6 +60,8 @@ Output:
 
 package exe68.text.justification;
 
+import java.util.List;
+
 /**
  * @author Manfred since 2019/7/16
  */
@@ -70,6 +72,9 @@ public class Main {
                 "to", "a", "computer.", "Art", "is", "everything", "else", "we", "do"
         };
         Solution solution = new Solution();
-        System.out.println(solution.fullJustify(words, 20));
+        List<String> result = solution.fullJustify(words, 20);
+        for (String s : result) {
+            System.out.println(s);
+        }
     }
 }

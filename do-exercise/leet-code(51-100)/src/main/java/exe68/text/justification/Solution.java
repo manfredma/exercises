@@ -11,31 +11,18 @@ class Solution {
         int endIndex = 0;
         for (int i = 0; i < words.length; i++) {
             if (columnLength + words[i].length() > maxWidth) {
-                StringBuilder row = new StringBuilder();
-                if (endIndex == beginIndex) {
-                    row.append(words[beginIndex]);
-                    for (int j = words[beginIndex].length(); j < maxWidth; j++) {
-                        row.append(' ');
-                    }
-                } else {
-                    int slotNum = endIndex - beginIndex;
-                    int spaceNum = maxWidth;
-                    for (int j = beginIndex; j < endIndex; j++) {
-                        spaceNum -= words[j].length();
-                    }
-                    int x = spaceNum / slotNum;
-                    int r = spaceNum % slotNum;
-                    for (int j = 0; j < slotNum; j++) {
-                        row.append(words[beginIndex + j]);
-                        for (int k = 0; k < (j < r ? x + 1 : x); k++) {
-                            row.append(' ');
-                        }
-                    }
-                    row.append(words[endIndex]);
-                }
+                StringBuilder row = buildRow(words, maxWidth, beginIndex, endIndex);
                 result.add(row.toString());
                 beginIndex = i;
                 endIndex = i;
+                columnLength = 0;
+                i--;
+            } else if (columnLength + words[i].length() == maxWidth) {
+                endIndex = i;
+                StringBuilder row = buildRow(words, maxWidth, beginIndex, endIndex);
+                result.add(row.toString());
+                beginIndex = i + 1;
+                endIndex = i + 1;
                 columnLength = 0;
             } else {
                 columnLength = columnLength + words[i].length() + 1;
@@ -58,5 +45,31 @@ class Solution {
         }
 
         return result;
+    }
+
+    private StringBuilder buildRow(String[] words, int maxWidth, int beginIndex, int endIndex) {
+        StringBuilder row = new StringBuilder();
+        if (endIndex == beginIndex) {
+            row.append(words[beginIndex]);
+            for (int j = words[beginIndex].length(); j < maxWidth; j++) {
+                row.append(' ');
+            }
+        } else {
+            int slotNum = endIndex - beginIndex;
+            int spaceNum = maxWidth;
+            for (int j = beginIndex; j <= endIndex; j++) {
+                spaceNum -= words[j].length();
+            }
+            int x = spaceNum / slotNum;
+            int r = spaceNum % slotNum;
+            for (int j = 0; j < slotNum; j++) {
+                row.append(words[beginIndex + j]);
+                for (int k = 0; k < (j < r ? x + 1 : x); k++) {
+                    row.append(' ');
+                }
+            }
+            row.append(words[endIndex]);
+        }
+        return row;
     }
 }
