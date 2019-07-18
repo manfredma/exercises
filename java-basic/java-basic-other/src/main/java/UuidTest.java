@@ -1,10 +1,14 @@
+import org.junit.Test;
+
 import java.util.UUID;
 
 /**
  * @author Manfred since 2019/7/2
  */
-public class UuidCreator {
-    public static void main(String[] args) {
+public class UuidTest {
+
+    @Test
+    public void testCreate() {
         System.out.println(createGUID());
         System.out.println(createGUID());
         System.out.println(createGUID());
@@ -13,6 +17,7 @@ public class UuidCreator {
         System.out.println(createGUID());
         System.out.println(createGUID());
         System.out.println(createGUID());
+
     }
 
     private static String createGUID() {
