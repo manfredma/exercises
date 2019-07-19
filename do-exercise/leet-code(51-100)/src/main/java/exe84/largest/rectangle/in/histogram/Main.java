@@ -20,5 +20,9 @@ public class Main {
         Solution solution = new Solution();
         System.out.println(solution.largestRectangleArea(new int[]{1, 1}));
         System.out.println(solution.largestRectangleArea(new int[]{2, 1, 5, 6, 2, 3}));
+
+        Solution2 solution2 = new Solution2();
+        System.out.println(solution2.largestRectangleArea(new int[]{1, 1}));
+        System.out.println(solution2.largestRectangleArea(new int[]{2, 1, 5, 6, 2, 3}));
     }
 }
