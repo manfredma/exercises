@@ -52,4 +52,9 @@ public class StringTest {
             System.out.print(splitResult[i] + " ");
         }
     }
+
+    @Test
+    public void plus() {
+        System.out.println("xxx" + null + "zzz");
+    }
 }
