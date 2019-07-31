@@ -53,4 +53,9 @@ package exe87.scramble.string;
  * @author Manfred since 2019/7/19
  */
 public class Main {
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        System.out.println(solution.isScramble("great", "rgeat"));
+        System.out.println(solution.isScramble("abcde", "caebd"));
+    }
 }
