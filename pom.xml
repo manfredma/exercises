@@ -22,6 +22,7 @@
         <module>rdbms</module>
         <module>tomcat</module>
         <module>rxjava</module>
+        <module>design-pattern</module>
     </modules>
     <packaging>pom</packaging>
 
