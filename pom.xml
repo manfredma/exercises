@@ -23,6 +23,7 @@
         <module>tomcat</module>
         <module>rxjava</module>
         <module>design-pattern</module>
+        <module>other</module>
     </modules>
     <packaging>pom</packaging>
 
