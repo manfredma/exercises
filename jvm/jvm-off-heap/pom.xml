@@ -3,23 +3,15 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>exercises</artifactId>
+        <artifactId>jvm</artifactId>
         <groupId>manfred.end</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>manfred.end</groupId>
-    <artifactId>jvm</artifactId>
+    <artifactId>jvm-off-heap</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <modules>
-        <module>jvm-memory</module>
-        <module>jvm-optimize</module>
-        <module>jvm-off-heap</module>
-    </modules>
-
-    <packaging>pom</packaging>
-
 
 
 </project>

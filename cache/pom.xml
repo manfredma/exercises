@@ -12,6 +12,9 @@
     <groupId>manfred.end</groupId>
     <artifactId>cache</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>cache-ohc</module>
+    </modules>
     <packaging>pom</packaging>
 
 

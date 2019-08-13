@@ -24,6 +24,7 @@
         <module>rxjava</module>
         <module>design-pattern</module>
         <module>other</module>
+        <module>dubbo</module>
     </modules>
     <packaging>pom</packaging>
 
