@@ -25,6 +25,7 @@
         <module>design-pattern</module>
         <module>other</module>
         <module>dubbo</module>
+        <module>test</module>
     </modules>
     <packaging>pom</packaging>
 
