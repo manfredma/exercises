@@ -26,6 +26,7 @@
         <module>decorator-pattern</module>
         <module>facade-pattern</module>
         <module>visitor-pattern</module>
+        <module>flyweight-pattern</module>
     </modules>
 
     <packaging>pom</packaging>
