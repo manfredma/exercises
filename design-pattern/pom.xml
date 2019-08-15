@@ -35,6 +35,7 @@
         <module>memento-pattern</module>
         <module>observer-pattern</module>
         <module>template-pattern</module>
+        <module>_2-model-view-controller</module>
     </modules>
 
     <packaging>pom</packaging>
