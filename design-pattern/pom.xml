@@ -23,6 +23,7 @@
         <module>abstract-factory-pattern</module>
         <module>filter-pattern</module>
         <module>composite-pattern</module>
+        <module>decorator-pattern</module>
     </modules>
 
     <packaging>pom</packaging>
