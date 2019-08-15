@@ -1,4 +1,4 @@
-package basic;
+package eager;
 
 public interface State {
     /**

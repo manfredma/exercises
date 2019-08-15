@@ -1,4 +1,4 @@
-package basic;
+package eager;
 
 public class OperationAdd implements Strategy{
    @Override
