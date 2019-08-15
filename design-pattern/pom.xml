@@ -25,6 +25,7 @@
         <module>composite-pattern</module>
         <module>decorator-pattern</module>
         <module>facade-pattern</module>
+        <module>visitor-pattern</module>
     </modules>
 
     <packaging>pom</packaging>
