@@ -37,6 +37,7 @@
         <module>template-pattern</module>
         <module>_2-model-view-controller</module>
         <module>_2-business-delegate-pattern</module>
+        <module>_2-front-controller-pattern</module>
     </modules>
 
     <packaging>pom</packaging>
