@@ -21,6 +21,8 @@
         <module>interpreter-pattern</module>
         <module>factory-pattern</module>
         <module>abstract-factory-pattern</module>
+        <module>filter-pattern</module>
+        <module>composite-pattern</module>
     </modules>
 
     <packaging>pom</packaging>
