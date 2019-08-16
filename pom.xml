@@ -26,6 +26,7 @@
         <module>other</module>
         <module>dubbo</module>
         <module>test</module>
+        <module>netty</module>
     </modules>
     <packaging>pom</packaging>
 
