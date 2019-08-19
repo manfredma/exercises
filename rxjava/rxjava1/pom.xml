@@ -18,11 +18,6 @@
             <artifactId>rxjava</artifactId>
             <version>1.0.14</version>
         </dependency>
-        <dependency>
-            <groupId>io.reactivex</groupId>
-            <artifactId>rxandroid</artifactId>
-            <version>1.0.1</version>
-        </dependency>
 
         <!--log4j2核心包-->
         <dependency>
