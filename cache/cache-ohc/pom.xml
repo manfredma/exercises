@@ -17,7 +17,12 @@
         <dependency>
             <groupId>org.caffinitas.ohc</groupId>
             <artifactId>ohc-core</artifactId>
-            <version>0.7.0</version>
+            <version>0.6.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.14.3</version>
         </dependency>
     </dependencies>
 </project>
