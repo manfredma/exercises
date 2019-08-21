@@ -22,10 +22,15 @@ public class GraphTest {
         graph.addEdge(6, 7);
 
         graph.bfs(0, 6);
-        System.out.println();
 
+        System.out.println();
         graph.dfs(0, 6);
         System.out.println();
         graph.dfs(0, 7);
+
+        System.out.println();
+        graph.dfs2(0, 6);
+        System.out.println();
+        graph.dfs2(0, 7);
     }
 }

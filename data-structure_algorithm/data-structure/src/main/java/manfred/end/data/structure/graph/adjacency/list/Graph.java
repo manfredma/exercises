@@ -63,6 +63,36 @@ public class Graph {
         }
     }
 
+
+    public void dfs2(int s, int t) {
+        boolean[] visited = new boolean[count];
+        int[] prev = new int[count];
+        for (int i = 0; i < count; ++i) {
+            prev[i] = -1;
+        }
+        recurDfs(s, t, visited, prev, false);
+        print(prev, s, t);
+    }
+
+    private boolean recurDfs(int w, int t, boolean[] visited, int[] prev, boolean found) {
+        if (found) {
+            return true;
+        }
+        visited[w] = true;
+        if (w == t) {
+            return true;
+        }
+        for (int i = 0; i < adj[w].size(); ++i) {
+            int q = adj[w].get(i);
+            if (!visited[q] && !found) {
+                prev[q] = w;
+                found = recurDfs(q, t, visited, prev, false);
+            }
+        }
+        return found;
+    }
+
+
     public void dfs(int s, int t) {
         if (s == t) {
             return;
