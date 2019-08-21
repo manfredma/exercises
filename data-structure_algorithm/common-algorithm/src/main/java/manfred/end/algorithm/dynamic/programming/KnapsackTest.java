@@ -27,5 +27,12 @@ public class KnapsackTest {
             knapsack.bruteForceWithMem(0, 0);
         }
         System.out.println("最大重量=" + knapsack.maxWeight + ", cost=" + (System.currentTimeMillis() - begin));
+
+        begin = System.currentTimeMillis();
+        for (int i = 0; i < loop; i++) {
+            knapsack = new Knapsack();
+            knapsack.dynamicProgramming();
+        }
+        System.out.println("最大重量=" + knapsack.maxWeight + ", cost=" + (System.currentTimeMillis() - begin));
     }
 }

@@ -80,19 +80,18 @@ public class Knapsack {
         state[0][0] = true;
         // 构造state
         for (int i = 1; i < 6; i++) {
+            int curWeight = weight[i - 1];
             state[i][0] = true;
             for (int j = 1; j < 10; j++) {
                 // 选择某一块石头
-                if (state[i - 1][j] || (true)) {
+                if (state[i - 1][j] || (j >= curWeight && state[i - 1][j - curWeight])) {
                     state[i][j] = true;
+                    if (j > maxWeight) {
+                        maxWeight = j;
+                    }
                 }
-
             }
-
         }
-
-
-
     }
 
 
