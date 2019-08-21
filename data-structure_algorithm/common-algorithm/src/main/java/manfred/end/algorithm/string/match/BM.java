@@ -7,6 +7,7 @@ import java.util.Arrays;
  * <p>
  * 算法思想：
  * -> 跳过一些没有必要的检测
+ * PS: 当前处于未完成状态。。。
  *
  * @author Manfred since 2019/8/21
  */
