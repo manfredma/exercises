@@ -11,7 +11,7 @@ public class KnapsackTest {
 
     @Test
     public void test() {
-        Knapsack knapsack = null;
+        Knapsack knapsack = new Knapsack();
         long begin = System.currentTimeMillis();
 
         for (int i = 0; i < loop; i++) {
