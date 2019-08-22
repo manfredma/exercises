@@ -1,4 +1,4 @@
-package manfred.end.algorithm.manfred.end.algorithm.graph.shortest.path;
+package manfred.end.algorithm.graph.shortest.path;
 
 import java.util.LinkedList;
 
