@@ -17,6 +17,7 @@
         <module>leet-code(51-100)</module>
         <module>leet-code(101-150)</module>
         <module>leet-code(451-500)</module>
+        <module>leet-code(351-400)</module>
     </modules>
 
     <packaging>pom</packaging>
