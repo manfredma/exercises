@@ -19,5 +19,11 @@ public class Main {
         System.out.println(s.restoreIpAddresses("1111"));
         System.out.println(s.restoreIpAddresses("255255255255"));
         System.out.println(s.restoreIpAddresses("25525511135"));
+
+        Solution2 s2 = new Solution2();
+        System.out.println(s2.restoreIpAddresses("1111"));
+        System.out.println(s2.restoreIpAddresses("0000"));
+        System.out.println(s2.restoreIpAddresses("255255255255"));
+        System.out.println(s2.restoreIpAddresses("25525511135"));
     }
 }
