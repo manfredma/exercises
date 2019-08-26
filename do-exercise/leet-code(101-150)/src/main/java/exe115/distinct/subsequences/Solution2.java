@@ -30,7 +30,7 @@ class Solution2 {
 
 
         for (int i = s.length() - 2; i >= 0; i--) {
-            for (int j = t.length() - 2; j >= 0; j--) {
+            for (int j = t.length() - 2; j >= (t.length() - s.length() + i) && j >= 0; j--) {
                 if (s.charAt(i) == t.charAt(j)) {
                     numDistinct[i][j] = numDistinct[i + 1][j + 1] + numDistinct[i + 1][j];
                 } else {
