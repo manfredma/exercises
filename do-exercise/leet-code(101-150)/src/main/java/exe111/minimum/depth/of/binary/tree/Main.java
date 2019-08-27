@@ -1,25 +1,26 @@
 /*
-Given a binary tree, return the bottom-up level order traversal of its nodes' values. (ie, from left to right, level by level from leaf to root).
+Given a binary tree, find its minimum depth.
 
-For example:
+The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node.
+
+Note: A leaf is a node with no children.
+
+Example:
+
 Given binary tree [3,9,20,null,null,15,7],
+
     3
    / \
   9  20
     /  \
    15   7
-return its bottom-up level order traversal as:
-[
-  [15,7],
-  [9,20],
-  [3]
-]
+return its minimum depth = 2.
 
  */
-package exe107.binary.tree.level.order.traversal.ii;
+package exe111.minimum.depth.of.binary.tree;
 
 /**
- * @author Manfred since 2019/8/27
+ * @author manfred on 2019/8/27.
  */
 public class Main {
     public static void main(String[] args) {
@@ -35,6 +36,6 @@ public class Main {
         treeNode3.left = treeNode4;
         treeNode3.right = treeNode5;
 
-        System.out.println(new Solution().levelOrderBottom(treeNode1));
+        System.out.println(new Solution().minDepth(treeNode1));
     }
 }
