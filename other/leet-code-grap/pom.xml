@@ -3,19 +3,22 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>exercises</artifactId>
+        <artifactId>other</artifactId>
         <groupId>manfred.end</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>manfred.end</groupId>
-    <artifactId>other</artifactId>
+    <artifactId>leet-code-grap</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <modules>
-        <module>leet-code-grap</module>
-    </modules>
 
-    <packaging>pom</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>4.3.16.RELEASE</version>
+        </dependency>
+    </dependencies>
 
 </project>
