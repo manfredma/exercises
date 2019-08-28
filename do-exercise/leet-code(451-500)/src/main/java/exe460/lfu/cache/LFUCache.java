@@ -1,185 +1,144 @@
 package exe460.lfu.cache;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 class LFUCache {
 
-    Heap heap;
+    private java.util.List<List> index;
 
-    private HashMap<Integer, Heap.HeapNode> cache;
+    private HashMap<Integer, ListNode> cache;
+
+    private int capacity;
+    private int count = 0;
 
     public LFUCache(int capacity) {
-        heap = new Heap(capacity);
+        index = new ArrayList<>();
         cache = new HashMap<>(capacity * 2);
+        this.capacity = capacity;
     }
 
     public int get(int key) {
-        if (heap.capacity == 0) {
+        if (capacity == 0) {
             return -1;
         }
         if (cache.containsKey(key)) {
-            Heap.HeapNode heapNode = cache.get(key);
-            heapNode.frequency++;
-            // 重新堆化一下
-            heap.heapToBottom(heapNode.arrayIndex);
-            return heapNode.hashValue;
+            ListNode listNode = cache.get(key);
+            List list = listNode.list;
+            removeListNode(listNode);
+            int fre = list.frequency + 1;
+            addListNode(listNode, fre);
+            return listNode.val;
         }
         return -1;
     }
 
+    private void addListNode(ListNode listNode, int fre) {
+        List newList = null;
+        for (List list : index) {
+            if (list.frequency == fre) {
+                newList = list;
+            }
+        }
+        if (newList == null) {
+            newList = new List();
+            newList.frequency = fre;
+            index.add(newList);
+        }
+
+        listNode.next = newList.tail;
+        listNode.pre = newList.tail.pre;
+        listNode.list = newList;
+
+        newList.tail.pre.next = listNode;
+        newList.tail.pre = listNode;
+    }
+
+    private void removeListNode(ListNode listNode) {
+        listNode.pre.next = listNode.next;
+        listNode.next.pre = listNode.pre;
+
+        if (listNode.list.head.next == listNode.list.tail) {
+            index.remove(listNode.list);
+        }
+        listNode.pre = null;
+        listNode.next = null;
+        listNode.list = null;
+    }
+
     public void put(int key, int value) {
-        if (heap.capacity == 0) {
+        if (capacity == 0) {
             return;
         }
         if (cache.containsKey(key)) {
-            Heap.HeapNode heapNode = cache.get(key);
-            heapNode.hashValue = value;
-            if (heapNode.frequency == 1) {
-                heap.heapToBottom(heapNode.arrayIndex);
-            } else {
-                heapNode.frequency = 1;
-                heap.heapToTop(heapNode.arrayIndex);
-            }
-
+            ListNode listNode = cache.get(key);
+            List list = listNode.list;
+            removeListNode(listNode);
+            addListNode(listNode, list.frequency + 1);
+            listNode.val = value;
         } else {
-            if (heap.isFull()) {
-                // 淘汰最少访问的
-                Heap.HeapNode removedHeapNode = heap.removeTop();
-                cache.remove(removedHeapNode.hashKey);
+            if (count >= capacity) {
+                List reList = index.get(0);
+                for (List list : index) {
+                    if (list.frequency < reList.frequency) {
+                        reList = list;
+                    }
+                }
+                cache.remove(reList.head.next.key);
+                removeListNode(reList.head.next);
+                count--;
             }
-            Heap.HeapNode heapNode = heap.insert(1, value, key);
-            cache.put(key, heapNode);
+            ListNode listNode = new ListNode(key, value, null);
+            addListNode(listNode, 1);
+            count++;
+            cache.put(key, listNode);
         }
     }
 
 
-    /**
-     * 小顶堆
-     */
-    class Heap {
+    class List {
+        ListNode head = new ListNode(-1, -1, this);
+        ListNode tail = new ListNode(-1, -1, this);
 
-
-        /**
-         * 数组，从下标 1 开始存储数据
-         */
-        private HeapNode[] data;
-
-        /**
-         * 堆可以存储的最大数据个数
-         */
-        private int capacity;
-
-        /**
-         * 堆中已经存储的数据个数
-         */
-        private int count;
-
-        public Heap(int capacity) {
-            data = new HeapNode[capacity + 1];
-            this.capacity = capacity;
-            count = 0;
+        {
+            head.next = tail;
+            tail.pre = head;
         }
 
-        public boolean isFull() {
-            return count >= capacity;
-        }
+        int frequency;
 
-        public HeapNode insert(int insertKey, int insertValue, int hashKey) {
-            // 判断堆是否已满
-            if (isFull()) {
-                throw new RuntimeException("heap is full");
+        @Override
+        public String toString() {
+            String s = frequency + " -> ";
+            ListNode cur = head.next;
+            while (cur != tail) {
+                s += ("--> [" + cur.key + " -- " + cur.val + "]");
+                cur = cur.next;
             }
-
-            // 如果堆中还有空间,则从小往上堆化
-            ++count;
-            int cur = count;
-            HeapNode result = new HeapNode(insertKey, insertValue, cur, hashKey);
-            data[cur] = result;
-            heapToTop(cur);
-            return result;
+            return s;
         }
+    }
 
-        private void heapToTop(int cur) {
-            int p = cur / 2;
-            while (p != 0) {
-                if (data[p].frequency > data[cur].frequency) {
-                    HeapNode tmp = data[cur];
-                    data[cur] = data[p];
-                    data[p] = tmp;
+    class ListNode {
+        int val;
+        int key;
+        ListNode next;
+        ListNode pre;
+        List list;
 
-                    // 更新一下索引
-                    data[p].arrayIndex = p;
-                    data[cur].arrayIndex = cur;
-
-                    cur = p;
-                    p = cur / 2;
-                } else {
-                    break;
-                }
-            }
+        public ListNode(int key, int val, List list) {
+            this.val = val;
+            this.list = list;
+            this.key = key;
         }
+    }
 
-
-        public HeapNode removeTop() {
-            // 判断堆中是否数据
-            if (isEmpty()) {
-                throw new RuntimeException("heap is empty");
-            }
-            HeapNode result = data[1];
-            data[1] = data[count];
-            --count;
-            heapToBottom(1);
-            return result;
+    @Override
+    public String toString() {
+        String r = "index: \n";
+        for (int i = 0; i < index.size(); i++) {
+            r += "  " + index.get(i) + "\n";
         }
-
-        public boolean isEmpty() {
-            return count == 0;
-        }
-
-        /**
-         * 自上往下堆化
-         */
-        private void heapToBottom(int cur) {
-
-            int leftChildIndex = cur * 2;
-            if (leftChildIndex > count) {
-                // 已经堆化到叶子节点
-                return;
-            }
-            int minChildIndex = leftChildIndex;
-            int rightChildIndex = cur * 2 + 1;
-            if (rightChildIndex <= count && data[rightChildIndex].frequency < data[leftChildIndex].frequency) {
-                minChildIndex = rightChildIndex;
-            }
-
-            if (data[cur].frequency >= data[minChildIndex].frequency) {
-
-                // 交换节点
-                HeapNode tmp = data[cur];
-                data[cur] = data[minChildIndex];
-                data[minChildIndex] = tmp;
-                heapToBottom(minChildIndex);
-
-                // 更新一下索引
-                data[cur].arrayIndex = cur;
-                data[minChildIndex].arrayIndex = minChildIndex;
-            }
-        }
-
-        private class HeapNode {
-            int frequency;
-            int hashValue;
-            int arrayIndex;
-
-            int hashKey;
-
-            HeapNode(int key, int value, int index, int hashKey) {
-                this.frequency = key;
-                this.hashValue = value;
-                this.arrayIndex = index;
-                this.hashKey = hashKey;
-            }
-        }
-
+        return r;
     }
 }
