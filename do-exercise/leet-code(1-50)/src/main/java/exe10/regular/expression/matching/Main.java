@@ -52,7 +52,24 @@ package exe10.regular.expression.matching;
 public class Main {
     public static void main(String[] args) {
 
+        test1();
+        System.out.println("===================");
+        test2();
+    }
+
+    private static void test1() {
         Solution solution = new Solution();
+        System.out.println("solution.isMatch(\"a\", \".*..a*\")=" + solution.isMatch("a", ".*..a*"));
+        System.out.println("solution.isMatch(\"ab\", \".*c\")=" + solution.isMatch("ab", ".*c"));
+        System.out.println("solution.isMatch(\"aab\", \"c*a*b*\")=" + solution.isMatch("aab", "c*a*b*"));
+        System.out.println("solution.isMatch(\"aa\", \"a\")=" + solution.isMatch("aa", "a"));
+        System.out.println("solution.isMatch(\"aa\", \"a*\")=" + solution.isMatch("aa", "a*"));
+        System.out.println("solution.isMatch(\"ab\", \".*\")=" + solution.isMatch("ab", ".*"));
+        System.out.println("solution.isMatch(\"mississippi\", \"mis*is*p*.\")=" + solution.isMatch("mississippi", "mis*is*p*."));
+    }
+
+    private static void test2() {
+        Solution2 solution = new Solution2();
         System.out.println("solution.isMatch(\"a\", \".*..a*\")=" + solution.isMatch("a", ".*..a*"));
         System.out.println("solution.isMatch(\"ab\", \".*c\")=" + solution.isMatch("ab", ".*c"));
         System.out.println("solution.isMatch(\"aab\", \"c*a*b*\")=" + solution.isMatch("aab", "c*a*b*"));
