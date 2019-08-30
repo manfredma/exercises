@@ -20,14 +20,26 @@ class Solution {
         if (null == root) {
             return result;
         }
-        Stack<TreeNode> stack = new Stack<>();
-        stack.push(root);
+        Stack<StackNode> stack = new Stack<>();
+        stack.push(new StackNode(root));
         while (!stack.isEmpty()) {
-            TreeNode cur = stack.pop();
-            result.add(cur.val);
+            StackNode cur = stack.pop();
+            result.add(cur.treeNode.val);
+            if (cur.isLeft && cur.treeNode.left != null) {
+                cur.isLeft = false;
+                stack.push(new StackNode(cur.treeNode.left));
+            }
             stack.push(cur);
-
         }
         return result;
+    }
+
+    private static class StackNode {
+        private TreeNode treeNode;
+        private boolean isLeft = true;
+
+        public StackNode(TreeNode treeNode) {
+            this.treeNode = treeNode;
+        }
     }
 }
