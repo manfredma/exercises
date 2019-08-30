@@ -24,12 +24,18 @@ class Solution {
         stack.push(new StackNode(root));
         while (!stack.isEmpty()) {
             StackNode cur = stack.pop();
-            result.add(cur.treeNode.val);
-            if (cur.isLeft && cur.treeNode.left != null) {
+            if (cur.isLeft) {
+                result.add(cur.treeNode.val);
                 cur.isLeft = false;
-                stack.push(new StackNode(cur.treeNode.left));
+                stack.push(cur);
+                if (cur.treeNode.left != null) {
+                    stack.push(new StackNode(cur.treeNode.left));
+                }
+            } else {
+                if (cur.treeNode.right != null) {
+                    stack.push(new StackNode(cur.treeNode.right));
+                }
             }
-            stack.push(cur);
         }
         return result;
     }
