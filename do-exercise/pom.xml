@@ -23,6 +23,7 @@
         <module>leet-code(401-450)</module>
         <module>leet-code(201-250)</module>
         <module>leet-code(301-350)</module>
+        <module>leet-code(651-700)</module>
     </modules>
 
     <packaging>pom</packaging>

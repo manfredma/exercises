@@ -18,6 +18,7 @@ public class ClassName {
             }
         }
         s = sb.toString();
+        s = s.replace("..", ".");
         s = prefix + s;
         return s;
     }
