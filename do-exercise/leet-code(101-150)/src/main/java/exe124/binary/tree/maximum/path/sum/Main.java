@@ -33,6 +33,14 @@ package exe124.binary.tree.maximum.path.sum;
  */
 public class Main {
     public static void main(String[] args) {
+        TreeNode treeNode41 = new TreeNode(-3);
+        System.out.println(new Solution().maxPathSum(treeNode41));
+
+        /* [5,4,8,11,null,13,4,7,2,null,null,null,1] */
+        TreeNode treeNode = createTreeNode("[5,4,8,11,null,13,4,7,2,null,null,null,1]");
+        System.out.println(new Solution().maxPathSum(treeNode));
+
+
         /* [1,-2,-3,1,3,-2,null,-1] */
         TreeNode treeNode31 = new TreeNode(1);
         TreeNode treeNode32 = new TreeNode(-2);
@@ -53,7 +61,6 @@ public class Main {
         treeNode34.left = treeNode37;
 
         System.out.println(new Solution().maxPathSum(treeNode31));
-
 
 
         TreeNode treeNode1 = new TreeNode(-10);
@@ -78,5 +85,29 @@ public class Main {
         System.out.println(new Solution().maxPathSum(treeNode21));
 
 
+    }
+
+    private static TreeNode createTreeNode(String s) {
+        s = s.replaceAll("\\[", "").replaceAll("]", "").replaceAll(" ", "");
+        String[] treeNode = s.split(",");
+        TreeNode[] treeNodes = new TreeNode[treeNode.length];
+        for (int i = 0; i < treeNode.length; i++) {
+            if (!"null".equals(treeNode[i])) {
+                treeNodes[i] = new TreeNode(Integer.parseInt(treeNode[i]));
+            }
+        }
+        for (int i = 0; i < treeNodes.length; i++) {
+            if (treeNodes[i] != null) {
+                int left = 2 * i + 1;
+                int right = 2 * i + 2;
+                if (left < treeNodes.length) {
+                    treeNodes[i].left = treeNodes[left];
+                }
+                if (right < treeNodes.length) {
+                    treeNodes[i].right = treeNodes[right];
+                }
+            }
+        }
+        return treeNodes[0];
     }
 }
