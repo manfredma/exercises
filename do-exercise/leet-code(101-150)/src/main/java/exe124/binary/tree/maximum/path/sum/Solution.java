@@ -1,5 +1,7 @@
 package exe124.binary.tree.maximum.path.sum;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -15,44 +17,24 @@ class Solution {
         if (root == null) {
             return Integer.MIN_VALUE;
         }
-
-        dispose(root);
-        return findMax(root);
-
+        AtomicInteger result = new AtomicInteger(Integer.MIN_VALUE);
+        findMax(root, result);
+        return result.get();
     }
 
-    private int findMax(TreeNode root) {
-        int result = Integer.MIN_VALUE;
-        if (root.val > result) {
-            result = root.val;
-        }
+    private int findMax(TreeNode root, AtomicInteger result) {
+        int x = 0;
         if (root.left != null) {
-            int leftMax = findMax(root.left);
-            if (leftMax > result) {
-                result = leftMax;
-            }
+            x = findMax(root.left, result);
         }
+        int y = 0;
         if (root.right != null) {
-            int rightMax = findMax(root.right);
-            if (rightMax > result) {
-                result = rightMax;
-            }
+            y = findMax(root.right, result);
         }
-        return result;
-    }
 
-    private void dispose(TreeNode root) {
-        if (root.left != null) {
-            dispose(root.left);
-            if (root.left.val > 0) {
-                root.val += root.left.val;
-            }
+        if (x + y + root.val > result.get()) {
+            result.set(x + y + root.val);
         }
-        if (root.right != null) {
-            dispose(root.right);
-            if (root.right.val > 0) {
-                root.val += root.right.val;
-            }
-        }
+        return Math.max(0, Math.max(root.val + x, root.val + y));
     }
 }
