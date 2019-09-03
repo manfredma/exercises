@@ -57,5 +57,9 @@ public class Main {
         Solution solution = new Solution();
         System.out.println(solution.isScramble("great", "rgeat"));
         System.out.println(solution.isScramble("abcde", "caebd"));
+
+        Solution2 solution2 = new Solution2();
+        System.out.println(solution2.isScramble("great", "rgeat"));
+        System.out.println(solution2.isScramble("abcde", "caebd"));
     }
 }
