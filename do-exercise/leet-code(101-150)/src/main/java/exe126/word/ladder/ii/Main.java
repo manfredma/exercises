@@ -47,6 +47,9 @@ import java.util.Arrays;
 public class Main {
     public static void main(String[] args) {
         Solution solution = new Solution();
+        System.out.println(solution.findLadders("hit", "cog", new ArrayList<>(Arrays.asList("hot", "dot", "dog", "lot"
+                , "log", "cog"))));
+        System.out.println(solution.findLadders("hot", "dog", new ArrayList<>(Arrays.asList("hot", "dog"))));
         System.out.println(solution.findLadders("nanny", "aloud", new ArrayList<>(Arrays.asList("ricky", "grind",
                 "cubic", "panic", "lover", "farce", "gofer", "sales", "flint", "omens", "lipid", "briny", "cloth",
                 "anted", "slime", "oaten", "harsh", "touts", "stoop", "cabal", "lazed", "elton", "skunk", "nicer",
@@ -463,9 +466,6 @@ public class Main {
                 "anons", "pupae", "chiba", "hoops", "trash", "noted", "boris", "dough", "shirt", "cowls", "seine",
                 "spool", "miens", "yummy", "grade", "proxy", "hopes", "girth", "deter", "dowry", "aorta", "paean",
                 "corms", "giant", "shank", "where", "means", "years", "vegan", "derek", "tales"))));
-        System.out.println(solution.findLadders("hot", "dog", new ArrayList<>(Arrays.asList("hot", "dog"))));
-        System.out.println(solution.findLadders("hit", "cog", new ArrayList<>(Arrays.asList("hot", "dot", "dog", "lot"
-                , "log", "cog"))));
         System.out.println(solution.findLadders("hit", "cog", new ArrayList<>(Arrays.asList("hot", "dot", "dog", "lot"
                 , "log", "cog"))));
     }
