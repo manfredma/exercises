@@ -1,4 +1,4 @@
-package manfred.end.concurrent.atomic;
+package concurrent.atomic;
 
 /**
  * @author Manfred since 2019/4/16

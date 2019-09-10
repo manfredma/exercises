@@ -1,4 +1,4 @@
-package manfred.end.concurrent.falsesharing;
+package concurrent.falsesharing;
 
 /**
  * @author maxingfang

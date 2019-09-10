@@ -1,4 +1,4 @@
-package manfred.end.concurrent.thread.pool;
+package concurrent.thread.pool;
 
 import java.util.concurrent.*;
 
@@ -15,7 +15,8 @@ public class Main {
                 latch.countDown();
                 for (int i = 0; i < 10; i++) {
                     try {
-                        executor.submit(() -> {
+
+                        Future f = executor.submit(() -> {
                                     try {
                                         TimeUnit.MILLISECONDS.sleep(ThreadLocalRandom.current().nextInt(10));
                                     } catch (InterruptedException e) {
@@ -23,6 +24,7 @@ public class Main {
                                     }
                                 }
                         );
+                        System.out.println(f.getClass());
                     } catch (Exception e) {
                         System.out.println(e.toString());
                     }

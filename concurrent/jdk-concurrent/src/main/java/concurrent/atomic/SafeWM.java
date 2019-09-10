@@ -1,4 +1,4 @@
-package manfred.end.concurrent.atomic;
+package concurrent.atomic;
 
 import java.util.concurrent.atomic.AtomicReference;
 
