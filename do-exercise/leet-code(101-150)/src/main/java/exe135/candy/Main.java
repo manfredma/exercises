@@ -31,5 +31,10 @@ public class Main {
         System.out.println(solution.candy(new int[]{1, 2, 87, 87, 87, 2, 1}));
         System.out.println(solution.candy(new int[]{1, 0, 2}));
         System.out.println(solution.candy(new int[]{1, 2, 2}));
+
+        Solution2 solution2 = new Solution2();
+        System.out.println(solution2.candy(new int[]{1, 2, 87, 87, 87, 2, 1}));
+        System.out.println(solution2.candy(new int[]{1, 0, 2}));
+        System.out.println(solution2.candy(new int[]{1, 2, 2}));
     }
 }
