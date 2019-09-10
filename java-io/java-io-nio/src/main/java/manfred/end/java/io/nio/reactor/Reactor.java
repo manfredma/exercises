@@ -18,9 +18,9 @@ public class Reactor implements Runnable {
 
     final ServerSocketChannel serverSocket;
 
-    private static final int MAXIN = 1024;
+    private static final int MAX_IN = 1024;
 
-    private static final int MAXOUT = 1024;
+    private static final int MAX_OUT = 1024;
 
 
     Reactor(int port) throws IOException {
@@ -81,8 +81,8 @@ public class Reactor implements Runnable {
 
         final SelectionKey sk;
 
-        ByteBuffer input = ByteBuffer.allocate(MAXIN);
-        ByteBuffer output = ByteBuffer.allocate(MAXOUT);
+        ByteBuffer input = ByteBuffer.allocate(MAX_IN);
+        ByteBuffer output = ByteBuffer.allocate(MAX_OUT);
 
         static final int READING = 0, SENDIND = 1;
         int state = READING;
@@ -151,8 +151,8 @@ public class Reactor implements Runnable {
 
         final SelectionKey sk;
 
-        ByteBuffer input = ByteBuffer.allocate(MAXIN);
-        ByteBuffer output = ByteBuffer.allocate(MAXOUT);
+        ByteBuffer input = ByteBuffer.allocate(MAX_IN);
+        ByteBuffer output = ByteBuffer.allocate(MAX_OUT);
 
         HandlerState(Selector sel, SocketChannel c) throws IOException {
             socket = c;
