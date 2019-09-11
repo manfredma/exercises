@@ -14,6 +14,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>netty-basic</module>
+        <module>netty-sticky</module>
     </modules>
 
     <packaging>pom</packaging>
