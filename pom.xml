@@ -28,6 +28,7 @@
         <module>test</module>
         <module>netty</module>
         <module>data-structure_algorithm</module>
+        <module>java-serialization</module>
     </modules>
     <packaging>pom</packaging>
 
