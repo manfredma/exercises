@@ -13,7 +13,7 @@ class Solution {
             for (int j = 0; j < wordDictLen; j++) {
                 if (i >= wordDict.get(j).length() - 1
                         && (i == wordDict.get(j).length() - 1 || wordBreakCache[i - wordDict.get(j).length()])
-                        && s.substring(0, i + 1).endsWith(wordDict.get(j))) {
+                        && s.substring(i - wordDict.get(j).length() + 1, i + 1).endsWith(wordDict.get(j))) {
                     wordBreakCache[i] = true;
                 }
             }
