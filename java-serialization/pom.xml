@@ -15,6 +15,7 @@
     <modules>
         <module>jdk-serialization</module>
         <module>message-pack</module>
+        <module>proto-buf</module>
     </modules>
 
 </project>
