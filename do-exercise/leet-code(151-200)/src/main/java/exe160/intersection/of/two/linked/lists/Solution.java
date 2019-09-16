@@ -11,7 +11,7 @@ package exe160.intersection.of.two.linked.lists;
  * }
  * }
  */
-public class Solution {
+class Solution {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         int lengthOfA = 0;
         ListNode curA = headA;
