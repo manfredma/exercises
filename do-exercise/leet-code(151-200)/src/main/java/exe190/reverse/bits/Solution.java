@@ -1,6 +1,6 @@
 package exe190.reverse.bits;
 
-public class Solution {
+class Solution {
     public int reverseBits(int n) {
         int result = 0;
         int x = 0x1;

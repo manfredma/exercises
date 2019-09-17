@@ -1,6 +1,6 @@
 package exe191.number.of.one.bits;
 
-public class Solution2 {
+class Solution2 {
     public int hammingWeight(int n) {
         int result = 0;
         while (n != 0) {
