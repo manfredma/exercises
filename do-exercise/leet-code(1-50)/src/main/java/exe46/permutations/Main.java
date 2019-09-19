@@ -22,7 +22,7 @@ package exe46.permutations;
  */
 public class Main {
     public static void main(String[] args) {
-        Solution solution = new Solution();
-        System.out.println(solution.permute(new int[]{1, 2, 3}));
+        Solution2 solution2 = new Solution2();
+        System.out.println(solution2.permute(new int[]{1, 2, 3}));
     }
 }

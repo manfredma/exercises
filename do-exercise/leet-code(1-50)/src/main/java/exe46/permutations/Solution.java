@@ -3,38 +3,30 @@ package exe46.permutations;
 import java.util.ArrayList;
 import java.util.List;
 
-class Solution {
+public class Solution {
     public List<List<Integer>> permute(int[] nums) {
-        List<List<Integer>> lists = new ArrayList<>();
-        if (nums.length == 0) {
-            return new ArrayList<>();
-        }
-        List<Integer> nums2 = new ArrayList<>();
-        for (int num : nums) {
-            nums2.add(num);
-        }
-        return permute(nums2);
+        List<List<Integer>> res = new ArrayList<>();
+        ArrayList<Integer> temp = new ArrayList<>();
+        dfs(res, nums, 0);
+        return res;
     }
 
-    private List<List<Integer>> permute(List<Integer> nums) {
-        List<List<Integer>> lists = new ArrayList<>();
-        if (nums.size() == 1) {
-            List<Integer> integers = new ArrayList<>();
-            integers.add(nums.get(0));
-            lists.add(integers);
-            return lists;
+    private void dfs(List<List<Integer>> res, int[] nums, int j) {
+        if (j == nums.length) {
+            List<Integer> temp = new ArrayList<Integer>();
+            for (int num : nums) temp.add(num);
+            res.add(temp);
         }
-        for (int i = 0; i < nums.size(); i++) {
-            List<Integer> numsS = new ArrayList<>(nums);
-            numsS.remove(nums.get(i));
-            List<List<Integer>> s = permute(numsS);
-            for (List<Integer> integers : s) {
-                List<Integer> integers2 = new ArrayList<>();
-                integers2.add(nums.get(i));
-                integers2.addAll(integers);
-                lists.add(integers2);
-            }
+        for (int i = j; i < nums.length; i++) {
+            swap(nums, i, j);
+            dfs(res, nums, j + 1);
+            swap(nums, i, j);
         }
-        return lists;
+    }
+
+    private void swap(int[] nums, int m, int n) {
+        int temp = nums[m];
+        nums[m] = nums[n];
+        nums[n] = temp;
     }
 }
