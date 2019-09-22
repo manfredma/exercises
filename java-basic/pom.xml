@@ -22,6 +22,7 @@
         <module>java-basic-system</module>
         <module>java-basic-other</module>
         <module>java-basic-init</module>
+        <module>java-generic</module>
     </modules>
 
 
