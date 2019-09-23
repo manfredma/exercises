@@ -18,7 +18,7 @@ public class Graph {
     /**
      * 邻接表
      */
-    private LinkedList<Integer> adj[];
+    private LinkedList<Integer>[] adj;
 
     public Graph(int count) {
         this.count = count;
