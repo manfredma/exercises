@@ -36,5 +36,9 @@ public class Main {
         Solution solution = new Solution();
         System.out.println(solution.canFinish(2, new int[][]{{1, 0}}));
         System.out.println(solution.canFinish(2, new int[][]{{1, 0}, {0, 1}}));
+
+        Solution2 solution2 = new Solution2();
+        System.out.println(solution2.canFinish(2, new int[][]{{1, 0}}));
+        System.out.println(solution2.canFinish(2, new int[][]{{1, 0}, {0, 1}}));
     }
 }
