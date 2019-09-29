@@ -4,7 +4,6 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToMessageDecoder;
 import org.msgpack.MessagePack;
-import sun.plugin2.main.client.MessagePassingExecutionContext;
 
 import java.util.List;
 
