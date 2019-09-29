@@ -1,9 +1,5 @@
 package exe148.sort.list;
 
-import com.sun.xml.internal.ws.developer.UsesJAXBContext;
-
-import java.nio.file.attribute.UserPrincipalNotFoundException;
-
 /**
  * Definition for singly-linked list.
  * public class ListNode {
