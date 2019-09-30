@@ -3,22 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>exercises</artifactId>
+        <artifactId>java-io</artifactId>
         <groupId>manfred.end</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>manfred.end</groupId>
-    <artifactId>java-io</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <modules>
-        <module>java-io-bio</module>
-        <module>java-io-nio</module>
-        <module>java-io-aio</module>
-        <module>java-io-file</module>
-    </modules>
-    <packaging>pom</packaging>
+    <artifactId>java-io-file</artifactId>
 
 
 </project>
