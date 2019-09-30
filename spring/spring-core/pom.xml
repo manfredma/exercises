@@ -12,6 +12,9 @@
     <groupId>manfred.end</groupId>
     <artifactId>spring-core</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>spring-proxy</module>
+    </modules>
 
 
     <packaging>pom</packaging>
