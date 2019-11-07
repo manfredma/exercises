@@ -29,6 +29,7 @@
         <module>netty</module>
         <module>data-structure_algorithm</module>
         <module>java-serialization</module>
+        <module>common-frame-work</module>
     </modules>
     <packaging>pom</packaging>
 

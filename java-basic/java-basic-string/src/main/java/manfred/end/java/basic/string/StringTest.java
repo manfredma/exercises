@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 
 /**
  * @author Manfred since 2019/3/19
@@ -51,10 +52,36 @@ public class StringTest {
         for (int i = 0; i < splitResult.length; i++) {
             System.out.print(splitResult[i] + " ");
         }
+        System.out.println();
+
+        aString = "fja;f?df;akf?:kjfas;lf'";
+        splitResult = aString.split("\\?");
+        System.out.println(Arrays.toString(splitResult));
     }
 
     @Test
     public void plus() {
         System.out.println("xxx" + null + "zzz");
     }
+
+    @Test
+    public void subString() {
+        String string = "ur1092345780";
+        System.out.println(string.substring(string.length() - 3));
+    }
+
+    @Test
+    public void replace() {
+
+        String st = "\\\\";
+        System.out.println(st.replace("\\\\", "!!!!!￥￥￥￥￥$$$!!!!")
+                .replace("\\", "").replace("!!!!!￥￥￥￥￥$$$!!!!", "\\"));
+        st = "\\hellofasjf\\flkaj\\";
+        System.out.println(st.replace("\\\\", "!!!!!￥￥￥￥￥$$$!!!!")
+                .replace("\\", "").replace("!!!!!￥￥￥￥￥$$$!!!!", "\\"));
+        st = "\\\"";
+        System.out.println(st.replace("\\\\", "!!!!!￥￥￥￥￥$$$!!!!")
+                .replace("\\", "").replace("!!!!!￥￥￥￥￥$$$!!!!", "\\"));
+    }
+
 }
