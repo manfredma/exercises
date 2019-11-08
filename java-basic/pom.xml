@@ -23,6 +23,7 @@
         <module>java-basic-other</module>
         <module>java-basic-init</module>
         <module>java-generic</module>
+        <module>java-basic-url</module>
     </modules>
 
 
