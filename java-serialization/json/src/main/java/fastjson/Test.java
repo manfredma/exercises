@@ -39,8 +39,5 @@ public class Test {
             System.out.println(stringObjectEntry.getKey().getClass() + ":" + stringObjectEntry.getValue().getClass());
         }
         System.out.println(v);
-
     }
-
-
 }
