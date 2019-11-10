@@ -30,6 +30,7 @@
         <module>data-structure_algorithm</module>
         <module>java-serialization</module>
         <module>common-frame-work</module>
+        <module>thrift</module>
     </modules>
     <packaging>pom</packaging>
 
