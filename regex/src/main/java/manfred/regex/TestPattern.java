@@ -17,5 +17,9 @@ public class TestPattern {
 
         String x = "1x_23_33";
         System.out.println(Arrays.toString(x.split("_")));
+
+
+        String[] split = "222?222".split("\\?");
+        System.out.println(Arrays.toString(split));
     }
 }
