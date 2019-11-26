@@ -11,6 +11,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 @RunWith(SpringRunner.class)
 @Transactional
 @ContextConfiguration(classes = CustomerConfig.class)
@@ -28,7 +30,7 @@ public class CustomerRepositoryTest {
 
         Customer saved = customerRepo.save(customer);
 
-        // assertThat(saved.id).isNotNull();
+        assertThat(saved.id).isNotNull();
         System.out.println(saved.id);
 
         saved.firstName = "Hans Albert";
@@ -37,9 +39,9 @@ public class CustomerRepositoryTest {
 
         Optional<Customer> reloaded = customerRepo.findById(saved.id);
 
-        // assertThat(reloaded).isNotEmpty();
+        assertThat(reloaded).isPresent();
 
-        // assertThat(reloaded.get().firstName).isEqualTo("Hans Albert");
+        assertThat(reloaded.get().firstName).isEqualTo("Hans Albert");
         reloaded.ifPresent(a -> System.out.println(a.getFirstName()));
     }
 
@@ -53,12 +55,12 @@ public class CustomerRepositoryTest {
         Customer saved = customerRepo.save(customer);
 
         System.out.println(saved.getId());
-        customer.id= null;
+        customer.id = null;
         customer.firstName = "Bertram";
 
         customerRepo.save(customer);
 
-        customer.id= null;
+        customer.id = null;
         customer.firstName = "Beth";
 
         customerRepo.save(customer);
