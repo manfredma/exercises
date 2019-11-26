@@ -33,6 +33,7 @@
         <module>thrift</module>
         <module>config</module>
         <module>regex</module>
+        <module>redis</module>
     </modules>
     <packaging>pom</packaging>
 
