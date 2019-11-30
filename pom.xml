@@ -34,6 +34,7 @@
         <module>config</module>
         <module>regex</module>
         <module>redis</module>
+        <module>canal</module>
     </modules>
     <packaging>pom</packaging>
 
