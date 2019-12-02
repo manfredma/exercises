@@ -3,20 +3,20 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>exercises</artifactId>
+        <artifactId>other</artifactId>
         <groupId>manfred.end</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>manfred.end</groupId>
-    <artifactId>other</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <modules>
-        <module>leet-code-grap</module>
-        <module>cpu-cache</module>
-    </modules>
+    <artifactId>cpu-cache</artifactId>
 
-    <packaging>pom</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>fr.ujm.tse.lt2c.satin</groupId>
+            <artifactId>cachesize</artifactId>
+            <version>0.2.1</version>
+        </dependency>
+    </dependencies>
 
 </project>
