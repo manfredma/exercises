@@ -17,6 +17,14 @@
             <artifactId>cachesize</artifactId>
             <version>0.2.1</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/ru.concerteza.util/ctz-utils -->
+        <dependency>
+            <groupId>ru.concerteza.util</groupId>
+            <artifactId>ctz-utils</artifactId>
+            <version>2.35</version>
+        </dependency>
+
     </dependencies>
 
 </project>
