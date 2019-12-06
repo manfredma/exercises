@@ -35,6 +35,7 @@
         <module>regex</module>
         <module>redis</module>
         <module>canal</module>
+        <module>concurrent/untitled</module>
     </modules>
     <packaging>pom</packaging>
 
