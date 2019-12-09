@@ -9,13 +9,13 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>multi-task</artifactId>
+    <artifactId>thread-local</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>com.baidu.unbiz</groupId>
-            <artifactId>multi-task</artifactId>
-            <version>1.0.0</version>
+            <groupId>com.alibaba</groupId>
+            <artifactId>transmittable-thread-local</artifactId>
+            <version>2.11.0</version>
         </dependency>
     </dependencies>
 
