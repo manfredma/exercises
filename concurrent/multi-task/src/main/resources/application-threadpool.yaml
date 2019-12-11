@@ -1,0 +1,8 @@
+threadpool:
+  realNameQuery:
+    corePoolSize: 20
+    maximumPoolSize: 20
+    keepAliveTime: 5s
+    queueSize: 20
+    timeout: 5s
+    submitOrder: false
