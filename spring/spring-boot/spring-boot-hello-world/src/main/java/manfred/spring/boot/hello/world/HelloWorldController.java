@@ -21,4 +21,9 @@ public class HelloWorldController {
     public List<String> hello2() {
         return Arrays.asList("A", "B", "C");
     }
+
+    @RequestMapping("/2")
+    public List<String> hello3() {
+        return Arrays.asList("A", "B", "C");
+    }
 }

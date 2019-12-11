@@ -14,6 +14,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>spring-boot-hello-world</module>
+        <module>spring-boot-config</module>
     </modules>
 
 </project>
