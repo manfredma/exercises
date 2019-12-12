@@ -25,7 +25,7 @@ public class ThreadPoolConfig {
 
     private String rejectedExecutionHandlerClassName = "java.util.concurrent.ThreadPoolExecutor$CallerRunsPolicy";
 
-    private boolean allowCoreThreadTimeOut;
+    private boolean allowCoreThreadTimeout;
 
 
     // 任务组相关配置

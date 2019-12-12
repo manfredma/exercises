@@ -45,7 +45,7 @@ public class ParallelPoolConfig {
         }
         ThreadPoolExecutor executor = createExecutor(realNameQuery.getCorePoolSize(), realNameQuery.getMaximumPoolSize(),
                 (int) realNameQuery.getKeepAliveTime().getSeconds(),  queue, threadFactory,rejectedExecutionHandler);
-        if (realNameQuery.isAllowCoreThreadTimeOut()) {
+        if (realNameQuery.isAllowCoreThreadTimeout()) {
             executor.allowCoreThreadTimeOut(true);
         }
 
