@@ -7,12 +7,13 @@ import java.util.concurrent.*;
  * @author manfred
  * @since 2019-12-11 上午9:47
  */
-public class MultiFutureTask<V> implements Future<List<V>>, CompletionMultiFuture<V>, NamedFutureContainer<V> {
+public class MultiFutureTask<V> implements TimeoutFuture<List<V>>, CompletionMultiFuture<V>, NamedFutureContainer<V> {
 
     private CompletionService<V> completionService;
 
     private Map<String, Future<V>> futures;
 
+    private MultiTaskContext context;
 
     private MultiFutureTask(MultiTaskContext context, List<TaskPair<V>> calls) {
         initConfig(context);
@@ -46,9 +47,10 @@ public class MultiFutureTask<V> implements Future<List<V>>, CompletionMultiFutur
     }
 
 
-    private void initConfig(MultiTaskContext config) {
-        Executor executor = null == config.getExecutor() ? ForkJoinPool.commonPool() : config.getExecutor();
-        if (config.isCompleteSubmitOrder()) {
+    private void initConfig(MultiTaskContext context) {
+        this.context = context;
+        Executor executor = null == context.getExecutor() ? ForkJoinPool.commonPool() : context.getExecutor();
+        if (context.isCompleteSubmitOrder()) {
             completionService = new SubmitOrderedCompletionService<>(executor);
         } else {
             completionService = new ExecutorCompletionService<>(executor);
@@ -63,17 +65,17 @@ public class MultiFutureTask<V> implements Future<List<V>>, CompletionMultiFutur
     }
 
     @Override
-    public Future<V> take() throws InterruptedException {
+    public Future<V> takeCompleted() throws InterruptedException {
         return completionService.take();
     }
 
     @Override
-    public Future<V> poll() {
+    public Future<V> pollCompleted() {
         return completionService.poll();
     }
 
     @Override
-    public Future<V> poll(long timeout, TimeUnit unit) throws InterruptedException {
+    public Future<V> pollCompleted(long timeout, TimeUnit unit) throws InterruptedException {
         return completionService.poll(timeout, unit);
     }
 
@@ -125,5 +127,33 @@ public class MultiFutureTask<V> implements Future<List<V>>, CompletionMultiFutur
     @Override
     public Future<V> get(String futureName) {
         return futures.get(futureName);
+    }
+
+    @Override
+    public boolean isTimeout() {
+        return context.getTimeoutInMs() >= 0 && context.getTimeoutInMs() + context.getBeginTime() < System.currentTimeMillis();
+    }
+
+    @Override
+    public List<V> getInDefaultTimeout() throws InterruptedException, ExecutionException, TimeoutException {
+        if (futures == null || futures.size() == 0) {
+            return new ArrayList<>();
+        }
+        if (context.getTimeoutInMs() < 0) {
+            return get();
+        }
+        long beginTime = context.getBeginTime();
+        long timeoutInMs = context.getTimeoutInMs();
+        Collection<Future<V>> futureList = futures.values();
+        for (Future<V> vFuture : futureList) {
+            long costTime = System.currentTimeMillis() - beginTime;
+            long leftTime = timeoutInMs - costTime;
+            if (leftTime < 0) {
+                throw new TimeoutException();
+            }
+            // 阻塞
+            vFuture.get(leftTime, TimeUnit.MILLISECONDS);
+        }
+        return get();
     }
 }

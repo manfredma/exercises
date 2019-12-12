@@ -2,7 +2,7 @@ package manfred.multi.task.policy;
 
 public interface ExecutePolicy {
 
-    long timeout();
+    long timeoutInMs();
 
     boolean submitOrder();
 }

@@ -34,7 +34,7 @@ public class Application {
         });
 
         for (int i = 0; i < 3; i++) {
-            System.out.println(multiFutureTask.take().get());
+            System.out.println(multiFutureTask.takeCompleted().get());
         }
 
         for (Integer integer : multiFutureTask.get()) {

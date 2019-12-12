@@ -12,7 +12,7 @@ public final class DefaultExecutePolicy implements ExecutePolicy {
     private boolean submitOrder;
 
     @Override
-    public long timeout() {
+    public long timeoutInMs() {
         return timeout;
     }
 

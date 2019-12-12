@@ -4,6 +4,7 @@ package manfred.multi.task;
 import manfred.multi.task.policy.DefaultExecutePolicy;
 import manfred.multi.task.policy.ExecutePolicy;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
@@ -71,8 +72,9 @@ public class ExecutorParallelPool implements ParallelPool {
     private MultiTaskContext convertFrom(ExecutePolicy policy) {
         return MultiTaskContext.builder()
                 .executor(executor)
-                .timeoutInMs(policy.timeout())
+                .timeoutInMs(policy.timeoutInMs())
                 .completeSubmitOrder(policy.submitOrder())
+                .beginTime(System.currentTimeMillis())
                 .build();
     }
 }

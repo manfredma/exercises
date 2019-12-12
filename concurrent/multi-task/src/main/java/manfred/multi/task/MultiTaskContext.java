@@ -28,4 +28,9 @@ public class MultiTaskContext {
      */
     private Executor executor;
 
+    /**
+     * 任务开始时间
+     */
+    private long beginTime;
+
 }
