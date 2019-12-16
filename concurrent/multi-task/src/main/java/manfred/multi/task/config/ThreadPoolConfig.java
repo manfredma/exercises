@@ -27,7 +27,6 @@ public class ThreadPoolConfig {
 
     private boolean allowCoreThreadTimeout;
 
-
     // 任务组相关配置
 
     private Duration timeout;

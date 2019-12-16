@@ -29,12 +29,15 @@ public class ParallelPoolConfig {
         // 创建线程池
         BlockingQueue<Runnable> queue = createQueue(realNameQuery.getQueueSize());
         ThreadFactory threadFactory = Executors.defaultThreadFactory();
-        try {
-            threadFactory = (ThreadFactory) Class.forName(realNameQuery.getThreadFactoryClassName()).newInstance();
-        } catch (Exception e) {
-            // ignore 线程池，一般只会设置名称或者后台，不影响使用，记录日志
-            log.error("ParallelPoolConfig#realNameQueryPool create threadFactory error by reflect!", e);
+        if (null != realNameQuery.getThreadFactoryClassName()) {
+            try {
+                threadFactory = (ThreadFactory) Class.forName(realNameQuery.getThreadFactoryClassName()).newInstance();
+            } catch (Exception e) {
+                // ignore 线程池，一般只会设置名称或者后台，不影响使用，记录日志
+                log.error("ParallelPoolConfig#realNameQueryPool create threadFactory error by reflect!", e);
+            }
         }
+
         RejectedExecutionHandler rejectedExecutionHandler;
         try {
             rejectedExecutionHandler = (RejectedExecutionHandler) Class.forName(realNameQuery.getRejectedExecutionHandlerClassName()).newInstance();
@@ -54,6 +57,7 @@ public class ParallelPoolConfig {
         if (null != realNameQuery.getTimeout()) {
             taskTimeout = realNameQuery.getTimeout().toMillis();
         }
+
         ExecutePolicy defaultExecutePolicy = DefaultExecutePolicy.builder()
                 .timeout(taskTimeout)
                 .submitOrder(realNameQuery.isSubmitOrder())
