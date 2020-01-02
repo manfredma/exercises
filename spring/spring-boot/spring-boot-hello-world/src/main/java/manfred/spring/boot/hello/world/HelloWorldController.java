@@ -1,6 +1,7 @@
 package manfred.spring.boot.hello.world;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,5 +26,10 @@ public class HelloWorldController {
     @RequestMapping("/2")
     public List<String> hello3() {
         return Arrays.asList("A", "B", "C");
+    }
+
+    @RequestMapping("/now")
+    public Date now() {
+        return new Date();
     }
 }

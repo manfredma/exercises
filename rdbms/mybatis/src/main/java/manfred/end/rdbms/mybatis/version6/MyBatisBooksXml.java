@@ -11,10 +11,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.Reader;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class MyBatisBooksXml {
     private static SqlSessionFactory factory = null;
@@ -27,6 +24,16 @@ public class MyBatisBooksXml {
         factory = new SqlSessionFactoryBuilder().build(reader);
         factory.getConfiguration().addMapper(MyMapper.class);
         session = factory.openSession();
+    }
+
+    @Test
+    public void deleteBooks2() {
+        Map<String, Object> param = new HashMap<>();
+        List<Long> ids = new ArrayList<>();
+        param.put("ids", ids);
+        int result = session.delete("deleteBook", param);
+        session.commit();
+        System.out.println("result=" + result);
     }
 
     @Test

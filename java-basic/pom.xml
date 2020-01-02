@@ -24,6 +24,7 @@
         <module>java-basic-init</module>
         <module>java-generic</module>
         <module>java-basic-url</module>
+        <module>java-stream</module>
     </modules>
 
 

@@ -29,6 +29,12 @@ public class HelloWorldControllerTest {
     public void getHello() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/hello1").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
                 .andExpect(content().string(equalTo("Hello World")));
+        System.out.println(mockMvc.perform(MockMvcRequestBuilders.get("/hello1").accept(MediaType.APPLICATION_JSON)).andReturn().getAsyncResult());
+    }
+
+    @Test
+    public void getNow() throws Exception {
+        System.out.println(mockMvc.perform(MockMvcRequestBuilders.get("/now").accept(MediaType.APPLICATION_JSON)).andReturn().getAsyncResult());
     }
 
     @Test
