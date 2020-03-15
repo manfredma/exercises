@@ -14,18 +14,9 @@
 
     <!-- 公共spring-boot配置，下面依赖jar文件不用在写版本号 -->
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <!-- 自动包含以下信息： -->
-        <!-- 1.使用Java6编译级别 -->
-        <!-- 2.使UTF-8编码 -->
-        <!-- 3.实现了通用的测试框架 (JUnit, Hamcrest, Mockito). -->
-        <!-- 4.智能资源过滤 -->
-        <!-- 5.智能的插件配置(exec plugin, surefire, Git commit ID, shade). -->
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <!-- spring boot 1.x最后稳定版本 -->
-        <version>2.1.8.RELEASE</version>
-        <!-- 表示父模块pom的相对路径，这里没有值 -->
-        <relativePath/>
+        <artifactId>spring-boot</artifactId>
+        <groupId>manfred.end</groupId>
+        <version>1.0-SNAPSHOT</version>
     </parent>
 
     <properties>
@@ -39,13 +30,14 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <version>2.1.8.RELEASE</version>
         </dependency>
 
         <!-- 测试 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <!-- 只在test测试里面运行 -->
+            <version>2.1.8.RELEASE</version>
             <scope>test</scope>
         </dependency>
 
@@ -53,6 +45,18 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.40</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>5.2.2.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>5.2.2.RELEASE</version>
         </dependency>
 
     </dependencies>

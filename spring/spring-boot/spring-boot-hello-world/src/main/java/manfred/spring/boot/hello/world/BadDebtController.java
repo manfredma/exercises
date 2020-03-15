@@ -1,13 +1,15 @@
 package manfred.spring.boot.hello.world;
 
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author manfred
@@ -40,9 +42,9 @@ public class BadDebtController {
                 return "uid cannot ben null";
             }
 
-            if ("1".equals(createDto.getOrderType())) {
+            if ("1".equals(createDto.getOrderType()) || "2".equals(createDto.getOrderType())) {
                 if ((createDto.memberUid == null || "".equals(createDto.memberUid))) {
-                    return "亲密付订单，memberUid 不能为空";
+                    return "1".equals(createDto.getOrderType()) ? "亲密付订单，memberUid 不能为空" : "团队付订单，memberUid 不能为空";
                 }
             }
 
@@ -62,7 +64,10 @@ public class BadDebtController {
             param.put("app_id", "'" + createDto.getAppId() + "'");
             String totalFee = createDto.getTotalFee() == null || "".equals(createDto.getTotalFee()) ? String.valueOf(20) : createDto.getTotalFee();
             param.put("total_fee", "'" + totalFee + "'");
-            param.put("member_uid", "'" + createDto.getMemberUid() + "'");
+            if ("1".equals(createDto.getOrderType()) || "2".equals(createDto.getOrderType())) {
+                param.put("member_uid", "'" + createDto.getMemberUid() + "'");
+                param.put("leader_uid", "'" + createDto.getUid() + "'");
+            }
             param.put("district", "'010'");
 
             String paramName = param.keySet().toString().substring(1, param.keySet().toString().length() - 1);
@@ -76,8 +81,6 @@ public class BadDebtController {
 
             if ("1".equals(createDto.getOrderType()) || "2".equals(createDto.getOrderType())) {
                 param.put("uid", "'" + createDto.getMemberUid() + "'");
-                param.put("leader_uid", createDto.getUid());
-                param.remove("member_uid");
                 paramName = param.keySet().toString().substring(1, param.keySet().toString().length() - 1);
                 paramValue = param.values().toString().substring(1, param.values().toString().length() - 1);
                 sql = "insert ignore into baddebt_328(" + paramName + ") values( + " + paramValue + ")";

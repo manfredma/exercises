@@ -36,6 +36,7 @@
         <module>redis</module>
         <module>canal</module>
         <module>stability</module>
+        <module>mq</module>
     </modules>
     <packaging>pom</packaging>
 
