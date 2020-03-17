@@ -25,6 +25,7 @@
         <module>java-generic</module>
         <module>java-basic-url</module>
         <module>java-stream</module>
+        <module>java-basic-time</module>
     </modules>
 
 
