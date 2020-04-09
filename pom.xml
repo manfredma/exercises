@@ -37,6 +37,7 @@
         <module>canal</module>
         <module>stability</module>
         <module>mq</module>
+        <module>zk</module>
     </modules>
     <packaging>pom</packaging>
 
