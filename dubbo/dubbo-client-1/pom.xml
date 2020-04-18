@@ -27,7 +27,7 @@
         <!-- log4j版本 -->
         <log4j.version>1.2.17</log4j.version>
         <!-- dubbo版本 -->
-        <dubbo.version>2.6.5-didi-1</dubbo.version>
+        <dubbo.version>2.6.5</dubbo.version>
         <!-- zookeeper版本 -->
         <zookeeper.version>3.4.6</zookeeper.version>
         <!-- zkclient版本 -->
