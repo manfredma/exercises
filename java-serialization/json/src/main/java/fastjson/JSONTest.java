@@ -3,6 +3,7 @@ package fastjson;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import lombok.Data;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +13,7 @@ import java.util.TreeMap;
  * @author manfred
  * @since 2019-11-06 下午2:34
  */
-public class Test {
+public class JSONTest {
 
     @org.junit.Test
     public void testBasic() {
@@ -87,5 +88,16 @@ public class Test {
         xxx.put("l", "l");
         System.out.println(JSON.toJSONString(xxx));
         System.out.println(JSON.toJSONString(JSONObject.parseObject(JSON.toJSONString(xxx))));
+    }
+
+    @org.junit.Test
+    public void testString2Integer () {
+        A a = JSON.parseObject("{'a':'34124123'}", A.class);
+        System.out.println(a);
+    }
+
+    @Data
+    public static class A {
+        private int a;
     }
 }
