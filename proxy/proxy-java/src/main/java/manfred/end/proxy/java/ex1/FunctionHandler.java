@@ -16,6 +16,7 @@ public class FunctionHandler implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        System.out.println(String.format("method=%s", method.getName()));
         return method.invoke(fun, args);
     }
 }
