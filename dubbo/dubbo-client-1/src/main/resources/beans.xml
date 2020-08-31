@@ -16,7 +16,7 @@
 
 
     <!-- 生成远程服务代理，可以像使用本地bean一样使用demoService -->
-    <dubbo:reference id="demoService" interface="cn.eaglefire.app.service.DemoService"/>
-    <dubbo:reference id="demoService2" interface="cn.eaglefire.app.service.DemoService"/>
+    <dubbo:reference id="demoService" interface="cn.eaglefire.app.service.DemoService" group="xxx" check="false" timeout="600000" async="true"/>
+    <dubbo:reference id="demoService2" interface="cn.eaglefire.app.service.DemoService" group="xxx" check="false" timeout="600000"/>
 
 </beans>

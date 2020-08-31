@@ -11,18 +11,18 @@ import org.apache.thrift.transport.TTransport;
 public class HelloClientDemo {
 
     public static final String SERVER_IP = "localhost";
+
     public static final int SERVER_PORT = 8090;
+
     public static final int TIMEOUT = 30000;
-
-
 
     public void startClient(String userName) {
         TTransport transport = null;
         try {
             transport = new TSocket(SERVER_IP, SERVER_PORT, TIMEOUT);
+            transport.open();
             TProtocol protocol = new TBinaryProtocol(transport);
             HelloWorldService.Client client = new HelloWorldService.Client(protocol);
-            transport.open();
             String result = client.sayHello(userName);
             System.out.println("Thrift client result =: " + result);
         } catch (TException e) {

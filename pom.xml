@@ -38,6 +38,7 @@
         <module>stability</module>
         <module>mq</module>
         <module>zk</module>
+        <module>parseq</module>
     </modules>
     <packaging>pom</packaging>
 

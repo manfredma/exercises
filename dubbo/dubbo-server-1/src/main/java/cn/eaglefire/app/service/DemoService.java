@@ -1,5 +1,6 @@
+package cn.eaglefire.app.service;
 
-package cn.eaglefire.app.service; public interface DemoService {
+public interface DemoService {
 	/**
  	* 测试方法
  	* @param name
