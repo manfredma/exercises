@@ -13,20 +13,20 @@
     <artifactId>do-exercise</artifactId>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>leet-code(1-50)</module>
-        <module>leet-code(51-100)</module>
-        <module>leet-code(101-150)</module>
-        <module>leet-code(451-500)</module>
-        <module>leet-code(351-400)</module>
-        <module>leet-code(251-300)</module>
-        <module>leet-code(151-200)</module>
-        <module>leet-code(401-450)</module>
-        <module>leet-code(201-250)</module>
-        <module>leet-code(301-350)</module>
-        <module>leet-code(651-700)</module>
-        <module>leet-code(601-650)</module>
-        <module>leet-code(551-600)</module>
-        <module>leet-code(501-550)</module>
+        <module>leet-code_1-50</module>
+        <module>leet-code_51-100</module>
+        <module>leet-code_101-150</module>
+        <module>leet-code_151-200</module>
+        <module>leet-code_201-250</module>
+        <module>leet-code_251-300</module>
+        <module>leet-code_301-350</module>
+        <module>leet-code_351-400</module>
+        <module>leet-code_401-450</module>
+        <module>leet-code_451-500</module>
+        <module>leet-code_501-550</module>
+        <module>leet-code_551-600</module>
+        <module>leet-code_601-650</module>
+        <module>leet-code_651-700</module>
     </modules>
 
     <packaging>pom</packaging>
