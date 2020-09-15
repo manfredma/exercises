@@ -4,6 +4,8 @@ import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.linkedin.parseq.Engine;
 import com.linkedin.parseq.EngineBuilder;
 import com.linkedin.parseq.Task;
+import com.linkedin.parseq.promise.Promise;
+import com.linkedin.parseq.promise.Promises;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,7 +13,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.concurrent.*;
 
-public class Main {
+public class Main2 {
     public static void main(String[] args) throws IOException {
 
         ExecutorService poolExecutor =
@@ -24,34 +26,39 @@ public class Main {
                 .setTimerScheduler(Executors.newScheduledThreadPool(2))
                 .build();
 
-        engine.run(createCompoundTask());
+        engine.run(createCompoundTask2());
         engine.shutdown();
         System.in.read();
         System.exit(0);
     }
 
     private static Task<Object> createTask(int id) {
-        return Task.callable(
+        return Task.async(
                 () -> {
                     System.out.println("BEGIN: time=" + new Date() + ",  Thread: " + Thread.currentThread() + ", id = " + id);
                     Thread.sleep(1000L);
                     System.out.println("END: time=" + new Date() + ",  Thread: " + Thread.currentThread() + ", id = " + id);
-                    return "S";
+                    return Promises.value(new Object());
                 }
         );
     }
 
-    private static Task createCompoundTask() {
-        return Task.par(createTask(0),
-                createTask(1),
-                createTask(2),
-                createTask(3),
-                createTask(4),
-                createTask(5),
-                createTask(6)
+    private static Task createCompoundTask(int x) {
+        return Task.par(createTask(x),
+                createTask(x + 1),
+                createTask(x + 2),
+                createTask(x + 3),
+                createTask(x + 4),
+                createTask(x + 5),
+                createTask(x + 6)
                 );
     }
 
+    private static Task createCompoundTask2() {
+        return Task.par(createCompoundTask(0),
+                createCompoundTask(7)
+        );
+    }
 
     public static class AsyncCallerRunsPolicy implements RejectedExecutionHandler {
 

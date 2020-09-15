@@ -4,6 +4,9 @@ import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.linkedin.parseq.Engine;
 import com.linkedin.parseq.EngineBuilder;
 import com.linkedin.parseq.Task;
+import com.linkedin.parseq.httpclient.HttpClient;
+import com.linkedin.parseq.promise.Promises;
+import com.ning.http.client.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,7 +14,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.concurrent.*;
 
-public class Main {
+public class Main3 {
     public static void main(String[] args) throws IOException {
 
         ExecutorService poolExecutor =
@@ -24,34 +27,29 @@ public class Main {
                 .setTimerScheduler(Executors.newScheduledThreadPool(2))
                 .build();
 
-        engine.run(createCompoundTask());
+        engine.run(createTask());
         engine.shutdown();
         System.in.read();
         System.exit(0);
     }
 
-    private static Task<Object> createTask(int id) {
-        return Task.callable(
-                () -> {
-                    System.out.println("BEGIN: time=" + new Date() + ",  Thread: " + Thread.currentThread() + ", id = " + id);
-                    Thread.sleep(1000L);
-                    System.out.println("END: time=" + new Date() + ",  Thread: " + Thread.currentThread() + ", id = " + id);
-                    return "S";
-                }
-        );
+    private static Task<String> createTask() {
+        final Task<String> google = fetchBody("http://www.baidu.com");
+        final Task<String> yahoo = fetchBody("http://www.sina.com");
+        final Task<String> bing = fetchBody("https://cn.bing.com/");
+
+        final Task<String> plan = Task.par(google, yahoo, bing)
+                .map((g, y, b) -> "baidu Page: " + g +" \n" +
+                        "sina Page: " + y + "\n" +
+                        "bing Page: " + b + "\n")
+                .andThen(System.out::println);
+        return plan;
+
     }
 
-    private static Task createCompoundTask() {
-        return Task.par(createTask(0),
-                createTask(1),
-                createTask(2),
-                createTask(3),
-                createTask(4),
-                createTask(5),
-                createTask(6)
-                );
+    private static Task<String> fetchBody(String url) {
+        return HttpClient.get(url).task().map(Response::getResponseBody);
     }
-
 
     public static class AsyncCallerRunsPolicy implements RejectedExecutionHandler {
 
