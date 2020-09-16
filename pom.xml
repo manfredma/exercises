@@ -39,6 +39,7 @@
         <module>mq</module>
         <module>zk</module>
         <module>parseq</module>
+        <module>tool</module>
     </modules>
     <packaging>pom</packaging>
 
