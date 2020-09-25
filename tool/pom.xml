@@ -15,5 +15,6 @@
 
     <modules>
         <module>mvn</module>
+        <module>arch-unit</module>
     </modules>
 </project>
