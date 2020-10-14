@@ -17,6 +17,7 @@
         <module>jdk-concurrent</module>
         <module>multi-task</module>
         <module>thread-local</module>
+        <module>parseq</module>
     </modules>
 
 
