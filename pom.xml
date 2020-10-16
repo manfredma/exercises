@@ -39,6 +39,7 @@
         <module>mq</module>
         <module>zk</module>
         <module>tool</module>
+        <module>log</module>
     </modules>
     <packaging>pom</packaging>
 
