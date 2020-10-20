@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.concurrent.*;
 
-public class Main {
+public class Basic {
     public static void main(String[] args) throws IOException {
 
         ExecutorService poolExecutor =

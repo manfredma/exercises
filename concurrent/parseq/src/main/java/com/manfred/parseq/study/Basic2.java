@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.concurrent.*;
 
-public class Main2 {
+public class Basic2 {
     public static void main(String[] args) throws IOException {
 
         ExecutorService poolExecutor =

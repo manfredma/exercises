@@ -7,17 +7,15 @@ import com.linkedin.parseq.Task;
 import com.linkedin.parseq.promise.Promises;
 import com.linkedin.parseq.promise.SettablePromise;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.*;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
-public class Main6 {
+public class IntegrateOutAsync {
 
     private static List<Task> taskList = new ArrayList<>();
 
@@ -27,7 +25,7 @@ public class Main6 {
                             .setNameFormat("out-%d")
                             .build(), new AsyncCallerRunsPolicy());
 
-    private static final Logger LOGGER = getLogger(Main6.class);
+    private static final Logger LOGGER = getLogger(IntegrateOutAsync.class);
 
     public static void main(String[] args) throws IOException, InterruptedException {
 

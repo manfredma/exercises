@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 
-public class Main4 {
+public class ListResultTest {
 
     private static List<Task> taskList = new ArrayList<>();
 

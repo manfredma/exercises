@@ -100,6 +100,9 @@ public class RetryExample {
             LOGGER.info("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
             Task<Object> result = createTask(20);
             return result;
+        }).map("mapRe", (x) -> {
+            LOGGER.info("输出一下结果, {}", x);
+            return x;
         });
         Task x2 = createTask(0).map("mapX2", (x) -> {
             LOGGER.info("输出一下结果, {}", x);

@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.*;
 
-public class Main5 {
+public class ListResultNoErrorTest {
 
     private static List<Task> taskList = new ArrayList<>();
 
@@ -56,16 +56,6 @@ public class Main5 {
 
     private static Task<Object> createTask(int id) {
         Task<Object> task = Task.callable("TaskSuccess " + id, () -> "S-" + id + ": " + new Random().nextDouble());
-        taskList.add(task);
-        return task;
-    }
-
-    private static Task<Object> createErrorTask(int id) {
-        Task<Object> task = Task.callable("TaskError" + id,
-                () -> {
-                    throw new RuntimeException("simu");
-                }
-        );
         taskList.add(task);
         return task;
     }

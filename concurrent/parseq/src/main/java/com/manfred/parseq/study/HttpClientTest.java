@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.concurrent.*;
 
-public class Main3 {
+public class HttpClientTest {
     public static void main(String[] args) throws IOException {
 
         ExecutorService poolExecutor =
@@ -48,7 +48,7 @@ public class Main3 {
     }
 
     private static Task<String> fetchBody(String url) {
-        return HttpClient.get(url).task().map(Response::getResponseBody);
+        return com.linkedin.parseq.httpclient.HttpClient.get(url).task().map(Response::getResponseBody);
     }
 
     public static class AsyncCallerRunsPolicy implements RejectedExecutionHandler {
