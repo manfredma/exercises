@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 
 public class Bar {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger("Bar.class");
+    private static final Logger LOGGER = LoggerFactory.getLogger(Bar.class);
 
     public boolean doIt() {
         LOGGER.error("Did it again!");

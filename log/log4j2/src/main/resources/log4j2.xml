@@ -2,17 +2,17 @@
 <Configuration status="WARN">
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %X{transaction.owner} [%t] [%-5p]  %c {%F:%L} - %m%n"/>
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %X{transaction.owner} [%t] [%-5p]  %c{1.} %F - %m%n"/>
         </Console>
     </Appenders>
     <Loggers>
-        <Logger name="com.foo.MyApp" level="error" additivity="false">
+        <Logger name="com.foo.MyApp" level="error" additivity="false" includeLocation="false">
             <AppenderRef ref="Console"/>
         </Logger>
 
-        <Logger name="com.foo.Bar" level="info" additivity="true"/>
+        <Logger name="com.foo.Bar" level="info" additivity="true" includeLocation="false"/>
 
-        <Root level="error">
+        <Root level="error" includeLocation="false">
             <AppenderRef ref="Console"/>
         </Root>
     </Loggers>
