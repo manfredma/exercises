@@ -10,18 +10,15 @@
     <modules>
         <module>java-basic</module>
         <module>camel</module>
-        <module>proxy</module>
         <module>spring</module>
         <module>rest</module>
         <module>concurrent</module>
         <module>java-io</module>
         <module>cache</module>
-        <module>i18n</module>
         <module>jvm</module>
         <module>do-exercise</module>
         <module>rdbms</module>
         <module>tomcat</module>
-        <module>rxjava</module>
         <module>design-pattern</module>
         <module>other</module>
         <module>dubbo</module>
