@@ -91,7 +91,7 @@ public class RetryExample {
                         : ErrorClassification.UNRECOVERABLE;
 
         RetryPolicy retryPolicy = new RetryPolicyBuilder()
-                .setTerminationPolicy(TerminationPolicy.limitAttempts(20))
+                .setTerminationPolicy(TerminationPolicy.limitAttempts(2))
                 // .setBackoffPolicy()
                 .setErrorClassifier(errorClassifier)
                 .build();

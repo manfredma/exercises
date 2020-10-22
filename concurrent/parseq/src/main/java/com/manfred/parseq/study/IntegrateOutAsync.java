@@ -41,6 +41,7 @@ public class IntegrateOutAsync {
         Task task = createCompoundTask();
         engine.run(task, "xxx");
         task.await();
+        LOGGER.info("任务整体执行完成");
         engine.shutdown();
         System.exit(0);
     }
