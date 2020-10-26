@@ -4,6 +4,7 @@ import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.linkedin.parseq.Engine;
 import com.linkedin.parseq.EngineBuilder;
 import com.linkedin.parseq.Task;
+import com.linkedin.parseq.trace.TraceUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,6 +17,9 @@ import java.util.concurrent.*;
 public class ListResultNoErrorTest {
 
     private static List<Task> taskList = new ArrayList<>();
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ListResultNoErrorTest.class);
+
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
@@ -31,8 +35,8 @@ public class ListResultNoErrorTest {
         Task task = createCompoundTaskV4();
         engine.run(task, "xxx");
         task.await();
-
-        listTaskResult();
+        LOGGER.info(TraceUtil.getJsonTrace(task));
+//        listTaskResult();
         engine.shutdown();
         System.exit(0);
     }
@@ -64,7 +68,7 @@ public class ListResultNoErrorTest {
         Task task0 = createTask(1);
         Task task1 = createTask(2);
         Task task2 = Task.par(task0, task1);
-        Task task3 = Task.par(task0.shareable(), createTask(3), task2);
+        Task task3 = Task.par(task0, createTask(3), task2);
         taskList.add(task0);
         taskList.add(task1);
         taskList.add(task2);

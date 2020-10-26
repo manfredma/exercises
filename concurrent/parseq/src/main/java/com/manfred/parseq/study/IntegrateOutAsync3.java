@@ -6,67 +6,64 @@ import com.linkedin.parseq.EngineBuilder;
 import com.linkedin.parseq.Task;
 import com.linkedin.parseq.promise.Promises;
 import com.linkedin.parseq.promise.SettablePromise;
+import com.linkedin.parseq.trace.TraceUtil;
 import org.slf4j.Logger;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.*;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
-public class IntegrateOutAsync {
+public class IntegrateOutAsync3 {
 
-    private static List<Task> taskList = new ArrayList<>();
-
-    private static ExecutorService poolExecutor =
+    private static ExecutorService outExecutor =
             new ThreadPoolExecutor(20, 50, 0L, TimeUnit.MILLISECONDS, new SynchronousQueue<>(),
                     new ThreadFactoryBuilder().setDaemon(false)
                             .setNameFormat("out-%d")
                             .build(), new AsyncCallerRunsPolicy());
 
-    private static final Logger LOGGER = getLogger(IntegrateOutAsync.class);
+    private static ExecutorService poolExecutor2 =
+            new ThreadPoolExecutor(20, 50, 0L, TimeUnit.MILLISECONDS, new SynchronousQueue<>(),
+                    new ThreadFactoryBuilder().setDaemon(false)
+                            .setNameFormat("parseq-%d")
+                            .build(), new AsyncCallerRunsPolicy());
+
+    private static final Logger LOGGER = getLogger(IntegrateOutAsync3.class);
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
-        ExecutorService poolExecutor =
-                new ThreadPoolExecutor(20, 50, 0L, TimeUnit.MILLISECONDS, new SynchronousQueue<>(),
-                        new ThreadFactoryBuilder().setDaemon(false)
-                                .setNameFormat("parseq-%d")
-                                .build(), new AsyncCallerRunsPolicy());
 
-        Engine engine = new EngineBuilder().setTaskExecutor(poolExecutor)
+        Engine engine = new EngineBuilder().setTaskExecutor(poolExecutor2)
                 .setTimerScheduler(Executors.newScheduledThreadPool(2))
                 .build();
         Task task = createCompoundTask();
         engine.run(task, "xxx");
         task.await();
+        String trace = TraceUtil.getJsonTrace(task);
         LOGGER.info("任务整体执行完成");
+        System.out.println(trace);
         engine.shutdown();
         System.exit(0);
     }
 
     private static Task<Object> createTask(int id) {
-        Task<Object> task = Task.async("Task " + id, () ->
-        {
+        Task<Object> task = Task.async("Task 1", () -> {
             SettablePromise<Object> promise = Promises.settable();
-            poolExecutor.submit(() -> {
+            outExecutor.submit(() -> {
                 Thread.sleep(id * 100 + 1000L);
-                LOGGER.info("id = {} 执行完成", id);
-                promise.done("Task " + id + " done!!!");
+                LOGGER.info("Task id = {} 执行完成", id);
+                promise.done("Task 1 done!!!");
                 return null;
             });
-
             return promise;
+        }).andThen("Task  2", (x) -> {
+            LOGGER.info("Task 2 done!!!");
         });
-        taskList.add(task);
         return task;
     }
 
     private static Task createCompoundTask() {
-        Task task = Task.par(createTask(0), createTask(1));
-        taskList.add(task);
-        return task;
+        return createTask(1);
     }
 
     public static class AsyncCallerRunsPolicy implements RejectedExecutionHandler {

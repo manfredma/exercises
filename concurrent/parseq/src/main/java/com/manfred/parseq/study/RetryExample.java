@@ -50,31 +50,31 @@ public class RetryExample {
         System.exit(0);
     }
 
-    static int successWhen5 = 1;
+    static int success = 1;
 
     private static Task<Object> createTask(int id) {
         Task<Object> task = Task.async("Task " + id, () -> {
             SettablePromise<Object> promise = Promises.settable();
             poolExecutor.execute(() -> {
                 try {
-                    Thread.sleep(id + 10L);
+                    Thread.sleep(id + 200L);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                LOGGER.info("id = {} 开始执行", id);
+                LOGGER.info("id = {} 开始在外部线程池执行", id);
 
-                if (!(successWhen5 % 5 == 0) && id == 20) {
+                if (!(success % 2 == 0) && id == 20) {
                     // LOGGER.info("id = {} 执行失败", id);
-                    successWhen5++;
+                    success++;
                     Exception exception = new RuntimeException();
                     promise.fail(exception);
                 } else if (id == 20) {
                     // LOGGER.info("id = {} 执行成功", id);
-                    successWhen5++;
-                    promise.done("Task " + id + " done!!!");
+                    success++;
+                    promise.done("Task " + id + " result!!!");
                 } else {
                     // LOGGER.info("id = {} 执行成功", id);
-                    promise.done("Task " + id + " done!!!");
+                    promise.done("Task " + id + " result!!!");
                 }
                 LOGGER.info("id = {} 执行完成", id);
                 // return null;
@@ -97,14 +97,13 @@ public class RetryExample {
                 .build();
 
         Task re = Task.withRetryPolicy(retryPolicy, () -> {
-            LOGGER.info("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-            Task<Object> result = createTask(20);
+            Task<Object> result = createTask(1);
             return result;
-        }).map("mapRe", (x) -> {
+        }).map("map-print-1", (x) -> {
             LOGGER.info("输出一下结果, {}", x);
             return x;
         });
-        Task x2 = createTask(0).map("mapX2", (x) -> {
+        Task x2 = createTask(0).map("map-print-2", (x) -> {
             LOGGER.info("输出一下结果, {}", x);
             return x;
         });

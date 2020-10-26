@@ -15,7 +15,7 @@ import java.util.concurrent.*;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
-public class IntegrateOutAsync {
+public class MapExample {
 
     private static List<Task> taskList = new ArrayList<>();
 
@@ -25,7 +25,7 @@ public class IntegrateOutAsync {
                             .setNameFormat("out-%d")
                             .build(), new AsyncCallerRunsPolicy());
 
-    private static final Logger LOGGER = getLogger(IntegrateOutAsync.class);
+    private static final Logger LOGGER = getLogger(MapExample.class);
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
@@ -59,13 +59,11 @@ public class IntegrateOutAsync {
 
             return promise;
         });
-        taskList.add(task);
         return task;
     }
 
     private static Task createCompoundTask() {
         Task task = Task.par(createTask(0), createTask(1));
-        taskList.add(task);
         return task;
     }
 

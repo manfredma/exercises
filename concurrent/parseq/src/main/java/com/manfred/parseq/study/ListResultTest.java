@@ -6,6 +6,7 @@ import com.linkedin.parseq.EngineBuilder;
 import com.linkedin.parseq.Task;
 import com.linkedin.parseq.promise.Promise;
 import com.linkedin.parseq.promise.SettablePromise;
+import com.linkedin.parseq.trace.TraceUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,9 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 
+import static org.slf4j.LoggerFactory.getLogger;
+
 public class ListResultTest {
 
     private static List<Task> taskList = new ArrayList<>();
+
+    private static final Logger LOGGER = getLogger(ListResultTest.class);
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
@@ -33,7 +38,7 @@ public class ListResultTest {
         engine.run(task, "xxx");
         task.await();
 
-        listTaskResult();
+        LOGGER.info(TraceUtil.getJsonTrace(task));
         engine.shutdown();
         System.exit(0);
     }
@@ -86,7 +91,7 @@ public class ListResultTest {
         Task task0 = createTask(1);
         Task task1 = createErrorTask(2);
         Task task2 = Task.par(task0, task1);
-        Task task3 = Task.par(task0, createTask(2), task2);
+        Task task3 = Task.par(task0.shareable(), createTask(2), task2);
         taskList.add(task0);
         taskList.add(task1);
         taskList.add(task2);
@@ -97,7 +102,7 @@ public class ListResultTest {
 
     public static class AsyncCallerRunsPolicy implements RejectedExecutionHandler {
 
-        private static final Logger LOGGER = LoggerFactory.getLogger(AsyncCallerRunsPolicy.class);
+        private static final Logger LOGGER = getLogger(AsyncCallerRunsPolicy.class);
 
         @Override
         public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {

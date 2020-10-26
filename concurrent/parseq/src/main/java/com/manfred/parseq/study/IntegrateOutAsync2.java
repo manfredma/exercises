@@ -6,6 +6,7 @@ import com.linkedin.parseq.EngineBuilder;
 import com.linkedin.parseq.Task;
 import com.linkedin.parseq.promise.Promises;
 import com.linkedin.parseq.promise.SettablePromise;
+import com.linkedin.parseq.trace.TraceUtil;
 import org.slf4j.Logger;
 
 import java.io.IOException;
@@ -15,7 +16,7 @@ import java.util.concurrent.*;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
-public class IntegrateOutAsync {
+public class IntegrateOutAsync2 {
 
     private static List<Task> taskList = new ArrayList<>();
 
@@ -25,7 +26,7 @@ public class IntegrateOutAsync {
                             .setNameFormat("out-%d")
                             .build(), new AsyncCallerRunsPolicy());
 
-    private static final Logger LOGGER = getLogger(IntegrateOutAsync.class);
+    private static final Logger LOGGER = getLogger(IntegrateOutAsync2.class);
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
@@ -41,6 +42,8 @@ public class IntegrateOutAsync {
         Task task = createCompoundTask();
         engine.run(task, "xxx");
         task.await();
+        String trace = TraceUtil.getJsonTrace(task);
+        System.out.println(trace);
         LOGGER.info("任务整体执行完成");
         engine.shutdown();
         System.exit(0);
@@ -52,12 +55,14 @@ public class IntegrateOutAsync {
             SettablePromise<Object> promise = Promises.settable();
             poolExecutor.submit(() -> {
                 Thread.sleep(id * 100 + 1000L);
-                LOGGER.info("id = {} 执行完成", id);
+                LOGGER.info("Task id = {} 执行完成", id);
                 promise.done("Task " + id + " done!!!");
                 return null;
             });
 
             return promise;
+        }).andThen("Task after " + id, (x) -> {
+            LOGGER.info("Task after " + id + " done!!!");
         });
         taskList.add(task);
         return task;
