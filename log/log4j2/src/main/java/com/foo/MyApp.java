@@ -5,7 +5,7 @@ import org.slf4j.MDC;
 
 public class MyApp {
 
-    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(MyApp.class);
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(StackLocatorTest.class);
 
     public static void main(final String... args) {
         MDC.put("transaction.owner", "MDC-owner");
