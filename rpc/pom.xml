@@ -9,13 +9,14 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>workflow</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>rpc</artifactId>
+
     <modules>
-        <module>easy-rule</module>
-        <module>easy-flows</module>
-        <module>easy-state</module>
+        <module>dubbo</module>
+        <module>thrift</module>
+        <module>rest</module>
     </modules>
 
+    <packaging>pom</packaging>
 
 </project>

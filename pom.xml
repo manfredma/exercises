@@ -11,7 +11,6 @@
         <module>java-basic</module>
         <module>camel</module>
         <module>spring</module>
-        <module>rest</module>
         <module>concurrent</module>
         <module>java-io</module>
         <module>cache</module>
@@ -21,13 +20,11 @@
         <module>tomcat</module>
         <module>design-pattern</module>
         <module>other</module>
-        <module>dubbo</module>
         <module>test</module>
         <module>netty</module>
         <module>data-structure_algorithm</module>
         <module>java-serialization</module>
         <module>common-frame-work</module>
-        <module>thrift</module>
         <module>config</module>
         <module>regex</module>
         <module>redis</module>
@@ -38,6 +35,7 @@
         <module>tool</module>
         <module>log</module>
         <module>workflow</module>
+        <module>rpc</module>
     </modules>
     <packaging>pom</packaging>
 

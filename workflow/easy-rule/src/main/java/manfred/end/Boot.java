@@ -14,6 +14,7 @@ public class Boot {
         Rule weatherRule = new RuleBuilder()
                 .name("weather rule")
                 .description("if it rains then take an umbrella")
+                .priority(2)
                 .when(facts -> facts.get("rain").equals(true))
                 .then(facts -> System.out.println("It rains, take an umbrella!"))
                 .build();
