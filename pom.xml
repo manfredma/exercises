@@ -37,6 +37,7 @@
         <module>zk</module>
         <module>tool</module>
         <module>log</module>
+        <module>workflow</module>
     </modules>
     <packaging>pom</packaging>
 
