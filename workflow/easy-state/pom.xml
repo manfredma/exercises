@@ -12,4 +12,24 @@
     <artifactId>easy-state</artifactId>
 
 
+    <properties>
+        <log4j2.version>2.13.3</log4j2.version>
+        <easy.states.version>2.0.0</easy.states.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jeasy</groupId>
+            <artifactId>easy-states</artifactId>
+            <version>${easy.states.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+
+    </dependencies>
+
 </project>
