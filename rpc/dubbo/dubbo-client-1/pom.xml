@@ -32,10 +32,16 @@
         <zookeeper.version>3.4.6</zookeeper.version>
         <!-- zkclient版本 -->
         <zkclient.version>0.1</zkclient.version>
+        <log4j2.version>2.13.3</log4j2.version>
     </properties>
 
     <!-- 依赖 -->
     <dependencies>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
         <!-- spring context -->
         <dependency>
             <groupId>org.springframework</groupId>
