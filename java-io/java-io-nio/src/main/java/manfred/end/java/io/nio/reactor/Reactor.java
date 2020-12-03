@@ -84,7 +84,7 @@ public class Reactor implements Runnable {
         ByteBuffer input = ByteBuffer.allocate(MAX_IN);
         ByteBuffer output = ByteBuffer.allocate(MAX_OUT);
 
-        static final int READING = 0, SENDIND = 1;
+        static final int READING = 0, SENDING = 1;
         int state = READING;
 
         Handler(Selector sel, SocketChannel c) throws IOException {
@@ -103,7 +103,7 @@ public class Reactor implements Runnable {
             try {
                 if (state == READING) {
                     read();
-                } else if (state == SENDIND) {
+                } else if (state == SENDING) {
                     send();
                 }
             } catch (IOException e) {
@@ -115,7 +115,7 @@ public class Reactor implements Runnable {
             socket.read(input);
             if (inputIsComplete()) {
                 process();
-                state = SENDIND;
+                state = SENDING;
                 sk.interestOps(SelectionKey.OP_WRITE);
             }
         }
