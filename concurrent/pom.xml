@@ -18,7 +18,7 @@
         <module>multi-task</module>
         <module>thread-local</module>
         <module>parseq</module>
-        <module>rxjava</module>
+        <module>reactive</module>
     </modules>
 
 

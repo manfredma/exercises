@@ -3,22 +3,20 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>rxjava</artifactId>
+        <artifactId>reactive</artifactId>
         <groupId>manfred.end</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>manfred.end</groupId>
-    <artifactId>rxjava2</artifactId>
+    <artifactId>rxjava1</artifactId>
     <version>1.0-SNAPSHOT</version>
-
-
     <dependencies>
         <dependency>
-            <groupId>io.reactivex.rxjava2</groupId>
+            <groupId>io.reactivex</groupId>
             <artifactId>rxjava</artifactId>
-            <version>2.2.9</version>
+            <version>1.0.14</version>
         </dependency>
 
         <!--log4j2核心包-->
@@ -52,4 +50,5 @@
         </dependency>
 
     </dependencies>
+
 </project>

@@ -9,11 +9,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>rxjava</artifactId>
+    <artifactId>reactive</artifactId>
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>rxjava2</module>
         <module>rxjava1</module>
+        <module>reactor</module>
     </modules>
 
     <packaging>pom</packaging>
