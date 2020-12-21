@@ -29,7 +29,7 @@
         <!-- dubbo版本 -->
         <dubbo.version>2.6.5</dubbo.version>
         <!-- zookeeper版本 -->
-        <zookeeper.version>3.4.6</zookeeper.version>
+        <zookeeper.version>3.4.14</zookeeper.version>
         <!-- zkclient版本 -->
         <zkclient.version>0.1</zkclient.version>
         <log4j2.version>2.13.3</log4j2.version>
