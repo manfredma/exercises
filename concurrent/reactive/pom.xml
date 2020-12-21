@@ -15,6 +15,7 @@
         <module>rxjava2</module>
         <module>rxjava1</module>
         <module>reactor</module>
+        <module>rsocket</module>
     </modules>
 
     <packaging>pom</packaging>

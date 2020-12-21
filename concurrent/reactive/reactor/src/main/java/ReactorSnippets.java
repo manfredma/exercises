@@ -1,5 +1,6 @@
 import org.junit.Test;
 import reactor.core.publisher.Flux;
+import reactor.core.scheduler.Scheduler;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,8 +23,14 @@ public class ReactorSnippets {
         Flux<String> fewWords = Flux.just("Hello", "World");
         Flux<String> manyWords = Flux.fromIterable(words);
 
-        fewWords.subscribe(System.out::println);
-        System.out.println();
-        manyWords.subscribe(System.out::println);
+
+        fewWords.subscribe(a -> {
+            System.out.println(Thread.currentThread() + ": " + a);
+        });
+
+        System.out.println("++++++++++++++++++++++++++++++++++++");
+        manyWords.subscribe(a -> {
+            System.out.println(Thread.currentThread() + ": " + a);
+        });
     }
 }
