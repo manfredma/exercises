@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>jedis</module>
+        <module>lettuce</module>
     </modules>
 
 
