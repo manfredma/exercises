@@ -22,7 +22,7 @@ public class BadDebtController {
     static final String USER = "root";
     static final String PASS = "123456";
 
-    {
+    static {
         try {
             Class.forName(JDBC_DRIVER);
         } catch (ClassNotFoundException e) {

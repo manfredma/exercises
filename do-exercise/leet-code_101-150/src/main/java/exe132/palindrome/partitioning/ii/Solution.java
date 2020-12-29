@@ -17,7 +17,7 @@ class Solution {
                 }
             }
         }
-        int dp[] = new int[len];
+        int[] dp = new int[len];
         for (int i = 0; i < len; ++i) {
             dp[i] = i;
             if (flag[0][i]) {

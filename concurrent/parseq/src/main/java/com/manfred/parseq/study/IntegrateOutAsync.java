@@ -51,7 +51,7 @@ public class IntegrateOutAsync {
         {
             SettablePromise<Object> promise = Promises.settable();
             poolExecutor.submit(() -> {
-                Thread.sleep(id * 100 + 1000L);
+                Thread.sleep(id * 100L + 1000L);
                 LOGGER.info("id = {} 执行完成", id);
                 promise.done("Task " + id + " done!!!");
                 return null;

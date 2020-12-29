@@ -6,7 +6,7 @@ import java.util.LinkedList;
  * 有向有权图的邻接表表示
  */
 public class Graph {
-    private LinkedList<Edge> adj[];
+    private LinkedList<Edge>[] adj;
     private int v;
 
     public Graph(int v) {

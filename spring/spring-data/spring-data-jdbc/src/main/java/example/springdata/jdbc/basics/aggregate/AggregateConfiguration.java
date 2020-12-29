@@ -37,6 +37,7 @@ import org.springframework.lang.Nullable;
  * @author Jens Schauder
  * @author Mark Paluch
  */
+@SuppressWarnings("deprecation")
 @Configuration
 @EnableJdbcRepositories
 public class AggregateConfiguration extends JdbcConfiguration {
@@ -77,11 +78,9 @@ public class AggregateConfiguration extends JdbcConfiguration {
 			public String convert(Clob clob) {
 
 				try {
-
 					return Math.toIntExact(clob.length()) == 0 //
 							? "" //
 							: clob.getSubString(1, Math.toIntExact(clob.length()));
-
 				} catch (SQLException e) {
 					throw new IllegalStateException("Failed to convert CLOB to String.", e);
 				}
