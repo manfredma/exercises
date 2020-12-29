@@ -39,6 +39,10 @@
     </modules>
     <packaging>pom</packaging>
 
+    <properties>
+        <spring-boot-2-version>2.2.1.RELEASE</spring-boot-2-version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -51,8 +55,6 @@
             <artifactId>lombok</artifactId>
             <version>1.18.4</version>
         </dependency>
-
-
     </dependencies>
 
     <repositories>
