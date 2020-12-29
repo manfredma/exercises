@@ -1,89 +1,73 @@
 package org.caffinitas.ohc.linked;
 
-import java.nio.ByteBuffer;
-import java.util.Random;
-
+import com.google.common.base.Charsets;
 import org.caffinitas.ohc.CacheSerializer;
 import org.caffinitas.ohc.OHCache;
 import org.testng.Assert;
 
-import com.google.common.base.Charsets;
+import java.nio.ByteBuffer;
+import java.util.Random;
 
-final class TestUtils
-{
+final class TestUtils {
     public static final long ONE_MB = 1024 * 1024;
-    public static final CacheSerializer<String> stringSerializer = new CacheSerializer<String>()
-    {
-        public void serialize(String s, ByteBuffer buf)
-        {
+    public static final CacheSerializer<String> stringSerializer = new CacheSerializer<String>() {
+        public void serialize(String s, ByteBuffer buf) {
             byte[] bytes = s.getBytes(Charsets.UTF_8);
             buf.put((byte) ((bytes.length >>> 8) & 0xFF));
-            buf.put((byte) ((bytes.length >>> 0) & 0xFF));
+            buf.put((byte) ((bytes.length) & 0xFF));
             buf.put(bytes);
         }
 
-        public String deserialize(ByteBuffer buf)
-        {
-            int length = (((buf.get() & 0xff) << 8) + ((buf.get() & 0xff) << 0));
+        public String deserialize(ByteBuffer buf) {
+            int length = (((buf.get() & 0xff) << 8) + ((buf.get() & 0xff)));
             byte[] bytes = new byte[length];
             buf.get(bytes);
             return new String(bytes, Charsets.UTF_8);
         }
 
-        public int serializedSize(String s)
-        {
+        public int serializedSize(String s) {
             return writeUTFLen(s);
         }
     };
-    public static final CacheSerializer<String> stringSerializerFailSerialize = new CacheSerializer<String>()
-    {
-        public void serialize(String s, ByteBuffer buf)
-        {
+    public static final CacheSerializer<String> stringSerializerFailSerialize = new CacheSerializer<String>() {
+        public void serialize(String s, ByteBuffer buf) {
             throw new RuntimeException("foo bar");
         }
 
-        public String deserialize(ByteBuffer buf)
-        {
-            int length = (buf.get() << 8) + (buf.get() << 0);
+        public String deserialize(ByteBuffer buf) {
+            int length = (buf.get() << 8) + (buf.get());
             byte[] bytes = new byte[length];
             buf.get(bytes);
             return new String(bytes, Charsets.UTF_8);
         }
 
-        public int serializedSize(String s)
-        {
+        public int serializedSize(String s) {
             return writeUTFLen(s);
         }
     };
-    public static final CacheSerializer<String> stringSerializerFailDeserialize = new CacheSerializer<String>()
-    {
-        public void serialize(String s, ByteBuffer buf)
-        {
+    public static final CacheSerializer<String> stringSerializerFailDeserialize = new CacheSerializer<String>() {
+        public void serialize(String s, ByteBuffer buf) {
             byte[] bytes = s.getBytes(Charsets.UTF_8);
             buf.put((byte) ((bytes.length >>> 8) & 0xFF));
-            buf.put((byte) ((bytes.length >>> 0) & 0xFF));
+            buf.put((byte) ((bytes.length) & 0xFF));
             buf.put(bytes);
         }
 
-        public String deserialize(ByteBuffer buf)
-        {
+        public String deserialize(ByteBuffer buf) {
             throw new RuntimeException("foo bar");
         }
 
-        public int serializedSize(String s)
-        {
+        public int serializedSize(String s) {
             return writeUTFLen(s);
         }
     };
 
-    static int writeUTFLen(String str)
-    {
+    static int writeUTFLen(String str) {
         int strlen = str.length();
         int utflen = 0;
         int c;
 
-        for (int i = 0; i < strlen; i++)
-        {
+        for (int i = 0; i < strlen; i++) {
             c = str.charAt(i);
             if ((c >= 0x0001) && (c <= 0x007F))
                 utflen++;
@@ -100,22 +84,19 @@ final class TestUtils
     }
 
     public static final byte[] dummyByteArray;
-    public static final CacheSerializer<Integer> intSerializer = new CacheSerializer<Integer>()
-    {
-        public void serialize(Integer s, ByteBuffer buf)
-        {
-            buf.put((byte)(1 & 0xff));
+    public static final CacheSerializer<Integer> intSerializer = new CacheSerializer<Integer>() {
+        public void serialize(Integer s, ByteBuffer buf) {
+            buf.put((byte) (1 & 0xff));
             buf.putChar('A');
             buf.putDouble(42.42424242d);
             buf.putFloat(11.111f);
             buf.putInt(s);
             buf.putLong(Long.MAX_VALUE);
-            buf.putShort((short)(0x7654 & 0xFFFF));
+            buf.putShort((short) (0x7654 & 0xFFFF));
             buf.put(dummyByteArray);
         }
 
-        public Integer deserialize(ByteBuffer buf)
-        {
+        public Integer deserialize(ByteBuffer buf) {
             Assert.assertEquals(buf.get(), (byte) 1);
             Assert.assertEquals(buf.getChar(), 'A');
             Assert.assertEquals(buf.getDouble(), 42.42424242d);
@@ -129,20 +110,16 @@ final class TestUtils
             return r;
         }
 
-        public int serializedSize(Integer s)
-        {
+        public int serializedSize(Integer s) {
             return 529;
         }
     };
-    public static final CacheSerializer<Integer> intSerializerFailSerialize = new CacheSerializer<Integer>()
-    {
-        public void serialize(Integer s, ByteBuffer buf)
-        {
+    public static final CacheSerializer<Integer> intSerializerFailSerialize = new CacheSerializer<Integer>() {
+        public void serialize(Integer s, ByteBuffer buf) {
             throw new RuntimeException("foo bar");
         }
 
-        public Integer deserialize(ByteBuffer buf)
-        {
+        public Integer deserialize(ByteBuffer buf) {
             Assert.assertEquals(buf.get(), (byte) 1);
             Assert.assertEquals(buf.getChar(), 'A');
             Assert.assertEquals(buf.getDouble(), 42.42424242d);
@@ -156,32 +133,27 @@ final class TestUtils
             return r;
         }
 
-        public int serializedSize(Integer s)
-        {
+        public int serializedSize(Integer s) {
             return 529;
         }
     };
-    public static final CacheSerializer<Integer> intSerializerFailDeserialize = new CacheSerializer<Integer>()
-    {
-        public void serialize(Integer s, ByteBuffer buf)
-        {
-            buf.put((byte)(1 & 0xff));
+    public static final CacheSerializer<Integer> intSerializerFailDeserialize = new CacheSerializer<Integer>() {
+        public void serialize(Integer s, ByteBuffer buf) {
+            buf.put((byte) (1 & 0xff));
             buf.putChar('A');
             buf.putDouble(42.42424242d);
             buf.putFloat(11.111f);
             buf.putInt(s);
             buf.putLong(Long.MAX_VALUE);
-            buf.putShort((short)(0x7654 & 0xFFFF));
+            buf.putShort((short) (0x7654 & 0xFFFF));
             buf.put(dummyByteArray);
         }
 
-        public Integer deserialize(ByteBuffer buf)
-        {
+        public Integer deserialize(ByteBuffer buf) {
             throw new RuntimeException("foo bar");
         }
 
-        public int serializedSize(Integer s)
-        {
+        public int serializedSize(Integer s) {
             return 529;
         }
     };
@@ -196,8 +168,7 @@ final class TestUtils
 
     static int manyCount = 20000;
 
-    static
-    {
+    static {
 
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < 1000; i++)
@@ -211,8 +182,7 @@ final class TestUtils
         bigRandom = sb.toString();
     }
 
-    static void fillBigRandom5(OHCache<Integer, String> cache)
-    {
+    static void fillBigRandom5(OHCache<Integer, String> cache) {
         cache.put(1, "one " + bigRandom);
         cache.put(2, "two " + bigRandom);
         cache.put(3, "three " + bigRandom);
@@ -220,39 +190,32 @@ final class TestUtils
         cache.put(5, "five " + bigRandom);
     }
 
-    static void checkBigRandom5(OHCache<Integer, String> cache, int serialized)
-    {
+    static void checkBigRandom5(OHCache<Integer, String> cache, int serialized) {
         int cnt = 0;
-        if (cache.get(1) != null)
-        {
+        if (cache.get(1) != null) {
             Assert.assertEquals(cache.get(1), "one " + bigRandom);
-            cnt ++;
+            cnt++;
         }
-        if (cache.get(2) != null)
-        {
+        if (cache.get(2) != null) {
             Assert.assertEquals(cache.get(2), "two " + bigRandom);
-            cnt ++;
+            cnt++;
         }
-        if (cache.get(3) != null)
-        {
+        if (cache.get(3) != null) {
             Assert.assertEquals(cache.get(3), "three " + bigRandom);
-            cnt ++;
+            cnt++;
         }
-        if (cache.get(4) != null)
-        {
+        if (cache.get(4) != null) {
             Assert.assertEquals(cache.get(4), "four " + bigRandom);
-            cnt ++;
+            cnt++;
         }
-        if (cache.get(5) != null)
-        {
+        if (cache.get(5) != null) {
             Assert.assertEquals(cache.get(5), "five " + bigRandom);
-            cnt ++;
+            cnt++;
         }
         Assert.assertEquals(cnt, serialized);
     }
 
-    static void fillBig5(OHCache<Integer, String> cache)
-    {
+    static void fillBig5(OHCache<Integer, String> cache) {
         cache.put(1, "one " + big);
         cache.put(2, "two " + big);
         cache.put(3, "three " + big);
@@ -260,8 +223,7 @@ final class TestUtils
         cache.put(5, "five " + big);
     }
 
-    static void checkBig5(OHCache<Integer, String> cache)
-    {
+    static void checkBig5(OHCache<Integer, String> cache) {
         Assert.assertEquals(cache.get(1), "one " + big);
         Assert.assertEquals(cache.get(2), "two " + big);
         Assert.assertEquals(cache.get(3), "three " + big);
@@ -269,8 +231,7 @@ final class TestUtils
         Assert.assertEquals(cache.get(5), "five " + big);
     }
 
-    static void fill5(OHCache<Integer, String> cache)
-    {
+    static void fill5(OHCache<Integer, String> cache) {
         cache.put(1, "one");
         cache.put(2, "two");
         cache.put(3, "three");
@@ -278,8 +239,7 @@ final class TestUtils
         cache.put(5, "five");
     }
 
-    static void check5(OHCache<Integer, String> cache)
-    {
+    static void check5(OHCache<Integer, String> cache) {
         Assert.assertEquals(cache.get(1), "one");
         Assert.assertEquals(cache.get(2), "two");
         Assert.assertEquals(cache.get(3), "three");
@@ -287,28 +247,23 @@ final class TestUtils
         Assert.assertEquals(cache.get(5), "five");
     }
 
-    static void fillMany(OHCache<Integer, String> cache)
-    {
+    static void fillMany(OHCache<Integer, String> cache) {
         for (int i = 0; i < manyCount; i++)
             cache.put(i, Integer.toHexString(i));
     }
 
-    static void checkManyForSerializedKeys(OHCache<Integer, String> cache, int count)
-    {
+    static void checkManyForSerializedKeys(OHCache<Integer, String> cache, int count) {
         Assert.assertTrue(count > manyCount * 9 / 10, "count=" + count); // allow some variation
 
     }
 
-    static void checkManyForSerializedEntries(OHCache<Integer, String> cache, int count)
-    {
+    static void checkManyForSerializedEntries(OHCache<Integer, String> cache, int count) {
         Assert.assertTrue(count > manyCount * 9 / 10, "count=" + count); // allow some variation
 
         int found = 0;
-        for (int i = 0; i < manyCount; i++)
-        {
+        for (int i = 0; i < manyCount; i++) {
             String v = cache.get(i);
-            if (v != null)
-            {
+            if (v != null) {
                 Assert.assertEquals(v, Integer.toHexString(i));
                 found++;
             }
@@ -317,8 +272,7 @@ final class TestUtils
         Assert.assertEquals(found, count);
     }
 
-    static byte[] randomBytes(int len)
-    {
+    static byte[] randomBytes(int len) {
         Random r = new Random();
         byte[] arr = new byte[len];
         r.nextBytes(arr);

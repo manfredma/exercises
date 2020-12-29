@@ -1,12 +1,5 @@
 package jdk.proxy;
 
-/**
- * 创建动态代理对象
- * 动态代理不需要实现接口,但是需要指定接口类型
- *
- * @author Manfred since 2019/9/29
- */
-
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
