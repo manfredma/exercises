@@ -13,7 +13,6 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>java-basic-primitive</module>
         <module>java-basic-string</module>
         <module>java-basic-collection</module>
         <module>java-basic-enum</module>

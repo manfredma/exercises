@@ -4,6 +4,7 @@ import sun.misc.Unsafe;
 
 import java.util.concurrent.TimeUnit;
 
+@SuppressWarnings("ALL")
 public class ObjectInHeap {
     private long address = 0;
 
