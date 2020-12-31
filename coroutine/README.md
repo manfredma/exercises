@@ -3,5 +3,13 @@
 
 协程的方式更多用来做阻塞密集型（比如 I/O）的操作，计算密集型的还是使用线程更加合理。
 
+# 常用实现
+* quasar
+* ea-async
+* Cactoos
+* Jcabi-Aspects
+* OpenJDK Loom
+* vertx-sync
+
 # 参考
 [Java 中的协程库 - Quasar](https://www.cnblogs.com/jmcui/p/12511623.html)

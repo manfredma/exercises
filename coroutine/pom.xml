@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>quasar</module>
+        <module>ea-async</module>
     </modules>
 
     <properties>

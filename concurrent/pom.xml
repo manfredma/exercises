@@ -18,7 +18,6 @@
         <module>thread-local</module>
         <module>parseq</module>
         <module>reactive</module>
-        <module>ea-async</module>
     </modules>
 
 
