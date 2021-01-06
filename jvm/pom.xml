@@ -17,6 +17,7 @@
         <module>jvm-off-heap</module>
         <module>jvm-byte</module>
         <module>proxy-java</module>
+        <module>agent</module>
     </modules>
 
     <packaging>pom</packaging>
