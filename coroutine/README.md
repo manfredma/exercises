@@ -30,7 +30,9 @@
 [次时代Java编程(一) Java里的协程](https://segmentfault.com/a/1190000005342905)  
 [干货——Java异步编程](https://www.jianshu.com/p/e752ed187826)  
 [硬核系列 | 深入剖析 Java 协程](https://xie.infoq.cn/article/cef6d2931a54f85142d863db7)
-[协程，高并发IO的终级杀器(1)](https://zhuanlan.zhihu.com/p/27519705)
+[协程，高并发IO的终级杀器(1)](https://zhuanlan.zhihu.com/p/27519705)  
+[爱奇艺网络协程编写高并发应用实践](https://mp.weixin.qq.com/s?__biz=MzAwMDU1MTE1OQ==&mid=2653553219&idx=1&sn=e9e7e473bc71684a0239140eacd12081&chksm=813993dbb64e1acd73e749c72fc7697cfcf04209a22eb888a32c37a8552b6df5da22d891d1ec&scene=21#wechat_redirect)  
+[白话高并发中的协程](https://mp.weixin.qq.com/s/xCP0lxc9Gc3QiBUmrsDWyg)  
 ---
 **quasar**  
 [携程基于Quasar协程的NIO实践](https://www.infoq.cn/article/umyqimhkwiyjhbp05mxb)  
