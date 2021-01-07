@@ -41,9 +41,9 @@ public class StatemachineConfigurer extends EnumStateMachineConfigurerAdapter<Tu
     @Override
     public void configure(StateMachineConfigurationConfigurer<TurnstileStates, TurnstileEvents> config)
             throws Exception {
-        config.withConfiguration()
-                .machineId("turnstileStateMachine")
-        ;
+        config
+                .withConfiguration()
+                .machineId("turnstileStateMachine");
     }
 
     public Action<TurnstileStates, TurnstileEvents> turnstileUnlock() {
