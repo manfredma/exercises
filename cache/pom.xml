@@ -12,6 +12,7 @@
     <artifactId>cache</artifactId>
     <modules>
         <module>cache-ohc</module>
+        <module>caffeine</module>
     </modules>
     <packaging>pom</packaging>
 

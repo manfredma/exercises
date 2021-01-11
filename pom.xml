@@ -42,6 +42,7 @@
 
     <properties>
         <spring-boot-2-version>2.2.1.RELEASE</spring-boot-2-version>
+        <caffeine-2-version>2.8.8</caffeine-2-version>
     </properties>
 
     <dependencies>

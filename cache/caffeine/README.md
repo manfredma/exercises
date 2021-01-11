@@ -1,0 +1,7 @@
+# 简介
+
+# 参考
+
+[Caffeine用法](https://www.cnblogs.com/fnlingnzb-learner/p/11025565.html)  
+[Caffeine Cache 进程缓存之王](https://www.javazhiyin.com/18782.html)  
+[Caffeine cache 实例代码demo](https://cuishilei.com/Caffeine%20cache%20%E5%AE%9E%E4%BE%8B%E4%BB%A3%E7%A0%81demo.html)  
