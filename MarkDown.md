@@ -87,3 +87,8 @@
    fun();
 ```
     xxxxxxxxxx
+
+十、  选择框  
+- [x] hello
+- [ ] hello  
+
