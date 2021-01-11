@@ -1,15 +1,12 @@
-package manfred.regex;
+package manfred.end.java.basic.regex;
 
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
-/**
- * @author manfred
- * @since 2019-11-13 下午7:51
- */
-public class TestPattern {
-    public static Pattern pattern = Pattern.compile(".*[a-zA-Z]+.*");
+public class PatternTest {
+
     public static void main(String[] args) {
+        Pattern pattern = Pattern.compile(".*[a-zA-Z]+.*");
         System.out.println(pattern.matcher("1233a4312").find());
         System.out.println(pattern.matcher("aa4312").find());
         System.out.println(pattern.matcher("aa").find());

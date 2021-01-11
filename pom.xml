@@ -24,7 +24,6 @@
         <module>data-structure_algorithm</module>
         <module>common-frame-work</module>
         <module>config</module>
-        <module>regex</module>
         <module>redis</module>
         <module>canal</module>
         <module>stability</module>
