@@ -15,7 +15,6 @@
  */
 package example.springdata.jdbc.mybatis;
 
-import lombok.experimental.UtilityClass;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,19 +24,18 @@ import org.slf4j.LoggerFactory;
  *
  * @author Jens Schauder
  */
-@UtilityClass
 public class Output {
 
-	private final Logger LOG = LoggerFactory.getLogger(Output.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Output.class);
 
-	public static void list(Iterable<?> categories, String title) {
+    public static void list(Iterable<?> categories, String title) {
 
-		StringBuilder message = new StringBuilder(String.format("==== %s ====\n", title));
+        StringBuilder message = new StringBuilder(String.format("==== %s ====\n", title));
 
-		categories.forEach(category -> {
-			message.append(category.toString().replace(", ", ",\n\t"));
-		});
+        categories.forEach(category -> {
+            message.append(category.toString().replace(", ", ",\n\t"));
+        });
 
-		LOG.info(message.toString());
-	}
+        LOG.info(message.toString());
+    }
 }

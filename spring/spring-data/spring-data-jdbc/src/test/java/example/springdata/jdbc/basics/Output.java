@@ -15,8 +15,6 @@
  */
 package example.springdata.jdbc.basics;
 
-import lombok.experimental.UtilityClass;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,10 +23,9 @@ import org.slf4j.LoggerFactory;
  *
  * @author Jens Schauder
  */
-@UtilityClass
 public class Output {
 
-	private final Logger LOG = LoggerFactory.getLogger(Output.class);
+	private static final Logger LOG = LoggerFactory.getLogger(Output.class);
 
 	public static void list(Iterable<?> categories, String title) {
 
