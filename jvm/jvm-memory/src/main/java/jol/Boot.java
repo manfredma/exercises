@@ -17,5 +17,16 @@ public class Boot {
         out.println(ClassLayout.parseClass(java.lang.String.class).toPrintable());
         out.println(ClassLayout.parseInstance(ins).toPrintable());
 
+        X x = new X();
+        out.println(ClassLayout.parseClass(X.class).toPrintable());
+        out.println(ClassLayout.parseInstance(x).toPrintable());
     }
+
+}
+
+class X {
+
+    private int x = 2;
+
+    private float y = 3.0F;
 }

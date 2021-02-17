@@ -1,4 +1,4 @@
-package jvm.memory.out.heap.oom;
+package out.heap.oom;
 
 import java.nio.ByteBuffer;
 
