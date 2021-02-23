@@ -9,7 +9,7 @@ import net.sf.cglib.core.DebuggingClassWriter;
  */
 public class App {
     public static void main(String[] args) {
-        System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, ".");
+        // System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, ".");
         IUserDao userDao = (IUserDao) new ProxyFactory(UserDao.class).getProxyInstance();
         userDao.save();
     }
