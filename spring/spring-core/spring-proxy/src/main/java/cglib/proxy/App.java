@@ -8,6 +8,7 @@ import dao.UserDao;
  */
 public class App {
     public static void main(String[] args) {
+        // System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, "~");
         IUserDao userDao = (IUserDao) new ProxyFactory(new UserDao()).getProxyInstance();
         userDao.save();
     }
