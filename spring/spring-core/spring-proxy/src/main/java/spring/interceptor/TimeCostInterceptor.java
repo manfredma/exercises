@@ -1,10 +1,9 @@
-package spring.jdk.proxy;
+package spring.interceptor;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 
-
-public class TimeCostUtil implements MethodInterceptor {
+public class TimeCostInterceptor implements MethodInterceptor {
 
     @Override
     public Object invoke(MethodInvocation invocation)
@@ -23,7 +22,6 @@ public class TimeCostUtil implements MethodInterceptor {
             }
             if (invocation.getThis() != null && invocation.getThis().getClass() != null) {
                 srcClassName = invocation.getThis().getClass().getName();
-
             }
         }
 
@@ -31,7 +29,8 @@ public class TimeCostUtil implements MethodInterceptor {
         Object result = invocation.proceed();
 
         // 打印耗时
-        System.out.println(srcClassName + "." + methodName + " cost time: " + (System.currentTimeMillis() - beginTime));
+        System.out.println(srcClassName + "." + methodName + " cost time: " +
+                (System.currentTimeMillis() - beginTime));
 
         return result;
     }

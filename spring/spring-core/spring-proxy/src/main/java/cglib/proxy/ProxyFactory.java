@@ -11,11 +11,9 @@ import java.lang.reflect.Method;
  * 对UserDao在内存中动态构建一个子类对象
  */
 public class ProxyFactory implements MethodInterceptor {
-    //维护目标对象
-    private Object target;
-
-    public ProxyFactory(Object target) {
-        this.target = target;
+    Class clazz;
+    public ProxyFactory(Class clazz) {
+        this.clazz = clazz;
     }
 
     //给目标对象创建一个代理对象
@@ -23,7 +21,7 @@ public class ProxyFactory implements MethodInterceptor {
         //1.工具类
         Enhancer en = new Enhancer();
         //2.设置父类
-        en.setSuperclass(target.getClass());
+        en.setSuperclass(clazz);
         //3.设置回调函数
         en.setCallback(this);
         //4.创建子类(代理对象)

@@ -13,6 +13,6 @@
         <aop:advisor advice-ref="advice" pointcut-ref="pointCut"/>
     </aop:config>
 
-    <bean id="advice" class="spring.jdk.proxy.TimeCostUtil"/>
+    <bean id="advice" class="spring.interceptor.TimeCostInterceptor"/>
 
 </beans>
