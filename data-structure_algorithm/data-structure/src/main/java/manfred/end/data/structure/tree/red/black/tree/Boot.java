@@ -25,11 +25,13 @@ public class Boot {
 
         bst.addNode("g");
         bst.printTree(bst.getRoot());
-
+        RBTreeShow.show(bst.getRoot());
         bst.addNode("h");
         bst.printTree(bst.getRoot());
 
-        bst.remove("c");
+        RBTreeShow.show(bst.getRoot());
+
+        // bst.remove("c");
 
         bst.printTree(bst.getRoot());
     }

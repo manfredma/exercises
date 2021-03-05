@@ -223,7 +223,11 @@ public class RBTree<T extends Comparable> {
                 firstQueue = !firstQueue;
             }
         }
+
+        System.out.println("\nEnd RBTree ----------------------------------------");
     }
+
+
 
     public void remove(T key) {
         Optional<RBTreeNode<T>> find = find(key);
@@ -251,7 +255,6 @@ public class RBTree<T extends Comparable> {
             while (candidate.getLeft().notLeafNode()) {
                 candidate = candidate.getLeft();
             }
-
 
 
             // 把节点关系断开

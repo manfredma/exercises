@@ -1,9 +1,8 @@
 package jol;
 
+import static java.lang.System.out;
 import org.openjdk.jol.info.ClassLayout;
 import org.openjdk.jol.vm.VM;
-
-import static java.lang.System.out;
 
 /**
  * @author manfred
@@ -20,6 +19,11 @@ public class Boot {
         X x = new X();
         out.println(ClassLayout.parseClass(X.class).toPrintable());
         out.println(ClassLayout.parseInstance(x).toPrintable());
+        out.println(ClassLayout.parseInstance(X.class).toPrintable());
+        out.println(ClassLayout.parseInstance((short) 2).toPrintable());
+        out.println(ClassLayout.parseInstance(2).toPrintable());
+        out.println(ClassLayout.parseInstance(2L).toPrintable());
+        out.println(ClassLayout.parseInstance(new Object()).toPrintable());
     }
 
 }
