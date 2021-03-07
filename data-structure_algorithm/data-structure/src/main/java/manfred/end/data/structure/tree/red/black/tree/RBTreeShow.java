@@ -3,7 +3,7 @@ package manfred.end.data.structure.tree.red.black.tree;
 public class RBTreeShow {
     private static <T> void writeArray(RBTreeNode<T> currNode, int rowIndex, int columnIndex, String[][] res, int treeDepth) {
         // 保证输入的树不为空
-        if (currNode == null && currNode != RBTreeNode.LEAF_NODE)
+        if (currNode == null && currNode != RBTreeNode.NIL_NODE)
             return;
         // 先将当前节点保存到二维数组中
         res[rowIndex][columnIndex] = String.format("%s|%s", String.valueOf(currNode.getKey()), currNode.isRed() ? "R" : "B");
@@ -17,20 +17,20 @@ public class RBTreeShow {
         int gap = treeDepth - currLevel - 1;
 
         // 对左儿子进行判断，若有左儿子，则记录相应的"/"与左儿子的值
-        if (currNode.getLeft() != null && currNode.getLeft() != RBTreeNode.LEAF_NODE) {
+        if (currNode.getLeft() != null && currNode.getLeft() != RBTreeNode.NIL_NODE) {
             res[rowIndex + 1][columnIndex - gap] = "/";
             writeArray(currNode.getLeft(), rowIndex + 2, columnIndex - gap * 2, res, treeDepth);
         }
 
         // 对右儿子进行判断，若有右儿子，则记录相应的"\"与右儿子的值
-        if (currNode.getRight() != null && currNode.getRight() != RBTreeNode.LEAF_NODE) {
+        if (currNode.getRight() != null && currNode.getRight() != RBTreeNode.NIL_NODE) {
             res[rowIndex + 1][columnIndex + gap] = "\\";
             writeArray(currNode.getRight(), rowIndex + 2, columnIndex + gap * 2, res, treeDepth);
         }
     }
 
     public static <T> void show(RBTreeNode<T> root) {
-        if (root == null || root == RBTreeNode.LEAF_NODE)
+        if (root == null || root == RBTreeNode.NIL_NODE)
             System.out.println("EMPTY!");
         // 得到树的深度
         int treeDepth = getTreeDepth(root);
@@ -66,7 +66,7 @@ public class RBTreeShow {
     }
 
     public static <T> int getTreeDepth(RBTreeNode<T> root) {
-        return root == null || root == RBTreeNode.LEAF_NODE ? 0 : (1 +
+        return root == null || root == RBTreeNode.NIL_NODE ? 0 : (1 +
                 Math.max(getTreeDepth(root.getLeft()), getTreeDepth(root.getRight())));
     }
 }

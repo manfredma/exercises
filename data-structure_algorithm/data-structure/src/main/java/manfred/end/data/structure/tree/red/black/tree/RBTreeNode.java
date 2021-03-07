@@ -6,10 +6,10 @@ public class RBTreeNode<T> {
     public static final int RED = 1;
     public static final int BLACK = 0;
 
-    public static RBTreeNode<?> LEAF_NODE = new RBTreeNode<>();
+    public static RBTreeNode<?> NIL_NODE = new RBTreeNode<>();
 
     static {
-        LEAF_NODE.setColor(BLACK);
+        NIL_NODE.setColor(BLACK);
     }
 
     /**
@@ -23,11 +23,11 @@ public class RBTreeNode<T> {
     private T key;
 
 
-    private RBTreeNode<T> left = (RBTreeNode<T>) LEAF_NODE;
+    private RBTreeNode<T> left = (RBTreeNode<T>) NIL_NODE;
 
-    private RBTreeNode<T> right = (RBTreeNode<T>) LEAF_NODE;
+    private RBTreeNode<T> right = (RBTreeNode<T>) NIL_NODE;
 
-    private RBTreeNode<T> parent = null;
+    private RBTreeNode<T> parent = (RBTreeNode<T>) NIL_NODE;
 
     private RBTreeNode() {
 
@@ -57,6 +57,27 @@ public class RBTreeNode<T> {
         return left;
     }
 
+    /**
+     * 判断节点是否含有子节点（Nil 节点作为空处理）
+     *
+     * @return true 不含叶子节点
+     */
+    public boolean hasNoChildren() {
+        return NIL_NODE == left && NIL_NODE == right;
+    }
+
+    public boolean hasLeftChild() {
+        return NIL_NODE != left;
+    }
+
+    public boolean hasRightChild() {
+        return NIL_NODE != right;
+    }
+
+    public boolean hasBothChildren() {
+        return hasLeftChild() && hasRightChild();
+    }
+
     public void setLeft(RBTreeNode<T> left) {
         this.left = left;
     }
@@ -70,12 +91,16 @@ public class RBTreeNode<T> {
     }
 
     public boolean notLeafNode() {
-        return this != LEAF_NODE;
+        return this != NIL_NODE;
     }
 
 
     public RBTreeNode<T> getParent() {
         return parent;
+    }
+
+    public boolean hasParent() {
+        return parent != NIL_NODE;
     }
 
     public void setParent(RBTreeNode<T> parent) {

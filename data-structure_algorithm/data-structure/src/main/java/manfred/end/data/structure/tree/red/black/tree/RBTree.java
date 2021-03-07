@@ -68,7 +68,7 @@ public class RBTree<T extends Comparable> {
         selfBalance(insertNode);
 
         // 重新寻找根节点
-        while (root.getParent() != null) {
+        while (root.hasParent()) {
             root = root.getParent();
         }
     }
@@ -76,7 +76,7 @@ public class RBTree<T extends Comparable> {
     private void selfBalance(RBTreeNode<T> insertNode) {
 
         // 如果插入节点是根节点，则变更颜色后直接返回
-        if (insertNode.getParent() == null) {
+        if (!insertNode.hasParent()) {
             insertNode.setColor(RBTreeNode.BLACK);
             return;
         }
@@ -206,11 +206,11 @@ public class RBTree<T extends Comparable> {
             RBTreeNode<T> n = q.poll();
 
             if (n != null) {
-                String pos = n.getParent() == null ? "" : (n == n.getParent().getLeft()
+                String pos = n.hasParent() ? "" : (n == n.getParent().getLeft()
                         ? " LE" : " RI");
-                String pstr = n.getParent() == null ? "" : n.getParent().toString();
+                String pstr = n.hasParent() ? "" : n.getParent().toString();
                 String cstr = n.isRed() ? "R" : "B";
-                cstr = n.getParent() == null ? cstr : cstr + " ";
+                cstr = n.hasParent() ? cstr : cstr + " ";
                 System.out.print(n + "(" + (cstr) + pstr + (pos) + ")" + "\t");
                 if (n.getLeft() != null && n.getLeft().notLeafNode()) {
                     (firstQueue ? queue2 : queue).add(n.getLeft());
@@ -228,64 +228,125 @@ public class RBTree<T extends Comparable> {
     }
 
 
-
     public void remove(T key) {
         Optional<RBTreeNode<T>> find = find(key);
         find.ifPresent(this::remove);
     }
 
-    private void remove(RBTreeNode<T> removeRBTreeNode) {
-        RBTreeNode<T> parent = removeRBTreeNode.getParent();
-        if (!removeRBTreeNode.getLeft().notLeafNode() &&
-                !removeRBTreeNode.getRight().notLeafNode()) {
-            // 情景1：若删除结点无子结点，直接删除
-            if (parent != null) {
-                if (parent.getLeft() == removeRBTreeNode) {
-                    parent.setLeft((RBTreeNode<T>) RBTreeNode.LEAF_NODE);
-                } else {
-                    parent.setRight((RBTreeNode<T>) RBTreeNode.LEAF_NODE);
-                }
-            } else {
-                this.root = null;
-            }
-        } else if (removeRBTreeNode.getLeft().notLeafNode() &&
-                removeRBTreeNode.getRight().notLeafNode()) {
+    private void remove(RBTreeNode<T> z) {
+
+        // 第一步：将红黑树当作一颗二叉查找树，将节点删除。
+        RBTreeNode<T> y = z;
+        if (z.hasBothChildren()) {
             // 情景3：若删除结点有两个子结点，用后继结点（大于删除结点的最小结点）替换删除结点
-            RBTreeNode<T> candidate = removeRBTreeNode.getRight();
-            while (candidate.getLeft().notLeafNode()) {
+            RBTreeNode<T> candidate = z.getRight();
+            while (candidate.hasLeftChild()) {
                 candidate = candidate.getLeft();
             }
+            // 使用后继节点的内容替换当前节点的存储内容
+            z.setKey(candidate.getKey());
+
+            // 后继节点作为删除节点
+            y = candidate;
+        }
 
 
-            // 把节点关系断开
-            candidate.setParent(null);
-            if (candidate.getParent().getRight() == candidate) {
-                // candidate.getParent().setRight();
+        RBTreeNode<T> parent = y.getParent();
+        // 替代节点：替换原节点的位置
+        RBTreeNode<T> x = null;
+        if (y.hasNoChildren()) {
+            // 情景1：若删除结点无子结点，直接删除
+            if (parent != null) {
+                if (parent.getLeft() == y) {
+                    parent.setLeft((RBTreeNode<T>) RBTreeNode.NIL_NODE);
+                } else {
+                    parent.setRight((RBTreeNode<T>) RBTreeNode.NIL_NODE);
+                }
             }
-
+            // 判断待删除节点是否是根节点，如果是根节点则将根节点置空
+            // 既没有子节点且自身是根节点，则说明树中只有这一个元素，则函数可以直接结束
+            if (y == root) {
+                root = null;
+                return;
+            }
+            x = (RBTreeNode<T>) RBTreeNode.NIL_NODE;
         } else {
             // 情景2：若删除结点只有一个子结点，用子结点替换删除结点
-            if (removeRBTreeNode.getLeft().notLeafNode()) {
+            if (y.hasLeftChild()) {
                 if (parent != null) {
-                    if (parent.getLeft() == removeRBTreeNode) {
-                        parent.setLeft(removeRBTreeNode.getLeft());
+                    if (parent.getLeft() == y) {
+                        parent.setLeft(y.getLeft());
                     } else {
-                        parent.setRight(removeRBTreeNode.getLeft());
+                        parent.setRight(y.getLeft());
                     }
                 } else {
-                    this.root = removeRBTreeNode.getLeft();
+                    this.root = y.getLeft();
                 }
+                x = y.getLeft();
             } else {
                 if (parent != null) {
-                    if (parent.getLeft() == removeRBTreeNode) {
-                        parent.setLeft(removeRBTreeNode.getRight());
+                    if (parent.getLeft() == y) {
+                        parent.setLeft(y.getRight());
                     } else {
-                        parent.setRight(removeRBTreeNode.getRight());
+                        parent.setRight(y.getRight());
                     }
                 } else {
-                    this.root = removeRBTreeNode.getRight();
+                    this.root = y.getRight();
                 }
+                x = y.getRight();
+            }
+            // 设置父节点
+            x.setParent(parent);
+        }
+
+        // 第二步：通过"旋转和重新着色"等一系列来修正该树，使之重新成为一棵红黑树。
+        if (!y.isRed()) {
+            // 如果删除节点是非红色，可能会导致红黑树的约束条件中的约束2，4，5 失效
+            /*
+             * 性质1：每个节点要么是黑色，要么是红色。
+             * 性质2：根节点是黑色。
+             * 性质3：每个叶子节点（NIL）是黑色。
+             * 性质4：每个红色结点的两个子结点一定都是黑色。
+             * 性质5：任意一结点到每个叶子结点的路径都包含数量相同的黑结点。
+             */
+            /* 思路：
+             * 删除节点y之后，x占据了原来节点y的位置。 既然删除y(y是黑色)，意味着减少一个黑色节点；
+             * 那么，再在该位置上增加一个黑色即可。
+             * 这样，当我们假设"x包含一个额外的黑色"，就正好弥补了"删除y所丢失的黑色节点"，也就不会违反"特性(5)"。
+             * 因此，假设"x包含一个额外的黑色"(x原本的颜色还存在)，这样就不会违反"特性(5)"。
+             * 现在，x不仅包含它原本的颜色属性，x还包含一个额外的黑色。即x的颜色属性是"红+黑"或"黑+黑"，它违反了"特性(1)"。
+             * 现在，我们面临的问题，由解决"违反了特性(2)、(4)、(5)三个特性"转换成了"解决违反特性(1)、(2)、(4)三个特性"。
+             * 需要做的就是通过算法恢复红黑树的特性(1)、(2)、(4)。
+             */
+            // ① 情况说明：x是“红+黑”节点。
+            //    处理方法：直接把x设为黑色，结束。此时红黑树性质全部恢复。
+            if (x.isRed()) {
+                x.setColor(RBTreeNode.BLACK);
+            } else if (x.hasParent()){
+                // ③ 情况说明：x是“黑+黑”节点，且x不是根。
+                //    处理方法：这种情况又可以划分为4种子情况。这4种子情况如下表所示：
+
+                // Case 1	x是"黑+黑"节点，x的兄弟节点是红色。(此时x的父节点和x的兄弟节点的子节点都是黑节点)。
+                //          (01) 将x的兄弟节点设为“黑色”。
+                //          (02) 将x的父节点设为“红色”。
+                //          (03) 对x的父节点进行左旋。
+                //          (04) 左旋后，重新设置x的兄弟节点。
+                if (x.getParent().getLeft() == x) {
+                    RBTreeNode<T> w = x.getParent().getRight();
+                    if (w.isRed()) {
+
+                    }
+                } else {
+
+                }
+
+
+
+            } else {
+                // ② 情况说明：x是“黑+黑”节点，且x是根。
+                //    处理方法：什么都不做，结束。此时红黑树性质全部恢复。
             }
         }
+
     }
 }
