@@ -11,6 +11,6 @@
 * 性质5.1：如果一个结点存在黑子结点，那么该结点肯定有两个子结点
 
 # 参考
-[30张图带你彻底理解红黑树](https://www.jianshu.com/p/e136ec79235c)
-[红黑树(一)之 原理和算法详细介绍](https://www.cnblogs.com/skywang12345/p/3245399.html)
-[红黑树深入剖析及Java实现](https://tech.meituan.com/2016/12/02/redblack-tree.html)
+[30张图带你彻底理解红黑树](https://www.jianshu.com/p/e136ec79235c)  
+[红黑树(一)之 原理和算法详细介绍](https://www.cnblogs.com/skywang12345/p/3245399.html)  
+[红黑树深入剖析及Java实现](https://tech.meituan.com/2016/12/02/redblack-tree.html)  
