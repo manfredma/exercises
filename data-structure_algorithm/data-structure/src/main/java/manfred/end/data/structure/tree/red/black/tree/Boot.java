@@ -31,8 +31,9 @@ public class Boot {
 
         RBTreeShow.show(bst.getRoot());
 
-        // bst.remove("c");
+        bst.remove("c");
 
         bst.printTree(bst.getRoot());
+        RBTreeShow.show(bst.getRoot());
     }
 }
