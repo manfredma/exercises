@@ -92,37 +92,20 @@ public class RBTree<T extends Comparable> {
                 pp.setColor(RBTreeNode.RED);
                 selfBalance(pp);
             } else {
+                // 处理父节点是红色，叔父节点是黑色的问题！
                 if (pp.getLeft() == parent) {
                     if (parent.getRight() == insertNode) {
-                        // 插入情景4.2：叔叔结点不存在或为黑结点，并且插入结点的父亲结点是祖父结点的左子结点
-                        // 插入情景4.2.2：插入结点是其父结点的右子结点
-                        //    对P进行左旋
-                        //    把P设置为插入结点，得到情景4.2.1
-                        //    进行情景4.2.1的处理
+                        // 因为没有父子节点都为红色，所以旋转不会增加黑高度
                         leftRotate(parent);
                     }
-                    // 插入情景4.2：叔叔结点不存在或为黑结点，并且插入结点的父亲结点是祖父结点的左子结点
-                    // 插入情景4.2.1：插入结点是其父结点的左子结点
-                    //    将P设为黑色
-                    //    将PP设为红色
-                    //    对PP进行右旋
+                    // 将红色节点挪到右子树上去，保证再满足黑高度的前提下，红色节点不再相邻
                     pp.getLeft().setColor(RBTreeNode.BLACK);
                     pp.setColor(RBTreeNode.RED);
                     rightRotate(pp);
                 } else {
                     if (pp.getLeft() == parent) {
-                        // 插入情景4.3：叔叔结点不存在或为黑结点，并且插入结点的父亲结点是祖父结点的右子结点
-                        // 插入情景4.3.2：插入结点是其父结点的左子结点
-                        //    对P进行右旋
-                        //    把P设置为插入结点，得到情景4.3.1
-                        //    进行情景4.3.1的处理
                         rightRotate(parent);
                     }
-                    // 插入情景4.3：叔叔结点不存在或为黑结点，并且插入结点的父亲结点是祖父结点的右子结点
-                    // 插入情景4.3.1：插入结点是其父结点的右子结点
-                    //    将P设为黑色
-                    //    将PP设为红色
-                    //    对PP进行左旋
                     pp.getRight().setColor(RBTreeNode.BLACK);
                     pp.setColor(RBTreeNode.RED);
                     leftRotate(pp);
