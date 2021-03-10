@@ -252,7 +252,7 @@ public class RBTree<T extends Comparable> {
                 root = null;
                 return;
             }
-            // FIXME：因为存在这种情况，所以后面处理的时候，不能直接使用 x.getParent
+            // XX：因为存在这种情况，所以后面处理的时候，不能直接使用 x.getParent
             x = (RBTreeNode<T>) RBTreeNode.NIL_NODE;
         } else {
             // 情景2：若删除结点只有一个子结点，用子结点替换删除结点
