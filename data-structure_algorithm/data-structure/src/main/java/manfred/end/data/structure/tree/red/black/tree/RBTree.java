@@ -206,7 +206,7 @@ public class RBTree<T extends Comparable> {
             RBTreeNode<T> n = q.poll();
 
             if (n != null) {
-                String pos = n.hasParent() ? "" : (n == n.getParent().getLeft()
+                String pos = !n.hasParent() ? "" : (n == n.getParent().getLeft()
                         ? " LE" : " RI");
                 String pstr = n.hasParent() ? "" : n.getParent().toString();
                 String cstr = n.isRed() ? "R" : "B";
