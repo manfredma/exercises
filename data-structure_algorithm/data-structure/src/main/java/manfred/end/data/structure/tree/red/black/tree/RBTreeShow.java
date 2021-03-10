@@ -3,10 +3,12 @@ package manfred.end.data.structure.tree.red.black.tree;
 public class RBTreeShow {
     private static <T> void writeArray(RBTreeNode<T> currNode, int rowIndex, int columnIndex, String[][] res, int treeDepth) {
         // 保证输入的树不为空
-        if (currNode == null && currNode != RBTreeNode.NIL_NODE)
+        if (currNode == null || currNode == RBTreeNode.NIL_NODE) {
             return;
+        }
+
         // 先将当前节点保存到二维数组中
-        res[rowIndex][columnIndex] = String.format("%s|%s", String.valueOf(currNode.getKey()), currNode.isRed() ? "R" : "B");
+        res[rowIndex][columnIndex] = String.format("%s|%s", currNode.getKey(), currNode.isRed() ? "R" : "B");
 
         // 计算当前位于树的第几层
         int currLevel = ((rowIndex + 1) / 2);

@@ -111,6 +111,10 @@ public class RBTreeNode<T> {
         return color == RED;
     }
 
+    public boolean isBlack() {
+        return color == BLACK;
+    }
+
     @Override
     public String toString() {
         return String.valueOf(key);
