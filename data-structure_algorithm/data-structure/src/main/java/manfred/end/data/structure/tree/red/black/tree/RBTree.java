@@ -354,8 +354,44 @@ public class RBTree<T extends Comparable> {
                         break;
                     }
                 } else {
+                    // 如果 x 是黑节点 且 不是根节点，则说明 x 的兄弟节点必然存在！否则性质5就不满足
+                    RBTreeNode<T> w = parent.getLeft();
+                    if (w.isRed()) {
+                        parent.setColor(RBTreeNode.RED);
+                        w.setColor(RBTreeNode.BLACK);
+                        // 因为 w 是红色，所以 parent 一定是黑色节点
+                        if (parent == root) {
+                            // 如果父节点是根节点，则左旋以后
+                            root = w;
+                        }
+                        rightRotate(parent);
+                    } else {
+                        if (w.getRight().isBlack() && w.getLeft().isBlack()) {
+                            x = parent;
+                            w.setColor(RBTreeNode.RED);
+                            parent = parent.getParent();
+                            continue;
+                        }
 
+                        if (w.getRight().isRed() && w.getLeft().isBlack()) {
+                            w.getRight().setColor(RBTreeNode.BLACK);
+                            w.setColor(RBTreeNode.RED);
+                            leftRotate(w);
+                            w = parent.getLeft();
+                        }
 
+                        w.setColor(parent.getColor());
+                        parent.setColor(RBTreeNode.BLACK);
+                        w.getLeft().setColor(RBTreeNode.BLACK);
+                        if (parent == root) {
+                            // 如果父节点是根节点，则左旋以后
+                            root = w;
+                        }
+                        rightRotate(parent);
+
+                        // 至此已经处理完成，不需要继续处理
+                        break;
+                    }
                 }
             }
         }
