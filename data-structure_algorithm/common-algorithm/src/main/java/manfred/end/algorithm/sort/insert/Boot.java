@@ -1,7 +1,5 @@
 package manfred.end.algorithm.sort.insert;
 
-import manfred.end.algorithm.sort.bubble.BubbleSort;
-
 import java.util.Arrays;
 
 public class Boot {
@@ -14,12 +12,12 @@ public class Boot {
         int[] x5 = {};
         int[] x6 = {-1};
 
-        BubbleSort.sort(x);
-        BubbleSort.sort(x2);
-        BubbleSort.sort(x3);
-        BubbleSort.sort(x4);
-        BubbleSort.sort(x5);
-        BubbleSort.sort(x6);
+        InsertionSort.sort(x);
+        InsertionSort.sort(x2);
+        InsertionSort.sort(x3);
+        InsertionSort.sort(x4);
+        InsertionSort.sort(x5);
+        InsertionSort.sort(x6);
 
         System.out.println(Arrays.toString(x));
         System.out.println(Arrays.toString(x2));

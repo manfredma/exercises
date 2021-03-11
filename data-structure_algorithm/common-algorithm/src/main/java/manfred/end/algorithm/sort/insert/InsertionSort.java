@@ -1,9 +1,10 @@
 package manfred.end.algorithm.sort.insert;
 
 public class InsertionSort {
-    public static int[] sort(int[] x) {
+    public static void sort(int[] x) {
+        System.out.println("insert sort: ");
         if (x == null || x.length == 0 || x.length == 1) {
-            return x;
+            return;
         }
 
         for (int i = 1; i < x.length; i++) {
@@ -16,6 +17,5 @@ public class InsertionSort {
                 }
             }
         }
-        return x;
     }
 }
