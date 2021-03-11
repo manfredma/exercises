@@ -17,7 +17,7 @@ public class StringMatcherTest {
         if (output) {
             System.out.println("bf.match(\"hello\", \"h\")=" + bf.match("hello", "h"));
             System.out.println("bf.match(\"hello\", \"ll\")=" + bf.match("hello", "ll"));
-            System.out.println("bf.match(\"hello\", \"a\")" + bf.match("hello", "a"));
+            System.out.println("bf.match(\"hello\", \"a\")=" + bf.match("hello", "a"));
         }
         for (int i = 0; i < loop; i++) {
             bf.match("hello", "h");
@@ -32,7 +32,7 @@ public class StringMatcherTest {
         if (output) {
             System.out.println("rk.match(\"hello\", \"ll\")=" + rk.match("hello", "ll"));
             System.out.println("rk.match(\"hello\", \"h\")=" + rk.match("hello", "h"));
-            System.out.println("rk.match(\"hello\", \"a\")" + rk.match("hello", "a"));
+            System.out.println("rk.match(\"hello\", \"a\")=" + rk.match("hello", "a"));
         }
         for (int i = 0; i < loop; i++) {
             rk.match("hello", "h");
