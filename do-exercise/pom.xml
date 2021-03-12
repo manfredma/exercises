@@ -29,6 +29,8 @@
         <module>leet-code_801-850</module>
         <module>leet-code_951-1000</module>
         <module>leet-code_901-950</module>
+        <module>leet-code_1101-1150</module>
+        <module>leet-code_1351-1400</module>
     </modules>
 
     <packaging>pom</packaging>
