@@ -1,9 +1,5 @@
 package manfred.end.rdbms.mybatis.version2;
 
-import java.io.IOException;
-import java.io.Reader;
-
-import manfred.end.rdbms.mybatis.version.MyMapper;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -11,6 +7,9 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.io.IOException;
+import java.io.Reader;
 
 public class MyBatisMySQLVersion2 {
 
@@ -23,7 +22,6 @@ public class MyBatisMySQLVersion2 {
         String resource = "version2/mybatis-config.xml";
         Reader reader = Resources.getResourceAsReader(resource);
         factory = new SqlSessionFactoryBuilder().build(reader);
-        factory.getConfiguration().addMapper(MyMapper.class);
         reader.close();
         session = factory.openSession();
     }

@@ -31,6 +31,9 @@ public class MyBatisMySQLVersion {
     public void getVersion() {
         String version = session.selectOne("getMySQLVersion");
         System.out.println(version);
+
+        MyMapper myMapper = session.getMapper(MyMapper.class);
+        System.out.println(myMapper.getMySQLVersion());
     }
 
 

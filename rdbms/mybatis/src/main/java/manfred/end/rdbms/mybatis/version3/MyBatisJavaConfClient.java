@@ -25,7 +25,7 @@ public class MyBatisJavaConfClient {
     public static void init() {
         Properties prop = new Properties();
         prop.setProperty("driver", "com.mysql.jdbc.Driver");
-        prop.setProperty("url", "jdbc:mysql://192.168.155.75:3306/manfred");
+        prop.setProperty("url", "jdbc:mysql://127.0.0.1:3306/manfred");
         prop.setProperty("user", "coupon");
         prop.setProperty("password", "coupon");
 
