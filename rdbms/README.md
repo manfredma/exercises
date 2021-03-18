@@ -7,7 +7,7 @@
 
 ## 用户管理
 
-1. 用户
+### 1. 用户
 
 **创建用户**
 
@@ -23,18 +23,23 @@
 
 * DROP USER 'username'@'host';
 
-2. 权限
+### 2. 权限  
+
 **授权**
 * GRANT privileges ON databasename.tablename TO 'username'@'host' WITH GRANT OPTION;
 * GRANT SELECT, INSERT ON test.user TO 'pig'@'%';
 * GRANT ALL ON *.* TO 'pig'@'%';
 
-> grant all on *.* to 'coupon'@'%';
+> grant all on *.* to 'coupon'@'%';  
 
+**取消授权**
 * REVOKE privilege ON databasename.tablename FROM 'username'@'host';
-* REVOKE SELECT ON *.* FROM 'pig'@'%';
+* REVOKE SELECT ON *.* FROM 'pig'@'%';  
 
-3. 修改密码
+**刷新授权**
+* FLUSH  PRIVILEGES
+
+### 3. 修改密码
 
 * SET PASSWORD FOR 'username'@'host' = PASSWORD('newpassword');
 
