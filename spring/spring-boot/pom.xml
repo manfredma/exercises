@@ -16,6 +16,7 @@
         <module>spring-boot-hello-world</module>
         <module>spring-boot-config</module>
         <module>spring-boot-hello-world-v2</module>
+        <module>spring-boot-starter</module>
     </modules>
 
 </project>
