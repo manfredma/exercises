@@ -34,6 +34,7 @@
         <module>workflow</module>
         <module>rpc</module>
         <module>coroutine</module>
+        <module>modeling</module>
     </modules>
     <packaging>pom</packaging>
 
