@@ -17,9 +17,7 @@ public class HelloClientDemo {
     public static final int TIMEOUT = 30000;
 
     public void startClient(String userName) {
-        TTransport transport = null;
-        try {
-            transport = new TSocket(SERVER_IP, SERVER_PORT, TIMEOUT);
+        try (TTransport transport = new TSocket(SERVER_IP, SERVER_PORT, TIMEOUT)) {
             transport.open();
             TProtocol protocol = new TBinaryProtocol(transport);
             HelloWorldService.Client client = new HelloWorldService.Client(protocol);
@@ -27,10 +25,6 @@ public class HelloClientDemo {
             System.out.println("Thrift client result =: " + result);
         } catch (TException e) {
             e.printStackTrace();
-        } finally {
-            if (null != transport) {
-                transport.close();
-            }
         }
     }
 
