@@ -9,8 +9,9 @@
 二、字体  
 **这是加粗的文字**  
 *这是倾斜的文字*`  
+_这是倾斜的文字_  
 ***这是斜体加粗的文字***   
-~~这是加删除线的文字~~
+~~这是加删除线的文字~~  
 
 三、引用
 >这是引用的内容
@@ -98,5 +99,10 @@
 - [x] hello
 - [ ] hello  
 
+十一、特殊符号  
+箭头：&rarr; &larr; &uarr; &darr; &harr; &varr; &rArr; &lArr; &uArr; &dArr; &hArr; &vArr;
+
 # 参考
 [Markdown-图片设置（大小，居中）](https://blog.csdn.net/qq_35451572/article/details/79443467)  
+[Markdown中如何添加特殊符号](https://blog.csdn.net/Logicr/article/details/82414854)  
+[Markdown进阶（更改字体、颜色、大小，设置文字背景色，调整图片大小设置居中）](https://blog.csdn.net/heimu24/article/details/81189700)
