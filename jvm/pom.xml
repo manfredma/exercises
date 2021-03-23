@@ -16,8 +16,9 @@
         <module>jvm-optimize</module>
         <module>jvm-off-heap</module>
         <module>jvm-byte</module>
-        <module>proxy-java</module>
-        <module>agent</module>
+        <module>jvm-proxy</module>
+        <module>jvm-agent</module>
+        <module>jvm-classloader</module>
     </modules>
 
     <packaging>pom</packaging>
