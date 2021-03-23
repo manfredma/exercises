@@ -7,6 +7,8 @@
 /*/*/target
 /*/*/*/*.iml
 /*/*/*/target
+/*/*/*/*/*.iml
+/*/*/*/*target
 /log4j
 
 /.DS_Store
