@@ -1,7 +1,7 @@
 package manfred.end.clazz.loader;
 
 public class Boot {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException {
 
         System.out.println("boot class path -> ");
         for (String s : System.getProperty("sun.boot.class.path").split(":")) {
@@ -27,6 +27,10 @@ public class Boot {
 
         System.out.println("查看自定义类的类加载器 ->");
         System.out.println("\t X.class 的类加载器是 " + X.class.getClassLoader());
+
+        classLoader = new CustomerClassLoader();
+        classLoader.loadClass("manfred.end.clazz.loader.X");
+        classLoader.loadClass("xxx");
 
     }
 }

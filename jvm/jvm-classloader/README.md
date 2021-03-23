@@ -26,7 +26,7 @@ JVM 提供给开发者可以干预的环节主要是 **加载** 环节
    也叫*系统类加载器*，它负责加载用户路径(ClassPath)上所指定的类库。  
    我们自己编写的代码以及使用的第三方的jar包都是由它来加载的。  
 4. 自定义加载器(Custom Classloader)  
-   通常是我们为了某些特殊目的实现的自定义加载器，后面我们得会详细介绍到它的作用以及使用场景。
+   通常是我们为了某些特殊目的实现的自定义加载器，如果没有明确其父加载器，则使用 Application Classloader 作为其父加载器。
    
 **代码实现**
 ![classloader_loadClass](img/classloader_loadClass.png)  
