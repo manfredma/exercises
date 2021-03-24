@@ -12,11 +12,11 @@ JVM 提供给开发者可以干预的环节主要是 **加载** 环节
 # 双亲委派模型
 ![双亲委派模型](img/双亲委派机制.png)
 
-**解决问题**
+**解决问题**  
 * 重复类的加载问题
 * 核心类的安全问题
 
-**classloader 种类**  
+**classloader 种类**    
 1. 启动类加载器(Bootstrap Classloader)  
    负责将<JAVA_HOME>/lib目录下并且被虚拟机识别的类库加载到虚拟机内存中。  
    我们常用基础库，例如java.util.**，java.io.**，java.lang.**等等都是由根加载器加载。
@@ -28,13 +28,39 @@ JVM 提供给开发者可以干预的环节主要是 **加载** 环节
 4. 自定义加载器(Custom Classloader)  
    通常是我们为了某些特殊目的实现的自定义加载器，如果没有明确其父加载器，则使用 Application Classloader 作为其父加载器。
    
-**代码实现**
+**代码实现**  
 ![classloader_loadClass](img/classloader_loadClass.png)  
 
 ## 双亲委派模型反例
-
+### 线程上下文类加载器 Context ClassLoader
+```
+public class Thread implements Runnable {  
+     /* The context ClassLoader for this thread */  
+     private ClassLoader contextClassLoader;  
+     
+     public void setContextClassLoader(ClassLoader cl) {  
+          SecurityManager sm = System.getSecurityManager();  
+          if (sm != null) {  
+               sm.checkPermission(new RuntimePermission("setContextClassLoader"));  
+          }  
+          contextClassLoader = cl;  
+     }  
+     public ClassLoader getContextClassLoader() {  
+          if (contextClassLoader == null)  
+               return null;  
+          SecurityManager sm = System.getSecurityManager();  
+          if (sm != null) {  
+                ClassLoader.checkClassLoaderPermission(contextClassLoader,  
+                    Reflection.getCallerClass());  
+          }  
+          return contextClassLoader;  
+     }  
+}
+```
+**线程上下文类加载器 存在的原因？**  
 
 
 # 参考
 [Java类加载器 — classloader 的原理及应用](https://mp.weixin.qq.com/s?__biz=MzAxNDEwNjk5OQ==&mid=2650418560&idx=1&sn=ed3c3ee4184fe48ffdcfb88d6b2aa539&chksm=8396e598b4e16c8ee4d4908d94cc41ed9d183538522b0b14524ec5bdf995e3197b88f70ff0c6&scene=178&cur_album_id=1452661944472977409#rd)  
 [一看你就懂，超详细java中的ClassLoader详解](https://blog.csdn.net/briblue/article/details/54973413)  
+[深入探索“线程上下文类加载器”](https://www.jianshu.com/p/05ec26e25627)  
