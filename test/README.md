@@ -11,6 +11,14 @@
 * R-Repeatable（可重复原则）：也叫做可幂性，意思是单元测试是可重复运行的，每次的结果都稳定可靠。为了保证单元测试的可幂性，需要引入测试数据构造和mock机制。
 
 # 编写可测试的代码
+【推荐】编写单元测试代码遵守 BCDE 原则，以保证被测试模块的交付质量。
+* **B：Border** 边界值测试，包括循环边界、特殊取值、特殊时间点、数据顺序等。
+* **C：Correct** 正确地输入，并得到预期的结果。
+* **D：Design** 与设计文档相结合，来编写单元测试。
+* **E：Error**，强制错误信息输入（如：非法数据、异常流程、业务允许外等），并得到预期的结果。
 
 # 参考
 [测试驱动开发](http://arganzheng.life/tdd.html)  
+[如何写单元测试](http://jimolonely.github.io/2018/10/28/basic/003-unit-testing/)  
+[“单元测试要做多细？”](https://coolshell.cn/articles/8209.html)  
+[单元测试规范和mock进阶使用实例](https://github.com/cyneck/unit-test-specification)  
