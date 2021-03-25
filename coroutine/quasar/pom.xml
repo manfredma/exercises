@@ -138,7 +138,7 @@
                         <!-- Classpath -->
                         <argument>-classpath</argument> <classpath/>
 
-                        <!-- Main class -->
+                        <!-- cache.line.CacheLineTest class -->
                         <argument>quasar.QuasarIncreasingEchoApp</argument>
                     </arguments>
                 </configuration>
