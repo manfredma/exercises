@@ -8,5 +8,8 @@ c）`command1 || command2`
 d）`command1 | command2`  
 这个是管道命令啦，如果没有set -e这样的设置，command1 | command2之后的shell语句会继续执行。
 
+# sudo vs su
+[sudo_su](cmd/linux_unix/sudo_su.md)  
+
 # 参考
 [Linux下多个命令的组合方式小结](https://blog.csdn.net/wangjianno2/article/details/17200599)
