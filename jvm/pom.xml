@@ -19,6 +19,7 @@
         <module>jvm-proxy</module>
         <module>jvm-agent</module>
         <module>jvm-classloader</module>
+        <module>jvm-thread-pool</module>
     </modules>
 
     <packaging>pom</packaging>
