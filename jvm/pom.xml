@@ -20,6 +20,7 @@
         <module>jvm-agent</module>
         <module>jvm-classloader</module>
         <module>jvm-thread-pool</module>
+        <module>jvm-native</module>
     </modules>
 
     <packaging>pom</packaging>
