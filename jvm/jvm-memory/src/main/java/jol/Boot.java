@@ -34,6 +34,7 @@ public class Boot {
         int[] ia = new int[40];
         byte[] ba = new byte[40];
         boolean[] bla = new boolean[40];
+        out.println(ClassLayout.parseInstance(new int[40]).toPrintable());
         out.println(GraphLayout.parseInstance((Object) ia).toPrintable());
         out.println(GraphLayout.parseInstance((Object) ba).toPrintable());
         out.println(GraphLayout.parseInstance((Object) bla).toPrintable());
@@ -43,9 +44,3 @@ public class Boot {
 
 }
 
-class X {
-
-    private int x = 2;
-
-    private float y = 3.0F;
-}
