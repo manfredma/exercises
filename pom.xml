@@ -20,7 +20,6 @@
         <module>design-pattern</module>
         <module>other</module>
         <module>test</module>
-        <module>netty</module>
         <module>data-structure_algorithm</module>
         <module>common-frame-work</module>
         <module>config</module>
@@ -35,6 +34,7 @@
         <module>rpc</module>
         <module>coroutine</module>
         <module>model_design</module>
+        <module>net</module>
     </modules>
     <packaging>pom</packaging>
 
