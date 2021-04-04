@@ -36,6 +36,7 @@
         <module>model_design</module>
         <module>net</module>
         <module>search</module>
+        <module>view</module>
     </modules>
     <packaging>pom</packaging>
 
