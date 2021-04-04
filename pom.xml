@@ -35,6 +35,7 @@
         <module>coroutine</module>
         <module>model_design</module>
         <module>net</module>
+        <module>search</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -52,6 +53,8 @@
         <lombok-version>1.18.4</lombok-version>
         <jmh-version>1.23</jmh-version>
         <guava-version>30.1-jre</guava-version>
+        <es-version>6.2.1</es-version>
+        <jackson-version>2.11.0</jackson-version>
     </properties>
 
     <dependencies>
@@ -160,6 +163,64 @@
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava-version}</version>
+            </dependency>
+
+            <!-- ES -->
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>transport</artifactId>
+                <version>${es-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.elasticsearch</groupId>
+                <artifactId>elasticsearch</artifactId>
+                <version>${es-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>elasticsearch-rest-high-level-client</artifactId>
+                <version>${es-version}</version>
+            </dependency>
+
+
+            <!-- spring-boot -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter</artifactId>
+                <version>${spring-boot-2-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring-boot-2-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-actuator</artifactId>
+                <version>${spring-boot-2-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <version>${spring-boot-2-version}</version>
+                <scope>test</scope>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.junit.vintage</groupId>
+                        <artifactId>junit-vintage-engine</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!-- JACKSON json -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson-version}</version>
             </dependency>
 
         </dependencies>
