@@ -1,0 +1,85 @@
+
+== 简介
+GraphQL is a relatively new concept from Facebook that is billed as an alternative to REST for Web APIs.
+
+== 2. What Is GraphQL?
+Traditional REST APIs work with the concept of Resources that the server manages. These resources can be manipulated in some standard ways, following the various HTTP verbs. This works very well as long as our API fits the resource concept, but quickly falls apart when we need to deviate from it.
+
+This also suffers when the client needs data from multiple resources at the same time. For example, requesting a blog post and the comments. Typically this is solved by either having the client make multiple requests or by having the server supply extra data that might not always be required, leading to larger response sizes.
+
+GraphQL offers a solution to both of these problems. It allows for the client to specify exactly what data is desired, including from navigating child resources in a single request, and allows for multiple queries in a single request.
+
+It also works in a much more RPC manner, using named queries and mutations instead of a standard mandatory set of actions. This works to put the control where it belongs, with the API developer specifying what is possible, and the API consumer what is desired.
+
+For example, a blog might allow the following query:
+
+[%hardbreaks]
+ query {
+     recentPosts(count: 10, offset: 0) {
+         id
+         title
+         category
+         author {
+             id
+             name
+             thumbnail
+         }
+     }
+ }
+
+
+This query will:
+
+* request the ten most recent posts
+* for each post, request the ID, title, and category
+* for each post request the author, returning the ID, name, and thumbnail
+
+In a traditional REST API, this either needs 11 requests – 1 for the posts and 10 for the authors – or needs to include the author details in the post details.
+
+=== 2.1. GraphQL Schemas
+The GraphQL server exposes a schema describing the API. This scheme is made up of type definitions. Each type has one or more fields, which each take zero or more arguments and return a specific type.
+
+The graph is made up from the way these fields are nested with each other. Note that there is no need for the graph to be acyclic – cycles are perfectly acceptable – but it is directed. That is, the client can get from one field to its children, but it can't automatically get back to the parent unless the schema defines this explicitly.
+
+An example GraphQL Schema for a blog may contain the following definitions, describing a Post, an Author of the post and a root query to get the most recent posts on the blog.
+
+----
+type Post {
+    id: ID!
+    title: String!
+    text: String!
+    category: String
+    author: Author!
+}
+
+type Author {
+    id: ID!
+    name: String!
+    thumbnail: String
+    posts: [Post]!
+}
+
+# The Root Query for the application
+type Query {
+    recentPosts(count: Int, offset: Int): [Post]!
+}
+
+# The Root Mutation for the application
+type Mutation {
+    writePost(title: String!, text: String!, category: String) : Post!
+}
+----
+
+The “!” at the end of some names indicates that this is a non-nullable type. Any type that does not have this can be null in the response from the server. The GraphQL service handles these correctly, allowing us to request child fields of nullable types safely.
+
+The GraphQL Service also exposes the schema itself using a standard set of fields, allowing any client to query for the schema definition ahead of time.
+
+This can allow for the client to automatically detect when the schema changes, and to allow for clients that dynamically adapt to the way that the schema works. One incredibly useful example of this is the GraphiQL tool – discussed later – that allows for us to interact with any GraphQL API.
+
+=== 与SpringBoot集成
+
+
+== 参考
+[%hardbreaks]
+https://www.baeldung.com/spring-graphql[Getting Started with GraphQL and Spring Boot]
+https://www.graphql-java.com/tutorials/getting-started-with-spring-boot/[Getting started with GraphQL Java and Spring Boot]
