@@ -17,5 +17,7 @@
         <module>mvn</module>
         <module>arch-unit</module>
         <module>ali-sandbox</module>
+        <module>disruptor</module>
+        <module>guava</module>
     </modules>
 </project>

@@ -16,6 +16,7 @@
         <module>thrift</module>
         <module>rest</module>
         <module>simple-rpc</module>
+        <module>graphql</module>
     </modules>
 
     <packaging>pom</packaging>

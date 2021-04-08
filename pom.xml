@@ -20,7 +20,6 @@
         <module>design-pattern</module>
         <module>other</module>
         <module>test</module>
-        <module>netty</module>
         <module>data-structure_algorithm</module>
         <module>common-frame-work</module>
         <module>config</module>
@@ -35,6 +34,9 @@
         <module>rpc</module>
         <module>coroutine</module>
         <module>model_design</module>
+        <module>net</module>
+        <module>search</module>
+        <module>view</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -47,10 +49,14 @@
         <snakeyml-version>1.23</snakeyml-version>
         <slf4j-version>1.7.25</slf4j-version>
         <mockito-version>2.23.0</mockito-version>
-        <powermock2.version>2.0.2</powermock2.version>
+        <powermock2-version>2.0.2</powermock2-version>
         <junit4-version>4.12</junit4-version>
         <lombok-version>1.18.4</lombok-version>
         <jmh-version>1.23</jmh-version>
+        <guava-version>30.1-jre</guava-version>
+        <es-version>6.2.1</es-version>
+        <jackson-version>2.11.0</jackson-version>
+        <commons-lang3-version>3.8.1</commons-lang3-version>
     </properties>
 
     <dependencies>
@@ -71,6 +77,7 @@
             <artifactId>jmh-core</artifactId>
             <version>${jmh-version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.openjdk.jmh</groupId>
             <artifactId>jmh-generator-annprocess</artifactId>
@@ -92,7 +99,7 @@
                 <version>${mysql-version}</version>
             </dependency>
 
-            <!-- log4j2 -->
+            <!-- log -->
             <!--log4j2核心包-->
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
@@ -134,7 +141,7 @@
                 <version>${snakeyml-version}</version>
             </dependency>
 
-            <!-- -->
+            <!-- mock -->
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
@@ -144,14 +151,84 @@
             <dependency>
                 <groupId>org.powermock</groupId>
                 <artifactId>powermock-module-junit4</artifactId>
-                <version>${powermock2.version}</version>
+                <version>${powermock2-version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.powermock</groupId>
                 <artifactId>powermock-api-mockito2</artifactId>
-                <version>${powermock2.version}</version>
+                <version>${powermock2-version}</version>
                 <scope>test</scope>
+            </dependency>
+
+            <!-- guava -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava-version}</version>
+            </dependency>
+
+            <!-- ES -->
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>transport</artifactId>
+                <version>${es-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.elasticsearch</groupId>
+                <artifactId>elasticsearch</artifactId>
+                <version>${es-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>elasticsearch-rest-high-level-client</artifactId>
+                <version>${es-version}</version>
+            </dependency>
+
+
+            <!-- spring-boot -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter</artifactId>
+                <version>${spring-boot-2-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring-boot-2-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-actuator</artifactId>
+                <version>${spring-boot-2-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <version>${spring-boot-2-version}</version>
+                <scope>test</scope>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.junit.vintage</groupId>
+                        <artifactId>junit-vintage-engine</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!-- JACKSON json -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3-version}</version>
             </dependency>
 
         </dependencies>

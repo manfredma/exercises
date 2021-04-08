@@ -13,5 +13,11 @@ public class Boot1 {
         System.out.println(s3 == s4);
         System.out.println(s3 == s5);
         System.out.println(s4 == s5);
+
+        System.out.println(System.identityHashCode(s));
+        System.out.println(System.identityHashCode(s2));
+        System.out.println(System.identityHashCode(s3));
+        System.out.println(System.identityHashCode(s4));
+        System.out.println(System.identityHashCode(s5));
     }
 }

@@ -10,6 +10,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>DDD</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>ddd_ship</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

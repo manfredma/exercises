@@ -1,0 +1,16 @@
+= guava 实践
+
+== 简介
+
+=== base 模块
+
+*optional*
+
+. 基本已经可以被 JDK8 中的 java.util.Optional 所取代
+. 提供了转换为集合（Set）的方法以及针对 Iterable 的拆箱方法（flatmap）方法
+. 实现上利用模板去实现，Absent 和 Present 去分别表示 Null 和 非Null 值。
+
+
+
+== 参考
+http://ifeve.com/google-guava/[Google Guava官方教程（中文版）]

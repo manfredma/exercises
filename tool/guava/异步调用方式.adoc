@@ -1,0 +1,5 @@
+
+
+== 参考
+[%hardbreaks]
+https://juejin.cn/post/6844903844791468046[【并发编程】Future模式添加Callback及Promise 模式]

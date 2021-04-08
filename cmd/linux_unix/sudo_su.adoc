@@ -1,15 +1,32 @@
-= 简介
+= sudo & su
+Doc Writer <doc.writer@asciidoctor.org>
+v1.0, 2013-08-01
+:toc: right
 
-*含义* +
+
+== 简介
+
 sudo = Super user do 超级用户do +
-su = Shift user 切换用户 +
-*用法* +
-1.su  <user> +
+su = Shift user 切换用户
+
+== 用法 +
+=== 1.su  <user> +
 su 命令是当前用户用来切换到另一个用户的命令，参数为用户名。 +
 *执行时会要求输入密码，这个密码是你要切换到的用户的密码。* +
 #注意，当你是root用户是，切换到本机的其他任何用户都是不需要输入密码的。# +
+----
+su
+不带命令行参数的 su 命令
+----
+如上，su 命令要求输入的密码是 root 用户的密码。所以，一般 su 命令需要输入目标用户的密码。在输入正确的密码之后，su 命令会在终端的当前会话中打开一个子会话。 +
+----
+su -
+还有一种方法可以切换到 root 用户：运行 su - 命令
+----
+su - 命令
+那么，su 命令与 su - 命令之间有什么区别呢？前者在切换到 root 用户之后仍然保持旧的（或者说原始用户的）环境，而后者则是创建一个新的环境（由 root 用户 ~/.bashrc 文件所设置的环境），相当于使用 root 用户正常登录（从登录屏幕登录）。 +
 
-2.sudo su <user> +
+=== 2.sudo su <user> +
 sudo su命令和su命令相似，都是用来切换用户的。区别就是两个命令需要输入的密码不一样。 +
 sudo su的含义就是要用root权限运行su命令，既然是用root权限运行su命令，那么就不需要输入切换到的用户的密码了。
 
@@ -24,19 +41,27 @@ visudo
 ----
 仿照root的配置把当前或者自己的用户加入该文件即可。有很所选项可以配置，比如使用sudo不需要输入密码等等。 +
 有一点一定要提，无意中发现一条也别牛掰的命令，本来你如果要从普通用户切换到root用户： +
-su root 或者 su -  此时你必须要输入root用户的密码，正如上边所讲。 +
+----
+su root 或者 su -  此时你必须要输入root用户的密码，正如上边所讲。
+----
 但是如果你使用： +
-*sudo su 这个命令，直接输入当前用户的密码即可切换到root用户。并且如果你的sudo设置而不需要输入密码，就直接切换到root用户了。*
+----
+sudo su 这个命令，直接输入当前用户的密码即可切换到root用户。并且如果你的sudo设置而不需要输入密码，就直接切换到root用户了。
 
 另外：用whoami命令查看当前用户，翻译过来就是"我是谁"---你懂的。
-
+----
 注意：如果没有设置使用sudo无需密码，那么每次使用都要输入，此时你输入的既不是root用户的密码，也不是要切换到用户的密码，而是当前使用sudo命令的用户的密码。
 
 此外，sudo su命令不保留原来shell的环境变量。
 
-3.sudo -u <user> -i
+=== 3.sudo -u <user> -i +
 如果你需要准确的模拟另外一个用户登录时的初始状态，那么就使用sudo -u <user> -i这个命令。-i这个参数代表"simulate initial login"，它将创建合适的命令行窗口，使./.bashrc 和 ./.bash_profile生效，然后引导你进入目标用户的home目录。对于普通用户来说，用处不大，所以很少有人关注它。
 
+如果你想在系统中启用 root 用户帐户（强烈反对，因为你可以使用 sudo 命令或 sudo su 命令），你必须手动设置 root 用户密码，可以使用以下命令：
+sudo passwd root
 
-= 参考
-https://github.com/asciidoctor[Asciidoctor @ *GitHub*]
+== 参考
+
+https://blog.csdn.net/kmust20093211/article/details/43565391[linux上su与sudo su的区别] +
+https://www.howtogeek.com/111479/htg-explains-whats-the-difference-between-sudo-su/[What’s the Difference Between Sudo and Su in Linux?] +
+

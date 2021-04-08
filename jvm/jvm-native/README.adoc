@@ -1,0 +1,51 @@
+== Mac 实现
+
+JNI的实现步骤如下： +
+1、编写带有native声明的方法的Java类 +
+....
+public class HelloWorld{
+    public native void hello();
+
+    static {
+        //设置查找路径为当前项目路径
+        System.setProperty("java.library.path", ".");
+        //加载动态库的名称
+        System.loadLibrary("hello");
+    }
+
+    public static void main(String[] args){
+        new HelloWorld().hello();
+    }
+}
+....
+
+2、使用javac命令编译编写的Java类 +
+3、使用javah -jni **来生成后缀名为.h的头文件 +
+
+....
+javah -jni HelloWorld
+....
+
+4、使用其他语言（C、C++）实现本地方法 +
+
+....
+#include "jni.h"
+#include "HelloWorld.h"
+#include <stdio.h>
+JNIEXPORT void JNICALL Java_HelloWorld_hello(JNIEnv *env,jobject obj){
+    printf("Hello World!\n");
+    return;
+}
+....
+
+5、将本地方法编写的文件生成动态链接库 +
+
+....
+gcc -dynamiclib -I ${JAVA_HOME}/include/ HelloWorldImpl.c -o libhello.jnilib
+....
+
+提示jni_md.h这个文件找不到, 我们执行下面的命令拷贝一份：
+
+....
+sudo cp ${JAVA_HOME}/include/darwin/jni_md.h ${JAVA_HOME}/include
+....
