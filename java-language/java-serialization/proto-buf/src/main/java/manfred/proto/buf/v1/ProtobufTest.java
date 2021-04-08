@@ -2,7 +2,7 @@ package manfred.proto.buf.v1;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import org.junit.Test;
-public class protobufTest {
+public class ProtobufTest {
     @Test
     public void testN() throws InvalidProtocolBufferException {
         PersonModel.Person.Builder builder = PersonModel.Person.newBuilder();
