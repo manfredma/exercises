@@ -1,0 +1,6 @@
+
+
+== 参考
+[%hardbreaks]
+https://www.infoq.cn/article/jdk1.8-abstractqueuedsynchronizer[深度解析 Java 8：JDK1.8 AbstractQueuedSynchronizer 的实现分析（上）]
+https://www.infoq.cn/article/java8-abstractqueuedsynchronizer[深度解析 Java 8：AbstractQueuedSynchronizer 的实现分析（下）]
