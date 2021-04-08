@@ -82,7 +82,19 @@ This can allow for the client to automatically detect when the schema changes, a
 graphql-java-spring-boot-starter-webmvc
 ----
 
+=== 测试
+* 使用 curl 或者 idea http request 测试
+----
+###
+POST http://127.0.0.1:8080/graphql
+content-type: application/json;charset=UTF-8
 
+{"operationName":null,"variables":{},"query":"{\n  bookById(id: \"book-1\") {\n    id\n    name\n    pageCount\n    author {\n      firstName\n      lastName\n    }\n  }\n}\n"}
+----
+* 使用 GraphQL Playground 进行测试
+----
+brew install --cask graphql-playground
+----
 
 == 参考
 [%hardbreaks]
