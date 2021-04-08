@@ -3,7 +3,7 @@ package manfred.end.guava.base;
 import com.google.common.base.Ascii;
 import org.junit.Test;
 
-public class AscIITest {
+public class AsciiTest {
 
     @Test
     public void test() {
