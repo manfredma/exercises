@@ -5,8 +5,14 @@
 ===== 堆栈丢失问题
 关闭优化 -XX:-OmitStackTraceInFastThrow +
 *谨慎使用，如果关闭fast throw的优化应预防"日志风暴"使磁盘空间迅速被打满*
-____
+_____
 The compiler in the server VM now provides correct stack backtraces for all "cold" built-in exceptions.
-For performance purposes, when such an exception is thrown a few times, the method may be recompiled. After recompilation, the compiler may choose a faster tactic using preallocated exceptions that do not provide a stack trace. To disable completely the use of preallocated exceptions, use this new flag: -XX:-OmitStackTraceInFastThrow.
-____
+For performance purposes, when such an exception is thrown a few times, the method may be recompiled.
+After recompilation, the compiler may choose a faster tactic using preallocated exceptions that do not provide a stack
+trace. To disable completely the use of preallocated exceptions, use this new flag: -XX:-OmitStackTraceInFastThrow.
+_____
 
+===== 指令重排
+[%hardbreaks]
+https://stackoverflow.com/questions/52648800/how-to-demonstrate-java-instruction-reordering-problems[How to demonstrate Java instruction reordering problems?]
+https://tech.meituan.com/2014/09/23/java-memory-reordering.html[Java内存访问重排序的研究]
