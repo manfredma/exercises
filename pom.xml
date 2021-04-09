@@ -41,7 +41,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <spring-boot-2-version>2.2.1.RELEASE</spring-boot-2-version>
+        <spring-boot-2-version>2.4.4</spring-boot-2-version>
         <caffeine-2-version>2.8.8</caffeine-2-version>
         <log4j2-version>2.9.1</log4j2-version>
         <mybatis-version>3.4.5</mybatis-version>
