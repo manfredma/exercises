@@ -1,18 +1,28 @@
+== 编译优化
 
-==== 编译优化
 展示优化信息 -XX:+PrintCompilation
 
-===== 堆栈丢失问题
+=== 堆栈丢失问题
+
 关闭优化 -XX:-OmitStackTraceInFastThrow +
 *谨慎使用，如果关闭fast throw的优化应预防"日志风暴"使磁盘空间迅速被打满*
+
 _____
 The compiler in the server VM now provides correct stack backtraces for all "cold" built-in exceptions.
 For performance purposes, when such an exception is thrown a few times, the method may be recompiled.
-After recompilation, the compiler may choose a faster tactic using preallocated exceptions that do not provide a stack
-trace. To disable completely the use of preallocated exceptions, use this new flag: -XX:-OmitStackTraceInFastThrow.
+After recompilation, the compiler may choose a faster tactic using preallocated exceptions that do not provide a stack trace.
+To disable completely the use of preallocated exceptions, use this new flag: -XX:-OmitStackTraceInFastThrow.
 _____
 
-===== 指令重排
+=== 参考
+[%hardbreaks]
+https://blog.csdn.net/weixin_39977488/article/details/110513203[java 堆栈_谈即时编译优化-以异常堆栈丢失为例]
+
+== 指令重排
+
+=== 参考
+
 [%hardbreaks]
 https://stackoverflow.com/questions/52648800/how-to-demonstrate-java-instruction-reordering-problems[How to demonstrate Java instruction reordering problems?]
 https://tech.meituan.com/2014/09/23/java-memory-reordering.html[Java内存访问重排序的研究]
+https://www.jianshu.com/p/7a6118b2d794[Java中的指令重排-简书]
