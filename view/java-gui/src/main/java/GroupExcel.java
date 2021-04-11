@@ -31,6 +31,7 @@ public class GroupExcel extends JFrame {
      * Creates new form AddDataToJTable
      */
     public GroupExcel() {
+        super();
         initComponents();
     }
 
@@ -101,7 +102,7 @@ public class GroupExcel extends JFrame {
         if (excelChooser == JFileChooser.APPROVE_OPTION) {
             excelFile = excelFileChooser.getSelectedFile();
             try (FileInputStream excelFis = new FileInputStream(excelFile);
-                 BufferedInputStream excelBis = new BufferedInputStream(excelFis)) {
+                 BufferedInputStream excelBis = new BufferedInputStream(excelFis);) {
                 importExcelWorkBook = new XSSFWorkbook(excelBis);
                 for (XSSFSheet excelSheet : importExcelWorkBook) {
                     XSSFCell xssfCell = excelSheet.getRow(0).getCell(0);
