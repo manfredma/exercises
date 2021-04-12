@@ -1,0 +1,44 @@
+
+== 安装 kafka
+
+=== macos 安装
+
+----
+1. brew install kafka
+
+To have launchd start kafka now and restart at login:
+brew services start kafka
+Or, if you don't want/need a background service you can just run:
+zookeeper-server-start /usr/local/etc/kafka/zookeeper.properties & kafka-server-start /usr/local/etc/kafka/server.properties
+
+2. 配置
+修改 /usr/local/etc/kafka/server.properties, 找到 listeners=PLAINTEXT://:9092 那一行，把注释取消掉。
+
+3. 启动
+如果想以服务的方式启动，那么可以:
+$ brew services start zookeeper
+$ brew services start kafka
+
+如果只是临时启动，可以:
+$ zkServer start
+$ kafka-server-start /usr/local/etc/kafka/server.properties
+
+4. 命令行操作
+4.1 创建Topic
+$ kafka-topics --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
+4.2 产生消息
+$ kafka-console-producer --broker-list localhost:9092 --topic test
+>HELLO Kafka
+4.3 消费
+简单方式:
+$ kafka-console-consumer --bootstrap-server localhost:9092 --topic test --from-beginning
+如果使用消费组:
+$ kafka-console-consumer --bootstrap-server localhost:9092 --topic test --group test-consumer1 --from-beginning
+----
+
+
+
+== 参考
+[%hardbreaks]
+https://segmentfault.com/a/1190000022949840[涨姿势了解一下Kafka消费位移可好？]
+https://colobu.com/2019/09/27/install-Kafka-on-Mac/[在 MacOS 上安装 Kafka]

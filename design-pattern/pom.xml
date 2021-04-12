@@ -34,9 +34,9 @@
         <module>memento-pattern</module>
         <module>observer-pattern</module>
         <module>template-pattern</module>
-        <module>_2-model-view-controller</module>
-        <module>_2-business-delegate-pattern</module>
-        <module>_2-front-controller-pattern</module>
+        <module>model-view-controller</module>
+        <module>business-delegate-pattern</module>
+        <module>front-controller-pattern</module>
     </modules>
 
     <packaging>pom</packaging>

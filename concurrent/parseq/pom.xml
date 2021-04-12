@@ -18,6 +18,11 @@
             <version>4.0.1</version>
         </dependency>
         <dependency>
+            <groupId>com.linkedin.parseq</groupId>
+            <artifactId>parseq-batching</artifactId>
+            <version>4.0.1</version>
+        </dependency>
+        <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
         </dependency>
