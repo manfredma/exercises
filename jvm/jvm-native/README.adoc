@@ -1,3 +1,5 @@
+:toc:
+
 == Mac 实现
 
 JNI的实现步骤如下： +
@@ -49,3 +51,7 @@ gcc -dynamiclib -I ${JAVA_HOME}/include/ HelloWorldImpl.c -o libhello.jnilib
 ....
 sudo cp ${JAVA_HOME}/include/darwin/jni_md.h ${JAVA_HOME}/include
 ....
+
+== 参考
+[%hardbreaks]
+https://www3.ntu.edu.sg/home/ehchua/programming/java/JavaNativeInterface.html[Java Programming Tutorial - Java Native Interface (JNI)]

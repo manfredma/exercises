@@ -14,4 +14,9 @@ http://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20[文
 https://excalidraw.com/[excalidraw]
 https://board.oktangle.com/[excalidraw 中文版]
 
+== 编程指南类
+[%hardbreaks]
+https://www3.ntu.edu.sg/home/ehchua/programming/index.html[programming notes -- 一个包含多种语言(Java&C++&Python)的学习的干货网站！]
+
+
 
