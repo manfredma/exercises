@@ -7,7 +7,7 @@ import java.lang.reflect.Field;
 /**
  * @author Manfred since 2019/8/9
  */
-public class GetUsafeInstance {
+public class GetUnsafeInstance {
     public static Unsafe getUnsafeInstance() {
 
         try {

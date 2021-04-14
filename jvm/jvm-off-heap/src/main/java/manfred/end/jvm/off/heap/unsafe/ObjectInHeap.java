@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 public class ObjectInHeap {
     private long address = 0;
 
-    private Unsafe unsafe = GetUsafeInstance.getUnsafeInstance();
+    private Unsafe unsafe = GetUnsafeInstance.getUnsafeInstance();
 
     public ObjectInHeap() {
         address = unsafe.allocateMemory(200 * 1024 * 1024);

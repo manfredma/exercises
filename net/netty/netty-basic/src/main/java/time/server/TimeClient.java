@@ -14,7 +14,7 @@ import io.netty.channel.socket.nio.NioSocketChannel;
  */
 public class TimeClient {
     public static void main(String[] args) {
-        int port = 8080;
+        int port = 18080;
 
         if (args != null && args.length > 0) {
             try {
