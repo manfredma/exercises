@@ -9,3 +9,4 @@ https://tech.meituan.com/2019/09/05/java-bytecode-enhancement.html[字节码增�
 https://www.163.com/dy/article/EL1FIVPF05376OPS.html[Java动态字节码增强技术原理与应用]
 https://my.oschina.net/vivotech/blog/4680933[字节码增强：原理与实战]
 https://www.infoq.cn/article/Easily-Create-Java-Agents-with-ByteBuddy[通过使用 Byte Buddy，便捷地创建 Java Agent]
+https://www.infoq.cn/article/cf-java-byte-code[Java 深度历险（一）——Java 字节代码的操纵]
