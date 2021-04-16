@@ -46,7 +46,7 @@ public class ThreadTest {
             ThreadTest tt = new ThreadTest();
             boolean b = tt.test();
             if (b) {
-                System.out.println("恭喜你，查看到了指令重排的现象！共执行了 " + index + " 次！");
+                System.out.println("出现了指令重排的现象！共执行了 " + index + " 次！");
                 break;
             }
         }

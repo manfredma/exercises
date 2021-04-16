@@ -37,6 +37,7 @@
         <module>net</module>
         <module>search</module>
         <module>view</module>
+        <module>asm</module>
     </modules>
     <packaging>pom</packaging>
 

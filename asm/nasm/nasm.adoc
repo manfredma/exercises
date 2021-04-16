@@ -1,0 +1,12 @@
+
+下载地址
+
+安装
+
+
+
+== 参考
+[%hardbreaks]
+https://www.toutiao.com/i6947920141447397892/[初识x86_64汇编系列]
+https://stackoverflow.com/questions/52830484/nasm-cant-link-object-file-with-ld-on-macos-mojave[nasm - Can't link object file with ld on macOS Mojave]
+https://gist.github.com/FiloSottile/7125822[mac nasm hello world 示例]
