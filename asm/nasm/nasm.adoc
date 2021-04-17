@@ -1,9 +1,11 @@
 
-下载地址
+== 安装
+----
+# ubuntu
+apt-get install -y nasm
+# mac
 
-安装
-
-
+----
 
 == 参考
 [%hardbreaks]

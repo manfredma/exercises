@@ -1,0 +1,46 @@
+== 基本操作
+
+* 查看docker资源
+
+----
+访问 Ubuntu 镜像库地址： https://hub.docker.com/_/ubuntu?tab=tags&page=1。
+----
+
+* 拉取最新版的 Ubuntu 镜像
+
+----
+docker pull ubuntu
+----
+
+* 查看本地镜像
+
+----
+docker images
+----
+
+* 运行容器，并且可以通过 exec 命令进入 ubuntu 容器
+
+----
+# 运行
+docker run -itd --name ubuntu-test ubuntu
+# 带有端口映射的启动命令
+docker run -d -p 8090:8080 jodzga/parseq-tracevis-server:latest
+
+# 通过 exec 命令进入 ubuntu 容器
+# 通过"名称"进入
+docker exec -it ubuntu-test /bin/bash
+# 通过"容器 ID"进入
+docker exec -it b8e2d67d931c6c6f39f5cade9eb734686a0c2104f74d847e493bee9e9f0d443f /bin/sh
+
+----
+
+* 查看容器的运行信息
+
+----
+docker ps
+----
+
+== 参考
+
+[%hardbreaks]
+https://www.runoob.com/docker/docker-install-ubuntu.html[Docker 安装 Ubuntu -- runoob.com]
