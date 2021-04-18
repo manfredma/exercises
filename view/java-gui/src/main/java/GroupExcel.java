@@ -1,7 +1,7 @@
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import javax.swing.*;
@@ -104,19 +104,17 @@ public class GroupExcel extends JFrame {
             try (FileInputStream excelFis = new FileInputStream(excelFile);
                  BufferedInputStream excelBis = new BufferedInputStream(excelFis);) {
                 importExcelWorkBook = new XSSFWorkbook(excelBis);
-                for (XSSFSheet excelSheet : importExcelWorkBook) {
-                    XSSFCell xssfCell = excelSheet.getRow(0).getCell(0);
+                for (Sheet excelSheet : importExcelWorkBook) {
+                    Cell xssfCell = excelSheet.getRow(0).getCell(0);
                     if (null != xssfCell
-                            && null != xssfCell.getRawValue()
-                            && Cell.CELL_TYPE_STRING == xssfCell.getCellType()
+                            && CellType.STRING == xssfCell.getCellType()
                             && xssfCell.getStringCellValue().contains("CUC")) {
                         int dataBeganRow = 1;
                         for (int row = 1; row < excelSheet.getLastRowNum(); row++) {
-                            XSSFRow excelRow = excelSheet.getRow(row);
+                            Row excelRow = excelSheet.getRow(row);
                             xssfCell = excelRow.getCell(6);
                             if (null != xssfCell
-                                    && null != xssfCell.getRawValue()
-                                    && Cell.CELL_TYPE_STRING == xssfCell.getCellType()
+                                    && CellType.STRING == xssfCell.getCellType()
                                     && xssfCell.getStringCellValue().contains("科目组合")) {
                                 dataBeganRow = row + 1;
                                 break;
@@ -124,7 +122,7 @@ public class GroupExcel extends JFrame {
                         }
                         Map<String, Double> sheetGroupResult = new HashMap<>();
                         for (int row = dataBeganRow; row < excelSheet.getLastRowNum(); row++) {
-                            XSSFRow excelRow = excelSheet.getRow(row);
+                            Row excelRow = excelSheet.getRow(row);
                             String[] strings = excelRow.getCell(6).getStringCellValue().split("\\.");
                             sheetGroupResult.putIfAbsent(strings[3], 0.0);
                             sheetGroupResult.put(strings[3], sheetGroupResult.get(strings[3]) + excelRow.getCell(7).getNumericCellValue());

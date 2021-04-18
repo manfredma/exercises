@@ -1,0 +1,6 @@
+
+
+
+== 参考
+[%hardbreaks]
+https://stackoverflow.com/questions/2353057/how-to-convert-inputstream-to-fileinputstreamp[How to convert InputStream to FileInputStream @stackoverflow]

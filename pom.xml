@@ -58,6 +58,7 @@
         <es-version>6.2.1</es-version>
         <jackson-version>2.11.0</jackson-version>
         <commons-lang3-version>3.8.1</commons-lang3-version>
+        <jsonp-version>1.13.1</jsonp-version>
     </properties>
 
     <dependencies>
@@ -230,6 +231,13 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${commons-lang3-version}</version>
+            </dependency>
+
+            <!-- jsonp -->
+            <dependency>
+                <groupId>org.jsoup</groupId>
+                <artifactId>jsoup</artifactId>
+                <version>${jsonp-version}</version>
             </dependency>
 
         </dependencies>

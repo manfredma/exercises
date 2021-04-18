@@ -13,6 +13,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>kafka-spring</module>
-        <module>kafka-spring</module>
+        <module>kafka-spring-boot</module>
     </modules>
 </project>

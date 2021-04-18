@@ -1,20 +1,12 @@
+package template;
+
 import org.apache.commons.io.filefilter.SuffixFileFilter;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
-import java.text.DecimalFormat;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.*;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -123,12 +115,16 @@ public class ExcelTemplate extends JFrame {
         if (excelChooser == JFileChooser.APPROVE_OPTION) {
             selectDirectory = excelFileChooser.getSelectedFile();
             DisposeContext context = extractedContext(selectDirectory);
-            if (!context.extractSuccess) {
+            if (!context.isExtractSuccess()) {
                 return;
             }
 
             try {
                 context.initXSSFWorkbook();
+                context.initVendorContext();
+                context.saveResult();
+
+
 
 
                 /*
@@ -171,7 +167,7 @@ public class ExcelTemplate extends JFrame {
 
 
             } catch (IOException ioException) {
-                JOptionPane.showMessageDialog(null, ioException.getMessage());
+                JOptionPane.showMessageDialog(this, ioException.getMessage());
             } finally {
                 context.closeXSSFWorkbook();
             }
@@ -190,13 +186,13 @@ public class ExcelTemplate extends JFrame {
             context.currentCheckFile = extractFileByName(excelFiles, "CUC_供应商往来情况核对表");
             context.invoiceFile = extractFileByName(excelFiles, "华盛报账单对应发票信息");
 
-            Path temp = Files.createTempFile("resource-", ".ext");
-            Files.copy(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("模板.xlsx")),
-                    temp, StandardCopyOption.REPLACE_EXISTING);
-            context.templateFile = temp.toFile();
+
+            URL templateIs = getClass().getClassLoader().getResource("模板.xlsx");
+            assert templateIs != null;
+            context.templateFile = new File(templateIs.toURI());
 
             context.extractSuccess = true;
-        } catch (IOException ioException) {
+        } catch (IOException | URISyntaxException ioException) {
             JOptionPane.showMessageDialog(null, ioException.getMessage());
         }
         return context;
@@ -214,136 +210,4 @@ public class ExcelTemplate extends JFrame {
         return exportFinishedClaimListFiles.get(0);
     }
 
-    private static class DisposeContext {
-        /**
-         * 当前选择的文件夹
-         */
-        private File selectDirectory;
-
-        /**
-         * exportFinishedClaimListFile 文件
-         */
-        private File exportFinishedClaimListFile;
-
-        /**
-         * 应付帐款报表文件
-         */
-        private File accountPayableFile;
-
-        /**
-         * 供应商往来情况核对表文件
-         */
-        private File currentCheckFile;
-
-        /**
-         * 华盛报账单对应发票信息
-         */
-        private File invoiceFile;
-
-        /**
-         * 模板文件
-         */
-        private File templateFile;
-
-        private boolean extractSuccess;
-
-
-        /**
-         * exportFinishedClaimListFile 文件
-         */
-        private Workbook exportFinishedClaim;
-
-        /**
-         * 应付帐款报表文件
-         */
-        private Workbook accountPayable;
-
-        /**
-         * 供应商往来情况核对表文件
-         */
-        private Workbook currentCheck;
-
-        /**
-         * 华盛报账单对应发票信息
-         */
-        private Workbook invoice;
-
-        /**
-         * 模板文件
-         */
-        private XSSFWorkbook template;
-
-        private List<InputStream> tempInputStreams = new ArrayList<>();
-
-        public void initXSSFWorkbook() throws IOException {
-            exportFinishedClaim = openHWorkbook(exportFinishedClaimListFile);
-            if (exportFinishedClaim == null) {
-                exportFinishedClaim = openWorkbook(exportFinishedClaimListFile);
-            }
-            accountPayable = openHWorkbook(accountPayableFile);
-            if (accountPayable == null) {
-                accountPayable = openWorkbook(accountPayableFile);
-            }
-            currentCheck = openHWorkbook(currentCheckFile);
-            if (currentCheck == null) {
-                currentCheck = openWorkbook(currentCheckFile);
-            }
-            invoice = openWorkbook(invoiceFile);
-            if (invoice == null) {
-                invoice = openHWorkbook(invoiceFile);
-            }
-            template = openWorkbook(templateFile);
-
-            checkWorkbookInit();
-        }
-
-        private void checkWorkbookInit() throws IOException {
-            try {
-                Objects.requireNonNull(exportFinishedClaim, exportFinishedClaimListFile.getName() + " 格式不正确");
-                Objects.requireNonNull(accountPayable, accountPayableFile.getName() + " 格式不正确");
-                Objects.requireNonNull(currentCheck, currentCheckFile.getName() + " 格式不正确");
-                Objects.requireNonNull(invoice, invoiceFile.getName() + " 格式不正确");
-            } catch (Exception exception) {
-                throw new IOException(exception.getMessage());
-            }
-        }
-
-        private XSSFWorkbook openWorkbook(File file) {
-            try {
-                FileInputStream excelFis = new FileInputStream(file);
-                BufferedInputStream excelBis = new BufferedInputStream(excelFis);
-                tempInputStreams.add(excelFis);
-                tempInputStreams.add(excelBis);
-                return new XSSFWorkbook(excelBis);
-            } catch (Exception exception) {
-                exception.printStackTrace();
-                return null;
-            }
-
-        }
-
-        private HSSFWorkbook openHWorkbook(File file) {
-            try {
-                FileInputStream excelFis = new FileInputStream(file);
-                BufferedInputStream excelBis = new BufferedInputStream(excelFis);
-                tempInputStreams.add(excelFis);
-                tempInputStreams.add(excelBis);
-                return new HSSFWorkbook(excelBis);
-            } catch (Exception exception) {
-                exception.printStackTrace();
-                return null;
-            }
-        }
-
-        public void closeXSSFWorkbook() {
-            tempInputStreams.forEach(a -> {
-                try {
-                    a.close();
-                } catch (IOException ioException) {
-                    // do nothing
-                }
-            });
-            tempInputStreams.clear();
-        }
-    }
 }
