@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import javax.validation.constraints.NotNull;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,17 +27,19 @@ public class EmployeeRepository {
 
 
     public Mono<Employee> findEmployeeById(String id) {
-        Optional<Employee> found = employeeList.stream().filter(a -> a.getId().equals(id)).findAny();
-        return Mono.delay(Duration.ofSeconds(10L)).thenReturn(found.orElseGet(() -> new Employee(id, "name-" + id)));
+        Optional<Employee> found =
+                employeeList.stream().filter(a -> a.getId().equals(id)).findAny();
+        return Mono.delay(Duration.ofSeconds(10L)).thenReturn(found.orElseGet(() -> new Employee(id,
+                "name-" + id)));
     }
 
     public Flux<Employee> findAllEmployees() {
         return Flux.fromIterable(employeeList);
     }
 
-    @NotNull
     public Mono<Employee> updateEmployee(Employee employee) {
-        Optional<Employee> found = employeeList.stream().filter(a -> a.getId().equals(employee.getId())).findAny();
+        Optional<Employee> found =
+                employeeList.stream().filter(a -> a.getId().equals(employee.getId())).findAny();
         found.ifPresent(value -> employeeList.remove(value));
         employeeList.add(employee);
         return Mono.just(employee);
