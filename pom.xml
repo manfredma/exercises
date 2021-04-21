@@ -47,7 +47,7 @@
         <log4j2-version>2.9.1</log4j2-version>
         <mybatis-version>3.4.5</mybatis-version>
         <mysql-version>8.0.21</mysql-version>
-        <snakeyml-version>1.23</snakeyml-version>
+        <snakeyml-version>1.28</snakeyml-version>
         <slf4j-version>1.7.25</slf4j-version>
         <mockito-version>2.23.0</mockito-version>
         <powermock2-version>2.0.2</powermock2-version>
@@ -59,6 +59,7 @@
         <jackson-version>2.11.0</jackson-version>
         <commons-lang3-version>3.8.1</commons-lang3-version>
         <jsonp-version>1.13.1</jsonp-version>
+        <r2dbc-mysql-version>0.8.2.RELEASE</r2dbc-mysql-version>
     </properties>
 
     <dependencies>
@@ -89,6 +90,31 @@
 
     <dependencyManagement>
         <dependencies>
+
+            <!--r2dbc mysql 库-->
+            <dependency>
+                <groupId>dev.miku</groupId>
+                <artifactId>r2dbc-mysql</artifactId>
+                <version>${r2dbc-mysql-version}</version>
+            </dependency>
+            <!--Spring r2dbc 抽象层-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-r2dbc</artifactId>
+                <version>${spring-boot-2-version}</version>
+            </dependency>
+            <!--自动配置需要引入的一个嵌入式数据库类型对象-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-jdbc</artifactId>
+                <version>${spring-boot-2-version}</version>
+            </dependency>
+            <!--反应式web框架-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-webflux</artifactId>
+                <version>${spring-boot-2-version}</version>
+            </dependency>
             <!-- DB -->
             <dependency>
                 <groupId>org.mybatis</groupId>

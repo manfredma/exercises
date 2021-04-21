@@ -1,0 +1,11 @@
+logging:
+  #日志存储地址
+  file: "logs/config/demo-xx.log"
+info:
+  name : "入门案例"
+
+server:
+  #端口号
+  port: 8888
+  #项目名，如果不设定，默认是 /
+  context-path: /demo

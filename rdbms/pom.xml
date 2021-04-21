@@ -13,6 +13,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>mybatis</module>
+        <module>r2dbc</module>
     </modules>
 
     <packaging>pom</packaging>
