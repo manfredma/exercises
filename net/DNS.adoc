@@ -1,0 +1,4 @@
+
+== 参考
+[%hardbreaks]
+https://www.ruanyifeng.com/blog/2016/06/dns.html[DNS 原理入门]
