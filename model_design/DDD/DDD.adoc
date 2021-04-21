@@ -83,5 +83,11 @@ ____
 
 == 参考
 [%hardbreaks]
-https://tech.meituan.com/2017/12/22/ddd-in-practice.html[领域驱动设计在互联网业务开发中的实践] +
+https://tech.meituan.com/2017/12/22/ddd-in-practice.html[领域驱动设计在互联网业务开发中的实践]
 https://insights.thoughtworks.cn/ddd-business-design/[使用DDD指导业务设计的一点思考 @ thoughtworks]
+https://zhuanlan.zhihu.com/p/340911587[阿里技术专家详解 DDD 系列 第一讲- Domain Primitive]
+https://zhuanlan.zhihu.com/p/343388831[阿里技术专家详解DDD系列 第二讲 - 应用架构]
+https://zhuanlan.zhihu.com/p/348706530[阿里技术专家详解DDD系列 第三讲 - Repository模式]
+https://zhuanlan.zhihu.com/p/356518017[阿里技术专家详解DDD系列 第四讲 - 领域层设计规范]
+https://zhuanlan.zhihu.com/p/366395817[阿里技术专家详解DDD系列 第五讲：聊聊如何避免写流水账代码]
+
