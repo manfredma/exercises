@@ -1,0 +1,15 @@
+
+== JDK 中的实现
+jdk 的定时器是基于 堆（基于到期时间排序）+ 阻塞队列的方式实现，java.util.Timer 和 java.util.concurrent.ScheduledExecutorService 的实现方式大同小异。
+最大的区别可能是 java.util.concurrent.ScheduledExecutorService 是基于线程池实现的，而 java.util.Timer 是使用单线程进行实现。
+
+== Quartz 中的实现
+
+== 时间轮算法
+
+
+== 参考
+[%hardbreaks]
+https://yfscfs.gitee.io/post/%E4%BB%A4%E4%BA%BA%E6%83%8A%E8%89%B3%E7%9A%84%E6%97%B6%E9%97%B4%E8%BD%AE%E7%AE%97%E6%B3%95timingwheel/[令人惊艳的时间轮算法（TimingWheel）]
+https://www.toutiao.com/i6953494843721138695/[那些惊艳的算法—时间轮算法]
+https://zhuanlan.zhihu.com/p/84502375[时间轮定时器]

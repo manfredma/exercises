@@ -9,7 +9,6 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>java-language</module>
-        <module>camel</module>
         <module>spring</module>
         <module>concurrent</module>
         <module>cache</module>
@@ -38,6 +37,8 @@
         <module>search</module>
         <module>view</module>
         <module>asm</module>
+        <module>cron</module>
+        <module>eip</module>
     </modules>
     <packaging>pom</packaging>
 
