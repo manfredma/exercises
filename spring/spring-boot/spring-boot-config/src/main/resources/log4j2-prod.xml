@@ -2,15 +2,14 @@
 <Configuration status="WARN">
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %logger %X{transaction.owner} [%t] [%-5p]  %c{1.}  %C %F - %m%n"/>
+            <PatternLayout
+                    pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %logger %X{transaction.owner} [%t] [%-5p]  %c{1.}  %C %F - %m%n"/>
         </Console>
     </Appenders>
     <Loggers>
-        <Logger name="com.foo.MyApp" level="info" additivity="false" includeLocation="true">
+        <Logger name="manfred.spring.boot.config" level="error" additivity="false" includeLocation="true">
             <AppenderRef ref="Console"/>
         </Logger>
-
-        <Logger name="com.foo.Bar" level="info" additivity="true" includeLocation="true"/>
 
         <Root level="error" includeLocation="true">
             <AppenderRef ref="Console"/>
