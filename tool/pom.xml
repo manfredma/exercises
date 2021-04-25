@@ -19,5 +19,6 @@
         <module>ali-sandbox</module>
         <module>disruptor</module>
         <module>guava</module>
+        <module>aviator</module>
     </modules>
 </project>
