@@ -61,6 +61,7 @@
         <commons-lang3-version>3.8.1</commons-lang3-version>
         <jsonp-version>1.13.1</jsonp-version>
         <r2dbc-mysql-version>0.8.2.RELEASE</r2dbc-mysql-version>
+        <spring5-version>5.3.5</spring5-version>
     </properties>
 
     <dependencies>
@@ -242,6 +243,12 @@
 
             <dependency>
                 <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot</artifactId>
+                <version>${spring-boot-2-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-test</artifactId>
                 <version>${spring-boot-2-version}</version>
                 <scope>test</scope>
@@ -271,6 +278,34 @@
                 <groupId>org.jsoup</groupId>
                 <artifactId>jsoup</artifactId>
                 <version>${jsonp-version}</version>
+            </dependency>
+
+            <!-- spring  -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring5-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${spring5-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${spring5-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-tx</artifactId>
+                <version>${spring5-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.statemachine</groupId>
+                <artifactId>spring-statemachine-core</artifactId>
+                <version>2.1.3.RELEASE</version>
             </dependency>
 
         </dependencies>

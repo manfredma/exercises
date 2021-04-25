@@ -1,0 +1,118 @@
+
+
+== springboot与LOG集成
+springboot 通过 LoggingApplicationListener 监听 SpringContext 的声明周期，在启动的时候初始化日志系统。
+包含：加载日志文件；更新日志配置等。
+----
+# Application Listeners
+org.springframework.context.ApplicationListener=\
+org.springframework.boot.ClearCachesApplicationListener,\
+org.springframework.boot.builder.ParentContextCloserApplicationListener,\
+org.springframework.boot.context.FileEncodingApplicationListener,\
+org.springframework.boot.context.config.AnsiOutputApplicationListener,\
+org.springframework.boot.context.config.DelegatingApplicationListener,\
+org.springframework.boot.context.logging.LoggingApplicationListener,\
+org.springframework.boot.env.EnvironmentPostProcessorApplicationListener,\
+org.springframework.boot.liquibase.LiquibaseServiceLocatorApplicationListener
+----
+
+=== springboot 与 日志实现 集成的实现
+springboot 通过 spring factory 的机制加载日志框架。
+其通过 LoggingSystemFactory 、LoggingSystem 对不同的日志框架进行抽象。
+如果我们需要支持新的日志框架，则需要实现 LoggingSystemFactory，LoggingSystem 使得 springboot 可以使用我们自定义的实现。
+
+----
+// LoggingSystemFactory 接口实现，其 fromSpringFactories 方法
+// 委托 DelegatingLoggingSystemFactory 来决定使用哪个 LoggingSystemFactory
+// 候选的 LoggingSystemFactory 在 springboot 的 spring.factories 中进行配置，例如2.4.4版本中的配置为：
+// # Logging Systems
+// org.springframework.boot.logging.LoggingSystemFactory=\
+// org.springframework.boot.logging.logback.LogbackLoggingSystem.Factory,\
+// org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.Factory,\
+// org.springframework.boot.logging.java.JavaLoggingSystem.Factory
+public interface LoggingSystemFactory {
+
+	/**
+	 * Return a logging system implementation or {@code null} if no logging system is
+	 * available.
+	 * @param classLoader the class loader to use
+	 * @return a logging system
+	 */
+	LoggingSystem getLoggingSystem(ClassLoader classLoader);
+
+	/**
+	 * Return a {@link LoggingSystemFactory} backed by {@code spring.factories}.
+	 * @return a {@link LoggingSystemFactory} instance
+	 */
+	static LoggingSystemFactory fromSpringFactories() {
+		return new DelegatingLoggingSystemFactory(
+				(classLoader) -> SpringFactoriesLoader.loadFactories(LoggingSystemFactory.class, classLoader));
+	}
+
+
+// DelegatingLoggingSystemFactory 用于决定使用哪个具体的 LoggingSystemFactory(谁先存在则优先使用谁)
+class DelegatingLoggingSystemFactory implements LoggingSystemFactory {
+
+	private final Function<ClassLoader, List<LoggingSystemFactory>> delegates;
+
+	/**
+	 * Create a new {@link DelegatingLoggingSystemFactory} instance.
+	 * @param delegates a function that provides the delegates
+	 */
+	DelegatingLoggingSystemFactory(Function<ClassLoader, List<LoggingSystemFactory>> delegates) {
+		this.delegates = delegates;
+	}
+
+	@Override
+	public LoggingSystem getLoggingSystem(ClassLoader classLoader) {
+		List<LoggingSystemFactory> delegates = (this.delegates != null) ? this.delegates.apply(classLoader) : null;
+		if (delegates != null) {
+			for (LoggingSystemFactory delegate : delegates) {
+				LoggingSystem loggingSystem = delegate.getLoggingSystem(classLoader);
+				if (loggingSystem != null) {
+					return loggingSystem;
+				}
+			}
+		}
+		return null;
+	}
+
+}
+// 例如 log4j2 的实现中是通过是否包含 org.apache.logging.log4j.core.impl.Log4jContextFactory 来决定是否生效。
+	@Order(Ordered.LOWEST_PRECEDENCE)
+	public static class Factory implements LoggingSystemFactory {
+
+		private static final boolean PRESENT = ClassUtils.isPresent("org.apache.logging.log4j.core.impl.Log4jContextFactory", Factory.class.getClassLoader());
+
+		@Override
+		public LoggingSystem getLoggingSystem(ClassLoader classLoader) {
+			if (PRESENT) {
+				return new Log4J2LoggingSystem(classLoader);
+			}
+			return null;
+		}
+
+	}
+
+// Log4J2LoggingSystem 通过调用的 LoggerContext#start 方法更新配置
+	@Override
+	protected void loadConfiguration(LoggingInitializationContext initializationContext, String location,
+			LogFile logFile) {
+		super.loadConfiguration(initializationContext, location, logFile);
+		loadConfiguration(location, logFile);
+	}
+
+	protected void loadConfiguration(String location, LogFile logFile) {
+		Assert.notNull(location, "Location must not be null");
+		try {
+			LoggerContext ctx = getLoggerContext();
+			URL url = ResourceUtils.getURL(location);
+			ConfigurationSource source = getConfigurationSource(url);
+			ctx.start(ConfigurationFactory.getInstance().getConfiguration(ctx, source));
+		}
+		catch (Exception ex) {
+			throw new IllegalStateException("Could not initialize Log4J2 logging from " + location, ex);
+		}
+	}
+
+----
