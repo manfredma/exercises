@@ -1,0 +1,2 @@
+org.springframework.boot.Bootstrapper=\
+ manfred.spring.boot.config.MyBootstrapper

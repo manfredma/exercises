@@ -1,0 +1,63 @@
+:toc:
+
+== 一、spring boot 启动过程
+=== 1.1 SpringApplication#run
+SpringApplication#run 方法等同于 new SpringApplication(primarySources).run(args)
+
+==== 1.1.1 new SpringApplication 过程
+----
+    public SpringApplication(ResourceLoader resourceLoader, Class<?>... primarySources) {
+		// 这个字段一般为空
+        this.resourceLoader = resourceLoader;
+		Assert.notNull(primarySources, "PrimarySources must not be null");
+		// 主资源类（一般就是启动类，即 SpringApplication#run 的参数）
+		this.primarySources = new LinkedHashSet<>(Arrays.asList(primarySources));
+        // 推断 WEB 类型（通过类路径上是否有对应的类来进行判断）
+        // 例如存在 org.springframework.web.reactive.DispatcherHandler，则认为是 REACTIVE 类型
+		this.webApplicationType = WebApplicationType.deduceFromClasspath();
+        // 通过 spring.factories 机制加载 Bootstrapper
+		this.bootstrappers = new ArrayList<>(getSpringFactoriesInstances(Bootstrapper.class));
+        // 通过 spring.factories 机制加载 ApplicationContextInitializer
+		setInitializers((Collection) getSpringFactoriesInstances(ApplicationContextInitializer.class));
+        // 通过 spring.factories 机制加载 ApplicationListener
+		setListeners((Collection) getSpringFactoriesInstances(ApplicationListener.class));
+        // 通过堆栈中调用 main 方法的类推到出来
+		this.mainApplicationClass = deduceMainApplicationClass();
+	}
+----
+
+==== 1.1.2 Bootstrapper 引导程序
+[%hardbreaks]
+主要接口：
+ org.springframework.boot.Bootstrapper
+ org.springframework.boot.BootstrapRegistry
+
+功能 +
+通过上面的描述来看，主要是用来在spring上下文初始化前需要初始化的类。分析到后面的初始化流程的时候可以再观察一下。
+________
+A simple object registry that is available during startup and Environment post-processing up to the point that the ApplicationContext is prepared.
+Can be used to register instances that may be expensive to create, or need to be shared before the ApplicationContext is available.
+The registry uses Class as a key, meaning that only a single instance of a given type can be stored.
+________
+
+其生命周期仅存在于 spring 初始化阶段（refresh 前关闭），非对用户开放的 API！
+
+==== 1.1.3 ApplicationContextInitializer 初始化
+
+
+
+
+== 二、META-INF/spring.factories 扩展机制
+* 在 springboot 启动的过程中，会加载类路径中 META-INF/spring.factories 文件。
+  加载实现在 spring-core 模块的 org.springframework.core.io.support.SpringFactoriesLoader
+* 文件格式 类名=实现类1,实现类2...
+----
+# Logging Systems
+org.springframework.boot.logging.LoggingSystemFactory=\
+org.springframework.boot.logging.logback.LogbackLoggingSystem.Factory,\
+org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.Factory,\
+org.springframework.boot.logging.java.JavaLoggingSystem.Factory
+----
+
+
+== 三、参考
