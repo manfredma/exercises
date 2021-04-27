@@ -154,17 +154,118 @@ org.springframework.boot.context.config.DelegatingApplicationContextInitializer,
 org.springframework.boot.rsocket.context.RSocketPortInfoApplicationContextInitializer,\
 org.springframework.boot.web.context.ServerPortInfoApplicationContextInitializer
 ----
+
 1. ConfigurationWarningsApplicationContextInitializer +
-   其主要是通过 BeanDefinitionRegistryPostProcessor 增加了检测，当前只检测了扫描路径
+其主要是通过 BeanDefinitionRegistryPostProcessor 增加了检测，当前只检测了扫描路径
 * 扫描配置了有问题的路径，目前检测了org.springframework、org 两个包路径。目前主要写警告日志，不会发生阻断。
 2. ContextIdApplicationContextInitializer +
-   其主要功能是创建一下Spring上下文的ContextId。
+其主要功能是创建一下Spring上下文的ContextId。
 3. DelegatingApplicationContextInitializer +
-   通过属性 context.initializer.classes 加载其他的ApplicationContextInitializer，相当于提供了另外一种加载ApplicationContextInitializer的扩展方式。
+通过属性 context.initializer.classes 加载其他的ApplicationContextInitializer，相当于提供了另外一种加载ApplicationContextInitializer的扩展方式。
 4. RSocketPortInfoApplicationContextInitializer +
-   注册 RSocketServerInitializedEvent 的 ApplicationListener，感知 RSocketServer 端口设置到属性 server.ports 中。
+注册 RSocketServerInitializedEvent 的 ApplicationListener，感知 RSocketServer 端口设置到属性 server.ports 中。
 5. ServerPortInfoApplicationContextInitializer +
-   注册 WebServerInitializedEvent 的 ApplicationListener，感知 WEB 的端口设置到属性 server.ports 中。
+注册 WebServerInitializedEvent 的 ApplicationListener，感知 WEB 的端口设置到属性 server.ports 中。
+
+==== 1.1.4 ApplicationListener 初始化
+
+ApplicationListener 主要是监听 ApplicationEvent 来做出响应，是观察者模式。其回调机制依赖于对应事件的发生。
+
+----
+/**
+ * Interface to be implemented by application event listeners.
+ *
+ * <p>Based on the standard {@code java.util.EventListener} interface
+ * for the Observer design pattern.
+ *
+ * <p>As of Spring 3.0, an {@code ApplicationListener} can generically declare
+ * the event type that it is interested in. When registered with a Spring
+ * {@code ApplicationContext}, events will be filtered accordingly, with the
+ * listener getting invoked for matching event objects only.
+ *
+ * @author Rod Johnson
+ * @author Juergen Hoeller
+ * @param <E> the specific {@code ApplicationEvent} subclass to listen to
+ * @see org.springframework.context.ApplicationEvent
+ * @see org.springframework.context.event.ApplicationEventMulticaster
+ * @see org.springframework.context.event.SmartApplicationListener
+ * @see org.springframework.context.event.GenericApplicationListener
+ * @see org.springframework.context.event.EventListener
+ */
+@FunctionalInterface
+public interface ApplicationListener<E extends ApplicationEvent> extends EventListener {
+
+	/**
+	 * Handle an application event.
+	 * @param event the event to respond to
+	 */
+	void onApplicationEvent(E event);
+
+
+	/**
+	 * Create a new {@code ApplicationListener} for the given payload consumer.
+	 * @param consumer the event payload consumer
+	 * @param <T> the type of the event payload
+	 * @return a corresponding {@code ApplicationListener} instance
+	 * @since 5.3
+	 * @see PayloadApplicationEvent
+	 */
+	static <T> ApplicationListener<PayloadApplicationEvent<T>> forPayload(Consumer<T> consumer) {
+		return event -> consumer.accept(event.getPayload());
+	}
+
+}
+----
+
+ApplicationListener （springboot 中默认加载的 ApplicationListener）
+
+----
+# Application Listeners
+org.springframework.context.ApplicationListener=\
+org.springframework.boot.ClearCachesApplicationListener,\
+org.springframework.boot.builder.ParentContextCloserApplicationListener,\
+org.springframework.boot.context.FileEncodingApplicationListener,\
+org.springframework.boot.context.config.AnsiOutputApplicationListener,\
+org.springframework.boot.context.config.DelegatingApplicationListener,\
+org.springframework.boot.context.logging.LoggingApplicationListener,\
+org.springframework.boot.env.EnvironmentPostProcessorApplicationListener,\
+org.springframework.boot.liquibase.LiquibaseServiceLocatorApplicationListener
+----
+
+1. ClearCachesApplicationListener +
+关注事件类型：ContextRefreshedEvent +
+功能：清空反射的缓存、清空 classloader 的缓存(需要 classloader 实现 clearCache 方法)
+2. ParentContextCloserApplicationListener +
+监听事件类型：ParentContextAvailableEvent +
+功能：在父类上下文中新注册一个监听器 ContextCloserListener （关注事件类型：ContextClosedEvent），这样当父上下文关闭的时候，也关闭一下当前上下文。
+3. FileEncodingApplicationListener +
+监听事件类型：ApplicationEnvironmentPreparedEvent +
+功能：如果配置了 spring.mandatory-file-encoding 环境属性（自定义），则要求系统属性 file.encoding 与 spring.mandatory-file-encoding 的值相同！
+4. AnsiOutputApplicationListener +
+监听事件类型：ApplicationEnvironmentPreparedEvent +
+功能：设置 AnsiOutput 的属性值
+5. DelegatingApplicationListener +
+监听事件类型: ApplicationEnvironmentPreparedEvent & ApplicationEvent +
+功能: +
+* 监听 ApplicationEnvironmentPreparedEvent，主要是根据属性 context.listener.classes 来加载自定义的 ApplicationListener
+* 监听 ApplicationEvent，主要是将事件发送给上面加载的自定义的 ApplicationListener
+6. LoggingApplicationListener +
+监听事件类型： +
+ApplicationStartingEvent +
+ApplicationEnvironmentPreparedEvent +
+ApplicationPreparedEvent +
+ContextClosedEvent +
+ApplicationFailedEvent +
+功能：其主要监听的上下文生命周期的事件类型，联动处理 loggingSystem 的生命周期；
+7. EnvironmentPostProcessorApplicationListener +
+监听事件类型： +
+ApplicationEnvironmentPreparedEvent +
+ApplicationPreparedEvent +
+ApplicationFailedEvent +
+功能：+ 其主要监听的上下文生命周期的事件类型，联动调用 EnvironmentPostProcessor（EnvironmentPostProcessor 从 ConfigurableBootstrapContext 获取）；
+8. LiquibaseServiceLocatorApplicationListener +
+监听事件类型：ApplicationStartingEvent +
+功能：执行 Liquibase 相关操作（通过判断类路径上是否存在 liquibase.servicelocator.CustomResolverServiceLocator 来决定是否启用）
 
 == 二、META-INF/spring.factories 扩展机制
 

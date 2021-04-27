@@ -1,7 +1,9 @@
 spring:
   profiles:
     include: a,b
-
+  output:
+    ansi:
+      enabled: NEVER
 c: 111
 
 logging:

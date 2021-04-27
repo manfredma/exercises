@@ -10,7 +10,7 @@ import org.springframework.context.ApplicationContext;
 /**
  * @author manfred
  */
-@SpringBootApplication(scanBasePackages = {"manfred.spring.boot.config"})
+@SpringBootApplication(scanBasePackages = {"manfred.spring.boot.config.**"})
 public class Application {
 
     private static final Logger LOGGER = getLogger(Application.class);
