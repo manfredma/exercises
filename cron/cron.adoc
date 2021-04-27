@@ -13,3 +13,4 @@ jdk 的定时器是基于 堆（基于到期时间排序）+ 阻塞队列的方�
 https://yfscfs.gitee.io/post/%E4%BB%A4%E4%BA%BA%E6%83%8A%E8%89%B3%E7%9A%84%E6%97%B6%E9%97%B4%E8%BD%AE%E7%AE%97%E6%B3%95timingwheel/[令人惊艳的时间轮算法（TimingWheel）]
 https://zhuanlan.zhihu.com/p/84502375[时间轮定时器 @知乎]
 http://www.cs.columbia.edu/~nahum/w6998/papers/ton97-timing-wheels.pdf[时间轮算法-论文]
+TODO https://www.toutiao.com/i6802170138318602759/[跟Kafka学技术系列之时间轮]

@@ -9,23 +9,15 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>jvm</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>gateway</artifactId>
+    <packaging>pom</packaging>
     <modules>
-        <module>jvm-memory</module>
-        <module>jvm-optimize</module>
-        <module>jvm-off-heap</module>
-        <module>jvm-byte</module>
-        <module>jvm-proxy</module>
-        <module>jvm-agent</module>
-        <module>jvm-classloader</module>
-        <module>jvm-thread-pool</module>
-        <module>jvm-native</module>
-        <module>jvm-gc</module>
+        <module>spring-cloud-gateway</module>
     </modules>
 
-    <packaging>pom</packaging>
-
-
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
 
 </project>

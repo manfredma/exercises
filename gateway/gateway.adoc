@@ -1,0 +1,13 @@
+
+
+== 参考
+[%hardbreaks]
+TODO https://www.toutiao.com/i6738191846356288007/[这样讲API网关，你应该能明白了吧]
+TODO https://www.toutiao.com/i6940137141049590284/[阿里终面：如何设计一个高性能网关？]
+TODO https://www.toutiao.com/i6839130912077120008/[谈谈微服务中的 API 网关]
+TODO https://www.toutiao.com/i6774752456954872327/[个推微服务网关架构实践详解]
+TODO https://www.toutiao.com/i6834394844534669836/[知乎千万级高性能长连接网关是如何搭建的]
+TODO https://www.toutiao.com/i6834052038012174859/[微服务平台之网关架构与应用]
+TODO https://www.ixigua.com/6812144183202021899[搭建Zuul网关服务，适合新手入门，手把手敲代码一节课搞定]
+TODO https://www.toutiao.com/w/a1668569433814030/[服务网关（Gateway）定义]
+TODO https://www.toutiao.com/w/a1668192326834188/[服务网关（Gateway）选型]

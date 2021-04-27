@@ -1,0 +1,6 @@
+
+== 参考
+[%hardbreaks]
+TODO https://www.toutiao.com/w/a1693196485966856/[消息中间件：Kafka拉模式和RabbitMQ推模式]
+TODO https://www.toutiao.com/i6828065657020482051/[RabbitMQ和Kafka的比较，一比吓一跳]
+TODO https://www.toutiao.com/i6841543519920718340/[消息中间件哪些事]

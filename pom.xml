@@ -39,6 +39,7 @@
         <module>asm</module>
         <module>cron</module>
         <module>eip</module>
+        <module>gateway</module>
     </modules>
     <packaging>pom</packaging>
 

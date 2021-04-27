@@ -1,0 +1,8 @@
+
+== 参考
+[%hardbreaks]
+TODO https://github.com/javagrowing/JGrowing/blob/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/IO/%E8%B5%B0%E8%BF%9B%E7%A7%91%E5%AD%A6%E4%B9%8B%E6%8F%AD%E5%BC%80%E7%A5%9E%E7%A7%98%E7%9A%84%E9%9B%B6%E6%8B%B7%E8%B4%9D.md[走进科学之揭开神秘的零拷贝]
+TODO https://www.toutiao.com/i6713341838087946766/[阿里P7二面：聊聊零拷贝的原理]
+TODO https://www.toutiao.com/i6760443427772432899/[Netty零拷贝机制]
+TODO https://www.toutiao.com/i6939752055871848973/[万字长文：细谈Linux、JDK、Netty中NIO与零拷贝]
+TODO https://www.jianshu.com/p/fad3339e3448[浅析Linux中的零拷贝技术]
