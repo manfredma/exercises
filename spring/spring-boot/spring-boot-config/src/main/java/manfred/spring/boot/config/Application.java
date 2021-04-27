@@ -1,7 +1,6 @@
 package manfred.spring.boot.config;
 
 import static org.slf4j.LoggerFactory.getLogger;
-import manfred.spring.boot.config.boot.Boot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -27,9 +26,6 @@ public class Application {
         LOGGER_V2.info("V2_" + applicationContext.getBean("a", A.class).getA());
         LOGGER_V2.info("V2_" + applicationContext.getBean("b", B.class).getB() + "");
         LOGGER_V2.info("V2_" + applicationContext.getBean("c") + "");
-
-
-
     }
 
 }
