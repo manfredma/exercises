@@ -8,10 +8,10 @@ public class Boot {
     private static final Logger LOGGER = getLogger(Boot.class);
 
     static {
-        LOGGER.info("加载俺老孙干啥！");
+        System.out.println("加载俺老孙干啥！");
     }
 
     public void sayHello() {
-        LOGGER.info("sayHello！");
+        System.out.println("sayHello！");
     }
 }

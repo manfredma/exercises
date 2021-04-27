@@ -14,8 +14,16 @@ public class MyEnvironmentPostProcessor implements EnvironmentPostProcessor {
             ConfigurableEnvironment environment,
             SpringApplication application) {
 
-        System.out.printf("enviroment=%s, application=%s\n", environment, application);
+        System.out.printf("\n MyEnvironmentPostProcessor: enviroment=%s, application=%s\n", environment, application);
 
+        // 这行无法输出是因为spring在启动的时候增加了过滤器，过略掉所有的日志输出！
+        // LoggingApplicationListener.java
+        // 	private void onApplicationStartingEvent(ApplicationStartingEvent event) {
+        //		this.loggingSystem = LoggingSystem.get(event.getSpringApplication().getClassLoader
+        //		());
+        //		this.loggingSystem.beforeInitialize();
+        //	}
         LOGGER.info("enviroment={}, application={}", environment, application);
+        LOGGER.error("enviroment={}, application={}", environment, application);
     }
 }

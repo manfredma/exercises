@@ -8,5 +8,7 @@ public class MyBootstrapper implements Bootstrapper {
     @Override
     public void intitialize(BootstrapRegistry registry) {
         registry.register(Boot.class, context -> new Boot());
+        System.out.println("我执行了~~~~");
+        new RuntimeException().printStackTrace(System.out);
     }
 }
