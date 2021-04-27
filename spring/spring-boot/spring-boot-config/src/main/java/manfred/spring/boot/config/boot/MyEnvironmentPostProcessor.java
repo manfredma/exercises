@@ -15,5 +15,7 @@ public class MyEnvironmentPostProcessor implements EnvironmentPostProcessor {
             SpringApplication application) {
 
         System.out.printf("enviroment=%s, application=%s\n", environment, application);
+
+        LOGGER.info("enviroment={}, application={}", environment, application);
     }
 }
