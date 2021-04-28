@@ -19,8 +19,6 @@
         <jdk.compile.source.version>1.7</jdk.compile.source.version>
         <!-- jdk编译目标版本 -->
         <jdk.compile.target.version>1.7</jdk.compile.target.version>
-        <!-- springframework版本 -->
-        <springframe.version>4.1.6.RELEASE</springframe.version>
         <!-- junit版本 -->
         <junit.version>4.12</junit.version>
         <!-- log4j版本 -->
@@ -45,7 +43,6 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>${springframe.version}</version>
         </dependency>
         <!-- log4j -->
         <dependency>

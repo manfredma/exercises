@@ -1,0 +1,9 @@
+
+== 参考
+[%hardbreaks]
+TODO https://www.toutiao.com/i6918701130272768523/[一文让你了解什么是Spring框架]
+TODO https://www.toutiao.com/i6690159618062025227/[Spring框架是怎么解决Bean之间的循环依赖的]
+TODO https://www.toutiao.com/i6845177299667517955/[Spring的反应式编程简介]
+TODO https://www.toutiao.com/i6843247617955070471/[一文搞懂 Spring JPA]
+TODO https://www.toutiao.com/i6841099066093339144/[Spring 从入门到入土——AOP 就这么简单！| 原力计划]
+TODO https://www.toutiao.com/i6673831727896461831/[Spring容器是怎么初始化的]

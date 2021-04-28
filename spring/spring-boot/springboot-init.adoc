@@ -1,5 +1,7 @@
 :toc:
 
+PS: 以下流程来自 2.4.4 版本，其他版本大同小异！
+
 == 一、spring boot 启动过程
 
 === 1.1 SpringApplication#run
@@ -267,17 +269,178 @@ ApplicationFailedEvent +
 监听事件类型：ApplicationStartingEvent +
 功能：执行 Liquibase 相关操作（通过判断类路径上是否存在 liquibase.servicelocator.CustomResolverServiceLocator 来决定是否启用）
 
-== 二、META-INF/spring.factories 扩展机制
-
-* 在 springboot 启动的过程中，会加载类路径中 META-INF/spring.factories 文件。 加载实现在 spring-core 模块的 org.springframework.core.io.support.SpringFactoriesLoader
-* 文件格式 类名=实现类1,实现类2...
+=== 1.1.5 实例方法 run(String... args) 方法
+构造好 SpringApplication 实例之后，需要调用其 run(String... args) 进行下一步的工作。
+其主要流程如下所示，主要找其中的
 
 ----
-# Logging Systems
-org.springframework.boot.logging.LoggingSystemFactory=\
-org.springframework.boot.logging.logback.LogbackLoggingSystem.Factory,\
-org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.Factory,\
-org.springframework.boot.logging.java.JavaLoggingSystem.Factory
+public ConfigurableApplicationContext run(String... args) {
+		// 1、创建并启动计时监控类
+		StopWatch stopWatch = new StopWatch();
+		stopWatch.start();
+
+		// 2、DefaultBootstrapContext 初始化
+		DefaultBootstrapContext bootstrapContext = createBootstrapContext();
+
+		ConfigurableApplicationContext context = null;
+
+		// 3、设置 java.awt.headless 属性，默认为 true
+		configureHeadlessProperty();
+
+		//4、创建所有 SpringApplication 运行监听器并发布应用启动事件
+		SpringApplicationRunListeners listeners = getRunListeners(args);
+		listeners.starting(bootstrapContext, this.mainApplicationClass);
+
+		try {
+			// 5、初始化默认应用参数类
+			ApplicationArguments applicationArguments = new DefaultApplicationArguments(args);
+
+			// 6、根据运行监听器和应用参数来准备 Spring 环境
+			ConfigurableEnvironment environment = prepareEnvironment(listeners, bootstrapContext, applicationArguments);
+			configureIgnoreBeanInfo(environment);
+
+			// 7、创建 Banner 打印类
+			Banner printedBanner = printBanner(environment);
+
+			// 8、创建应用上下文
+			context = createApplicationContext();
+			context.setApplicationStartup(this.applicationStartup);
+
+			// 9、准备应用上下文
+			prepareContext(bootstrapContext, context, environment, listeners, applicationArguments, printedBanner);
+
+			// 10、刷新应用上下文
+			refreshContext(context);
+
+			// 11、应用上下文刷新后置处理
+			afterRefresh(context, applicationArguments);
+
+			// 12、停止计时监控类并输出
+			stopWatch.stop();
+			if (this.logStartupInfo) {
+				new StartupInfoLogger(this.mainApplicationClass).logStarted(getApplicationLog(), stopWatch);
+			}
+
+			// 13、发布应用上下文启动完成事件
+			listeners.started(context);
+
+			// 14、执行所有 Runner 运行器
+			callRunners(context, applicationArguments);
+		}
+		catch (Throwable ex) {
+			handleRunFailure(context, ex, listeners);
+			throw new IllegalStateException(ex);
+		}
+
+		try {
+			// 15、发布应用上下文就绪事件
+			listeners.running(context);
+		}
+		catch (Throwable ex) {
+			handleRunFailure(context, ex, null);
+			throw new IllegalStateException(ex);
+		}
+		return context;
+	}
 ----
 
-== 三、参考
+* DefaultBootstrapContext 初始化 +
+根据上面加载的 Bootstrapper 初始化 DefaultBootstrapContext。 +
+可以将 DefaultBootstrapContext 理解为一个启动的 *辅助容器*。
+
+* 设置 java.awt.headless 属性，默认为 true +
+________
+对于一个 Java 服务器来说经常要处理一些图形元素，例如地图的创建或者图形和图表等。这些API基本上总是需要运行一个X-server以便能使用AWT（Abstract Window Toolkit，抽象窗口工具集）。然而运行一个不必要的 X-server 并不是一种好的管理方式。有时你甚至不能运行 X-server,因此最好的方案是运行 headless 服务器，来进行简单的图像处理。 +
+参考：www.cnblogs.com/princessd8251/p/4000016.html
+________
+
+* 创建应用上下文 +
+目前支持3种类型的，
+----
+        ApplicationContextFactory DEFAULT = (webApplicationType) -> {
+		try {
+			switch (webApplicationType) {
+			case SERVLET:
+				return new AnnotationConfigServletWebServerApplicationContext();
+			case REACTIVE:
+				return new AnnotationConfigReactiveWebServerApplicationContext();
+			default:
+				return new AnnotationConfigApplicationContext();
+			}
+		}
+		catch (Exception ex) {
+			throw new IllegalStateException("Unable create a default ApplicationContext instance, "
+					+ "you may need a custom ApplicationContextFactory", ex);
+		}
+	};
+----
+
+* 准备应用上下文 +
+准备应用上下文是 springboot 的概念，在 SpringCore 中一般是直接指定了配置文件等，在 springboot 需要将自己和配置文件打通。 +
+除去 spring.factories 之外，这一自动组装的功能应该是springboot的主要功能。
+TODO
+----
+private void prepareContext(DefaultBootstrapContext bootstrapContext, ConfigurableApplicationContext context,
+			ConfigurableEnvironment environment, SpringApplicationRunListeners listeners,
+			ApplicationArguments applicationArguments, Banner printedBanner) {
+		context.setEnvironment(environment);
+		postProcessApplicationContext(context);
+		applyInitializers(context);
+		listeners.contextPrepared(context);
+		bootstrapContext.close(context);
+		if (this.logStartupInfo) {
+			logStartupInfo(context.getParent() == null);
+			logStartupProfileInfo(context);
+		}
+		// Add boot specific singleton beans
+		ConfigurableListableBeanFactory beanFactory = context.getBeanFactory();
+		beanFactory.registerSingleton("springApplicationArguments", applicationArguments);
+		if (printedBanner != null) {
+			beanFactory.registerSingleton("springBootBanner", printedBanner);
+		}
+		if (beanFactory instanceof DefaultListableBeanFactory) {
+			((DefaultListableBeanFactory) beanFactory)
+					.setAllowBeanDefinitionOverriding(this.allowBeanDefinitionOverriding);
+		}
+		if (this.lazyInitialization) {
+			context.addBeanFactoryPostProcessor(new LazyInitializationBeanFactoryPostProcessor());
+		}
+		// Load the sources
+		Set<Object> sources = getAllSources();
+		Assert.notEmpty(sources, "Sources must not be empty");
+		load(context, sources.toArray(new Object[0]));
+		listeners.contextLoaded(context);
+	}
+----
+
+* 刷新应用上下文 +
+注册了 shutdownHook（用于监听shutdown的时候做上下文的关闭）+ Spring应用上下文刷新操作
+----
+	private void refreshContext(ConfigurableApplicationContext context) {
+		if (this.registerShutdownHook) {
+			try {
+				context.registerShutdownHook();
+			}
+			catch (AccessControlException ex) {
+				// Not allowed in some environments.
+			}
+		}
+		refresh((ApplicationContext) context);
+	}
+----
+
+* 应用上下文刷新后置处理 +
+目前没有执行，只是保留了这个扩展点
+
+* 执行所有 Runner 运行器 +
+依次回调上下文中的 ApplicationRunner、CommandLineRunner Bean。
+
+== 二、参考
+[%hardbreaks]
+TODO https://www.toutiao.com/i6843033073345364488/[当用SpringApplication.run的时候发生了什么(一)]
+TODO https://www.toutiao.com/i6760252859201094148/[Springboot：高并发下耗时操作的实现]
+TODO https://www.toutiao.com/i6839610818623963651/[Spring Boot深度实践之自动装配]
+TODO https://www.toutiao.com/i6839241200394830347/[Spring Boot 在启动时进行配置文件加解密]
+TODO https://www.toutiao.com/i6807650160445751820/[SpringBoot 线程池的使用]
+TODO https://www.xiefayang.com/2019/04/01/Spring%20Boot%20%E9%85%8D%E7%BD%AE%E7%BB%91%E5%AE%9A%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/[Spring Boot 2.0源码解析-配置绑定]
+TODO https://segmentfault.com/a/1190000015998105[涨姿势：Spring Boot 2.x 启动全过程源码分析]

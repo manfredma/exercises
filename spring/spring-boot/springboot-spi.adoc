@@ -1,0 +1,14 @@
+
+== META-INF/spring.factories 扩展机制
+
+* 在 springboot 启动的过程中，会加载类路径中 META-INF/spring.factories 文件。 加载实现在 spring-core 模块的 org.springframework.core.io.support.SpringFactoriesLoader
+* 文件格式 类名=实现类1,实现类2...
+
+----
+# Logging Systems
+org.springframework.boot.logging.LoggingSystemFactory=\
+org.springframework.boot.logging.logback.LogbackLoggingSystem.Factory,\
+org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.Factory,\
+org.springframework.boot.logging.java.JavaLoggingSystem.Factory
+----
+
