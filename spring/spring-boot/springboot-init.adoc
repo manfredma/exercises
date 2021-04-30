@@ -159,7 +159,7 @@ org.springframework.boot.web.context.ServerPortInfoApplicationContextInitializer
 
 1. ConfigurationWarningsApplicationContextInitializer +
 其主要是通过 BeanDefinitionRegistryPostProcessor 增加了检测，当前只检测了扫描路径
-* 扫描配置了有问题的路径，目前检测了org.springframework、org 两个包路径。目前主要写警告日志，不会发生阻断。
+* 扫描配置了有问题的路径，目前检测了org.springframework、org 两个包路径。当前主要写警告日志，不会发生阻断。
 2. ContextIdApplicationContextInitializer +
 其主要功能是创建一下Spring上下文的ContextId。
 3. DelegatingApplicationContextInitializer +
@@ -264,14 +264,15 @@ ApplicationFailedEvent +
 ApplicationEnvironmentPreparedEvent +
 ApplicationPreparedEvent +
 ApplicationFailedEvent +
-功能：+ 其主要监听的上下文生命周期的事件类型，联动调用 EnvironmentPostProcessor（EnvironmentPostProcessor 从 ConfigurableBootstrapContext 获取）；
+功能： +
+其主要监听的上下文生命周期的事件类型，联动调用 EnvironmentPostProcessor（EnvironmentPostProcessor 从 ConfigurableBootstrapContext 获取）；
 8. LiquibaseServiceLocatorApplicationListener +
 监听事件类型：ApplicationStartingEvent +
 功能：执行 Liquibase 相关操作（通过判断类路径上是否存在 liquibase.servicelocator.CustomResolverServiceLocator 来决定是否启用）
 
-=== 1.1.5 实例方法 run(String... args) 方法
-构造好 SpringApplication 实例之后，需要调用其 run(String... args) 进行下一步的工作。
-其主要流程如下所示，主要找其中的
+==== 1.1.5 实例方法 run(String... args) 方法
+
+构造好 SpringApplication 实例之后，需要调用其 run(String... args) 进行下一步的工作。 其主要流程如下所示，主要找其中的
 
 ----
 public ConfigurableApplicationContext run(String... args) {
@@ -349,13 +350,136 @@ public ConfigurableApplicationContext run(String... args) {
 可以将 DefaultBootstrapContext 理解为一个启动的 *辅助容器*。
 
 * 设置 java.awt.headless 属性，默认为 true +
+
 ________
 对于一个 Java 服务器来说经常要处理一些图形元素，例如地图的创建或者图形和图表等。这些API基本上总是需要运行一个X-server以便能使用AWT（Abstract Window Toolkit，抽象窗口工具集）。然而运行一个不必要的 X-server 并不是一种好的管理方式。有时你甚至不能运行 X-server,因此最好的方案是运行 headless 服务器，来进行简单的图像处理。 +
 参考：www.cnblogs.com/princessd8251/p/4000016.html
 ________
 
+* 准备 spring 应用上下文的环境 +
+
+----
+	private ConfigurableEnvironment prepareEnvironment(SpringApplicationRunListeners listeners,
+			DefaultBootstrapContext bootstrapContext, ApplicationArguments applicationArguments) {
+		// Create and configure the environment
+		ConfigurableEnvironment environment = getOrCreateEnvironment();
+		configureEnvironment(environment, applicationArguments.getSourceArgs());
+		ConfigurationPropertySources.attach(environment);
+		listeners.environmentPrepared(bootstrapContext, environment);
+		DefaultPropertiesPropertySource.moveToEnd(environment);
+		configureAdditionalProfiles(environment);
+		bindToSpringApplication(environment);
+		if (!this.isCustomEnvironment) {
+			environment = new EnvironmentConverter(getClassLoader()).convertEnvironmentIfNecessary(environment,
+					deduceEnvironmentClass());
+		}
+		ConfigurationPropertySources.attach(environment);
+		return environment;
+	}
+
+	private ConfigurableEnvironment getOrCreateEnvironment() {
+
+		// 手动设置的优先级最高
+		if (this.environment != null) {
+			return this.environment;
+		}
+		switch (this.webApplicationType) {
+		case SERVLET:
+			return new StandardServletEnvironment();
+		case REACTIVE:
+			return new StandardReactiveWebEnvironment();
+		default:
+			return new StandardEnvironment();
+		}
+	}
+----
+
+1) 根据 WEB 的类型（Servlet、Reactive、None）来创建不同的ConfigurableEnvironment。 +
+** StandardEnvironment 与 StandardReactiveWebEnvironment 目前实现同（StandardReactiveWebEnvironment 继承 StandardEnvironment）。 +
+** StandardEnvironment 默认加载系统属性和系统的环境变量；
+
+** StandardServletEnvironment 默认生成 WEB 相关的属性（servletContextInitParams、servletConfigInitParams）并实现了可以更新默认属性的 ConfigurableWebEnvironment。 +
+
+*** servletContextInitParams：从 ServletContext 获取； +
+*** servletConfigInitParams：从 ServletConfig 获取； +
+*** 加载系统属性和系统的环境变量； +
+
+2) 对初始化之后的上下文进行配置 +
+** 设置 ConversionService（实现类型转换） ** 设置自定义的 propertiesSource。 *** defaultProperties：将 SpringApplication 的默认配置与环境中的defaultProperties配置合并。 *** springApplicationCommandLineArgs：将args（一般来自于命令行）参数解析为 properties 形式加入进来。（默认放到开头，优先级较高） ** 设置 profile：默认是空实现，可以被子类覆写。
+
+3）设置 attach propertiesSources +
+ConfigurationPropertySources.attach(environment); +
+封装了 ConfigurationPropertySourcesPropertySource，并且可以给 PropertyResolver，其内部包含了所有的属性来源 +
+
+4）listeners.environmentPrepared(bootstrapContext, environment); +
+** 真正加载配置文件的地方在这个地方，其通过 EventPublishingRunListener 将事件传递发下去。 +
+** EnvironmentPostProcessorApplicationListener 会监听这个消息  +
+
+** 其最终会调用 StandardConfigDataLocationResolver#getReferencesForConfigName 来获取可能的配置文件名称  +
+
+*** 默认支持 application.yaml;application.yml;application.xml;application.properties 四个文件  +
+*** 支持文件名自定义和扩展名的自定义  +
+**** 参考 #getConfigNames 来提供自定义的文件名；  +
+**** 扩展名通过 spring factories 机制来加载 PropertySourceLoader，默认实现 PropertiesPropertySourceLoader， YamlPropertySourceLoader  +
+** 默认的加载位置 ConfigDataEnvironment 来获取  +
+*** 默认的加载位置有：classpath:/，classpath:/config/，file:./，file:./config/，file:./config/*/  +
+*** 支持加载位置的自定义，参考方法 #getInitialImportContributors +
+
+5) DefaultPropertiesPropertySource.moveToEnd(environment); +
+将 defaultProperties 移到尾部；
+
+6）configureAdditionalProfiles 将 SpringApplication 设置进来的 Profiles 设置到环境变量中；（貌似没有再重新加载配置文件了）
+
+7）bindToSpringApplication 将SpringApplication 与 spring.main 属性bind到一起；
+
+8）如果是自定义的ConfigurableEnvironment，转换成与 WEB 类型相匹配的类型
+
+9）重新设置 attach propertiesSources
+
+10）configureIgnoreBeanInfo +
+初始化 "spring.beaninfo.ignore" 系统属性，默认为true
+
+----
+getReferencesForConfigName:195, StandardConfigDataLocationResolver (org.springframework.boot.context.config)
+getReferencesForDirectory:176, StandardConfigDataLocationResolver (org.springframework.boot.context.config)
+getReferences:123, StandardConfigDataLocationResolver (org.springframework.boot.context.config)
+resolve:115, StandardConfigDataLocationResolver (org.springframework.boot.context.config)
+lambda$resolve$1:115, ConfigDataLocationResolvers (org.springframework.boot.context.config)
+get:-1, 1831882653 (org.springframework.boot.context.config.ConfigDataLocationResolvers$$Lambda$90)
+resolve:126, ConfigDataLocationResolvers (org.springframework.boot.context.config)
+resolve:115, ConfigDataLocationResolvers (org.springframework.boot.context.config)
+resolve:107, ConfigDataLocationResolvers (org.springframework.boot.context.config)
+resolve:101, ConfigDataImporter (org.springframework.boot.context.config)
+resolve:93, ConfigDataImporter (org.springframework.boot.context.config)
+resolveAndLoad:81, ConfigDataImporter (org.springframework.boot.context.config)
+withProcessedImports:121, ConfigDataEnvironmentContributors (org.springframework.boot.context.config)
+processInitial:242, ConfigDataEnvironment (org.springframework.boot.context.config)
+processAndApply:230, ConfigDataEnvironment (org.springframework.boot.context.config)
+postProcessEnvironment:97, ConfigDataEnvironmentPostProcessor (org.springframework.boot.context.config)
+postProcessEnvironment:89, ConfigDataEnvironmentPostProcessor (org.springframework.boot.context.config)
+onApplicationEnvironmentPreparedEvent:100, EnvironmentPostProcessorApplicationListener (org.springframework.boot.env)
+onApplicationEvent:86, EnvironmentPostProcessorApplicationListener (org.springframework.boot.env)
+doInvokeListener:176, SimpleApplicationEventMulticaster (org.springframework.context.event)
+invokeListener:169, SimpleApplicationEventMulticaster (org.springframework.context.event)
+multicastEvent:143, SimpleApplicationEventMulticaster (org.springframework.context.event)
+multicastEvent:131, SimpleApplicationEventMulticaster (org.springframework.context.event)
+environmentPrepared:82, EventPublishingRunListener (org.springframework.boot.context.event)
+lambda$environmentPrepared$2:63, SpringApplicationRunListeners (org.springframework.boot)
+accept:-1, 1966355106 (org.springframework.boot.SpringApplicationRunListeners$$Lambda$38)
+forEach:1257, ArrayList (java.util)
+doWithListeners:117, SpringApplicationRunListeners (org.springframework.boot)
+doWithListeners:111, SpringApplicationRunListeners (org.springframework.boot)
+environmentPrepared:62, SpringApplicationRunListeners (org.springframework.boot)
+prepareEnvironment:362, SpringApplication (org.springframework.boot)
+run:320, SpringApplication (org.springframework.boot)
+run:1313, SpringApplication (org.springframework.boot)
+run:1302, SpringApplication (org.springframework.boot)
+main:21, Application (manfred.spring.boot.config)
+----
+
 * 创建应用上下文 +
 目前支持3种类型的，
+
 ----
         ApplicationContextFactory DEFAULT = (webApplicationType) -> {
 		try {
@@ -377,8 +501,8 @@ ________
 
 * 准备应用上下文 +
 准备应用上下文是 springboot 的概念，在 SpringCore 中一般是直接指定了配置文件等，在 springboot 需要将自己和配置文件打通。 +
-除去 spring.factories 之外，这一自动组装的功能应该是springboot的主要功能。
-TODO
+除去 spring.factories 之外，这一自动组装的功能应该是springboot的主要功能。 TODO
+
 ----
 private void prepareContext(DefaultBootstrapContext bootstrapContext, ConfigurableApplicationContext context,
 			ConfigurableEnvironment environment, SpringApplicationRunListeners listeners,
@@ -414,7 +538,9 @@ private void prepareContext(DefaultBootstrapContext bootstrapContext, Configurab
 ----
 
 * 刷新应用上下文 +
-注册了 shutdownHook（用于监听shutdown的时候做上下文的关闭）+ Spring应用上下文刷新操作
+注册了 shutdownHook（用于监听shutdown的时候做上下文的关闭） +
+Spring应用上下文刷新操作
+
 ----
 	private void refreshContext(ConfigurableApplicationContext context) {
 		if (this.registerShutdownHook) {
@@ -436,6 +562,7 @@ private void prepareContext(DefaultBootstrapContext bootstrapContext, Configurab
 依次回调上下文中的 ApplicationRunner、CommandLineRunner Bean。
 
 == 二、参考
+
 [%hardbreaks]
 TODO https://www.toutiao.com/i6843033073345364488/[当用SpringApplication.run的时候发生了什么(一)]
 TODO https://www.toutiao.com/i6760252859201094148/[Springboot：高并发下耗时操作的实现]
