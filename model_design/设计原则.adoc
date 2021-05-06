@@ -2,4 +2,4 @@
 
 == 参考
 [%hardbreaks]
-http://principles-wiki.net/collections:ood_principle_language[OOD Principle Language]
+TODO http://principles-wiki.net/collections:ood_principle_language[OOD Principle Language]
