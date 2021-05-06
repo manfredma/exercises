@@ -40,6 +40,7 @@
         <module>cron</module>
         <module>eip</module>
         <module>gateway</module>
+        <module>doc</module>
     </modules>
     <packaging>pom</packaging>
 

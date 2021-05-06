@@ -1,0 +1,5 @@
+
+== 参考
+[%hardbreaks]
+https://mp.weixin.qq.com/s/dpkteHsQJ4Rwl6YNl2PVeg[从中台到平台(上)]
+https://mp.weixin.qq.com/s/TirTQfWo0gX9PUw_okdGjQ?[从平台到中台【下】]
