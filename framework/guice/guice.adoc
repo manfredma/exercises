@@ -1,0 +1,6 @@
+
+
+== 参考
+[%hardbreaks]
+https://zhuanlan.zhihu.com/p/32299568[「Guice」依赖注入框架中的小清新]
+https://blog.csdn.net/sidongxue2/article/details/72626202[Guice入门实例和单例模式]
