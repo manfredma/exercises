@@ -213,5 +213,4 @@ https://www.ruanyifeng.com/blog/2017/08/elasticsearch.html[全文搜索引擎 El
 https://www.elastic.co/guide/en/elasticsearch/reference/current/_mapping_concepts_across_sql_and_elasticsearch.html[Mapping concepts across SQL and Elasticsearch]
 https://wangxin1248.github.io/java/2020/04/elasticsearch-introduction.html[Elasticsearch(一) 入门教程]
 https://juejin.cn/post/6844903828932804615[Elasticsearch入门及掌握其JavaAPI]
-
 TODO https://leonlibraries.github.io/2017/04/15/ElasticSearch%E5%86%85%E9%83%A8%E6%9C%BA%E5%88%B6%E6%B5%85%E6%9E%90%E4%B8%80/[ElasticSearch 内部机制浅析（一）]
