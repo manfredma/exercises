@@ -5,3 +5,4 @@
 TODO https://github.com/maetrive/businessworks[businessworks - 基础业务集成开发平台]
 https://developer.aliyun.com/article/38[平台化三部曲之一微核心可扩展架构 - 从Eclipse平台看交易平台化]
 https://developer.aliyun.com/article/39[平台化三部曲之二模块化开发 - Google Guice 平台模块化开发的果汁]
+https://developer.aliyun.com/article/772[平台化三部曲之三流程编排 - 平台化是舞台，流程编排就是导演一场戏]
