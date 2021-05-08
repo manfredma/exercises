@@ -1,10 +1,10 @@
 package manfred.multi.task.config;
 
-import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
+import static org.slf4j.LoggerFactory.getLogger;
 import manfred.multi.task.ExecutorParallelPool;
 import manfred.multi.task.policy.DefaultExecutePolicy;
 import manfred.multi.task.policy.ExecutePolicy;
+import org.slf4j.Logger;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,11 +17,11 @@ import java.util.concurrent.*;
  */
 @Configuration
 @ConfigurationProperties(prefix = "threadpool")
-@Data
-@Slf4j
 public class ParallelPoolConfig {
 
     private ThreadPoolConfig realNameQuery;
+
+    private static final Logger LOGGER = getLogger(ParallelPoolConfig.class);
 
     @Bean("realNameQueryPool")
     public ExecutorParallelPool realNameQueryPool() {
@@ -34,7 +34,7 @@ public class ParallelPoolConfig {
                 threadFactory = (ThreadFactory) Class.forName(realNameQuery.getThreadFactoryClassName()).newInstance();
             } catch (Exception e) {
                 // ignore 线程池，一般只会设置名称或者后台，不影响使用，记录日志
-                log.error("ParallelPoolConfig#realNameQueryPool create threadFactory error by reflect!", e);
+                LOGGER.error("ParallelPoolConfig#realNameQueryPool create threadFactory error by reflect!", e);
             }
         }
 
@@ -43,7 +43,7 @@ public class ParallelPoolConfig {
             rejectedExecutionHandler = (RejectedExecutionHandler) Class.forName(realNameQuery.getRejectedExecutionHandlerClassName()).newInstance();
         } catch (Exception e) {
             // ignore 线程池
-            log.error("ParallelPoolConfig#realNameQueryPool create rejectedExecutionHandler error by reflect!", e);
+            LOGGER.error("ParallelPoolConfig#realNameQueryPool create rejectedExecutionHandler error by reflect!", e);
             throw new RuntimeException("使用反射创建线程池的拒绝策略失败", e);
         }
         ThreadPoolExecutor executor = createExecutor(realNameQuery.getCorePoolSize(), realNameQuery.getMaximumPoolSize(),
@@ -83,4 +83,11 @@ public class ParallelPoolConfig {
                 keepAliveSeconds, TimeUnit.SECONDS, queue, threadFactory, rejectedExecutionHandler);
     }
 
+    public ThreadPoolConfig getRealNameQuery() {
+        return realNameQuery;
+    }
+
+    public void setRealNameQuery(ThreadPoolConfig realNameQuery) {
+        this.realNameQuery = realNameQuery;
+    }
 }

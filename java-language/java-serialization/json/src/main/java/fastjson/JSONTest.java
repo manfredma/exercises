@@ -3,7 +3,6 @@ package fastjson;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import lombok.Data;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -96,8 +95,15 @@ public class JSONTest {
         System.out.println(a);
     }
 
-    @Data
     public static class A {
         private int a;
+
+        public int getA() {
+            return a;
+        }
+
+        public void setA(int a) {
+            this.a = a;
+        }
     }
 }

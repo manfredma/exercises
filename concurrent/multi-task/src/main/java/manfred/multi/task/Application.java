@@ -6,7 +6,6 @@ import org.springframework.context.ApplicationContext;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 /**
  * @author manfred
@@ -14,7 +13,7 @@ import java.util.concurrent.TimeoutException;
 @SpringBootApplication(scanBasePackages = {"manfred.multi.task"})
 public class Application {
 
-    public static void main(String[] args) throws InterruptedException, ExecutionException, TimeoutException {
+    public static void main(String[] args) throws InterruptedException, ExecutionException {
         ApplicationContext applicationContext = SpringApplication.run(Application.class, args);
         ParallelPool parallelPool = applicationContext.getBean("realNameQueryPool", ParallelPool.class);
         MultiFutureTask<Integer> multiFutureTask = parallelPool.submit(() -> {

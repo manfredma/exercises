@@ -20,5 +20,10 @@
         <module>disruptor</module>
         <module>guava</module>
         <module>aviator</module>
+        <module>redis</module>
+        <module>cron</module>
+        <module>cache</module>
+        <module>tomcat</module>
+        <module>apache-commons</module>
     </modules>
 </project>

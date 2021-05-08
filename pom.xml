@@ -9,35 +9,24 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>java-language</module>
-        <module>spring</module>
         <module>concurrent</module>
-        <module>cache</module>
         <module>jvm</module>
         <module>do-exercise</module>
-        <module>rdbms</module>
-        <module>tomcat</module>
         <module>design-pattern</module>
         <module>other</module>
         <module>test</module>
         <module>data-structure_algorithm</module>
-        <module>common-frame-work</module>
         <module>config</module>
-        <module>redis</module>
         <module>canal</module>
         <module>stability</module>
-        <module>mq</module>
-        <module>zk</module>
         <module>tool</module>
-        <module>log</module>
         <module>workflow</module>
         <module>rpc</module>
         <module>coroutine</module>
         <module>model_design</module>
-        <module>net</module>
         <module>search</module>
         <module>view</module>
         <module>asm</module>
-        <module>cron</module>
         <module>eip</module>
         <module>gateway</module>
         <module>doc</module>
@@ -57,7 +46,6 @@
         <mockito-version>2.23.0</mockito-version>
         <powermock2-version>2.0.2</powermock2-version>
         <junit4-version>4.12</junit4-version>
-        <lombok-version>1.18.4</lombok-version>
         <jmh-version>1.23</jmh-version>
         <guava-version>30.1-jre</guava-version>
         <es-version>6.2.1</es-version>
@@ -73,12 +61,6 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit4-version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok-version}</version>
         </dependency>
 
         <dependency>
@@ -268,11 +250,6 @@
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-core</artifactId>
-                <version>${jackson-version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-databind</artifactId>
                 <version>${jackson-version}</version>
             </dependency>
             <dependency>

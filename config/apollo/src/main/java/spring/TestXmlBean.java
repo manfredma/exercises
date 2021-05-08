@@ -1,6 +1,5 @@
 package spring;
 
-import lombok.Data;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -8,7 +7,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @author manfred
  * @since 2019-11-11 下午3:46
  */
-@Data
 public class TestXmlBean {
 
     private int timeout;
@@ -21,4 +19,20 @@ public class TestXmlBean {
         System.out.println(testXmlBean);
     }
 
+
+    public void setTimeout(int timeout) {
+        this.timeout = timeout;
+    }
+
+    public void setBatch(int batch) {
+        this.batch = batch;
+    }
+
+    @Override
+    public String toString() {
+        return "TestXmlBean{" +
+                "timeout=" + timeout +
+                ", batch=" + batch +
+                '}';
+    }
 }

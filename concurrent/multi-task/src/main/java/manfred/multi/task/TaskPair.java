@@ -1,10 +1,7 @@
 package manfred.multi.task;
 
-import lombok.Getter;
-
 import java.util.concurrent.Callable;
 
-@Getter
 public class TaskPair<V> {
 
     private String name;
@@ -18,5 +15,13 @@ public class TaskPair<V> {
 
     public static <V> TaskPair<V> of(String taskName, Callable<V> cal) {
         return new TaskPair<V>(taskName, cal);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Callable<V> getCallable() {
+        return callable;
     }
 }

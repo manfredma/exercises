@@ -11,7 +11,7 @@ public class ProductTests {
     @Test
     public void demo() {
         Product product = mock(Product.class);
-        assert !product.getIsDel();
+        assert !product.getDel();
         assert product.getOpReason() == null;
         assert product.getProductId() == 0;
         assert product.getProductInfoList().size() == 0;

@@ -14,6 +14,11 @@
     <modules>
         <module>guice</module>
         <module>axon</module>
+        <module>log</module>
+        <module>mq</module>
+        <module>net</module>
+        <module>rdbms</module>
+        <module>spring</module>
     </modules>
 
     <properties>

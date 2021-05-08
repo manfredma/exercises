@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>raft</module>
+        <module>zk</module>
     </modules>
 
     <properties>
