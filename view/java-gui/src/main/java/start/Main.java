@@ -1,4 +1,3 @@
-
 package start;
 
 import java.awt.*;//必须引入的两个包
