@@ -1,0 +1,5 @@
+
+
+== 参考
+[%hardbreaks]
+https://www.yuque.com/jiujuan/techstack/gmazgy[从分布式一致性到共识机制Raft算法]

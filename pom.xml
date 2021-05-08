@@ -42,6 +42,7 @@
         <module>gateway</module>
         <module>doc</module>
         <module>framework</module>
+        <module>distribution</module>
     </modules>
     <packaging>pom</packaging>
 

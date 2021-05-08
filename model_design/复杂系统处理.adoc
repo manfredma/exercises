@@ -2,4 +2,6 @@
 
 
 == 参考
+[%hardbreaks]
 https://tech.meituan.com/2019/09/19/common-method-of-reduce-complexity.html[降低软件复杂性一般原则和方法]
+TODO https://mp.weixin.qq.com/s/pdjlf9I73sXDr30t-5KewA[阿里高级技术专家方法论：如何写复杂业务代码？]
