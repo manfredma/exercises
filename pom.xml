@@ -54,6 +54,8 @@
         <jsonp-version>1.13.1</jsonp-version>
         <r2dbc-mysql-version>0.8.2.RELEASE</r2dbc-mysql-version>
         <spring5-version>5.3.5</spring5-version>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
@@ -362,6 +364,7 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                    <compilerArgument>-XDignore.symbol.file</compilerArgument>
                 </configuration>
             </plugin>
             <plugin>

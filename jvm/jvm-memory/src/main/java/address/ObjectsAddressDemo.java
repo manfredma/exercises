@@ -6,11 +6,14 @@ import sun.misc.Unsafe;
 
 import java.lang.reflect.Field;
 
-@SuppressWarnings("restriction")        //取消显示的警告集
+//取消显示的警告集
+@SuppressWarnings("restriction")
 public class ObjectsAddressDemo {
 
     static final Unsafe unsafe = getUnsafe();
-    static final boolean is64bit = true; // auto detect if possible.
+
+    // auto detect if possible.
+    static final boolean is64bit = true;
 
     public static void main(String... args) {
         A a = new A();

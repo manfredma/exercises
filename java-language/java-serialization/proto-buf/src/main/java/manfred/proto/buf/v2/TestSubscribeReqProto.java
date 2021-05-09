@@ -1,7 +1,6 @@
 package manfred.proto.buf.v2;
 
 import com.google.protobuf.InvalidProtocolBufferException;
-import com.sun.org.apache.xerces.internal.impl.io.UCSReader;
 
 /**
  * @author manfred on 2019/9/14.

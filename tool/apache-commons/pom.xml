@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>common-frame-work</artifactId>
+    <artifactId>apache-commons</artifactId>
     <packaging>pom</packaging>
     <modules>
         <module>commons-codec</module>
