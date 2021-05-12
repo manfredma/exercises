@@ -1,0 +1,5 @@
+
+
+== 参考
+[%hardbreaks]
+https://www.cnblogs.com/wj5888/p/4667086.html[Java 8 Lambda实现原理分析]
