@@ -22,6 +22,7 @@
         <module>jvm-thread-pool</module>
         <module>jvm-native</module>
         <module>jvm-gc</module>
+        <module>jvm-method-invoke</module>
     </modules>
 
     <packaging>pom</packaging>
