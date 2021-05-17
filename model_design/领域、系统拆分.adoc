@@ -1,0 +1,5 @@
+
+
+== 参考
+[%hardbreaks]
+https://www.infoq.cn/article/xHmsStj6ShvFJwIo2z7T[微服务划分的模式与反模式]

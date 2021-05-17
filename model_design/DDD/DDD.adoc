@@ -93,4 +93,6 @@ https://zhuanlan.zhihu.com/p/356518017[阿里技术专家详解DDD系列 第四�
 https://zhuanlan.zhihu.com/p/366395817[阿里技术专家详解DDD系列 第五讲：聊聊如何避免写流水账代码]
 http://kaelzhang81.github.io/2017/10/20/DDD%E4%B9%8B-%E9%81%93%E6%9C%AF%E5%99%A8/[DDD之-道术器]
 https://zq99299.github.io/note-book2/ddd/[DDD 实战课]
+https://www.infoq.cn/article/goF6SKzuzxEwjAdrljuf[领域驱动设计之理论篇：应对复杂业务和提升系统弹性之道]
+
 
