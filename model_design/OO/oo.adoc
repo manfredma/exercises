@@ -1,0 +1,6 @@
+
+
+
+== 参考
+[%hardbreaks]
+https://zhuanlan.zhihu.com/p/363829222[面向对象中的主体客体思维]

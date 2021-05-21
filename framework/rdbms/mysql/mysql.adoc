@@ -1,0 +1,7 @@
+
+
+== 参考
+[%hardbreaks]
+https://zhuanlan.zhihu.com/p/75673270[MySQL锁机制——你想知道的都在这了！]
+https://zhuanlan.zhihu.com/p/94778920[一条简单的更新语句，MySQL是如何加锁的？]
+https://juejin.cn/post/6844904193078280199[MySQL系列(三) : 你了解MySQL中的事务吗?]
