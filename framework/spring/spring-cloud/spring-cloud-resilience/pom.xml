@@ -17,12 +17,19 @@
             <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
             <version>2.2.1.RELEASE</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter</artifactId>
+            <version>3.0.2</version>
+        </dependency>
 
         <dependency>
             <groupId>io.github.resilience4j</groupId>
             <artifactId>resilience4j-spring-boot2</artifactId>
-            <version>1.2.0</version>
+            <version>1.7.0</version>
         </dependency>
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -38,7 +45,7 @@
         <dependency>
             <groupId>io.github.resilience4j</groupId>
             <artifactId>resilience4j-rxjava2</artifactId>
-            <version>1.2.0</version>
+            <version>1.7.0</version>
         </dependency>
 
         <dependency>
@@ -46,11 +53,7 @@
             <artifactId>spring-boot-starter-webflux</artifactId>
             <version>${spring-boot-2-version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-            <version>${spring-boot-2-version}</version>
-        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
@@ -60,7 +63,7 @@
         <dependency>
             <groupId>io.github.resilience4j</groupId>
             <artifactId>resilience4j-reactor</artifactId>
-            <version>1.2.0</version>
+            <version>1.7.0</version>
         </dependency>
 
         <dependency>
@@ -79,14 +82,12 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.11.0</version>
         </dependency>
 
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <version>${spring-boot-2-version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -95,6 +96,13 @@
             <artifactId>reactor-test</artifactId>
             <version>3.3.1.RELEASE</version>
             <scope>test</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.github.resilience4j/resilience4j-annotations -->
+        <dependency>
+            <groupId>io.github.resilience4j</groupId>
+            <artifactId>resilience4j-annotations</artifactId>
+            <version>1.7.0</version>
         </dependency>
 
     </dependencies>
