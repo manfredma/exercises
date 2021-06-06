@@ -1,0 +1,13 @@
+== 概念
+
+____
+规约，一般是指在国际社会具有重大意义的 *条约*，通常指国际组织的章程。例如，1966年《经济、社会及文化权利国际公约》、1945年《联合国宪章》、1924年《国际联盟盟约》、1945年《国际法院规约》。
+
+百度百科
+____
+
+规约模式 +
+定义
+在wiki中，对规约模式（Specification pattern）的定义是 a particular software design pattern, whereby business rules can be recombined by chaining the business rules together using boolean logic.
+
+具体就是指将业务规则用布尔运算组合起来的一种设计模式。
