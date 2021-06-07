@@ -1,0 +1,5 @@
+
+
+== 参考
+[%hardbreaks]
+https://docs.woocommerce.com/document/managing-product-taxonomies/[Managing Product Categories, Tags and Attributes]

@@ -1,0 +1,3 @@
+
+== 参考
+http://www.uml.org.cn/requirementproject/200707024.asp[使用 UML 进行业务建模：理解业务用例与系统用例的相似和不同之处]
