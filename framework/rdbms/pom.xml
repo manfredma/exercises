@@ -14,7 +14,8 @@
     <modules>
         <module>mybatis</module>
         <module>r2dbc</module>
-        <module>mysql</module>
+        <module>jdbc</module>
+        <module>mybatis-spring</module>
     </modules>
 
     <packaging>pom</packaging>
