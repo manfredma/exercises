@@ -1,4 +1,17 @@
+== 状态机
+image::img/tcp_ip_状态机.png[状态机]
+
+
+== 建立连接
+
+image::img/tcp_ip_连接建立.png[建立连接]
+
+== 连接关闭
+
+image::img/tcp_ip_连接关闭.png[连接关闭]
+
 
 == 参考
 [%hardbreaks]
 https://zhuanlan.zhihu.com/p/60305452[计算机网络面试题（一）]
+https://www.cnblogs.com/chopper-poet/p/14618391.html[分享一次排查CLOSE_WAIT过多的经验]
