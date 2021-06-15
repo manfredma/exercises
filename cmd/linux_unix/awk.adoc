@@ -1,0 +1,5 @@
+
+
+== 参考
+[%hardbreaks]
+https://coolshell.cn/articles/9070.html[AWK 简明教程]
