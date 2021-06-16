@@ -3,4 +3,5 @@
 
 == 参考
 [%hardbreaks]
-https://zhuanlan.zhihu.com/p/363829222[面向对象中的主体客体思维]
+https://zhuanlan.zhihu.com/p/363829222[面向对象中的主体客体思维 @知乎]
+https://www.cnblogs.com/progroveriman/p/6180246.html[结构化和面向对象之应用比较 @cnbologs]
