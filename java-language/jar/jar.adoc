@@ -1,0 +1,8 @@
+
+解压：
+unzip xxx.jar
+
+打包：
+jar cvf xxx.jar ./
+就可以重新将修改后的文件重新打包，但是注意此处有个问题，那就是manifest文件的问题，众所周知，manifest文件的记载着一些启动参数，如果是可运行的jar包，那么这个是必不可少的。但是jar命令默认是不会使用原先的manifest文件的，会重新生成一个默认的。所以我们如果想要保留原先的manifest文件必须指定,使用如下的命令制定打包原先的manifest文件。
+jar cvfm xxx.jar ./META-INF/MANIFEST.MF ./
