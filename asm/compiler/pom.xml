@@ -3,18 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>exercises</artifactId>
+        <artifactId>asm</artifactId>
         <groupId>manfred.end</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>asm</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>nasm</module>
-        <module>compiler</module>
-    </modules>
+    <artifactId>compiler</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

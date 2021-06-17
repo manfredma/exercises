@@ -25,5 +25,6 @@
         <module>cache</module>
         <module>tomcat</module>
         <module>apache-commons</module>
+        <module>antlr</module>
     </modules>
 </project>

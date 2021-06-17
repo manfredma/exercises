@@ -1,0 +1,17 @@
+
+Antlr (ANother Tool for Language Recognition) 是一个强大的跨语言语法解析器，可以用来读取、处理、执行或翻译结构化文本或二进制文件。它被广泛用来构建语言，工具和框架。Antlr可以从语法上来生成一个可以构建和遍历解析树的解析器。
+
+== 基本概念
+[%hardbreaks]
+*抽象语法树 (Abstract Syntax Tree,AST)*
+抽象语法树是源代码结构的一种抽象表示，它以树的形状表示语言的语法结构。抽象语法树一般可以用来进行代码语法的检查，代码风格的检查，代码的格式化，代码的高亮，代码的错误提示以及代码的自动补全等等。
+*语法解析器 (Parser)*
+语法解析器通常作为编译器或解释器出现。它的作用是进行语法检查，并构建由输入单词(Token)组成的数据结构(即抽象语法树)。语法解析器通常使用词法分析器(Lexer)从输入字符流中分离出一个个的单词(Token)，并将单词(Token)流作为其输入。实际开发中，语法解析器可以手工编写，也可以使用工具自动生成。
+*词法分析器 (Lexer)*
+词法分析是指在计算机科学中，将字符序列转换为单词(Token)的过程。执行词法分析的程序便称为词法分析器。词法分析器(Lexer)一般是用来供语法解析器(Parser)调用的。
+
+
+== 参考
+[%hardbreaks]
+https://iamazy.github.io/2020/02/12/antlr4-jiao-cheng/[Antlr4]
+https://wizardforcel.gitbooks.io/antlr4-short-course/content/[ANTLR 4简明教程]
