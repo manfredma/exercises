@@ -30,7 +30,10 @@ public class Boot {
 
     @Test
     public void testFlatmap() throws InterruptedException {
-        Task<String> task = Task.value("hello", "xxxxx");
+        Task<String> task = Task.value("hello", "xxxxx").map(a -> {
+            System.out.println(a);
+            return a;
+        });
         Task<Boot> finalTask = task.flatMap("flatmap to Boot", s -> Task.value(new Boot()));
         engine.run(finalTask);
         finalTask.await();
