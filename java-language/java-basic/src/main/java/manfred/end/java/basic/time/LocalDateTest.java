@@ -1,6 +1,7 @@
 package manfred.end.java.basic.time;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 
 /**
  * @author manfred
@@ -11,5 +12,7 @@ public class LocalDateTest {
         System.out.println(LocalDate.parse("2020-02-02"));
         System.out.println(LocalDate.parse("2020-02-02"));
 
+        System.out.println(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        System.out.println(LocalDate.now().atStartOfDay());
     }
 }
