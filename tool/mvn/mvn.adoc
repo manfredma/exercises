@@ -4,3 +4,4 @@
 == 参考
 [%hardbreaks]
 https://developer.aliyun.com/article/2916[换个视角看Maven - 一个领域平台的优美设计]
+https://mymavenrepo.com/[个人仓库-创建自己的仓库]

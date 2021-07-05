@@ -43,6 +43,36 @@ ____
 == 六、图片引用
 image::https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=702257389,1274025419&fm=27&gp=0.jpg[hello]
 
+== 七、列表
+无序列表 +
+
+* 列表1
+* 列表2
+
+有序列表
+
+1. 列表1
+2. 列表2
+
+有序列表
+
+. 列表3
+
+有序列表
+
+.. 列表4
+
+
+
+
+== 八、表格
+|===
+|column1|column2
+
+|1|1
+|2|2
+|===
+
 == 参考 +
 
 https://asciidoctor.cn/docs/asciidoc-syntax-quick-reference[Asciidoctor Reference] +
