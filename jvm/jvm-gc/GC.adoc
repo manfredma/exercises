@@ -2,3 +2,10 @@
 == 参考
 [%hardbreaks]
 TODO https://www.toutiao.com/i6757955841636172291/[JVM GC原理深度解析及性能调优实战（二）]
+https://tech.meituan.com/2017/12/29/jvm-optimize.html[从实际案例聊聊Java应用的GC优化]
+https://www.jianshu.com/p/ca1b0d4107c5[CMS之promotion failed&concurrent mode failure]
+https://toutiao.io/posts/3ogeka/preview[聊一聊 GC 中的 promotion failed]
+https://www.infoq.cn/article/3wyretkqrhivtw4frmr3[一文看懂 JVM 内存布局及 GC 原理]
+https://tech.meituan.com/2016/09/23/g1.html[Java Hotspot G1 GC的一些关键技术]
+https://tech.meituan.com/2020/08/06/new-zgc-practice-in-meituan.html[新一代垃圾回收器ZGC的探索与实践]
+https://tech.meituan.com/2020/11/12/java-9-cms-gc.html[Java中9种常见的CMS GC问题分析与解决]
