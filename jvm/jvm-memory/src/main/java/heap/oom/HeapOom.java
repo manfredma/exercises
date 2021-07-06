@@ -9,7 +9,7 @@ public class HeapOom {
         List<byte[]> x = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
             // TimeUnit.MILLISECONDS.sleep(100);
-            x.add(new byte[1024 * 1024]);
+            x.add(new byte[100 * 1024 * 1024]);
         }
         System.in.read();
     }

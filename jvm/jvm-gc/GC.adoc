@@ -1,4 +1,56 @@
 
+== 常用参数
+
+|===
+|参数名称 | 释义
+|-XmsN
+|设置堆的初始内存大小为N
+
+|-XmxN
+|设置堆的最大内存大小为N
+
+|-XmnN
+|设置新生代的内存大小为N
+
+|-XX:MetaspaceSize=N
+|设置元空间初始配置为N
+
+|-XX:+PrintGC
+|打印GC情况
+
+|-XX:+PrintGCTimeStamps
+|在发生GC时打印发生时间
+
+|-XX:+PrintGCDetails
+|在发生GC时打印GC日志
+
+|-XX:+UseParallelGC
+|新生代使用并行垃圾回收算法
+
+|-XX:+UseParallelOldGC
+|老年代使用并行垃圾回收算法
+
+|===
+|===
+|参数名称 | 释义
+|-XX:+PrintFlagsFinal
+| 可以在 JVM 启动时输出所有参数值，便于检查参数是否被覆盖
+
+|-XX:-UseBiasedLocking
+| 如果服务存在明显的锁竞争，请使用 -XX:-UseBiasedLocking 参数取消偏向锁
+
+|-XX:+PrintHeapAtGC
+| 在启动参数中添加 -XX:+PrintHeapAtGC 可以在日志里输出堆中各代的内存大小分布
+
+|-XX:+PrintTenuringDistribution
+| 在日志中输出对象年龄分布可帮助 JVM 调优，启动参数中添加 -XX:+PrintTenuringDistribution 开启
+
+|-XX:+PrintGCApplicationStoppedTime
+|在日志中输出 STW 的暂停时间，可定位其他 STW 操作，启动参数中添加 -XX:+PrintGCApplicationStoppedTime 开启
+
+
+|===
+
 == 参考
 [%hardbreaks]
 TODO https://www.toutiao.com/i6757955841636172291/[JVM GC原理深度解析及性能调优实战（二）]
@@ -9,3 +61,6 @@ https://www.infoq.cn/article/3wyretkqrhivtw4frmr3[一文看懂 JVM 内存布局�
 https://tech.meituan.com/2016/09/23/g1.html[Java Hotspot G1 GC的一些关键技术]
 https://tech.meituan.com/2020/08/06/new-zgc-practice-in-meituan.html[新一代垃圾回收器ZGC的探索与实践]
 https://tech.meituan.com/2020/11/12/java-9-cms-gc.html[Java中9种常见的CMS GC问题分析与解决]
+https://blog.csdn.net/z69183787/article/details/104976782[CMS的CMSInitiatingOccupancyFraction 及 触发条件]
+https://segmentfault.com/a/1190000039806436[求你了，GC 日志打印别再瞎配置了]
+https://blog.csdn.net/yuxxz/article/details/89432786[FullGC触发条件和解读GC日志]
