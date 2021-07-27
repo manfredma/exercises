@@ -64,3 +64,4 @@ https://tech.meituan.com/2020/11/12/java-9-cms-gc.html[Java中9种常见的CMS G
 https://blog.csdn.net/z69183787/article/details/104976782[CMS的CMSInitiatingOccupancyFraction 及 触发条件]
 https://segmentfault.com/a/1190000039806436[求你了，GC 日志打印别再瞎配置了]
 https://blog.csdn.net/yuxxz/article/details/89432786[FullGC触发条件和解读GC日志]
+https://zhuanlan.zhihu.com/p/274267631[探索G1垃圾回收器]

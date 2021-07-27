@@ -23,6 +23,8 @@ ____
 * 为聚合根设计仓储，并思考实体或值对象的创建方式；
 * 在工程中实践领域模型，并在实践中检验模型的合理性，倒推模型中不足的地方并重构。
 
+image::img/6w.png[6w]
+
 == 定义
 *战略建模* +
 
@@ -96,5 +98,6 @@ https://zq99299.github.io/note-book2/ddd/[DDD 实战课]
 https://www.infoq.cn/article/goF6SKzuzxEwjAdrljuf[领域驱动设计之理论篇：应对复杂业务和提升系统弹性之道]
 https://zhuanlan.zhihu.com/p/378902174[为什么你应该关心领域模型？]
 https://mp.weixin.qq.com/s/a5NiKLFZsg54P_fcXPkahg[深入理解领域驱动设计中的聚合 @阿里技术]
-
+http://apframework.com/2020/03/22/ddd-color/[DDD：四色建模]
+https://www.infoq.cn/article/xh-four-color-modeling[运用四色建模法进行领域分析]
 

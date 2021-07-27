@@ -5,3 +5,4 @@
 https://tech.meituan.com/2018/11/15/java-lock.html[不可不说的Java“锁”事]
 https://xiaomi-info.github.io/2020/03/24/synchronized/[synchronized 实现原理]
 https://mp.weixin.qq.com/s/eKksisOytAz4_4Oq_QZPGQ[synchronized 的超多干货！]
+https://zhuanlan.zhihu.com/p/265945420[深入浅出Java锁(一)]

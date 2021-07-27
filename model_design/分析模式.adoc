@@ -1,0 +1,5 @@
+
+
+== 参考
+[%hardbreaks]
+http://www.uml.org.cn/sjms/2004092401.htm[《分析模式：可重用对象模型》-- 责任模式]
