@@ -27,5 +27,6 @@
         <module>apache-commons</module>
         <module>antlr</module>
         <module>arthas</module>
+        <module>wireshark</module>
     </modules>
 </project>
