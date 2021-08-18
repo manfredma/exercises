@@ -28,5 +28,6 @@
         <module>antlr</module>
         <module>arthas</module>
         <module>wireshark</module>
+        <module>sofa</module>
     </modules>
 </project>

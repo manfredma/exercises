@@ -1,0 +1,6 @@
+
+
+== 参考
+[%hardbreaks]
+https://cloud.tencent.com/developer/news/712304[架构必备的领域边界划分方法：职责驱动设计]
+

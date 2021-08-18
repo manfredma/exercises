@@ -9,7 +9,7 @@ import java.util.Arrays;
  * @author Manfred since 2019/8/14
  */
 public class Server implements Runnable {
-    static final int PORT = 8080;
+    static final int PORT = 18080;
     private static final int MAX_INPUT = 1024;
 
     @Override

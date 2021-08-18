@@ -23,6 +23,7 @@
         <module>jvm-native</module>
         <module>jvm-gc</module>
         <module>jvm-method-invoke</module>
+        <module>jvm-invoke</module>
     </modules>
 
     <packaging>pom</packaging>
