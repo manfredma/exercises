@@ -21,3 +21,4 @@ image::img/structure.png[]
 == 参考
 [%hardbreaks]
 https://zhuanlan.zhihu.com/p/35182323[设计模式----访问者模式]
+https://refactoringguru.cn/design-patterns/visitor[访问者模式]
