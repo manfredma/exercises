@@ -12,6 +12,10 @@
 
         <Logger name="com.foo.Bar" level="info" additivity="true" includeLocation="true"/>
 
+        <Logger name="com.foo.Bar" level="WARN" additivity="true" includeLocation="true"/>
+
+
+
         <Root level="error" includeLocation="true">
             <AppenderRef ref="Console"/>
         </Root>

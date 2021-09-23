@@ -14,19 +14,10 @@ public class MyApp {
 
         MDC.put("transaction.owner", "MDC-owner");
         LOGGER.info("Entering application.");
-        LOGGERV2.info("Entering application.");
-        LOGGERV3.info("Entering application.");
-        LOGGERV4.info("Entering application.");
         Bar bar = new Bar();
         if (!bar.doIt()) {
             LOGGER.error("Didn't do it.");
-            LOGGERV2.error("Didn't do it.");
-            LOGGERV3.error("Didn't do it.");
-            LOGGERV4.error("Didn't do it.");
         }
         LOGGER.info("Exiting application.");
-        LOGGERV2.info("Exiting application.");
-        LOGGERV3.info("Exiting application.");
-        LOGGERV4.info("Exiting application.");
     }
 }
