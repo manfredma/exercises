@@ -7,9 +7,6 @@ import java.util.List;
  * JKD版本：jdk1.8.0_111
  * JVM参数：-XX:+UseParallelGC -XX:+UseParallelOldGC -XX:+PrintGC -XX:+PrintGCTimeStamps
  * -XX:+PrintGCDetails -Xms2g -Xmx2g -Xmn1g
- *
- * @author Bo.Zhao
- * @since 19/4/21
  */
 public class SysGc {
     public static void main(String[] args) {

@@ -6,8 +6,6 @@ import java.io.IOException;
  * JDK版本：jdk1.8.0_111
  * JVM参数：-XX:+PrintGC -XX:+PrintGCTimeStamps -XX:+PrintGCDetails -Xms200m -Xmx200m -Xmn30m -XX:+UseParallelGC -XX:+UseParallelOldGC
  *
- * @author Bo.Zhao
- * @since 19/4/21
  */
 public class ErgonomicsGc {
     public static void main(String[] args) throws IOException {

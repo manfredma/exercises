@@ -3,9 +3,6 @@ package manfred.end.gc;
 /**
  * JDK版本：jdk1.8.0_111
  * JVM参数：-Xms200m -Xmx200m -Xmn32m -XX:+UseParallelGC -XX:+UseParallelOldGC
- *
- * @author Bo.Zhao
- * @since 19/4/21
  */
 public class AllocationFailure {
     public static void main(String[] args) {
