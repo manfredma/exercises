@@ -10,12 +10,12 @@ public interface Token{
      * Token的类型
      * @return
      */
-    public TokenType getType();
+    TokenType getType();
 
     /**
      * Token的文本值
      * @return
      */
-    public String getText();
+    String getText();
 
 }
