@@ -33,12 +33,15 @@ ps aux | less
 如果要 less 显示行号，请使用以下 -N 选项启动程序：
 
 less -N filename
+
 默认情况下， less 退出时，将从屏幕中清除文件内容。要在屏幕上保留文件内容，请使用以下 -X 选项：
 
 less -X filename
+
 该 +F 选项告诉 less 您查看文件内容可能会更改。这在打开日志文件时很有用。
 
 less +F /var/log/messages
+
 添加了 +F 选项的 less的表现与 tail -f 命令几乎相同。
 
 == less 命令
