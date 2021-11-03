@@ -29,5 +29,6 @@
         <module>arthas</module>
         <module>wireshark</module>
         <module>sofa</module>
+        <module>error-prone</module>
     </modules>
 </project>
