@@ -30,5 +30,6 @@
         <module>wireshark</module>
         <module>sofa</module>
         <module>error-prone</module>
+        <module>ff4j</module>
     </modules>
 </project>
