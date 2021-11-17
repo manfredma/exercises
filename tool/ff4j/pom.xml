@@ -19,7 +19,7 @@
     <dependencies>
         <dependency>
             <groupId>org.ff4j</groupId>
-            <artifactId>ff4j-core</artifactId>
+            <artifactId>ff4j-aop</artifactId>
             <version>1.8.11</version>
         </dependency>
     </dependencies>
