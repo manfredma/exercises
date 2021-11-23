@@ -31,15 +31,11 @@ public class MyClass {
   }
 
   public void x() {
-    if (expt.enableFlag(TestExperimentName.SAMPLE_STALE_FLAG)) {
-      System.out.println("x");
-    }
+    expt.enableFlag(TestExperimentName.SAMPLE_STALE_FLAG);
   }
 
   public void y() {
-    if (expt.disableFlag(TestExperimentName.SAMPLE_STALE_FLAG)) {
-      System.out.println("y");
-    }
+    expt.disableFlag(TestExperimentName.SAMPLE_STALE_FLAG);
   }
 
   static class XPTest {
