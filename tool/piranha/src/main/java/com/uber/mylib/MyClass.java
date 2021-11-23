@@ -12,10 +12,6 @@ package com.uber.mylib;
 /** A sample class. */
 public class MyClass {
 
-  enum TestExperimentName {
-    SAMPLE_STALE_FLAG
-  }
-
   private XPTest expt;
 
   public void foo() {
@@ -30,29 +26,4 @@ public class MyClass {
     }
   }
 
-  public void x() {
-    expt.enableFlag(TestExperimentName.SAMPLE_STALE_FLAG);
-  }
-
-  public void y() {
-    expt.disableFlag(TestExperimentName.SAMPLE_STALE_FLAG);
-  }
-
-  static class XPTest {
-    public boolean flagEnabled(TestExperimentName x) {
-      return true;
-    }
-
-    public boolean enableFlag(TestExperimentName x) {
-      return true;
-    }
-
-    public boolean disableFlag(TestExperimentName x) {
-      return true;
-    }
-
-    public boolean flagDisabled(TestExperimentName x) {
-      return true;
-    }
-  }
 }

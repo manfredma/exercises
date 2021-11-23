@@ -17,12 +17,12 @@
     },
     {
       "methodName": "enableFlag",
-      "flagType": "empty",
+      "flagType": "set_treated",
       "argumentIndex": 0
     },
     {
       "methodName": "disableFlag",
-      "flagType": "empty",
+      "flagType": "set_control",
       "argumentIndex": 0
     }
   ],
@@ -33,6 +33,6 @@
   "cleanupOptions": {
     "tests.clean_by_setters_heuristic.enabled" : true,
     "tests.clean_by_setters_heuristic.ignore_other_flag_sets" : false,
-    "tests.clean_by_setters_heuristic.lines_limit" : 100
+    "tests.clean_by_setters_heuristic.lines_limit" : 10000
   }
 }
