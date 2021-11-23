@@ -30,6 +30,18 @@ public class MyClass {
     }
   }
 
+  public void x() {
+    if (expt.enableFlag(TestExperimentName.SAMPLE_STALE_FLAG)) {
+      System.out.println("x");
+    }
+  }
+
+  public void y() {
+    if (expt.disableFlag(TestExperimentName.SAMPLE_STALE_FLAG)) {
+      System.out.println("y");
+    }
+  }
+
   static class XPTest {
     public boolean flagEnabled(TestExperimentName x) {
       return true;
