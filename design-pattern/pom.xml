@@ -38,6 +38,7 @@
         <module>business-delegate-pattern</module>
         <module>front-controller-pattern</module>
         <module>specification-pattern</module>
+        <module>black-board</module>
     </modules>
 
     <packaging>pom</packaging>
