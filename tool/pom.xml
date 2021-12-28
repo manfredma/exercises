@@ -33,6 +33,8 @@
         <module>ff4j</module>
         <module>depend-ff4j-mvn</module>
         <module>piranha</module>
+        <module>padding-beans</module>
+        <module>jsqlparser</module>
     </modules>
 
     <dependencyManagement>
