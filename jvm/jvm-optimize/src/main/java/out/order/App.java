@@ -31,13 +31,13 @@ public class App {
                 int tmpA = state.a;
 
                 if (tmpB == 1 && tmpA == 0) {
-                    System.out.println("Hey wtf!! b == 1 && a == 0");
+                    System.out.println("Hey wtf!! b == 1 && a == 0 && c == " + tmpC);
                 }
                 if (tmpC == 2 && tmpB == 0) {
-                    System.out.println("Hey wtf!! c == 2 && b == 0");
+                    System.out.println("Hey wtf!! c == 2 && b == 0 && a == " + tmpA);
                 }
                 if (tmpC == 2 && tmpA == 0) {
-                    System.out.println("Hey wtf!! c == 2 && a == 0");
+                    System.out.println("Hey wtf!! c == 2 && a == 0 && b == " + tmpB);
                 }
             }).start();
 
