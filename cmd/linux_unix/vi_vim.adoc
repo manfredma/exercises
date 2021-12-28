@@ -1,0 +1,39 @@
+== 快捷键
+[%hardbreaks]
+[n]x 剪切光标右边n个字符
+[n]X 剪切光标左边n个字符
+y 复制在可视模式下选中的文本
+yy  复制整行文本
+Y 复制整行文本
+[%hardbreaks]
+y[n]w 复制一(n)个词
+y[n]l 复制光标右边1(n)个字符
+y[n]h 复制光标左边1(n)个字符
+d$ 删除当前位置到行尾的内容
+D 删除当前位置到行尾的内容
+[%hardbreaks]
+d[n]w 删除（剪切）n个单词
+d[n]l 删除（剪切）光标右边n个字符
+d[n]h 删除（剪切）光标左边n个字符
+d0 删除（剪切）当前位置到行首的内容
+[n] dd 删除（剪切）n行
+[%hardbreaks]
+:m,nd<cr> 剪切m行到n行的内容
+d1G 剪切光标以上的所有行
+dgg 剪切光标以上的所有行
+dG 剪切光标以下的所有行
+d/f<cr> 删除当前位置到下一个f之间的内容
+[%hardbreaks]
+p 在光标之后粘贴
+P 在光标之前粘贴
+daw 剪切一个词
+das 剪切一个句子
+dap 剪切一个段落
+dab 剪切一块（包含在圆括号中的）
+[%hardbreaks]
+/something 在后面的文本中查找something
+?something 在前面的文本中查找something
+/pattern/+number 将光标停在包含pattern的行后面第number行上
+/pattern/-number 将光标停在包含pattern的行前面第number行上
+n: 向后查找下一个
+N: 向前查找下一个
