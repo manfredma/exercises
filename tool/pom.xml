@@ -16,7 +16,6 @@
     <modules>
         <module>mvn</module>
         <module>arch-unit</module>
-        <module>ali-sandbox</module>
         <module>disruptor</module>
         <module>guava</module>
         <module>aviator</module>
@@ -27,7 +26,6 @@
         <module>apache-commons</module>
         <module>antlr</module>
         <module>arthas</module>
-        <module>wireshark</module>
         <module>sofa</module>
         <module>error-prone</module>
         <module>ff4j</module>

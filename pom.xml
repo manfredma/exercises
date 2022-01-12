@@ -32,6 +32,8 @@
         <module>doc</module>
         <module>framework</module>
         <module>distribution</module>
+        <module>sandbox</module>
+        <module>net</module>
     </modules>
     <packaging>pom</packaging>
 

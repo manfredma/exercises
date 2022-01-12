@@ -9,15 +9,17 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>test</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <modules>
-        <module>jmh</module>
-        <module>mockito</module>
-        <module>powermock</module>
-        <module>testability</module>
-        <module>pi-text</module>
-    </modules>
+    <artifactId>sandbox</artifactId>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
 
     <packaging>pom</packaging>
+
+    <modules>
+        <module>ali-sandbox</module>
+    </modules>
+
 </project>
