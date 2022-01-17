@@ -16,7 +16,7 @@
         <module>mockito</module>
         <module>powermock</module>
         <module>testability</module>
-        <module>pi-text</module>
+        <module>pi-test</module>
     </modules>
 
     <packaging>pom</packaging>
