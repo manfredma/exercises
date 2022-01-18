@@ -35,14 +35,4 @@
         <module>jsqlparser</module>
     </modules>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.ff4j</groupId>
-                <artifactId>ff4j-core</artifactId>
-                <version>1.8.1</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
 </project>

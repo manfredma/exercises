@@ -30,7 +30,7 @@
                     <showWarnings>true</showWarnings>
                     <compilerArgs>
                         <arg>-XDcompilePolicy=simple</arg>
-                        <arg>-Xplugin:ErrorProne -Xep:Piranha:WARN -XepPatchChecks:Piranha -XepPatchLocation:IN_PLACE -XepOpt:Piranha:FlagName=SAMPLE_STALE_FLAG -XepOpt:Piranha:IsTreated=false -XepOpt:Piranha:Config=config/properties_test_clean_by_setters_ignore_others.json</arg>
+                        <arg>-Xplugin:ErrorProne -Xep:Piranha:WARN -XepPatchChecks:Piranha -XepPatchLocation:IN_PLACE -XepOpt:Piranha:FlagName=SAMPLE_STALE_FLAG -XepOpt:Piranha:IsTreated=true -XepOpt:Piranha:Config=config/properties.json</arg>
                     </compilerArgs>
                     <annotationProcessorPaths>
                         <path>

@@ -34,6 +34,7 @@
         <module>distribution</module>
         <module>sandbox</module>
         <module>net</module>
+        <module>kotlin</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -333,6 +334,12 @@
                 <groupId>com.google.inject</groupId>
                 <artifactId>guice</artifactId>
                 <version>5.0.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.ff4j</groupId>
+                <artifactId>ff4j-aop</artifactId>
+                <version>1.8.11</version>
             </dependency>
 
         </dependencies>
