@@ -1,0 +1,10 @@
+
+=== MethodHandle 与 Method 区别
+[%hardbreaks]
+MethodHandle 在模拟 字节码 层次的方法调用，因而可适用于所有 JVM 语言 ；Reflection 在模拟 Java 层次的方法调用，仅可适用于 Java。
+MethodHandle 可进行 JVM 的内联优化，Reflection 屏蔽了 JVM ，所以完全没有相应的优化。
+MethodHandle 从 JVM 层次支持调用，只需要包含方法必要的信息，所以说是轻量级的，而 Reflection 是 Java Api 层次的反射调用，包含了方法的签名、描述符以及方法属性表中各种属性的Java端表示方式，还包含有执行权限等的运行期信息，所以说是重量级的。
+MethodHandle 方法调用需要考虑到 字节码，而 Reflection 则不用考虑这些。
+
+== 参考
+https://segmentfault.com/a/1190000017208820[JSR 292 学习]

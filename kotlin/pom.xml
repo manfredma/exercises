@@ -14,8 +14,7 @@
     <modules>
         <module>kotlin-base-example</module>
         <module>kotlin-spring-boot</module>
+        <module>kotlin-coroutines</module>
     </modules>
-
-
 
 </project>
