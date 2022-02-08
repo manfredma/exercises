@@ -7,4 +7,6 @@ MethodHandle 从 JVM 层次支持调用，只需要包含方法必要的信息�
 MethodHandle 方法调用需要考虑到 字节码，而 Reflection 则不用考虑这些。
 
 == 参考
+[%hardbreaks]
 https://segmentfault.com/a/1190000017208820[JSR 292 学习]
+https://zhuanlan.zhihu.com/p/28124632[Invokedynamic：Java的秘密武器]
