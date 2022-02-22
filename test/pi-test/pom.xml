@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>pi-text</artifactId>
+    <artifactId>pi-test</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -20,7 +20,7 @@
         <dependency>
             <groupId>org.pitest</groupId>
             <artifactId>pitest-parent</artifactId>
-            <version>1.1.10</version>
+            <version>1.7.2</version>
             <type>pom</type>
         </dependency>
     </dependencies>
