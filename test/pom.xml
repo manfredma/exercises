@@ -17,6 +17,7 @@
         <module>powermock</module>
         <module>testability</module>
         <module>pi-test</module>
+        <module>junit4</module>
     </modules>
 
     <packaging>pom</packaging>

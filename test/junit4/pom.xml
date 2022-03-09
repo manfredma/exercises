@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>test</artifactId>
+        <groupId>manfred.end</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>junit4</artifactId>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <!-- http://maven.apache.org/surefire/maven-surefire-plugin/examples/fork-options-and-parallel-execution.html -->
+                    <parallel>classesAndMethods</parallel>
+                    <!--<useUnlimitedThreads>true</useUnlimitedThreads>-->
+                    <threadCount>6</threadCount>
+                    <!--
+                    `mvn install -DskipTests`: 通过命令行参数(skipTests)停止
+                    `mvn install -Dmaven.test.skip=true`: 插件参数, 跳过tests的编译和执行.
+                    Failsafe同样生效此参数.
+                    http://maven.apache.org/surefire/maven-surefire-plugin/examples/skipping-tests.html
+                    -->
+                    <!--
+                    <version>2.17</version>
+                    [WARNING] Error injecting: org.apache.maven.plugin.surefire.SurefirePlugin
+                    java.lang.NoClassDefFoundError: org/apache/maven/surefire/booter/KeyValueSource
+                    ...
+                    Caused by: java.lang.ClassNotFoundException: org.apache.maven.surefire.booter.KeyValueSource
+                    ...
+                    -->
+                    <includes>
+                        <!-- 小于默认范围(https://maven.apache.org/surefire/maven-surefire-plugin/examples/inclusion-exclusion.html) -->
+                        <include>**/*Tests.java</include>
+                        <include>**/*Test.java</include>
+                    </includes>
+                    <excludes>
+                        <exclude>**/Abstract*.java</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

@@ -1,0 +1,5 @@
+
+
+== 参考
+
+https://refactoringguru.cn/[深入设计模式]
