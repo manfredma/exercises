@@ -17,7 +17,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/baddebt")
 public class BadDebtController {
-    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+    static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://10.96.81.212:3306/baddebt?useUnicode=true&characterEncoding=UTF-8&characterSetResults=UTF-8&useSSL=false&allowPublicKeyRetrieval=true";
     static final String USER = "root";
     static final String PASS = "123456";

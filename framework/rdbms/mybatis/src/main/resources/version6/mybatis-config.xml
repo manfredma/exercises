@@ -7,7 +7,7 @@
         <environment id="development">
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
                 <property name="url" value="jdbc:mysql://10.96.81.212:3306/manfred"/>
                 <property name="username" value="root"/>
                 <property name="password" value="123456"/>
