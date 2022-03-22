@@ -35,6 +35,7 @@
         <module>sandbox</module>
         <module>net</module>
         <module>kotlin</module>
+        <module>dsl</module>
     </modules>
     <packaging>pom</packaging>
 
