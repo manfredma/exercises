@@ -36,6 +36,7 @@
         <module>net</module>
         <module>kotlin</module>
         <module>dsl</module>
+        <module>rdbms</module>
     </modules>
     <packaging>pom</packaging>
 

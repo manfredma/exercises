@@ -16,7 +16,6 @@
         <module>axon</module>
         <module>log</module>
         <module>mq</module>
-        <module>rdbms</module>
         <module>spring</module>
     </modules>
 

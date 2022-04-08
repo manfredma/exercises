@@ -19,6 +19,7 @@
         <module>java-lambda</module>
         <module>java-jar</module>
         <module>java-thread</module>
+        <module>java-collection</module>
     </modules>
 
 
