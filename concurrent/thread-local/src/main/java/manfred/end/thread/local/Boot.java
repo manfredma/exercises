@@ -8,5 +8,7 @@ public class Boot {
         ThreadLocal<String> threadLocal = new ThreadLocal<>();
         threadLocal.set("xxx");
         System.out.println(threadLocal.get());
+
+        System.out.println(ThreadLocalHolder.x.get());
     }
 }
