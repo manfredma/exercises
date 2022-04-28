@@ -39,6 +39,7 @@
         <module>front-controller-pattern</module>
         <module>specification-pattern</module>
         <module>black-board</module>
+        <module>type-object-pattern</module>
     </modules>
 
     <packaging>pom</packaging>

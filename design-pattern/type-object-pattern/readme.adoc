@@ -1,0 +1,5 @@
+
+
+== 参考
+[%hardbreaks]
+https://www.cnblogs.com/gaochundong/p/design_pattern_type_object.html[设计模式之美：Type Object（类型对象）]
