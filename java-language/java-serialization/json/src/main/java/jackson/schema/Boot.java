@@ -1,4 +1,4 @@
-package schema;
+package jackson.schema;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.github.fge.jackson.JsonLoader;
@@ -13,7 +13,7 @@ import java.util.Iterator;
 public class Boot {
     @Test
     public void testJsonSchema2() {
-        String failure = new String("{\"foo\":1234}");
+        String failure = "{\"foo\":1234}";
         String Schema = "{\"type\": \"object\", \"properties\" : {\"foo\" : {\"type\" : " +
                 "\"string\"}}}";
         ProcessingReport report = null;
