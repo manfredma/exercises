@@ -23,7 +23,7 @@ import java.util.function.Function;
 
 public class RetryExampleV2 {
 
-    private static List<Task> taskList = new ArrayList<>();
+    private static final List<Task> taskList = new ArrayList<>();
 
     private static ExecutorService outPool =
             new ThreadPoolExecutor(20, 50, 0L, TimeUnit.MILLISECONDS, new SynchronousQueue<>(),
