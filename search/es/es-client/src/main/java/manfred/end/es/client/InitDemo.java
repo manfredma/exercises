@@ -5,8 +5,7 @@ import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
 
 /**
- * @Description: 获取Java High Level REST Client客户端
- * @date 2018年6月23日
+ * 获取Java High Level REST Client客户端
  */
 public class InitDemo {
 
