@@ -1,4 +1,4 @@
-package manfred.end.es.client;
+package manfred.end.es.client.rest;
 
 import java.io.IOException;
 

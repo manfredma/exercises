@@ -15,15 +15,11 @@ public class MyClass {
   private XPTest expt;
 
   public void foo() {
-    if (expt.flagEnabled(TestExperimentName.SAMPLE_STALE_FLAG)) {
-      System.out.println("Hello World");
-    }
+    System.out.println("Hello World");
   }
 
   public void bar() {
-    if (expt.flagDisabled(TestExperimentName.SAMPLE_STALE_FLAG)) {
-      System.out.println("Hi World");
-    }
+    
   }
 
 }
