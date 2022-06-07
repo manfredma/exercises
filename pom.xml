@@ -37,6 +37,8 @@
         <module>kotlin</module>
         <module>dsl</module>
         <module>rdbms</module>
+        <module>batch_processing</module>
+        <module>batch_processing/spring_batch</module>
     </modules>
     <packaging>pom</packaging>
 
