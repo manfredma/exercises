@@ -5,3 +5,4 @@
 [%hardbreaks]
 https://riptutorial.com/spring-batch[Getting started with spring-batch]
 https://juejin.cn/post/6844903670237102087[记一次Spring Batch完整入门实践]
+https://docs.spring.io/spring-batch/docs/current/reference/html/spring-batch-intro.html[Spring Batch Introduction]
