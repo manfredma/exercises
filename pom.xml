@@ -39,6 +39,7 @@
         <module>rdbms</module>
         <module>batch_processing</module>
         <module>batch_processing/spring_batch</module>
+        <module>asm/antlr</module>
     </modules>
     <packaging>pom</packaging>
 

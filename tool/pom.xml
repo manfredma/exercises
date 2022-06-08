@@ -24,7 +24,6 @@
         <module>cache</module>
         <module>tomcat</module>
         <module>apache-commons</module>
-        <module>antlr</module>
         <module>arthas</module>
         <module>sofa</module>
         <module>error-prone</module>
