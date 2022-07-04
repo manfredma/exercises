@@ -6,17 +6,25 @@
         </Console>
     </Appenders>
     <Loggers>
-        <Logger name="com.foo.MyApp" level="info" additivity="false" includeLocation="true">
+        <Logger name="com.foo.MyApp" level="info" additivity="true" includeLocation="true">
             <AppenderRef ref="Console"/>
         </Logger>
 
-        <Logger name="com.foo.Bar" level="info" additivity="true" includeLocation="true"/>
+        <Logger name="com.foo.Bar" level="info" additivity="true" includeLocation="true">
+            <AppenderRef ref="Console"/>
+        </Logger>
 
-        <Logger name="com.foo.Bar" level="WARN" additivity="true" includeLocation="true"/>
+        <Logger name="com.foo" level="info" additivity="true" includeLocation="true">
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+        <Logger name="com" level="info" additivity="true" includeLocation="true">
+            <AppenderRef ref="Console"/>
+        </Logger>
 
 
 
-        <Root level="error" includeLocation="true">
+        <Root level="info" includeLocation="true">
             <AppenderRef ref="Console"/>
         </Root>
     </Loggers>
