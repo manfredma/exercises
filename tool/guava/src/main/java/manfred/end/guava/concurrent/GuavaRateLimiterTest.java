@@ -4,7 +4,7 @@ import com.google.common.util.concurrent.RateLimiter;
 
 import java.time.LocalDateTime;
 
-public class RateLimiterTest {
+public class GuavaRateLimiterTest {
     public static void main(String[] args) {
         RateLimiter rateLimiter = RateLimiter.create(1);
         for (int i = 0; i < 10; i++) {

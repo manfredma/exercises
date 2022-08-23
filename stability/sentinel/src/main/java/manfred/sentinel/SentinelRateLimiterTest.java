@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author manfred
  * @since 2019-12-17 上午9:58
  */
-public class Boot {
+public class SentinelRateLimiterTest {
     public static void main(String[] args) throws InterruptedException {
         // 配置规则.
         initFlowRules();
