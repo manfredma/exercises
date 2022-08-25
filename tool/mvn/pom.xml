@@ -11,5 +11,13 @@
 
     <artifactId>mvn</artifactId>
 
+    <packaging>pom</packaging>
+
+
+    <modules>
+        <module>hello-maven-plugin</module>
+        <module>hello-maven-plugin-test</module>
+    </modules>
+
 
 </project>
