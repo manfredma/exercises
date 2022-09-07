@@ -12,11 +12,22 @@
     <artifactId>hystrix</artifactId>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/com.netflix.hystrix/hystrix-core -->
+
         <dependency>
             <groupId>com.netflix.hystrix</groupId>
             <artifactId>hystrix-core</artifactId>
             <version>1.5.18</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.netflix.rxjava</groupId>
+            <artifactId>rxjava-core</artifactId>
+            <version>0.20.7</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
         </dependency>
     </dependencies>
 

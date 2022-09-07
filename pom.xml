@@ -399,6 +399,13 @@
                 <version>${spring-boot-2-version}</version>
             </dependency>
 
+
+            <dependency>
+                <groupId>io.github.resilience4j</groupId>
+                <artifactId>resilience4j-circuitbreaker</artifactId>
+                <version>1.7.1</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
