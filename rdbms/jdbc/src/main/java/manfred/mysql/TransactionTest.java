@@ -12,26 +12,30 @@ public class TransactionTest {
     public static void main(String[] args) throws Exception {
         Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/manfred",
                 "coupon", "coupon");
+        Connection monitorConnection = DriverManager.getConnection(
+                "jdbc:mysql://127.0.0.1:3306/manfred", "coupon", "coupon");
+
         System.out.println("Database Connection Established.\n");
         // connection.setAutoCommit(false);
         Statement statement = connection.createStatement();
         statement.executeQuery("start transaction ");
-        printCurrentTransaction(statement);
+        printCurrentTransaction(monitorConnection);
 
         statement.execute("select * from employees where emp_no = 14");
-        printCurrentTransaction(statement);
+        printCurrentTransaction(monitorConnection);
 
         Random random = new Random();
         statement.execute("update employees set first_name = '" + random.nextInt() +
                 "' where emp_no = 100012");
 
-        printCurrentTransaction(statement);
+        printCurrentTransaction(monitorConnection);
 
         statement.execute("commit ");
-        printCurrentTransaction(statement);
+        printCurrentTransaction(monitorConnection);
     }
 
-    private static void printCurrentTransaction(Statement statement) throws Exception {
+    private static void printCurrentTransaction(Connection connection) throws Exception {
+        Statement statement = connection.createStatement();
         printCurrentTransaction(new Date(), statement);
     }
     private static void printCurrentTransaction(Date execDate, Statement statement) throws Exception {
