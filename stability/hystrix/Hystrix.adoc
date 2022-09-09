@@ -5,3 +5,4 @@
 https://www.baeldung.com/introduction-to-hystrix[Introduction to Hystrix]
 https://howtodoinjava.com/spring-cloud/spring-hystrix-circuit-breaker-tutorial/[Hystrix Circuit Breaker Pattern – Spring Cloud]
 https://blog.fintopia.tech/60868c70ce7094706059f126/[Hystrix 源码分析及实践]
+https://github.com/Netflix/Hystrix/wiki/How-it-Works[How it Works]
