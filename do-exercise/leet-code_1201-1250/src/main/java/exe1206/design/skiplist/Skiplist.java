@@ -1,5 +1,8 @@
 package exe1206.design.skiplist;
 
+import java.util.Arrays;
+import java.util.Random;
+
 /**
  * Design a Skiplist without using any built-in libraries.
  * <p>
@@ -47,12 +50,18 @@ package exe1206.design.skiplist;
  */
 class Skiplist {
 
-    private Node head;
+    private Node[] heads = new Node[MAX_LEVEL];
 
-    private double promoteRate = 0.2;
+    private static final int MAX_LEVEL = 16;
 
     public Skiplist() {
+        for (int i = 0; i < MAX_LEVEL; i++) {
+            heads[i] = new Node(Integer.MIN_VALUE);
+        }
 
+        for (int i = 0; i < MAX_LEVEL - 1; i++) {
+            heads[i].down = heads[i + 1];
+        }
     }
 
     public boolean search(int target) {
@@ -60,7 +69,7 @@ class Skiplist {
     }
 
     private Node find(int target) {
-        Node current = head;
+        Node current = heads[0];
         while (current != null) {
             if (current.value == target) {
                 return current;
@@ -77,203 +86,83 @@ class Skiplist {
         return null;
     }
 
-    private Node[] findWithUpLeft(int target) {
-        Node upLeft = null;
-        Node current = head;
-        while (current != null) {
-            if (current.value == target) {
-                return new Node[]{upLeft, current};
-            } else if (current.value < target) {
-                if (current.next == null || current.next.value > target) {
-                    upLeft = current;
-                    current = current.down;
-                } else {
-                    current = current.next;
-                }
-            } else {
-                break;
-            }
-        }
-        return null;
-    }
-
 
     public void add(int num) {
-        if (head != null) {
-            if (head.value > num) {
-                Node insertNode = new Node(num);
-                Node next = head;
-                head = insertNode;
-                while (next != null) {
-                    insertNode.next = next;
-                    if (next.down != null) {
-                        Node down = new Node(num);
-                        insertNode.down = down;
-                        insertNode = down;
-                        next = next.down;
-                    } else {
-                        next = null;
-                    }
-                }
-            } else {
-                Node current = head;
-                while (current != null) {
-                    if (current.next != null) {
-                        if (current.next.value < num) {
-                            current = current.next;
-                        } else {
-                            Node up = new Node(num);
-                            while (current != null) {
-                                Node insertNode = new Node(num);
-                                insertNode.next = current.next;
-                                current.next = insertNode;
+        // 1. 计算在第几层
+        int level = randomLevel();
 
-                                up.down = insertNode;
-                                current = current.down;
-                            }
-                        }
-                    } else {
-                        if (current.down == null) {
-                            current.next = new Node(num);
-                            current = null;
-                        } else {
-                            current = current.down;
-                        }
-                    }
-                }
-            }
-        } else {
-            head = new Node(num);
+        // 2. 获取第level层的根节点
+        Node fromSearch = heads[0];
+        for (int i = 0; i < level; i++) {
+            fromSearch = searchInsertNode(fromSearch, new Node(num));
+            fromSearch = fromSearch.down;
         }
-        if (Math.random() < promoteRate) {
-            promote(num);
+        Node preInsertNode = null;
+        for (int i = level; i < MAX_LEVEL; i++) {
+            Node insertNode = new Node(num);
+            fromSearch = addNode(fromSearch, insertNode);
+            fromSearch = fromSearch.down;
+            if (preInsertNode != null) {
+                preInsertNode.down = insertNode;
+            }
+            preInsertNode = insertNode;
         }
     }
 
-    private void promote(int num) {
-        Node[] findWithUpLeft = findWithUpLeft(num);
-        if (findWithUpLeft != null) {
-            if (findWithUpLeft[0] != null) {
-                // 不需要新增加一层
-                Node current = new Node(num);
-                current.next = findWithUpLeft[0].next;
-                findWithUpLeft[0].next = current;
-                current.down = findWithUpLeft[1];
-            } else {
-                if (num != head.value) {
-                    // 新增加一层
-                    Node newHead = new Node(head.value);
-                    Node current = new Node(findWithUpLeft[1].value);
-                    newHead.next = current;
-
-                    newHead.down = head;
-                    current.down = findWithUpLeft[1];
-
-                    head = newHead;
-                }
-            }
-        }
+    private Node addNode(Node fromSearch, Node addingNode) {
+        Node added = searchInsertNode(fromSearch, addingNode);
+        addingNode.next = added.next;
+        added.next = addingNode;
+        return added;
     }
+
+    private Node searchInsertNode(Node fromSearch, Node addingNode) {
+        Node added = fromSearch;
+        while (added.next != null && added.next.value < addingNode.value) {
+            added = added.next;
+        }
+        return added;
+    }
+
 
     public boolean erase(int num) {
-        Node current = head;
-        Node before = null;
+        boolean result = false;
+        Node current = heads[0];
         while (current != null) {
-            if (current.value == num) {
-                break;
-            } else if (current.value < num) {
-                if (current.next == null || current.next.value > num) {
-                    current = current.down;
-                } else {
-                    before = current;
+            if (current.next != null) {
+                if (current.next.value == num) {
+                    result = true;
+                    // 当前节点直接指向下一节点来实现删除；
+                    current.next = current.next.next;
+                    current = current.down; // 处理下一层（因为是单向链表，故只能通过目标节点的前一节点下降下去）
+                } else if (current.next.value < num) {
                     current = current.next;
-                }
-            } else {
-                break;
-            }
-        }
-        if (current != null && current.value == num) {
-            if (before != null) {
-                // 删除非根节点
-                while (current != null) {
-                    before.next = current.next;
+                } else {
                     current = current.down;
-                    before = before.down;
                 }
             } else {
-                // 删除根节点，只需要将head节点右移一位即可
-                // 如果删除head节点后，这一层没有其他元素，则删除这一层
-                while (head != null && head.next == null) {
-                    head = head.down;
-                }
-
-                // 这个删除head节点，需要寻找次小节点来代替
-                if (head != null) {
-                    head = recursiveEraseHead(head);
-                }
+                current = current.down;
             }
-            return true;
         }
-        return false;
+        return result;
     }
 
-    private Node recursiveEraseHead(Node head) {
-        if (head.down != null) {
-            Node downHead = recursiveEraseHead(head.down);
-            if (head.next.value != downHead.value) {
-                Node newHead = new Node(downHead.value);
-                newHead.next = head.next;
-                newHead.down = downHead;
-                return newHead;
-            } else {
-                return head.next;
-            }
-
-        } else {
-            // 最底层直接使用 next 做的新的头部节点
-            return head.next;
-        }
+    private int randomLevel() {
+        return Math.abs(new Random().nextInt()) % MAX_LEVEL;
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        Node currentHead = head;
-        while (currentHead != null) {
-            Node current = currentHead;
-            while (current != null) {
-                sb.append(current.value);
-                if (currentHead.down == null && current.down != null) {
-                    sb.append("(错误：down=").append(current.down.value).append(")");
-                }
-                sb.append(" -> ");
-                current = current.next;
+        StringBuffer value = new StringBuffer();
+        Arrays.stream(heads).forEach(a -> {
+            Node x = a;
+            while (x.next != null) {
+                value.append(x.next.value).append(" -> ");
+                x = x.next;
             }
-            sb.append("NIL\n");
-            currentHead = currentHead.down;
-        }
-        return sb.toString();
+            value.append('\n');
+        });
+        return value.toString();
     }
 }
 
-class Node {
-
-    Node next;
-
-    Node down;
-
-    int value;
-
-    public Node(int value) {
-        this.value = value;
-    }
-
-    @Override
-    public String toString() {
-        return "Node{" +
-                "next=" + next +
-                ", down=" + down +
-                ", value=" + value +
-                '}';
-    }
-}
