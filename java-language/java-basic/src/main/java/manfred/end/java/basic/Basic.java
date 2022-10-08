@@ -7,5 +7,8 @@ public class Basic {
         String s = null + "";
         System.out.println(s.length());
 
+        // 三目运算符
+        System.out.println(false ? 1 : Integer.valueOf(2));
+
     }
 }
