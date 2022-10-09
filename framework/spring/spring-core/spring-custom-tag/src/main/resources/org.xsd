@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+        xmlns="http://hresh.com/schema/org"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://hresh.com/schema/org"
+        elementFormDefault="qualified">
+
+    <xsd:element name="car">
+        <xsd:complexType>
+            <xsd:attribute name="id" type="xsd:string"/>
+            <xsd:attribute name="maxSpeed" type="xsd:integer"/>
+            <xsd:attribute name="price" type="xsd:double"/>
+            <xsd:attribute name="brand" type="xsd:string"/>
+            <xsd:attribute name="color" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+
+</xsd:schema>

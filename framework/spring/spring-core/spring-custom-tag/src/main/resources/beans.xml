@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:myTag="http://hresh.com/schema/org"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://hresh.com/schema/org http://hresh.com/schema/org.xsd">
+
+    <myTag:car id="car2" price="56000" maxSpeed="240" brand="宝马" color="银色"/>
+</beans>
