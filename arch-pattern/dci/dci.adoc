@@ -10,6 +10,5 @@ https://dzone.com/articles/dci-architecture-is-visionary
 https://developer.huawei.com/consumer/cn/forum/topic/0202693314445180765
 https://www.jdon.com/37976
 https://www.jianshu.com/p/a775836c7e25
-https://km.sankuai.com/page/1205196838
 https://dci.github.io/examples/cpp/verbatim/#Domain
 https://www.infoq.cn/article/g6bk78djx_wukxps0kxm[当 DDD 遇上 DCI（Data, Context, Interactive）架构模式]
