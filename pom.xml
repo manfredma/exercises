@@ -41,6 +41,7 @@
         <module>batch_processing/spring_batch</module>
         <module>asm/antlr</module>
         <module>tool/freemarker</module>
+        <module>arch-pattern</module>
     </modules>
     <packaging>pom</packaging>
 
