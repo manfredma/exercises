@@ -3,12 +3,11 @@
 == 参考
 [%hardbreaks]
 https://en.wikipedia.org/wiki/Data,_context_and_interaction[DCI 维基百科]
-https://www.artima.com/articles/the-dci-architecture-a-new-vision-of-object-oriented-programming
-https://github.com/ruanrunxue/DCI-Architecture-Implementation
-https://blog.csdn.net/chelsea/article/details/7093693
-https://dzone.com/articles/dci-architecture-is-visionary
-https://developer.huawei.com/consumer/cn/forum/topic/0202693314445180765
-https://www.jdon.com/37976
-https://www.jianshu.com/p/a775836c7e25
-https://dci.github.io/examples/cpp/verbatim/#Domain
+https://www.artima.com/articles/the-dci-architecture-a-new-vision-of-object-oriented-programming[The DCI Architecture: A New Vision of Object-Oriented Programming]
+https://blog.csdn.net/chelsea/article/details/7093693[DCI: 代码的可理解性]
+https://dzone.com/articles/dci-architecture-is-visionary[dci-architecture-is-visionary]
+https://github.com/ruanrunxue/DCI-Architecture-Implementation[DCI-Architecture-Implementation]
+https://www.jdon.com/37976[DCI架构是什么？]
+https://dci.github.io/examples/cpp/verbatim/#Domain[DCI Implementation by C++]
 https://www.infoq.cn/article/g6bk78djx_wukxps0kxm[当 DDD 遇上 DCI（Data, Context, Interactive）架构模式]
+https://github.com/agiledragon/transfer-money[transfer-money(scala) | github]
