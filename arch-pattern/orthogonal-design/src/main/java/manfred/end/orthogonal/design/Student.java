@@ -28,7 +28,7 @@ public class Student {
     public static void sortStudentsByHeight(Student[] students) {
         for (int y = 0; y < students.length - 1; y++) {
             for (int x = 1; x < students.length - y; x++) {
-                if (students[x].height > students[x - 1].height) {
+                if (students[x].height < students[x - 1].height) {
                     swap(students, x, x - 1);
                 }
             }
