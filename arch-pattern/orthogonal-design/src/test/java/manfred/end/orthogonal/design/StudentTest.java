@@ -17,7 +17,7 @@ public class StudentTest {
             x[i].setHeight(ThreadLocalRandom.current().nextInt(100));
         }
         Arrays.stream(x).forEach(System.out::println);
-        Student.sortStudentsByHeight(x);
+        Sorter.sortStudentsByHeight(x);
         System.out.println("after sort：");
         Arrays.stream(x).forEach(System.out::println);
     }

@@ -1,27 +1,14 @@
 package manfred.end.orthogonal.design;
 
-
 /**
  * @author manfred on 2022/11/18.
  */
-public class Student implements Highable {
-
+public class Teacher implements Highable {
     private String name;
 
     private int height;
 
-    private int age;
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
     public String getName() {
-
         return name;
     }
 
@@ -37,11 +24,9 @@ public class Student implements Highable {
         this.height = height;
     }
 
-
-
     @Override
     public String toString() {
-        return "Student{" +
+        return "Teacher{" +
                 "name='" + name + '\'' +
                 ", height=" + height +
                 '}';
