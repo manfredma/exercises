@@ -4,7 +4,7 @@ package manfred.end.orthogonal.design;
 /**
  * @author manfred on 2022/11/18.
  */
-public class Student implements Highable {
+public class Student implements Highly {
 
     private String name;
 
