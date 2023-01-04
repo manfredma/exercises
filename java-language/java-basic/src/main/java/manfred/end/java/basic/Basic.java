@@ -10,5 +10,9 @@ public class Basic {
         // 三目运算符
         System.out.println(false ? 1 : Integer.valueOf(2));
 
+        System.out.println(Math.abs(Integer.MIN_VALUE));
+        System.out.println(Math.abs(Integer.MAX_VALUE));
+        System.out.println(Integer.MIN_VALUE);
+
     }
 }
