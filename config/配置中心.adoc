@@ -3,3 +3,4 @@
 == 参考
 [%hardbreaks]
 https://www.zhihu.com/question/468739689[配置中心是如何实现推送的？]
+https://cloud.tencent.com/developer/article/1619242[[享学Archaius] 一、初识Archaius的简单使用及高级使用]

@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>apollo</module>
+        <module>archaius</module>
     </modules>
 
 
