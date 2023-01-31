@@ -1,0 +1,10 @@
+
+Steps to run this project:
+
+* Perform a dry run with `./mvnw rewrite:dryRun`
+* Perform the actual migration with `./mvnw rewrite:run`
+* Update Mockito to `3.12.4`
+* Run all tests with `./mvnw test`
+
+== 参考
+https://rieckpil.de/automatic-java-code-migration-with-openrewrite-mockito-example/[使用 OpenRewrite 自动迁移 Java 代码（Mockito 示例）]

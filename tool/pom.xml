@@ -32,6 +32,7 @@
         <module>piranha</module>
         <module>padding-beans</module>
         <module>jsqlparser</module>
+        <module>open-rewrite</module>
     </modules>
 
 </project>
