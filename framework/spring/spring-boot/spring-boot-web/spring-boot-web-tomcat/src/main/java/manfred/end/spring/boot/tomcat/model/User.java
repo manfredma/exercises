@@ -1,6 +1,12 @@
 package manfred.end.spring.boot.tomcat.model;
 
+import javax.validation.constraints.NotNull;
+import manfred.end.spring.boot.tomcat.constraint.LengthConstraint;
+
 public class User {
+
+    @LengthConstraint(min = 12, max = 15)
+    @NotNull(message = "Please enter a valid email Id")
     private String email;
     private String name;
     private String address;
@@ -27,5 +33,14 @@ public class User {
 
     public String getAddress() {
         return address;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "email='" + email + '\'' +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                '}';
     }
 }
