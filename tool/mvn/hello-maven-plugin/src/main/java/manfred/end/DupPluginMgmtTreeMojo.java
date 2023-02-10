@@ -4,11 +4,12 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Sets;
 import com.google.common.collect.Sets.SetView;
-import com.meituan.kuailv.hyperion.plugins.utils.Utils;
+
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.Nonnull;
+import manfred.end.utils.Utils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.model.Build;

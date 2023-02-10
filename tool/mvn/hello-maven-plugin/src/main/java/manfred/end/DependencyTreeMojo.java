@@ -26,10 +26,8 @@ import org.barfuin.texttree.api.TextTree;
 import org.barfuin.texttree.api.TreeOptions;
 import org.barfuin.texttree.api.style.TreeStyles;
 
-@Mojo(name = "tree")
-public class TreeMojo extends AbstractMojo {
-
-    private static final int DEPTH_INCREMENT = 1;
+@Mojo(name = "dependency-tree")
+public class DependencyTreeMojo extends AbstractMojo {
 
     private static final String LEVEL_FULL = "full";
 
