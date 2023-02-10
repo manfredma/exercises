@@ -192,9 +192,9 @@ client 节点仅作为请求客户端存在，client的作用也作为负载均�
 ===== 配置
 可在/config/elasticsearch.yml中配置节点的功能：
 [%hardbreaks]
-node.master: #是否允许为主节点
-node.data: #允许存储数据作为数据节点
-node.ingest: #是否允许成为协调节点（数据不在当前ES实例上时转发请求）
+astNode.master: #是否允许为主节点
+astNode.data: #允许存储数据作为数据节点
+astNode.ingest: #是否允许成为协调节点（数据不在当前ES实例上时转发请求）
 
 四种组合方式：
 [%hardbreaks]
