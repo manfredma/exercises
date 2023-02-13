@@ -60,7 +60,7 @@ class Solution {
     }
 
     private AstNode prog(List<Token> tokens) {
-        // 先转换为逆波兰表达式（算法：调度场算法 https://zh.wikipedia.org/wiki/%E8%B0%83%E5%BA%A6%E5%9C%BA%E7%AE%97%E6%B3%95）
+
         Stack<Token> opStack = new Stack<>();
         List<Token> rpnTokens = rpnExpression(tokens, opStack);
         AstNode head = new AstNode(rpnTokens.get(rpnTokens.size() - 1));
@@ -69,19 +69,27 @@ class Solution {
             Token token = rpnTokens.get(i);
             AstNode astNode = new AstNode(token);
             while (needChildrenAstNode != null) {
-                if (needChildrenAstNode.child2 == null) {
-                    needChildrenAstNode.child2 = astNode;
-                    astNode.parent = needChildrenAstNode;
-                    break;
-                }
-                if (needChildrenAstNode.child1 == null) {
-                    needChildrenAstNode.child1 = astNode;
-                    astNode.parent = needChildrenAstNode;
-                    break;
+                if (needChildrenAstNode.token.type == Token.Type.NEGATIVE) {
+                    if (needChildrenAstNode.child1 == null) {
+                        needChildrenAstNode.child1 = astNode;
+                        astNode.parent = needChildrenAstNode;
+                        break;
+                    }
+                } else {
+                    if (needChildrenAstNode.child2 == null) {
+                        needChildrenAstNode.child2 = astNode;
+                        astNode.parent = needChildrenAstNode;
+                        break;
+                    }
+                    if (needChildrenAstNode.child1 == null) {
+                        needChildrenAstNode.child1 = astNode;
+                        astNode.parent = needChildrenAstNode;
+                        break;
+                    }
                 }
                 needChildrenAstNode = needChildrenAstNode.parent;
             }
-            if (token.type == Token.Type.ADD || token.type == Token.Type.SUB) {
+            if (token.type == Token.Type.ADD || token.type == Token.Type.SUB || token.type == Token.Type.NEGATIVE) {
                 needChildrenAstNode = astNode;
             }
         }
@@ -89,21 +97,31 @@ class Solution {
     }
 
     private List<Token> rpnExpression(List<Token> tokens, Stack<Token> opStack) {
+        // 先转换为逆波兰表达式（算法：调度场算法 https://zh.wikipedia.org/wiki/%E8%B0%83%E5%BA%A6%E5%9C%BA%E7%AE%97%E6%B3%95）
         List<Token> rpnTokens = new ArrayList<>();
         for (Token token : tokens) {
-            if (token.type.equals(Token.Type.ADD) || token.type.equals(Token.Type.SUB)) {
+            if (token.type == Token.Type.ADD
+                    || token.type == Token.Type.SUB
+                    || token.type == Token.Type.NEGATIVE) {
                 // 如果这个记号表示一个操作符，记做o1，那么：
                 //     只要存在另一个记为o2的操作符位于栈的顶端，并且
                 //            如果o1是左结合性的并且它的运算符优先级要小于或者等于o2的优先级，或者
                 //            如果o1是右结合性的并且它的运算符优先级比o2的要低，那么
-                //        将o2从栈的顶端弹出并且放入输出队列中（循环直至以上条件不满足为止）；
+                //                将o2从栈的顶端弹出并且放入输出队列中（循环直至以上条件不满足为止）；
                 //     然后，将o1压入栈的顶端。
                 while (!opStack.empty()) {
                     Token o2 = opStack.peek();
-                    if (o2.type.equals(Token.Type.ADD) || o2.type.equals(Token.Type.SUB)) {
-                        rpnTokens.add(opStack.pop());
-                    } else {
+                    // 右结合性的
+                    if (token.type == Token.Type.NEGATIVE) {
                         break;
+                    } else {
+                        if (o2.type == Token.Type.ADD
+                                || o2.type == Token.Type.SUB
+                                || o2.type == Token.Type.NEGATIVE) {
+                            rpnTokens.add(opStack.pop());
+                        } else {
+                            break;
+                        }
                     }
                 }
                 opStack.push(token);
@@ -121,9 +139,7 @@ class Solution {
                         opStack.pop();
                         break;
                     }
-                    if (o2.type.equals(Token.Type.ADD) || o2.type.equals(Token.Type.SUB)) {
-                        rpnTokens.add(opStack.pop());
-                    }
+                    rpnTokens.add(opStack.pop());
                 }
             } else {
                 rpnTokens.add(token);
@@ -167,6 +183,19 @@ class Solution {
             }
             tokens.add(token);
         }
+
+        // 正确识别其中的 负号
+        if (tokens.get(0).type == Token.Type.SUB) {
+            tokens.get(0).type = Token.Type.NEGATIVE;
+        }
+        for (int i = 1; i < tokens.size(); i++) {
+            if (tokens.get(i).type == Token.Type.SUB) {
+                if (tokens.get(i - 1).type != Token.Type.NUM &&
+                        tokens.get(i - 1).type != Token.Type.RP) {
+                    tokens.get(i).type = Token.Type.NEGATIVE;
+                }
+            }
+        }
         return tokens;
     }
 
@@ -183,6 +212,7 @@ class Solution {
                 this.symbol = symbol;
             }
         }
+
         static Token parseAndGuessType(String text) {
 
             Token token = new Token();
