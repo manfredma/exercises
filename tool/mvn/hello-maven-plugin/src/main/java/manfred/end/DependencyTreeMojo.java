@@ -2,7 +2,11 @@ package manfred.end;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.Queue;
 import manfred.end.tree.MavenDefaultTreeNode;
 import manfred.end.tree.MavenProjectTreeNode;
@@ -43,12 +47,29 @@ public class DependencyTreeMojo extends AbstractMojo {
     @Component
     private ProjectBuilder projectBuilder;
 
+    private List<String> filterMiddleWareGroup = Arrays.asList(
+            "com.sankuai.octo",
+            "com.sankuai.meituan",
+            "com.meituan.octo",
+            "com.sankuai.mafka",
+            "com.meituan.mafka",
+            "com.meituan.service.mobile",
+            "com.meituan.servicecatalog",
+            "com.meituan.xframe",
+            "com.meituan.log",
+            "com.sankuai.inf",
+            "com.meituan.mtrace",
+            "com.sankuai.xm"
+
+    );
+
     @Override
     public void execute() {
 
         // root node
         MavenProjectTreeNode root = new MavenProjectTreeNode(MessageType.__ROOT, project);
-        bfs(root);
+        Map<String, List<Dependency>> multiVersion = new HashMap<>();
+        bfs(root, multiVersion);
 
         TreeOptions options = new TreeOptions();
         options.setStyle(TreeStyles.UNICODE);
@@ -57,12 +78,21 @@ public class DependencyTreeMojo extends AbstractMojo {
 
         getLog().info("\n" + rendered);
 
+        multiVersion.forEach((k, v) -> {
+            if (v.size() > 1) {
+                StringBuilder sb = new StringBuilder();
+                for (Dependency dependency : v) {
+                    sb.append(dependency.toString()).append("\n");
+                }
+                getLog().error("查找到多版本依赖：" + k + "=\n" + sb);
+            }
+        });
+
     }
 
-    private void bfs(MavenProjectTreeNode root) {
+    private void bfs(MavenProjectTreeNode root, Map<String, List<Dependency>> multiVersion) {
         Queue<MavenDefaultTreeNode> queue = new ArrayDeque<>();
         queue.add(root);
-        List<String> resolved = new ArrayList<>();
         MavenDefaultTreeNode pointer;
         while (!queue.isEmpty()) {
             pointer = queue.remove();
@@ -74,14 +104,26 @@ public class DependencyTreeMojo extends AbstractMojo {
             List<Dependency> dependencies = mavenProject.getDependencies();
 
             for (Dependency dependency : dependencies) {
-                if (!dependency.getGroupId().startsWith("com.meituan") && !dependency.getGroupId().startsWith("com.sankuai")) {
+                if (!dependency.getGroupId().startsWith("com.meituan")
+                        && !dependency.getGroupId().startsWith("com.sankuai")) {
                     continue;
+                }
+                if (filterMiddleWareGroup.contains(dependency.getGroupId())) {
+                    continue;
+                }
+                String key = dependency.getGroupId() + ":" + dependency.getArtifactId();
+                if (!multiVersion.containsKey(key)) {
+                    multiVersion.put(key, new ArrayList<>());
+                }
+                List<Dependency> sameDependencies = multiVersion.get(key);
+                Optional<Dependency> sameVersionDependency = sameDependencies
+                        .stream()
+                        .filter(a -> a.getVersion().equals(dependency.getVersion()))
+                        .findAny();
+                if (!sameVersionDependency.isPresent()) {
+                    sameDependencies.add(dependency);
                 }
 
-                if (resolved.contains(dependency.toString())) {
-                    continue;
-                }
-                resolved.add(dependency.toString());
 
                 getLog().info("正在解析 dependency：" + dependency);
                 try {
