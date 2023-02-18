@@ -104,13 +104,13 @@ public class DependencyTreeMojo extends AbstractMojo {
             List<Dependency> dependencies = mavenProject.getDependencies();
 
             for (Dependency dependency : dependencies) {
-                if (!dependency.getGroupId().startsWith("com.meituan")
-                        && !dependency.getGroupId().startsWith("com.sankuai")) {
-                    continue;
-                }
-                if (filterMiddleWareGroup.contains(dependency.getGroupId())) {
-                    continue;
-                }
+//                if (!dependency.getGroupId().startsWith("com.meituan")
+//                        && !dependency.getGroupId().startsWith("com.sankuai")) {
+//                    continue;
+//                }
+//                if (filterMiddleWareGroup.contains(dependency.getGroupId())) {
+//                    continue;
+//                }
                 String key = dependency.getGroupId() + ":" + dependency.getArtifactId();
                 if (!multiVersion.containsKey(key)) {
                     multiVersion.put(key, new ArrayList<>());

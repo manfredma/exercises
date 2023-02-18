@@ -1,7 +1,5 @@
 package exe5.longest.palindromic.substring;
 
-import java.util.Arrays;
-
 class Solution3 {
     public String longestPalindrome(String s) {
         if (s == null || s.length() < 1) {
