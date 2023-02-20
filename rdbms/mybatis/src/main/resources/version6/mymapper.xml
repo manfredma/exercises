@@ -5,16 +5,38 @@
 
 <mapper namespace="com.zetcode">
 
+
+    <resultMap type="manfred.end.rdbms.mybatis.BookV2" id="bookV2">
+        <!-- 订单表属性 -->
+        <id column="id" property="id"/>
+        <association property="book" javaType="manfred.end.rdbms.mybatis.Book">
+            <result column="id" property="id"/>
+            <result column="author" property="author"/>
+            <result column="title" property="title"/>
+            <result column="published" property="published"/>
+            <result column="remark" property="remark"/>
+        </association>
+    </resultMap>
     <select id="mysqlVersion" resultType="String">
         SELECT VERSION()
     </select>
 
-    <select id="deleteBook">
+    <delete id="deleteBook">
         DELETE from MyBooks where id IN
         <foreach item="item" index="index" collection="ids"
                  open="(" separator="," close=")">
             #{item}
         </foreach>
+    </delete>
+
+    <select id="selectBook" resultMap="bookV2">
+        SELECT *
+        FROM MyBooks
     </select>
+
+    <insert id="insertBook" parameterType="manfred.end.rdbms.mybatis.BookV2">
+        INSERT INTO MyBooks(id,Author, Title, Published, Remark)
+        VALUES (#{id},#{book.author},#{book.title},#{book.published},#{book.remark});
+    </insert>
 
 </mapper>

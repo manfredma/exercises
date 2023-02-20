@@ -8,7 +8,7 @@
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://127.0.0.1:3306/manfred"/>
+                <property name="url" value="jdbc:mysql://127.0.0.1:3300/manfred"/>
                 <property name="username" value="coupon"/>
                 <property name="password" value="coupon"/>
             </dataSource>

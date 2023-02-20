@@ -50,7 +50,7 @@
         <caffeine-2-version>2.8.8</caffeine-2-version>
         <log4j2-version>2.9.1</log4j2-version>
         <mybatis-version>3.4.5</mybatis-version>
-        <mysql-version>8.0.21</mysql-version>
+        <mysql-version>8.0.32</mysql-version>
         <snakeyml-version>1.28</snakeyml-version>
         <slf4j-version>1.7.25</slf4j-version>
         <mockito-version>2.23.0</mockito-version>

@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class WaitTimeout {
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/manfred", "coupon", "coupon");
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3300/manfred", "coupon", "coupon");
         System.out.println("Database Connection Established.\n");
         System.out.println(connection.createStatement().execute("set session wait_timeout=2"));
 
