@@ -18,7 +18,8 @@ Firstname Lastname <author@asciidoctor.org>
 *这是加粗的文字* +
 _这是倾斜的文字_ +
 *_这是斜体加粗的文字_* +
-~~[.line-through]#这是加删除线的文字#~~
+[.line-through]#这是加删除线的文字# +
+[.underline]#这是加下划线的文字# +
 
 == 三、引用
 [quote]
