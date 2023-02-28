@@ -51,44 +51,51 @@ package exe218.the.skyline.problem;
 // Related Topics 树状数组 线段树 数组 分治 有序集合 扫描线 堆（优先队列） 👍 760 👎 0
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.PriorityQueue;
 import java.util.Set;
+import java.util.stream.Collectors;
 
-class Solution {
+class SolutionV2 {
     public List<List<Integer>> getSkyline(int[][] buildings) {
 
         Set<Integer> keyPoints = new HashSet<>();
+        PriorityQueue<int[]> buildingQueue
+                = new PriorityQueue<>(buildings.length, Comparator.comparingInt(o -> o[1]));
         for (int[] building : buildings) {
             keyPoints.add(building[0]);
             keyPoints.add(building[1]);
+            buildingQueue.add(building);
         }
-        List<Integer> sortedKeyPoints = new ArrayList<>(keyPoints);
-        Collections.sort(sortedKeyPoints);
+        List<Integer> sortedKeyPoints = new ArrayList<>(keyPoints).stream()
+                .sorted().collect(Collectors.toList());
+
 
         List<List<Integer>> result = new ArrayList<>();
         int lastHeight = 0;
-        int from = 0;
-        Arrays.sort(buildings, Comparator.comparingInt(o -> o[1]));
         for (Integer keyPoint : sortedKeyPoints) {
             int height = 0;
-            for (int i = from; i < buildings.length; i++) {
-                int[] building = buildings[i];
-                // 如果关键点已经落到当前 building 的右面，则不需要再判断其大小
-                if (keyPoint >= building[1]) {
-                    from = i + 1;
-                    continue;
+            while (!buildingQueue.isEmpty()) {
+                int[] building = buildingQueue.peek();
+                if (building[1] <= keyPoint) {
+                    buildingQueue.poll();
+                } else {
+                    break;
                 }
-                if (building[0] > keyPoint) {
-                    continue;
-                }
-                if (building[2] > height) {
+            }
+
+            Iterator<int[]> buildingIterator = buildingQueue.iterator();
+            while (buildingIterator.hasNext()) {
+                int[] building = buildingIterator.next();
+                if (building[0] <= keyPoint && building[2] > height) {
                     height = building[2];
                 }
             }
+
+
             if (height != lastHeight) {
                 List<Integer> keyPointWithHeight = new ArrayList<>();
                 keyPointWithHeight.add(keyPoint);
