@@ -1,6 +1,6 @@
 package exe226.invert.binary.tree;
 
-public class TreeNode {
+class TreeNode {
     int val;
     TreeNode left;
     TreeNode right;
