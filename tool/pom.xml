@@ -33,6 +33,7 @@
         <module>padding-beans</module>
         <module>jsqlparser</module>
         <module>open-rewrite</module>
+        <module>parser</module>
     </modules>
 
 </project>
