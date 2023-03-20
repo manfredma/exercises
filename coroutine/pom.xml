@@ -14,7 +14,6 @@
     <modules>
         <module>quasar</module>
         <module>ea-async</module>
-        <module>quasar-aot</module>
     </modules>
 
     <properties>

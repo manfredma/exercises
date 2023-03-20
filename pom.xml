@@ -34,12 +34,10 @@
         <module>distribution</module>
         <module>sandbox</module>
         <module>net</module>
-        <module>kotlin</module>
         <module>dsl</module>
         <module>rdbms</module>
         <module>batch_processing</module>
         <module>batch_processing/spring_batch</module>
-        <module>asm/antlr</module>
         <module>tool/freemarker</module>
         <module>arch-pattern</module>
     </modules>
@@ -134,8 +132,8 @@
                 <version>${mybatis-version}</version>
             </dependency>
             <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
+                <groupId>com.mysql</groupId>
+                <artifactId>mysql-connector-j</artifactId>
                 <version>${mysql-version}</version>
             </dependency>
 
@@ -471,30 +469,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-help-plugin</artifactId>
                 <version>3.2.0</version>
-            </plugin>
-            <plugin>
-                <groupId>org.jetbrains.kotlin</groupId>
-                <artifactId>kotlin-maven-plugin</artifactId>
-                <version>${kotlin.version}</version>
-                <executions>
-                    <execution>
-                        <id>compile</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>test-compile</id>
-                        <phase>test-compile</phase>
-                        <goals>
-                            <goal>test-compile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <jvmTarget>1.8</jvmTarget>
-                </configuration>
             </plugin>
 
             <plugin>

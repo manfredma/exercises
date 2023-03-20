@@ -1,14 +1,14 @@
 package manfred.antlr.array;// import ANTLR's runtime libraries
 
-import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 public class TreeMain {
     public static void main(String[] args) throws Exception {
         // create a CharStream that reads from standard input
-        CharStream input = new ANTLRInputStream(System.in);
+        CharStream input = CharStreams.fromStream(System.in);
 
         // create a lexer that feeds off of input CharStream
         ArrayLexer lexer = new ArrayLexer(input);

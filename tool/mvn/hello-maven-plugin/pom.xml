@@ -98,6 +98,7 @@
                     <goalPrefix>hello</goalPrefix>
                     <skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
                 </configuration>
+
             </plugin>
         </plugins>
     </build>

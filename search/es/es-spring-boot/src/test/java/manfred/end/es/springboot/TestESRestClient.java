@@ -1,10 +1,15 @@
 package manfred.end.es.springboot;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
 import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
-import org.elasticsearch.action.admin.indices.delete.DeleteIndexResponse;
-import org.elasticsearch.action.admin.indices.mapping.put.PutMappingRequest;
 import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetRequest;
@@ -13,15 +18,20 @@ import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.action.support.master.AcknowledgedResponse;
 import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.client.IndicesClient;
+import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
-
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.xcontent.XContentType;
-import org.elasticsearch.index.query.*;
+import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.MultiMatchQueryBuilder;
+import org.elasticsearch.index.query.Operator;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.TermQueryBuilder;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
@@ -31,10 +41,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.*;
 
 /**
  * TestES class
@@ -70,9 +76,10 @@ public class TestESRestClient {
          *    }
          * }
          */
-        request.settings(Settings.builder().put("number_of_shards", 1).put("number_of_replicas", 0));
+        request.settings(Settings.builder().put("number_of_shards", 1).put("number_of_replicas",
+                0));
         IndicesClient indicesClient = restHighLevelClient.indices();    //通过ES连接对象获取索引库管理对象
-        CreateIndexResponse response = indicesClient.create(request);
+        CreateIndexResponse response = indicesClient.create(request, RequestOptions.DEFAULT);
         System.out.println(response.isAcknowledged());  //操作是否成功
     }
 
@@ -85,7 +92,7 @@ public class TestESRestClient {
     public void testDeleteIndex() throws IOException {
         DeleteIndexRequest request = new DeleteIndexRequest("xc_course");
         IndicesClient indicesClient = restHighLevelClient.indices();
-        DeleteIndexResponse response = indicesClient.delete(request);
+        AcknowledgedResponse response = indicesClient.delete(request, RequestOptions.DEFAULT);
         System.out.println(response.isAcknowledged());
     }
 
@@ -97,7 +104,8 @@ public class TestESRestClient {
     @Test
     public void testCreateIndexWithMapping() throws IOException {
         CreateIndexRequest request = new CreateIndexRequest("xc_course");
-        request.settings(Settings.builder().put("number_of_shards", 1).put("number_of_replicas", 0));
+        request.settings(Settings.builder().put("number_of_shards", 1).put("number_of_replicas",
+                0));
         request.mapping("doc", "{\n" +
                 "    \"properties\": {\n" +
                 "        \"name\": {\n" +
@@ -116,7 +124,7 @@ public class TestESRestClient {
                 "    }\n" +
                 "}", XContentType.JSON);
         IndicesClient indicesClient = restHighLevelClient.indices();
-        CreateIndexResponse response = indicesClient.create(request);
+        CreateIndexResponse response = indicesClient.create(request, RequestOptions.DEFAULT);
         System.out.println(response.isAcknowledged());
     }
 
@@ -135,7 +143,7 @@ public class TestESRestClient {
         jsonMap.put("timestamp", FORMAT.format(new Date(System.currentTimeMillis())));
         IndexRequest request = new IndexRequest("xc_course", "doc");
         request.source(jsonMap);
-        IndexResponse response = restHighLevelClient.index(request);
+        IndexResponse response = restHighLevelClient.index(request, RequestOptions.DEFAULT);
         System.out.println(response);
     }
 
@@ -147,7 +155,7 @@ public class TestESRestClient {
     @Test
     public void testFindById() throws IOException {
         GetRequest request = new GetRequest("xc_course", "doc", "1");
-        GetResponse response = restHighLevelClient.get(request);
+        GetResponse response = restHighLevelClient.get(request, RequestOptions.DEFAULT);
         System.out.println(response);
     }
 
@@ -164,7 +172,7 @@ public class TestESRestClient {
         docMap.put("price", 99.8);
         docMap.put("timestamp", FORMAT.format(new Date(System.currentTimeMillis())));
         request.doc(docMap);
-        UpdateResponse response = restHighLevelClient.update(request);
+        UpdateResponse response = restHighLevelClient.update(request, RequestOptions.DEFAULT);
         System.out.println(response);
         testFindById();
     }
@@ -177,7 +185,7 @@ public class TestESRestClient {
     @Test
     public void testDeleteDoc() throws IOException {
         DeleteRequest request = new DeleteRequest("xc_course", "doc", "BtcGnHgBqMLYNOHtVsoa");
-        DeleteResponse response = restHighLevelClient.delete(request);
+        DeleteResponse response = restHighLevelClient.delete(request, RequestOptions.DEFAULT);
         System.out.println(response);
     }
 
@@ -209,7 +217,7 @@ public class TestESRestClient {
         //将请求体设置到请求对象中
         request.source(searchSourceBuilder);
         //发起DSL请求
-        SearchResponse response = restHighLevelClient.search(request);
+        SearchResponse response = restHighLevelClient.search(request, RequestOptions.DEFAULT);
         System.out.println(response);
 
 
@@ -241,7 +249,7 @@ public class TestESRestClient {
         searchSourceBuilder.fetchSource(new String[]{"name", "studymodel"}, null);
 
         request.source(searchSourceBuilder);
-        SearchResponse response = restHighLevelClient.search(request);
+        SearchResponse response = restHighLevelClient.search(request, RequestOptions.DEFAULT);
         System.out.println(response);
     }
 
@@ -265,7 +273,7 @@ public class TestESRestClient {
         SearchResponse response = null;
         try {
             System.out.println(request);
-            response = restHighLevelClient.search(request);
+            response = restHighLevelClient.search(request, RequestOptions.DEFAULT);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -317,7 +325,9 @@ public class TestESRestClient {
         request.types("doc");
 
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
-        sourceBuilder.query(QueryBuilders.matchQuery("name", "spring开发指南").minimumShouldMatch("70%")); //3*0.7 -> 2
+        sourceBuilder.query(QueryBuilders.matchQuery("name", "spring开发指南").minimumShouldMatch(
+                "70" +
+                        "%")); //3*0.7 -> 2
 
         printResult(request, sourceBuilder);
     }
@@ -342,9 +352,12 @@ public class TestESRestClient {
     public void testUpdateDoc2() throws IOException {
         UpdateRequest request = new UpdateRequest("xc_course", "doc", "1");
         Map<String, Object> docMap = new HashMap<>();
-        docMap.put("description", "Bootstrap是由Twitter推出的一个css前台页面开发框架，是一个非常流行的css开发框架，此框架集成了多种css页面效果。此开发框架包含了大量的CSS、JS程序代码，可以帮助css开发者（尤其是不擅长css页面开发的程序人员）轻松的实现一个不受浏览器限制的精美界面效果。");
+        docMap.put("description",
+                "Bootstrap是由Twitter推出的一个css前台页面开发框架，是一个非常流行的css开发框架，此框架集成了多种css" +
+                        "页面效果。此开发框架包含了大量的CSS、JS程序代码，可以帮助css开发者（尤其是不擅长css" +
+                        "页面开发的程序人员）轻松的实现一个不受浏览器限制的精美界面效果。");
         request.doc(docMap);
-        UpdateResponse response = restHighLevelClient.update(request);
+        UpdateResponse response = restHighLevelClient.update(request, RequestOptions.DEFAULT);
         System.out.println(response);
         testFindById();
     }
@@ -358,7 +371,8 @@ public class TestESRestClient {
         request.types("doc");
 
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
-        MultiMatchQueryBuilder multiMatchQueryBuilder = QueryBuilders.multiMatchQuery("spring css", "name", "description").minimumShouldMatch("50%");
+        MultiMatchQueryBuilder multiMatchQueryBuilder = QueryBuilders.multiMatchQuery("spring " +
+                "css", "name", "description").minimumShouldMatch("50%");
         multiMatchQueryBuilder.field("name", 10);
         sourceBuilder.query(multiMatchQueryBuilder);
 
@@ -374,7 +388,8 @@ public class TestESRestClient {
         BoolQueryBuilder boolQueryBuilder = new BoolQueryBuilder();        //query.bool
 
         TermQueryBuilder termQueryBuilder = QueryBuilders.termQuery("name", "spring");
-        MultiMatchQueryBuilder multiMatchQueryBuilder = QueryBuilders.multiMatchQuery("开发框架", "name", "description");
+        MultiMatchQueryBuilder multiMatchQueryBuilder = QueryBuilders.multiMatchQuery("开发框架",
+                "name", "description");
 
         boolQueryBuilder.must(termQueryBuilder);        //query.bool.must
         boolQueryBuilder.must(multiMatchQueryBuilder);
