@@ -34,6 +34,7 @@
         <module>jsqlparser</module>
         <module>open-rewrite</module>
         <module>parser</module>
+        <module>git</module>
     </modules>
 
 </project>
