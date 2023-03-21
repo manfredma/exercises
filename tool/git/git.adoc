@@ -1,4 +1,5 @@
 
+ObjectInserter: 对象插入（包含了hashId的生成）
 
 == 参考
 https://www.vogella.com/tutorials/JGit/article.html[JGit - Tutorial]
