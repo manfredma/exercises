@@ -36,22 +36,54 @@ import java.util.Stack;
  */
 class Solution {
     public int calculate(String s) {
+        s = s.replaceAll(" ", "");
         int index = 0;
         Stack<Object> stack = new Stack<>();
-        int x = parseInteger(s, index, stack);
+        index = parseInteger(s, index, stack);
 
-        return 0;
+        while (index < s.length()) {
+            index = parseOp(s, index, stack);
+            char op = (Character) stack.peek();
+            index = parseInteger(s, index, stack);
+            if (op == '*' || op == '/') {
+                int right = (Integer) stack.pop();
+                char x = (Character) stack.pop();
+                int left = (Integer) stack.pop();
+                if (x == '*') {
+                    stack.push(right * left);
+                } else {
+                    stack.push(left / right);
+                }
+            }
+        }
+
+        int result = (Integer) stack.get(0);
+        for (int i = 1; i < stack.size(); i = i + 2) {
+            if ((Character) stack.get(i) == '+') {
+                result = result + (Integer) stack.get(i + 1);
+            } else {
+                result = result - (Integer) stack.get(i + 1);
+            }
+        }
+        return result;
     }
 
     private int parseInteger(String s, int index, Stack<Object> stack) {
-        while (s.charAt(index) == ' ') {
+        StringBuilder x = new StringBuilder();
+        while (index < s.length()) {
+            if (!Character.isDigit(s.charAt(index))) {
+                break;
+            }
+            x.append(s.charAt(index));
             index++;
         }
-        String x = "";
-        if (Character.isDigit(s.charAt(index))) {
-            x += s.charAt(index);
-        }
-        stack.push(x);
+
+        stack.push(Integer.parseInt(x.toString()));
         return index;
+    }
+
+    private int parseOp(String s, int index, Stack<Object> stack) {
+        stack.push(s.charAt(index));
+        return ++index;
     }
 }
