@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="manfred.end.rdbms.mybatis.version7.MyMapper">
+
+
+    <resultMap type="manfred.end.rdbms.mybatis.Book" id="bookV2">
+        <!-- 订单表属性 -->
+        <result column="id" property="id"/>
+        <result column="author" property="author"/>
+        <result column="title" property="title"/>
+        <result column="published" property="published"/>
+        <result column="remark" property="remark"/>
+    </resultMap>
+
+
+    <insert id="insertBook" parameterType="manfred.end.rdbms.mybatis.Book">
+        INSERT INTO MyBooks(Author, Title, Published, Remark)
+        VALUES (#{author}, #{title}, #{published}, #{remark});
+    </insert>
+
+
+    <select id="getBookById" resultMap="bookV2">
+        SELECT * FROM MyBooks WHERE Id = #{id}
+    </select>
+
+    <select id="getBooksByAuthor" resultMap="bookV2">
+        SELECT * FROM MyBooks WHERE Author = #{author}
+    </select>
+
+    <update id="updateBookCreated">
+        update MyBooks set created = date_add(created, interval 1 second) where created <![CDATA[ < ]]> #{date}
+    </update>
+
+
+</mapper>

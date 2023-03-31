@@ -35,6 +35,7 @@ public class MyBatisBooksXml {
     public void deleteBooks2() {
         Map<String, Object> param = new HashMap<>();
         List<Long> ids = new ArrayList<>();
+        ids.add(1L);
         param.put("ids", ids);
         int result = session.delete("deleteBook", param);
         session.commit();
