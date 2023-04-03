@@ -2,14 +2,7 @@ package com.test;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.beans.factory.support.BeanDefinitionReader;
-import org.springframework.beans.factory.support.BeanDefinitionRegistry;
-import org.springframework.beans.factory.support.DefaultListableBeanFactory;
-import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
-import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 
 public class TestBean {
 
@@ -28,5 +21,12 @@ public class TestBean {
         BeanFactory fa = new ClassPathXmlApplicationContext("beans.xml");
         TestBean bean = fa.getBean("testBean", TestBean.class);
         System.out.println(bean.getShowMsg());
+
+        A a = fa.getBean("a", A.class);
+        B b = fa.getBean("b", B.class);
+
+        System.out.println(System.identityHashCode(a) + ": " + a);
+        System.out.println(System.identityHashCode(b) + ": " + b);
+
     }
 }
