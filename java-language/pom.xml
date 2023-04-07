@@ -20,6 +20,7 @@
         <module>java-jar</module>
         <module>java-thread</module>
         <module>java-collection</module>
+        <module>java-generic</module>
     </modules>
 
 
