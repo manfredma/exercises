@@ -15,6 +15,7 @@
     <modules>
         <module>dci</module>
         <module>orthogonal-design</module>
+        <module>layer</module>
     </modules>
 
     <properties>
