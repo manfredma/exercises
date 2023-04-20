@@ -51,10 +51,10 @@ public class TimeServer {
         }
     }
 
-    private class ChildChannelHandler extends ChannelInitializer<SocketChannel> {
+    private static class ChildChannelHandler extends ChannelInitializer<SocketChannel> {
 
         @Override
-        protected void initChannel(SocketChannel ch) throws Exception {
+        protected void initChannel(SocketChannel ch) {
             ch.pipeline().addLast(new TimeServerHandler());
         }
     }
