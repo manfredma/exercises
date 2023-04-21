@@ -56,7 +56,7 @@
         <junit4-version>4.12</junit4-version>
         <jmh-version>1.23</jmh-version>
         <guava-version>30.1-jre</guava-version>
-        <es-version>7.5.2</es-version>
+        <es-version>7.10.0</es-version>
         <jackson-version>2.11.0</jackson-version>
         <commons-lang3-version>3.8.1</commons-lang3-version>
         <jsonp-version>1.13.1</jsonp-version>

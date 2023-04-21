@@ -7,6 +7,19 @@ Elastic 的底层是开源库 Lucene。但是，你没法直接用 Lucene，必�
 接口，开箱即用。Elastic 的底层是开源库 Lucene。但是，你没法直接用 Lucene，必须自己写代码去调用它的接口。Elastic 是 Lucene 的封装，提供了
 REST API 的操作接口，开箱即用。
 
+== CURL示例
+curl  -H "Accept: application/json" -H "Content-type: application/json" -X PUT 'http://127.0.0.1:9200/shop?pretty' -d '{"mappings":{"_source":{"enabled":true},"properties":{"cityid":{"type":"integer"},"address":{"type":"keyword"},"shopid":{"type":"integer"},"shopname":{"type":"text"},"shoppoi":{"type":"geo_point"}}},"settings":{"index":{"number_of_shards":"2","number_of_replicas":"1"}}}'
+
+
+curl -H "Accept: application/json" -H "Content-type: application/json" -X POST  '127.0.0.1:9200/shop/_doc/1000' -d '{"shopid":1000,"shopname":"肯德基","cityid":1,"address":"胜辛路426号2层222-3号商铺","shoppoi":"31.331241607666016,121.25092315673828"}'
+curl -H "Accept: application/json" -H "Content-type: application/json" -X POST  '127.0.0.1:9200/shop/_doc/1001' -d '{"shopid":1001,"shopname":"肯德基","cityid":1,"address":"浦江镇召楼路1976号","shoppoi":"31.05731773376465,121.5353012084961"}'
+curl -H "Accept: application/json" -H "Content-type: application/json" -X POST  '127.0.0.1:9200/shop/_doc/1002' -d '{"shopid":1002,"shopname":"肯德基","cityid":1,"address":"长宁区北新泾四村5号","shoppoi":"31.21916961669922,121.36328125"}'
+curl -H "Accept: application/json" -H "Content-type: application/json" -X POST  '127.0.0.1:9200/shop/_doc/1003' -d '{"shopid":1003,"shopname":"肯德基","cityid":1,"address":"铁路上海虹桥站出发层2F-26","shoppoi":"31.197473526000977,121.3229751586914"}'
+curl -H "Accept: application/json" -H "Content-type: application/json" -X POST  '127.0.0.1:9200/shop/_doc/1004' -d '{"shopid":1004,"shopname":"肯德基","cityid":1,"address":"金沙江路956号","shoppoi":"31.23369598388672,121.3904037475586"}'
+curl -H "Accept: application/json" -H "Content-type: application/json" -X POST  '127.0.0.1:9200/shop/_doc/1005' -d '{"shopid":1005,"shopname":"肯德基","cityid":1,"address":"川沙路4839号","shoppoi":"31.197004318237305,121.69368743896484"}'
+
+
+curl -H "Accept: application/json" -H "Content-type: application/json" -X GET '127.0.0.1:9200/shop/_search' -d '{"query": {"bool": {"must": [{"match_all": {}}],"must_not": [],"should": [],"filter": []}},"from": 0,"size": 10,"sort": [],"profile": false}'
 
 |===
 |SQL |Elasticsearch |Description
