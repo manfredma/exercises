@@ -24,10 +24,10 @@ import org.elasticsearch.search.builder.SearchSourceBuilder;
  */
 public class SearchDemo {
 
-    private static Logger logger = LogManager.getRootLogger();
+    private static final Logger LOGGER = LogManager.getRootLogger();
 
     public static void main(String[] args) {
-        try (RestHighLevelClient client = InitDemo.getClient();) {
+        try (RestHighLevelClient client = InitDemo.getClient()) {
 
             // 1、创建search请求
             SearchRequest searchRequest = new SearchRequest("mess");
@@ -78,12 +78,12 @@ public class SearchDemo {
                 //取_source字段值
                 String sourceAsString = hit.getSourceAsString(); //取成json串
                 Map<String, Object> sourceAsMap = hit.getSourceAsMap(); // 取成map对象
-                logger.info("index:" + index + "  type:" + type + "  id:" + id);
-                logger.info(sourceAsString);
+                LOGGER.info("index:" + index + "  type:" + type + "  id:" + id);
+                LOGGER.info(sourceAsString);
             }
 
         } catch (IOException e) {
-            logger.error(e);
+            LOGGER.error(e);
         }
     }
 }

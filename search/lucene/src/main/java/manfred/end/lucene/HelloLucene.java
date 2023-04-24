@@ -62,7 +62,7 @@ public class HelloLucene {
         }
 
         // reader can only be closed when there
-        // is no need to access the documents any more.
+        // is no need to access the documents anymore.
         reader.close();
 
     }
