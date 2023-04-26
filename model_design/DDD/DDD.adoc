@@ -101,3 +101,4 @@ https://mp.weixin.qq.com/s/a5NiKLFZsg54P_fcXPkahg[深入理解领域驱动设计
 http://apframework.com/2020/03/22/ddd-color/[DDD：四色建模]
 https://www.infoq.cn/article/xh-four-color-modeling[运用四色建模法进行领域分析]
 
+https://domain-driven-design.org/zh/ddd-concept-reference.html[DDD 概念参考]

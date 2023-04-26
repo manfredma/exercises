@@ -3,13 +3,12 @@ package com.yinwenjie.test.cameltest.helloworld;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
 import org.apache.camel.Exchange;
 import org.apache.camel.ExchangePattern;
 import org.apache.camel.Message;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.http.HttpMessage;
+import org.apache.camel.http.common.HttpMessage;
 import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.model.ModelCamelContext;
 
@@ -43,7 +42,7 @@ public class HelloWorld extends RouteBuilder {
     }
 
     @Override
-    public void configure() throws Exception {
+    public void configure() {
         // 在本代码段之下随后的说明中，会详细说明这个构造的含义
         from("jetty:http://0.0.0.0:8282/doHelloWorld")
                 .process(new HttpProcessor())
@@ -78,9 +77,6 @@ public class HelloWorld extends RouteBuilder {
 
         /**
          * 从stream中分析字符串内容
-         *
-         * @param bodyStream
-         * @return
          */
         private String analysisMessage(InputStream bodyStream) throws IOException {
             ByteArrayOutputStream outStream = new ByteArrayOutputStream();
