@@ -1,3 +1,5 @@
+package manfred.end.hardware.info;
+
 import fr.ujm.tse.lt2c.satin.cache.exceptions.CacheNotFoundException;
 import fr.ujm.tse.lt2c.satin.cache.size.CacheInfo;
 import fr.ujm.tse.lt2c.satin.cache.size.CacheLevel;
@@ -10,7 +12,7 @@ import fr.ujm.tse.lt2c.satin.cache.size.CacheType;
  * @author manfred
  * @since 2019-12-02 下午2:19
  */
-public class Main {
+public class CpuCacheInfo {
     public static void main(String[] args) throws CacheNotFoundException {
         CacheInfo info = CacheInfo.getInstance();
         CacheLevelInfo l1Datainf = info.getCacheInformation(CacheLevel.L1, CacheType.DATA_CACHE);

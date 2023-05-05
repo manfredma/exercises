@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>cpu-cache</artifactId>
+    <artifactId>hardware-info</artifactId>
 
     <dependencies>
         <dependency>
@@ -23,6 +23,12 @@
             <groupId>ru.concerteza.util</groupId>
             <artifactId>ctz-utils</artifactId>
             <version>2.35</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.oshi</groupId>
+            <artifactId>oshi-core</artifactId>
+            <version>6.4.0</version>
         </dependency>
 
     </dependencies>

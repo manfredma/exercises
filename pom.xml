@@ -40,6 +40,7 @@
         <module>batch_processing/spring_batch</module>
         <module>tool/freemarker</module>
         <module>arch-pattern</module>
+        <module>graph</module>
     </modules>
     <packaging>pom</packaging>
 

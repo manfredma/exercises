@@ -35,6 +35,7 @@
         <module>open-rewrite</module>
         <module>parser</module>
         <module>git</module>
+        <module>hutool</module>
     </modules>
 
 </project>

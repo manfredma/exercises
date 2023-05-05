@@ -13,7 +13,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>leet-code-grap</module>
-        <module>cpu-cache</module>
+        <module>hardware-info</module>
         <module>map-struct</module>
     </modules>
 
