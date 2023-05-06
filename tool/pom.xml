@@ -36,6 +36,7 @@
         <module>parser</module>
         <module>git</module>
         <module>hutool</module>
+        <module>echart-java</module>
     </modules>
 
 </project>
