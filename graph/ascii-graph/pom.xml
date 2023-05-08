@@ -5,22 +5,32 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>manfred.end</groupId>
-        <artifactId>exercises</artifactId>
+        <artifactId>graph</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>graph</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>jgrapht</module>
-        <module>tree-ascii</module>
-        <module>ascii-graph</module>
-    </modules>
+    <artifactId>ascii-graph</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/com.indvd00m.ascii.render/ascii-render -->
+        <dependency>
+            <groupId>com.indvd00m.ascii.render</groupId>
+            <artifactId>ascii-render</artifactId>
+            <version>2.2.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.freva</groupId>
+            <artifactId>ascii-table</artifactId>
+            <version>1.8.0</version>
+        </dependency>
+
+    </dependencies>
 
 </project>
