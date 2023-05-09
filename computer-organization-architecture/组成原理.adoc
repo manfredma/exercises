@@ -1,0 +1,5 @@
+
+
+== 参考
+[%hardbreaks]
+https://gist.github.com/jboner/2841832[Latency Numbers Every Programmer Should Know]

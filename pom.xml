@@ -41,6 +41,7 @@
         <module>tool/freemarker</module>
         <module>arch-pattern</module>
         <module>graph</module>
+        <module>computer-organization-architecture</module>
     </modules>
     <packaging>pom</packaging>
 
