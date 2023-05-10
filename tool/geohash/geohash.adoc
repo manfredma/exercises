@@ -1,0 +1,6 @@
+
+
+== 参考
+[%hardbreaks]
+https://github.com/kungfoo/geohash-java[java code for geohashes]
+https://www.cnblogs.com/LBSer/category/575692.html[空间索引原理]
