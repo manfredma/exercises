@@ -1,0 +1,5 @@
+
+
+== 参考
+[%hardbreaks]
+https://www.cnblogs.com/xiaolincoding/p/15628854.html[为了拿捏 Redis 数据结构，我画了 40 张图（完整版）]
