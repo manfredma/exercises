@@ -43,6 +43,7 @@
         <module>graph</module>
         <module>computer-organization-architecture</module>
         <module>real-time-computing</module>
+        <module>chart</module>
     </modules>
     <packaging>pom</packaging>
 

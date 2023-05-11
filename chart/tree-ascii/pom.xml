@@ -5,20 +5,32 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>manfred.end</groupId>
-        <artifactId>exercises</artifactId>
+        <artifactId>chart</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>graph</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>jgrapht</module>
-    </modules>
+    <artifactId>tree-ascii</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/hu.webarticum/tree-printer -->
+        <dependency>
+            <groupId>hu.webarticum</groupId>
+            <artifactId>tree-printer</artifactId>
+            <version>2.2.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.barfuin.texttree</groupId>
+            <artifactId>text-tree</artifactId>
+            <version>2.1.2</version>
+        </dependency>
+
+    </dependencies>
 
 </project>
