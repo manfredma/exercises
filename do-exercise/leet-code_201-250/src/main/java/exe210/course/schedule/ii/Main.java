@@ -36,11 +36,15 @@ import java.util.Arrays;
 public class Main {
     public static void main(String[] args) {
         Solution solution = new Solution();
+        Solution2 solution2 = new Solution2();
+        System.out.println(Arrays.toString(solution2.findOrder(2, new int[][]{{1, 0}})));
+
         System.out.println(Arrays.toString(solution.findOrder(4, new int[][]{{1, 0}, {2, 0}, {3, 1}, {3, 2}})));
+        System.out.println(Arrays.toString(solution2.findOrder(4, new int[][]{{1, 0}, {2, 0}, {3, 1}, {3, 2}})));
+
         System.out.println(Arrays.toString(solution.findOrder(2, new int[][]{{1, 0}})));
 
 
-        Solution2 solution2 = new Solution2();
         System.out.println(Arrays.toString(solution2.findOrder(800, new int[][]{
                 {695, 229}, {199, 149}, {443, 397}, {258, 247}, {781, 667}, {350, 160}, {678, 629}, {467, 166}, {500, 450}, {477, 107},
                 {483, 151}, {792, 785}, {752, 368}, {659, 623}, {316, 224}, {487, 268}, {743, 206}, {552, 211}, {314, 20}, {720, 196},
