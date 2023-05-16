@@ -5,7 +5,7 @@ import java.util.Map;
 import ognl.Ognl;
 import ognl.OgnlException;
 
-public class Boot {
+public class HelloOgnl {
 
     public static void main(String[] args) throws OgnlException {
 
@@ -14,7 +14,7 @@ public class Boot {
         user.setName("downpour");
 
         // 创建上下文环境
-        Map context = new HashMap();
+        Map<String, Object> context = new HashMap<>();
         context.put("introduction", "My name is ");
 
         // 测试从Root对象中进行表达式计算并获取结果
