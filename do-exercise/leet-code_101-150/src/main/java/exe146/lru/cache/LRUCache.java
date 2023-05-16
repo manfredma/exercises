@@ -5,18 +5,17 @@ import java.util.Map;
 
 class LRUCache {
 
-    private int capacity;
+    private final ListNode head = new ListNode(-1, -1);
+    private final ListNode tail = new ListNode(-1, -1);
+    private final int capacity;
+    private final Map<Integer, ListNode> indexMap;
     private int size;
 
-    private ListNode head = new ListNode(-1, -1);
-    private ListNode tail = new ListNode(-1, -1);
-
-    private Map<Integer, ListNode> indexMap;
-
     public LRUCache(int capacity) {
-        indexMap = new HashMap<>(capacity);
         this.capacity = capacity;
+        indexMap = new HashMap<>(capacity);
         this.size = 0;
+
         head.next = tail;
         tail.pre = head;
     }
@@ -30,10 +29,8 @@ class LRUCache {
         cur.pre.next = cur.next;
         cur.next.pre = cur.pre;
 
-
         cur.next = head.next;
         head.next.pre = cur;
-
 
         cur.pre = head;
         head.next = cur;
@@ -48,21 +45,9 @@ class LRUCache {
             old.next.pre = old.pre;
             indexMap.remove(key);
             size--;
-            put(key, value);
-            return;
         }
-
-        if (size < capacity) {
-            size++;
-            ListNode cur = new ListNode(key, value);
-            cur.next = head.next;
-            head.next.pre = cur;
-
-            head.next = cur;
-            cur.pre = head;
-
-            indexMap.put(key, cur);
-        } else {
+        // 处理集合满的情况
+        if (size == capacity) {
             size--;
             ListNode preTail = tail.pre;
             indexMap.remove(preTail.key);
@@ -72,8 +57,16 @@ class LRUCache {
 
             preTail.next = null;
             preTail.pre = null;
-            put(key, value);
         }
+        size++;
+        ListNode cur = new ListNode(key, value);
+        cur.next = head.next;
+        head.next.pre = cur;
+
+        head.next = cur;
+        cur.pre = head;
+
+        indexMap.put(key, cur);
     }
 
     private static class ListNode {
