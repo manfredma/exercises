@@ -2,16 +2,16 @@ package exe1206.design.skiplist;
 
 class SkiplistV2 {
 
-    private static int LEVEL_SIZE = 32;
+    private static final int LEVEL_SIZE = 32;
 
     /**
      * 最大层数
      */
-    private static int DEFAULT_MAX_LEVEL = LEVEL_SIZE - 1;
+    private static final int DEFAULT_MAX_LEVEL = LEVEL_SIZE - 1;
     /**
      * 随机层数概率，也就是随机出的层数，在 第1层以上(不包括第一层)的概率，层数不超过maxLevel，层数的起始号为1
      */
-    private static double DEFAULT_P_FACTOR = 0.5;
+    private static final double DEFAULT_P_FACTOR = 0.5;
 
     Node head = new Node(null, LEVEL_SIZE); //头节点
 
