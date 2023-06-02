@@ -1,0 +1,5 @@
+
+
+== 参考
+https://github.com/wangdoc/bash-tutorial[bash tutorial source]
+https://wangdoc.com/bash/[bash脚本教程]
