@@ -3,10 +3,10 @@ package fastjson;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
+import org.junit.Test;
 
 /**
  * @author manfred
@@ -14,7 +14,7 @@ import java.util.TreeMap;
  */
 public class JSONTest {
 
-    @org.junit.Test
+    @Test
     public void testBasic() {
         System.out.println(JSON.toJSON("xxxx"));
         System.out.println(JSON.toJSON("xxxx"));
@@ -30,7 +30,7 @@ public class JSONTest {
         System.out.println();
     }
 
-    @org.junit.Test
+    @Test
     public void testDeSerialization() {
         Map<String, Object> xxx = new HashMap<>();
         xxx.put("1", "1");
@@ -44,7 +44,7 @@ public class JSONTest {
         System.out.println(xxx);
     }
 
-    @org.junit.Test
+    @Test
     public void testSerialization() {
         Map<String, Object> xxx = new HashMap<>();
         xxx.put("2", null);
@@ -60,7 +60,7 @@ public class JSONTest {
         System.out.println(xxx);
     }
 
-    @org.junit.Test
+    @Test
     public void testTreeMap() {
         Map<String, Object> xxx = new TreeMap<>();
         xxx.put("3", "3");
@@ -74,7 +74,7 @@ public class JSONTest {
         System.out.println(JSON.toJSONString(xxx));
     }
 
-    @org.junit.Test
+    @Test
     public void testTreeMap2() {
         Map<String, Object> xxx = new HashMap<>();
         xxx.put("3", "3");
@@ -89,7 +89,7 @@ public class JSONTest {
         System.out.println(JSON.toJSONString(JSONObject.parseObject(JSON.toJSONString(xxx))));
     }
 
-    @org.junit.Test
+    @Test
     public void testString2Integer () {
         A a = JSON.parseObject("{'a':'34124123'}", A.class);
         System.out.println(a);

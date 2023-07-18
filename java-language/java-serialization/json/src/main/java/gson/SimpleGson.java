@@ -5,7 +5,7 @@ import com.google.gson.Gson;
 /**
  * @author manfred on 2022/5/23.
  */
-public class Boot {
+public class SimpleGson {
 
     public static void main(String[] args) {
         Gson gson = new Gson();
