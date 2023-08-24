@@ -14,7 +14,7 @@ public class CreateIndexDemo {
 
     public static void main(String[] args) {
         //这里和RESTful风格不同
-        try (TransportClient client = InitDemo.getClient();) {
+        try (TransportClient client = InitDemo.getClient()) {
 
             // 1、创建 创建索引request
             CreateIndexRequest request = new CreateIndexRequest("mess");

@@ -44,6 +44,7 @@
         <module>computer-organization-architecture</module>
         <module>real-time-computing</module>
         <module>chart</module>
+        <module>draw</module>
     </modules>
     <packaging>pom</packaging>
 

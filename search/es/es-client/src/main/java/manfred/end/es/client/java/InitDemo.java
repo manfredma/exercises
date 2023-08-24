@@ -19,11 +19,10 @@ public class InitDemo {
             
             // 连接集群的设置
             Settings settings = Settings.builder()
-                    //.put("cluster.name", "myClusterName") //如果集群的名字不是默认的elasticsearch，需指定
+                    .put("cluster.name", "mycluster") //如果集群的名字不是默认的elasticsearch，需指定
                     .put("client.transport.sniff", true) //自动嗅探
                     .build();   
             client = new PreBuiltTransportClient(settings)
-                //.addTransportAddress(new TransportAddress(InetAddress.getByName("localhost"), 9300));
                 .addTransportAddress(new TransportAddress(InetAddress.getByName("127.0.0.1"), 9300));
             
             //可用连接设置参数说明

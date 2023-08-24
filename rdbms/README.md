@@ -35,7 +35,7 @@
 ` REVOKE SELECT ON *.* FROM 'pig'@'%';`
 
 **刷新授权**  
-` FLUSH PRIVILEGES`
+` FLUSH PRIVILEGES;`
 
 ### 3. 修改密码
 `SET PASSWORD FOR 'username'@'host' = PASSWORD('newpassword');`
@@ -49,8 +49,8 @@
 `show tables;`  
 `show create table mybooks;`
 
-
-# H2
+### 创建数据库
+`CREATE DATABASE IF NOT EXISTS magento2 DEFAULT CHARSET utf8 COLLATE utf8_general_ci;//创建数据库`
 
 # 参考
 

@@ -1,0 +1,219 @@
+@startuml
+!define ENTITY_BORDER_COLOR #2C3E50
+!define ENTITY_BACKGROUND_COLOR #FFFFFF
+!define ENTITY_FONT_COLOR #000000
+!define RELATION_BORDER_COLOR #34495E
+!define RELATION_ARROW_COLOR #34495E
+!define RELATION_FONT_COLOR #34495E
+
+skinparam class {
+    BorderColor ENTITY_BORDER_COLOR
+    BackgroundColor ENTITY_BACKGROUND_COLOR
+    FontColor ENTITY_FONT_COLOR
+    ArrowColor RELATION_ARROW_COLOR
+    BorderThickness 2
+}
+
+skinparam relationship {
+    BorderColor RELATION_BORDER_COLOR
+    FontColor RELATION_FONT_COLOR
+    Thickness 2
+}
+
+
+package "基础属性" <<frame>> {
+
+entity "属性定义 \n info_property_meta" as p {
+    * 属性ID : bigint(20)
+    --
+    属性名称 : varchar(255)
+    属性标识 : varchar(20)
+    是否允许多个取值 : smallint(4)
+    是否enum模式 : smallint(4)
+    值类型 : smallint(4)
+    单位类型 : smallint(4)
+    单位取值 : varchar(255)
+}
+
+entity "属性扩展信息 \n sc_property_extend" as p_extend {
+    * 扩展信息ID : bigint(20)
+    --
+    ** 属性ID : bigint(20) **
+    列名称 : varchar(64)
+    取值 : varchar(2000)
+}
+entity "属性取值基类 \n info_property_value_base" as p_value {
+    * 属性取值ID : bigint(20)
+    --
+    父属性取值ID : bigint(20)
+    ** 属性ID : bigint(20) **
+    str型值(enum) : varchar(1000)
+    int型值(enum) : bigint(20)
+    decimal型值(enum) : decimal(12,4)
+    单位取值 : varchar(255)
+    排序值 : int(11)
+}
+
+entity "属性级联约束 \n info_property_cascade_constraint" as p_c_c {
+    * 属性级联约束ID : bigint(20)
+    --
+    所属类目ID : int(11)
+    上游属性ID : bigint(20)
+    上游属性取值ID : bigint(20)
+    下游属性ID : bigint(20)
+    下游属性取值ID : bigint(20)
+}
+
+
+}
+
+package "类目属性" <<frame>> {
+entity "** 类目属性模板明细 ** \n info_category_property_meta" as c_p {
+    * 类目属性ID : bigint(20)
+    --
+    * 所属类目ID : bigint(20)
+    * 属性ID : bigint(20)
+    是否关键属性 : smallint(4)
+    是否销售属性 : smallint(4)
+    是否SPU一般属性 : smallint(4)
+    是否SKU一般属性 : smallint(4)
+    是否允许多个取值 : smallint(4)
+    属性值是否全选 : smallint(4)
+    属性管理数据维度 : smallint(4)
+    是否必填 : smallint(4)
+    是否商城展示 : smallint(4)
+    商城展示类型 : smallint(4)
+    加工端是否展示 : smallint(4)
+    单位取值 : varchar(255)
+    级联约束是否生效 : smallint(4)
+}
+
+entity "类目属性3p卖家额外属性 \n info_category_property_meta_3p_extra" as c_p_e {
+    * 类目属性3p卖家额外属性ID : bigint(20)
+    --
+    * 类目属性ID : bigint(20)
+    display : smallint(4)
+    required : smallint(4)
+}
+
+entity "** 类目属性取值**  \n info_category_property_value" as c_p_v {
+    * 类目属性取值ID : bigint(20)
+    --
+    * 类目属性ID : bigint(20)
+    * 属性取值ID : bigint(20)
+    str型值 : varchar(1000)
+    int型值 : bigint(20)
+    decimal型值 : decimal(12,4)
+    单位取值 : varchar(255)
+}
+
+entity "** 类目属性值扩展信息 **  \n sc_category_property_option_value_extend" as c_p_v_e {
+    * ID : bigint(20)
+    --
+   类目属性ID : bigint(20)
+   属性ID : bigint(20)
+   属性取值ID : bigint(20)
+   配置项 : varchar(64)
+   配置值 : varchar(2000)
+}
+
+}
+
+package "商品属性" <<frame>>{
+entity "SKU属性取值  \n info_sku_property_value" as sku_p_v {
+    * SKU属性值ID : bigint(20)
+    --
+    SKU编码 : int(11)
+    属性ID : bigint(20)
+    属性取值ID : bigint(20)
+    str型值 : varchar(1000)
+    int型值 : bigint(20)
+    decimal型值 : decimal(12,4)
+    str型值 : varchar(1000)
+    unit_value : varchar(255)
+}
+
+entity "BU-SKU属性取值  \n info_bu_sku_property_value" as sku_b_p_v {
+    * SKU属性值ID : bigint(20)
+    --
+    SKU编码 : int(11)
+    属性ID : bigint(20)
+    属性取值ID : bigint(20)
+    ** bu_id : int(11) **
+    str型值 : varchar(1000)
+    int型值 : bigint(20)
+    decimal型值 : decimal(12,4)
+    str型值 : varchar(1000)
+    unit_value : varchar(255)
+}
+
+entity "SPU属性取值  \n info_spu_property_value" as spu_p_v {
+    * SPU属性值ID : bigint(20)
+    --
+    SPU编码 : int(11)
+    属性ID : bigint(20)
+    属性取值ID : bigint(20)
+    str型值 : varchar(1000)
+    int型值 : bigint(20)
+    decimal型值 : decimal(12,4)
+    str型值 : varchar(1000)
+    unit_value : varchar(255)
+}
+
+entity "BU-SPU属性取值  \n info_bu_spu_property_value" as spu_b_p_v {
+    * SPU属性值ID : bigint(20)
+    --
+    SPU编码 : int(11)
+    属性ID : bigint(20)
+    属性取值ID : bigint(20)
+    ** bu_id : int(11) **
+    str型值 : varchar(1000)
+    int型值 : bigint(20)
+    decimal型值 : decimal(12,4)
+    str型值 : varchar(1000)
+    unit_value : varchar(255)
+}
+
+}
+
+package "类目" <<frame>> {
+
+entity "商品类目表 \n info_category" as c {
+    类目ID : int(11)
+    --
+    父分类ID : int(11)
+    类目名称 : varchar(64)
+    层级 : tinyint(4)
+    是否叶子类目 : tinyint(4)
+    排序值 : int(11)
+    路径 : varchar(64)
+}
+
+}
+p ||--o{ p_extend
+p ||--o{ p_value
+p ||--o{ c_p
+c_p ||--o| c_p_e
+c_p ||--o{ c_p_v
+p_value ||--o{ c_p_v
+c_p ||--o{ c_p_v_e
+
+c ||--o{ c_p
+
+p ||--o{ p_c_c
+p_value ||--o{ p_c_c
+
+
+p ||--o{ sku_p_v
+p_value |o--o{ sku_p_v
+p ||--o{ sku_b_p_v
+p_value |o--o{ sku_b_p_v
+
+p ||--o{ spu_p_v
+p_value |o--o{ spu_p_v
+p ||--o{ spu_b_p_v
+p_value |o--o{ spu_b_p_v
+
+
+@enduml
+
