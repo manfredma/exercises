@@ -1,0 +1,104 @@
+@startuml
+!define ENTITY_BORDER_COLOR #2C3E50
+!define ENTITY_BACKGROUND_COLOR #FFFFFF
+!define ENTITY_FONT_COLOR #000000
+!define RELATION_BORDER_COLOR #34495E
+!define RELATION_ARROW_COLOR #34495E
+!define RELATION_FONT_COLOR #34495E
+
+skinparam class {
+    BorderColor ENTITY_BORDER_COLOR
+    BackgroundColor ENTITY_BACKGROUND_COLOR
+    FontColor ENTITY_FONT_COLOR
+    ArrowColor RELATION_ARROW_COLOR
+    BorderThickness 2
+}
+
+skinparam relationship {
+    BorderColor RELATION_BORDER_COLOR
+    FontColor RELATION_FONT_COLOR
+    Thickness 2
+}
+
+package "类目" <<frame>> {
+    entity "SKU分类表 \n sc_category" as category #lightblue {
+        * 分类ID : int(11)
+        --
+        父分类ID, 根分类时为0 : int(11)
+        分类名 : varchar(64)
+        层级 : tinyint(4)
+        是否是叶子分类 : tinyint(4)
+        排序值 : smallint(10)
+        菜单路径 : varchar(64)
+        类目路径 : varchar(64)
+        类目状态 : smallint(4)
+    }
+
+    entity "分类信息场景表 \n sc_category_meta_scene" as category_m_s {
+        自增ID : bigint(20)
+        --
+        场景类型 : smallint(4)
+        场景值 : smallint(4)
+    }
+
+    entity "分类信息配置表 \n sc_category_meta" as category_m {
+        自增ID : bigint(20)
+        --
+        * 叶子类目id : int(11)
+        业务类型 : smallint(4)
+        是否有效 : smallint(4)
+        配置内容 : varchar(2000)
+        场景 : smallint(4)
+        配置值 : varchar(2000)
+    }
+
+}
+
+package "类目治理" <<frame>> {
+    entity "类目管理任务表 \n sc_category_manage_task" as category_m_t {
+        自增ID : bigint(20)
+        --
+        类目管理类型 : smallint(4)
+        操作类目ID : int(11)
+        类目路径 : varchar(64)
+        类目卡控状态 : smallint(4)
+        状态 : smallint(4)
+        审批ID : int(11)
+        审核状态 : int(11)
+    }
+
+    entity "SPU总部属性值信息草稿表 \n sc_spu_property_value_draft" as spu_p_v_d {
+        主键 : bigint(20)
+        --
+        * 类目管理任务Id : bigint(20)
+        SPU编码 : varchar(30)
+        SPU名称 : varchar(255)
+        商品SPU总部属性信息json : text
+        属性值完整性 : smallint(4)
+        数据同步状态 : smallint(4)
+        同步结果描述 : varchar(255)
+    }
+
+    entity "SKU事业部属性值信息草稿表 \n sc_sku_bu_property_value_draft" as sku_b_p_v_d {
+        主键 : bigint(20)
+        --
+        *类目管理任务Id : bigint(20)
+        SKU编码 : int(11)
+        SKU名称 : varchar(255)
+        SPU编码 : varchar(30)
+        BU_ID : int(11)
+        商品SKU事业部属性信息json : text
+        属性值完整性:0不完整,1完整 : smallint(4)
+    }
+
+
+}
+
+category ||--o{ category_m_t
+category ||--o{ category_m
+category_m_s ||--o{ category_m
+
+category_m_t ||--o{ spu_p_v_d
+category_m_t ||--o{ sku_b_p_v_d
+
+@enduml
