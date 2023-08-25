@@ -1,0 +1,288 @@
+@startuml
+!define ENTITY_BORDER_COLOR #2C3E50
+!define ENTITY_BACKGROUND_COLOR #FFFFFF
+!define ENTITY_FONT_COLOR #000000
+!define RELATION_BORDER_COLOR #34495E
+!define RELATION_ARROW_COLOR #34495E
+!define RELATION_FONT_COLOR #34495E
+
+skinparam class {
+    BorderColor ENTITY_BORDER_COLOR
+    BackgroundColor ENTITY_BACKGROUND_COLOR
+    FontColor ENTITY_FONT_COLOR
+    ArrowColor RELATION_ARROW_COLOR
+    BorderThickness 2
+}
+
+skinparam relationship {
+    BorderColor RELATION_BORDER_COLOR
+    FontColor RELATION_FONT_COLOR
+    Thickness 2
+}
+
+package "平台SPU" <<frame>> {
+
+    entity "平台SPU信息表 \n sc_spu_info" as spu #lightblue {
+        * 平台spu编码 : varchar(64)
+        --
+        平台spu id : bigint(20)
+        SPU编码 : varchar(30)
+        卖家ID，自营默认为0 : int(11)
+        SPU名称 : varchar(255)
+        标题 : varchar(255)
+        所属叶子类目ID : int(11)
+        后台类目路径 : varchar(64)
+        品牌ID : bigint(20)
+        标准化标记 : smallint(4)
+        SPU状态 : smallint(4)
+        版本号 : int(11)
+    }
+
+    entity "平台SPU属性取值 \n sc_spu_property_value" as spu_p_v {
+        平台SPU属性值Id : bigint(20)
+        --
+        *平台SPU编码 : varchar(64)
+        *属性Id : bigint(20)
+        属性取值Id : bigint(20)
+        str型值 : varchar(1000)
+        int型值 : bigint(20)
+        decimal型值 : decimal(12,4)
+    }
+
+    entity "SPU扩展信息 \n sc_spu_extend" as spu_e {
+        主键 : bigint(20)
+        平台spu编码 : varchar(64)
+        列名称 : varchar(64)
+        取值 : varchar(2000)
+    }
+
+    note "最小包装单位&最小度量单位"  as n1
+
+    n1 .. spu_e
+
+    spu_p_v }o--|| spu
+
+    spu_e }o--|| spu
+
+}
+
+package "平台SKU" <<frame>> {
+    entity "平台SKU信息表 \n sc_sku_info" as sku #lightblue {
+        *平台sku编码 : varchar(64)
+        --
+        SKU编码 : int(11)
+        平台sku id : bigint(20)
+        平台spu编码 : varchar(64)
+        卖家ID : int(11)
+        SKU名称 : varchar(500)
+        SKU单位ID : int(11)
+        SKU单位 : varchar(32)
+        毛重,单位克 : decimal(16,5)
+        净重,单位克 : decimal(16,5)
+        SKU状态: smallint(4)
+        序号 : int(11)
+        版本号 : int(11)
+    }
+
+    entity "SKU扩展表 \n sc_sku_extend" as sku_e {
+        *主键 : bigint(20)
+        --
+        SKU编码 : int(11)
+        *平台sku编码 : varchar(64)
+        SKU类别: smallint(4)
+        整散类型: smallint(4)
+        规格描述 : varchar(128)
+    }
+
+    entity "平台SKU属性取值 \n sc_sku_property_value" as sku_p_v {
+        平台SKU属性值Id : bigint(20)
+        --
+        * 平台SKU编码 : varchar(64)
+        * 属性Id : bigint(20)
+        属性取值Id : bigint(20)
+        str型值 : varchar(1000)
+        int型值 : bigint(20)
+        decimal型值 : decimal(12,4)
+    }
+
+    entity "SKU单位信息表 \n sc_sku_unit" as sku_u {
+        主键 : bigint(20)
+        --
+        SKU编码 : int(11)
+        * 平台sku编码 : varchar(64)
+        类型 : smallint(4)
+        单位 : varchar(32)
+        单位id : int(11)
+        换算率 : decimal(13,5)
+    }
+
+    entity "SKU条码信息表 \n sc_sku_barcode" as sku_b {
+        主键 : bigint(20)
+        --
+        sku编码 : int(11)
+        * 平台sku编码 : varchar(64)
+        条码类型 : tinyint(4)
+        条码内容 : varchar(64)
+        条码来源 : tinyint(4)
+        条码图片 : varchar(5000)
+    }
+
+    entity "SKU箱规表 \n sc_sku_outer_packing" as sku_o_p {
+        主键 : bigint(20)
+        --
+        SKU编码 : int(11)
+        * 平台sku编码 : varchar(64)
+        箱规编码 : bigint(20)
+        箱规换算率 : int(11)
+        箱规单位ID : int(11)
+        箱规单位 : varchar(32)
+        箱规图片，多个图片用,分隔 : varchar(5000)
+    }
+
+    sku_p_v }|--|| sku
+
+    sku_e }o--|| sku
+
+    sku_u }o--|| sku
+
+    sku_b }o--|| sku
+
+    sku_o_p }o--|| sku
+
+}
+
+package "来源信息" <<frame>> {
+    entity "SKU来源 \n sc_sku_source" as sku_s {
+        主键 : bigint(20)
+        --
+        来源类型 : smallint(4)
+        SKU编码 : int(11)
+        平台sku编码 : varchar(64)
+        来源的扩展信息 : text
+        来源id : int(11)
+    }
+
+    entity "来源详情表 \n sc_sku_source_detail" as sku_s_d {
+        自增ID : bigint(20)
+        --
+        来源名称 : varchar(100)
+    }
+
+    sku_s }o--|| sku_s_d
+}
+
+package "定品信息" <<frame>> {
+    entity "平台品定品信息宽表 \n sc_sku_definition_extend_info" as sku_d {
+            * 平台sku编码 : varchar(64)
+            --
+            SKU名称 : varchar(500)
+            平台spu编码 : varchar(64)
+            SPU名称 : varchar(255)
+            品牌ID : bigint(20)
+            品牌名称 : varchar(100)
+            所属叶子类目ID : int(11)
+            一级类目名称 : varchar(64)
+            二级类目名称 : varchar(64)
+            三级类目名称 : varchar(64)
+            四级类目名称 : varchar(64)
+            定品属性字符串 : text
+            一般属性字符串 : text
+            最小包装信息 : varchar(64)
+            规格描述 : varchar(128)
+            SKU单位 : varchar(32)
+            内包装单位 : varchar(32)
+            内包装换算率 : decimal(13,5)
+            净重信息 : varchar(60)
+            平台规则定品hash值 : varchar(100)
+            外部规则定品hash值 : varchar(100)
+            SKU状态 : smallint(4)
+        }
+}
+
+package "废弃信息" <<frame>> {
+    entity "spu废弃信息表 \n spu_abandon_info" as spu_a {
+        平台SPU编码 : varchar(64)
+        --
+        SPU编码 : varchar(30)
+        废弃原因 : smallint(4)
+        其它类型该值不为空 : varchar(100)
+        废弃时间 : datetime
+    }
+
+    entity "sku废弃信息表 \n sku_abandon_info" as sku_a {
+        平台sku编码 : varchar(64)
+        --
+        商品编码 : varchar(30)
+        包装规格编码 : int(11)
+        废弃原因 : smallint(4)
+        其它类型该值不为空 : varchar(100)
+        废弃类型 : smallint(4)
+        废弃时间 : datetime
+    }
+}
+
+
+package "媒体信息" <<frame>> {
+
+    entity "SKU图文信息表 \n sc_sku_media" as sku_m {
+        主键 : bigint(20)
+        --
+        SKU编码 : int(11)
+        * 平台sku编码 : varchar(64)
+        资源Id : bigint(20)
+        资源类型 : tinyint(4)
+        顺序 : int(11)
+    }
+
+    entity "SKU关联外部品图片表 \n sc_sku_related_media" as sku_r_m {
+        主键 : bigint(20)
+        --
+        * 平台sku编码 : varchar(64)
+        资源Id : bigint(20)
+        资源类型:11外部图片 : tinyint(4)
+        顺序 : int(11)
+    }
+
+    entity "文字描述表 \n sc_media_text_info" as text {
+        主键ID : bigint(20)
+        --
+        文字描述 : text
+    }
+
+    entity "图片表 \n sc_media_image_info" as image {
+        主键ID : bigint(20)
+        图片URL : varchar(300)
+        channelId : int(11)
+    }
+
+    entity "外部图片表 \n sc_related_media_info" as r_image {
+        主键ID : bigint(20)
+        图片URL : varchar(300)
+    }
+
+    entity "视频表 \n sc_media_video_info" as video {
+        主键ID : bigint(20)
+        视频URL : varchar(300)
+    }
+
+    image |o--o{ sku_m
+    video |o--o{ sku_m
+    text |o--o{ sku_m
+    r_image ||--o{ sku_r_m
+}
+
+sku_m }o--|| sku
+
+sku_r_m }o--|| sku
+
+sku }o--|| spu
+
+sku_s |o--|| sku
+
+sku_d |o--|| sku
+
+sku_a |o--|| sku
+
+spu_a |o--|| spu
+
+@enduml

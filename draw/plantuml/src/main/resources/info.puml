@@ -33,7 +33,10 @@ entity "属性定义 \n info_property_meta" as p {
     值类型 : smallint(4)
     单位类型 : smallint(4)
     单位取值 : varchar(255)
+
 }
+
+
 
 entity "属性扩展信息 \n sc_property_extend" as p_extend {
     * 扩展信息ID : bigint(20)
@@ -42,6 +45,11 @@ entity "属性扩展信息 \n sc_property_extend" as p_extend {
     列名称 : varchar(64)
     取值 : varchar(2000)
 }
+
+note "appleFlag - 属性值自助申报标识" as N1
+
+N1 .. p_extend
+
 entity "属性取值基类 \n info_property_value_base" as p_value {
     * 属性取值ID : bigint(20)
     --
@@ -53,6 +61,10 @@ entity "属性取值基类 \n info_property_value_base" as p_value {
     单位取值 : varchar(255)
     排序值 : int(11)
 }
+
+note "虽然有父子实际上没有使用" as N2
+
+N2 .. p_value
 
 entity "属性级联约束 \n info_property_cascade_constraint" as p_c_c {
     * 属性级联约束ID : bigint(20)
@@ -117,6 +129,9 @@ entity "** 类目属性值扩展信息 **  \n sc_category_property_option_value_
    配置值 : varchar(2000)
 }
 
+note "增量建改品不可用标记" as N3
+
+N3 .. c_p_v_e
 }
 
 package "商品属性" <<frame>>{

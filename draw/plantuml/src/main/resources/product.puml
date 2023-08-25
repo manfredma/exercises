@@ -1,0 +1,344 @@
+@startuml
+!define ENTITY_BORDER_COLOR #2C3E50
+!define ENTITY_BACKGROUND_COLOR #FFFFFF
+!define ENTITY_FONT_COLOR #000000
+!define RELATION_BORDER_COLOR #34495E
+!define RELATION_ARROW_COLOR #34495E
+!define RELATION_FONT_COLOR #34495E
+
+skinparam class {
+    BorderColor ENTITY_BORDER_COLOR
+    BackgroundColor ENTITY_BACKGROUND_COLOR
+    FontColor ENTITY_FONT_COLOR
+    ArrowColor RELATION_ARROW_COLOR
+    BorderThickness 2
+}
+
+skinparam relationship {
+    BorderColor RELATION_BORDER_COLOR
+    FontColor RELATION_FONT_COLOR
+    Thickness 2
+}
+
+package "卖家SKU" <<frame>> {
+
+    entity "** SKU信息 ** \n sc_sku_info" as sku #lightblue {
+        * SKU编码 : int(11)
+        --
+        SPU编码 : varchar(30)
+        卖家ID : int(11)
+        商品类别 : smallint(4)
+        主包装规格编码 : int(11)
+        SKU名称 : varchar(500)
+        版本号 : int(11)
+        状态 : int(11)
+    }
+
+    entity "BU-SKU信息 \n sc_sku_sales_info" as sku_b #yellow {
+        * SKU编码 : int(11)
+        --
+        SPU编码 : varchar(30)
+        商品类别 : smallint(4)
+        ** BU_ID : int(11) **
+        上下架状态 : smallint(4)
+        存储方式 : varchar(64)
+        运输方式 : varchar(64)
+        保质期单位 : smallint(4)
+        保质期数字 : int(11)
+        利润品标志 : smallint(4)
+        SKU描述 : varchar(1000)
+        SKU标题 : varchar(500)
+        是否定制 : smallint(4)
+        管理模式 : smallint(4)
+        SKU规格说明 : sku_unit_desc
+    }
+
+    entity "SKU条码信息表 \n sc_sku_barcode" as sku_bc {
+        * SKU编码 : int(11)
+        --
+        SPU编码 : varchar(30)
+        卖家ID : int(11)
+        条码类型 : smallint(4)
+        条码内容 : varchar(64)
+    }
+
+    entity "SKU业务单位 \n sc_sku_biz_unit" as sku_b_u {
+        * SKU编码 : int(11)
+        --
+        ** BU_ID : int(11) **
+        业务类型 : smallint(4)
+        单位 : varchar(32)
+        单位ID : int(11)
+        业务单位与SKU单位之间换算率 : decimal(13,5)
+    }
+
+    sku ||--o{ sku_b
+    sku ||--o{ sku_bc
+    sku ||--o{ sku_b_u
+
+}
+
+package "外包装信息" <<frame>> {
+    entity "SKU外包装单位 \n sc_sku_outer_packing" as sku_o_p {
+        * SKU编码 : int(11)
+        * 外包装编码id : bigint(20)
+        --
+        外包装转化率 : int(11)
+        外包装单位 : varchar(32)
+        外包装单位id : int(11)
+    }
+
+    entity "SKU内包装单位 \n sc_sku_inner_unit" as sku_i_u {
+        * SKU编码 : int(11)
+        --
+        类型 : smallint(4)
+        单位 : varchar(32)
+        单位id : int(11)
+        换算率 : decimal(13,5)
+    }
+}
+
+package "媒体信息" <<frame>> {
+    entity "sku箱规媒体信息 \n sc_sku_outer_packing_media_info" as sku_o_p_m_i {
+        * 外包装编码id : bigint(20)
+        * 媒体资源Id : bigint(20)
+        __
+        媒体类型 : tinyint(4)
+        顺序 : int(11)
+    }
+
+    entity "商品媒体信息 \n sc_sku_media_info" as sku_m_i {
+        * 媒体资源Id : bigint(20)
+        * skuCode : int(11)
+        --
+        资源位置 : tinyint(4)
+        媒体类型 : tinyint(4)
+        顺序 : int(11)
+    }
+
+    entity "媒体图片信息 \n sc_media_image_info" as m_i_i {
+        * 主键ID : bigint(20)
+        --
+        图片URL : varchar(300)
+        1比1图片URL : varchar(300)
+        4比3图片URL : varchar(300)
+    }
+
+    entity "媒体视频信息 \n sc_media_video_info" as m_v_i {
+        * 主键ID : bigint(20)
+        --
+        视频URL : varchar(300)
+        动态封面url : varchar(300)
+        带水印的视频URL : varchar(300)
+        视频基础信息 : varchar(500)
+    }
+
+    sku_o_p ||--o{ sku_o_p_m_i
+    sku ||--o{ sku_m_i
+
+    m_i_i }|--o{ sku_o_p_m_i
+    m_i_i }|--o{ sku_m_i
+    m_v_i }|--o{ sku_m_i
+
+
+
+}
+
+package "平台SKU" <<frame>> {
+
+    entity "** 平台SKU与卖家SKU关联 ** \n sc_uni_sku_mapping" as uni_sku {
+        * 平台SKU编码 : int(11)
+        * 卖家SKU编码 : int(11)
+        --
+        卖家ID : int(11)
+    }
+
+}
+
+package "卖家SPU" <<frame>> {
+
+    entity "SPU信息 \n sc_spu_info" as spu #lightblue {
+        * SPU编码 : int(11)
+        --
+        卖家ID : int(11)
+        名称 : varchar(255)
+        标题 : varchar(255)
+        类型 : smallint(4)
+        所属类目ID : int(11)
+        品牌ID : bigint(20)
+        版本号 : int(11)
+    }
+    entity "SPU扩展信息 \n sc_spu_extend" as spu_e {
+        * SPU编码 : int(11)
+        --
+        列名称 : varchar(64)
+        取值 : varchar(2000)
+    }
+
+    note "主要存储的数据是:最小包装单位和最小度量单位" as N1
+
+    N1 .. spu_e
+
+
+    entity "BU-SPU信息 \n sc_sales_spu" as spu_b #yellow {
+        * SPU编码 : varchar(30)
+        --
+        ** BU_ID : int(11) **
+        商品类型 : smallint(4)
+        品牌id : bigint(20)
+        所属类目ID : int(11)
+        产品名称 : varchar(255)
+        别名 : varchar(255)
+        带广告词名称 : varchar(200)
+        简单文字描述 : text
+        图片URL : varchar(1024)
+        详情图片URL : varchar(4096)
+        营养成分表图片URL : varchar(1024)
+        质检报告图片URL : varchar(1024)
+        是否定制: smallint(4)
+        是否支持多退少补: smallint(1)
+        加工标签 : smallint(1)
+        加工标签最小阈值 : int(4)
+        加工标签最大阈值 : int(4)
+        运营上下架 : smallint(4)
+        销售类型 : smallint(4)
+        无库存原因 : smallint(4)
+        利润品标志 : smallint(4)
+        统一品类型 : smallint(4)
+        税率 : decimal(2,2)
+    }
+
+
+    spu ||--o{ spu_e
+    spu ||--o{ spu_b
+
+}
+
+package "定品信息" <<frame>> {
+    entity "卖家SPU定品信息表 \n sc_spu_definition_info" as spu_d_i {
+        * 卖家ID : int(11)
+        * SPU编码 : varchar(64)
+        --
+        SPU名称 : varchar(255)
+        叶子类目ID : int(11)
+        品牌ID : bigint(20)
+        最小包装信息 : varchar(128)
+        关键属性字符串 : text
+        不拼接类目ID的定品属性字符串 : text
+        不包含类目ID的定品hash值 : varchar(128)
+        完整的定品hash值 : varchar(128)
+        定品信息是否完整 : smallint(4)
+    }
+}
+
+package "平台SPU" <<frame>> {
+
+    entity "平台SPU与卖家SPU关联 \n sc_uni_spu_mapping" as uni_spu {
+        平台SPU编码 : varchar(30)
+        卖家SPU编码 : varchar(30)
+        --
+        卖家ID : int(11)
+    }
+
+}
+
+package "平台SKU" <<frame>> {
+
+    entity "** 平台SKU与卖家SKU关联 ** \n sc_uni_sku_mapping" as uni_sku {
+        * 平台SKU编码 : int(11)
+        * 卖家SKU编码 : int(11)
+        --
+        卖家ID : int(11)
+    }
+
+}
+
+package "品牌" <<frame>> {
+
+    entity "品牌表 \n sc_brand" as brand {
+        * 自增ID : bigint(20)
+        --
+        品牌名称 : varchar(100)
+        logo图片URL : varchar(1024)
+        品牌详情 : varchar(100)
+        BU_ID : int(11)
+    }
+
+}
+
+package "废弃信息" <<frame>> {
+    entity "spu废弃信息表 \n spu_abandon_info" as spu_a_i {
+        * 自增ID : bigint(20)
+        --
+        商品编码 : varchar(30)
+        废弃原因 : smallint(4)
+        其它类型该值不为空 : varchar(100)
+        废弃时间 : datetime
+    }
+
+    entity "sku废弃信息表 \n sku_abandon_info" as s_a_i {
+        * 商品编码 : varchar(30)
+        --
+        包装规格编码 : int(11)
+        废弃原因 : smallint(4)
+        其它类型该值不为空 : varchar(100)
+        废弃类型 : smallint(4)
+        废弃时间 : datetime
+    }
+
+}
+
+package "其他信息" <<frame>> {
+
+    package "自营品与POP品关联" <<frame>> {
+        entity "卖家商品体检信息摘要 \n seller_info_summary" as s_i_s {
+            *BU_ID : int(11)
+            --
+            全部商品数 : int(11)
+            不完整商品数 : int(11)
+            得分 : int(11)
+            不准确商品数 : int(11)
+            不完整商品明细 : text
+            不准确商品明细 : text
+            治理信息得分 : int(11)
+        }
+    }
+
+    package "自营品与POP品关联" <<frame>> {
+        entity "自营品与POP SPU关联表 \n sc_spu_relevancy" as spu_s_r {
+            类型:1搬家,2系统 : smallint(4)
+            自营SPU编码 : varchar(30)
+            POP卖家SPU编码 : varchar(30)
+            卖家ID，自营默认为0 : int(11)
+        }
+
+        entity "自营SKU与POP卖家SKU关联表 \n sc_sku_relevancy" as sku_s_r {
+            类型:1搬家,2系统 : smallint(4)
+            自营SKU编码 : int(11)
+            POP卖家SKU编码 : int(11)
+            卖家ID，自营默认为0 : int(11)
+        }
+
+    }
+}
+
+
+
+
+uni_sku ||--o{ sku
+uni_spu ||-o{ spu
+
+spu ||--o{ sku
+
+spu }o--|| brand
+
+spu ||--o| spu_d_i
+sku ||--o{ sku_o_p
+sku ||--o{ sku_i_u
+
+sku ||--o{ s_a_i
+spu ||--o| spu_a_i
+
+
+
+@enduml
