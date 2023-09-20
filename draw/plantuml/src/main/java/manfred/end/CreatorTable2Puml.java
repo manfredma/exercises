@@ -4,25 +4,21 @@ import java.util.Arrays;
 
 public class CreatorTable2Puml {
     public static void main(String[] args) {
-        String s = "CREATE TABLE `sc_sku_bu_property_value_draft` (\n" +
+        String s = "CREATE TABLE `sc_same_spu_relation` (\n" +
                 "  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',\n" +
-                "  `task_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '类目管理任务Id',\n" +
-                "  `sku_code` int(11) NOT NULL DEFAULT '0' COMMENT 'SKU编码',\n" +
-                "  `sku_name` varchar(255) NOT NULL DEFAULT '' COMMENT 'SKU名称',\n" +
-                "  `spu_code` varchar(30) NOT NULL DEFAULT '' COMMENT 'SPU编码',\n" +
-                "  `bu_id` int(11) NOT NULL DEFAULT '0' COMMENT '事业部编码',\n" +
-                "  `bu_name` varchar(255) NOT NULL DEFAULT '' COMMENT '事业部名称',\n" +
-                "  `property_info` text COMMENT '商品SKU事业部属性信息json',\n" +
-                "  `property_integrity` smallint(4) NOT NULL DEFAULT '0' COMMENT '属性值完整性:0不完整,1完整',\n" +
-                "  `channel_id` int(11) NOT NULL DEFAULT '0' COMMENT '渠道',\n" +
-                "  `istatus` smallint(4) NOT NULL DEFAULT '1' COMMENT '逻辑删除, 1正常, 0已删除',\n" +
-                "  `create_time` datetime NOT NULL DEFAULT '1970-01-01 00:00:00' COMMENT '创建时间',\n" +
-                "  `create_by` varchar(60) NOT NULL DEFAULT '' COMMENT '创建人',\n" +
-                "  `last_modify_time` datetime NOT NULL DEFAULT '1970-01-01 00:00:00' COMMENT '最后修改时间',\n" +
-                "  `last_modify_by` varchar(60) NOT NULL DEFAULT '' COMMENT '最后修改人',\n" +
+                "  `group_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '分组id',\n" +
+                "  `spu_code` varchar(30) NOT NULL DEFAULT '' COMMENT '商品编码',\n" +
+                "  `scene_type` smallint(4) NOT NULL DEFAULT '100' COMMENT '相同品类型:1比价',\n" +
+                "  `channel_id` int(11) NOT NULL DEFAULT '0' COMMENT 'channelId',\n" +
+                "  `istatus` smallint(4) NOT NULL DEFAULT '1' COMMENT '逻辑删除:0删除,1有效',\n" +
+                "  `create_time` datetime DEFAULT '1970-01-01 00:00:00' COMMENT '创建时间',\n" +
+                "  `create_by` varchar(45) NOT NULL DEFAULT '' COMMENT '创建者',\n" +
+                "  `last_modify_time` datetime DEFAULT '1970-01-01 00:00:00' COMMENT '修改时间',\n" +
+                "  `last_modify_by` varchar(45) NOT NULL DEFAULT '' COMMENT '修改者',\n" +
                 "  PRIMARY KEY (`id`),\n" +
-                "  KEY `idx_sc_sku_bu_property_value_draft_task_id_sku_code_bu_id` (`task_id`,`sku_code`,`bu_id`)\n" +
-                ") ENGINE=InnoDB AUTO_INCREMENT=33724 DEFAULT CHARSET=utf8mb4 COMMENT='SKU事业部属性值信息草稿表'";
+                "  UNIQUE KEY `uiq_sku_code_scene_type` (`spu_code`,`scene_type`),\n" +
+                "  KEY `idx_groupid` (`group_id`)\n" +
+                ") ENGINE=InnoDB AUTO_INCREMENT=10420039 DEFAULT CHARSET=utf8mb4 COMMENT='SPU分组关系表'";
 
         String[] lines = s.split("\\r?\\n");
         String tableName = lines[0].substring(lines[0].indexOf("`") + 1, lines[0].lastIndexOf("`"));

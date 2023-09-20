@@ -1,0 +1,78 @@
+@startuml
+
+
+
+package "Group" <<frame>> {
+    entity "分组groupID生成表 \n sc_same_group_id_generate" as group_id {
+        主键 : bigint(20)
+        分组算法算出的分组哈希值 : varchar(100)
+        场景类型 : int(11)
+        SKU编码 : int(11)
+        原始property编码，用于计算md5值 : text
+    }
+
+    entity "SKU分组关系表 \n sc_same_sku_relation" as sku_g {
+        主键 : bigint(20)
+        --
+        * 分组id : int(11)
+        SKU编码 : int(11)
+        CSU编码 : int(11)
+        SPU编码 : varchar(30)
+        相同品类型 : smallint(4)
+    }
+
+    entity "SPU分组关系表 \n sc_same_spu_relation" as spu_g {
+        主键 : bigint(20)
+        分组id : bigint(20)
+        商品编码 : varchar(30)
+        相同品类型:1比价 : smallint(4)
+    }
+
+    group_id ||--|{ spu_g
+    group_id ||--|{ sku_g
+}
+
+
+
+package "分组任务" <<frame>> {
+    entity "分组变化合并任务 \n sc_same_group_change_merge_task" as group_c_m_t {
+        主键 : bigint(20)
+        任务ID : bigint(20)
+        场景类型 : int(11)
+        开始时间 : datetime
+        结束时间 : datetime
+        总行数 : int(11)
+        成功行数 : int(11)
+        失败行数 : int(11)
+        分组变更总数 : int(11)
+        1:未完成，2:已完成 : int(11)
+    }
+
+    entity "分组变化任务明细 \n sc_same_group_change_merge_detail" as group_c_m_t_d {
+        主键 : bigint(20)
+        任务ID : bigint(20)
+        场景类型: int(11)
+        分组ID，旧 : bigint(20)
+        分组ID，新 : bigint(20)
+        分组参考ID，旧 : varchar(64)
+        分组参考ID，新 : varchar(64)
+        分组参考的属性信息，旧 : text
+        分组参考的属性信息，新 : text
+        是否为新增-0:false, 1:true : tinyint(1)
+    }
+
+
+    entity "分组明细关系表 \n sc_group_detail_relation" as s_g_d_r {
+        主键 : bigint(20)
+        分组主表id : bigint(20)
+        场景类型 : smallint(11)
+        分组关系id : bigint(20)
+        分组明细编码 : varchar(30)
+        关系状态 1有效 2无效 : smallint(4)
+        分组主表hashcode : varchar(100)
+    }
+
+}
+
+
+@enduml
