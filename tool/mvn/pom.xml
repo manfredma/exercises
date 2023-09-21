@@ -18,6 +18,7 @@
         <module>hello-maven-plugin</module>
         <module>hello-maven-plugin-test</module>
         <module>dependency-conflic</module>
+        <module>maven-surefire-plugin-test</module>
     </modules>
 
 
