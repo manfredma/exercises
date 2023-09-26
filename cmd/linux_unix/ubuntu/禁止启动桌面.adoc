@@ -1,0 +1,7 @@
+##用来将Ubuntu默认启动方式改为从命令行启动
+
+user@ubuntu: sudo systemctl set-default multi-user.target
+
+##恢复的命令
+
+sudo systemctl set-default graphical.target
