@@ -58,11 +58,11 @@
         <slf4j-version>1.7.25</slf4j-version>
         <mockito-version>2.23.0</mockito-version>
         <powermock2-version>2.0.2</powermock2-version>
-        <junit4-version>4.12</junit4-version>
+        <junit4-version>4.13.1</junit4-version>
         <jmh-version>1.23</jmh-version>
         <guava-version>30.1-jre</guava-version>
         <es-version>7.10.0</es-version>
-        <jackson-version>2.11.0</jackson-version>
+        <jackson-version>2.15.2</jackson-version>
         <commons-lang3-version>3.8.1</commons-lang3-version>
         <jsonp-version>1.13.1</jsonp-version>
         <r2dbc-mysql-version>0.8.2.RELEASE</r2dbc-mysql-version>
@@ -441,6 +441,14 @@
                 <groupId>io.netty</groupId>
                 <artifactId>netty-all</artifactId>
                 <version>4.1.60.Final</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.openrewrite.recipe</groupId>
+                <artifactId>rewrite-recipe-bom</artifactId>
+                <version>2.3.0</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
 
         </dependencies>
