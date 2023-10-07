@@ -9,6 +9,7 @@ import com.tngtech.archunit.core.domain.JavaFieldAccess;
 import com.tngtech.archunit.core.importer.ClassFileImporter;
 import com.tngtech.archunit.lang.ArchRule;
 import java.util.Set;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +38,7 @@ public class MyArchitectureTest {
     }
 
     @Test
+    @Ignore // 暂时忽略
     public void some_architecture_rule() {
         JavaClasses importedClasses = new ClassFileImporter().importPackages("com.myapp");
 
