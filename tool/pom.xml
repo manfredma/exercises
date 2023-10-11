@@ -37,6 +37,7 @@
         <module>git</module>
         <module>hutool</module>
         <module>geohash</module>
+        <module>yml</module>
     </modules>
 
 </project>
