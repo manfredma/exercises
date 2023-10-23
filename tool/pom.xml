@@ -38,6 +38,7 @@
         <module>hutool</module>
         <module>geohash</module>
         <module>yml</module>
+        <module>diff</module>
     </modules>
 
 </project>
