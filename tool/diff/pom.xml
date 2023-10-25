@@ -25,6 +25,32 @@
             <version>6.14.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>io.github.zerobyteword</groupId>
+            <artifactId>json-diff-core</artifactId>
+            <version>1.0.0-release</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/cn.xiaoandcai/JsonDiff -->
+        <dependency>
+            <groupId>cn.xiaoandcai</groupId>
+            <artifactId>JsonDiff</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/io.github.java-diff-utils/java-diff-utils -->
+        <dependency>
+            <groupId>io.github.java-diff-utils</groupId>
+            <artifactId>java-diff-utils</artifactId>
+            <version>4.12</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>
