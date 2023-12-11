@@ -4,3 +4,4 @@
 [%hardbreaks]
 https://www.lsdcloud.com/go/middleware/json-schema.html[JSON Schema详解]
 https://gjtmaster.com/2018/08/17/JsonSchema%E5%85%A8%E5%A5%97%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/[JsonSchema全套解决方案]
+https://juejin.cn/post/6844903766915809287[Jackson注解大全，你都学会了吗？]

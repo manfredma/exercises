@@ -1,11 +1,11 @@
 package org.openrewrite.java;
 
-import static java.util.Collections.emptyList;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.openrewrite.ExecutionContext;
@@ -13,7 +13,6 @@ import org.openrewrite.InMemoryExecutionContext;
 import org.openrewrite.Recipe;
 import org.openrewrite.Result;
 import org.openrewrite.SourceFile;
-import org.openrewrite.config.Environment;
 import org.openrewrite.internal.InMemoryLargeSourceSet;
 
 public class RunRewriteManually {
@@ -21,12 +20,12 @@ public class RunRewriteManually {
         // determine your project directory and provide a list of
         // paths to jars that represent the project's classpath
         Path projectDir = Paths.get(".");
-        List<Path> classpath = emptyList();
+        List<Path> classpath = Collections.emptyList();
 
 
         // put any rewrite recipe jars on this main method's runtime classpath
         // and either construct the recipe directly or via an Environment
-        Environment environment = Environment.builder().scanRuntimeClasspath().build();
+        // Environment environment = Environment.builder().scanRuntimeClasspath().build();
         Recipe recipe = new UseStaticImport("java.util.List remove(..)");
 
         // create a JavaParser instance with your classpath

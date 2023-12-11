@@ -1,4 +1,4 @@
-package jackson.schema;
+package jackson;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.github.fge.jackson.JsonLoader;
@@ -10,7 +10,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.Iterator;
 
-public class Boot {
+public class JacksonSchemaMain {
     @Test
     public void testJsonSchema2() {
         String failure = "{\"foo\":1234}";
