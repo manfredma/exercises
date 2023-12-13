@@ -51,6 +51,12 @@
             <artifactId>guava</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.openrewrite.tools</groupId>
+            <artifactId>java-object-diff</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+
     </dependencies>
 
 </project>
