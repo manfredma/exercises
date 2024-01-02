@@ -17,6 +17,7 @@
         <module>jdbc</module>
         <module>mybatis-spring</module>
         <module>dbcp</module>
+        <module>shard-mybatis</module>
     </modules>
 
     <packaging>pom</packaging>
