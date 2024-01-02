@@ -17,16 +17,17 @@ import org.openrewrite.internal.InMemoryLargeSourceSet;
 
 public class RunRewriteManually {
     public static void main(String[] args) throws IOException {
+
         // determine your project directory and provide a list of
         // paths to jars that represent the project's classpath
-        Path projectDir = Paths.get(".");
+        Path projectDir = Paths.get("./tool/open-rewrite");
         List<Path> classpath = Collections.emptyList();
 
 
         // put any rewrite recipe jars on this main method's runtime classpath
         // and either construct the recipe directly or via an Environment
         // Environment environment = Environment.builder().scanRuntimeClasspath().build();
-        Recipe recipe = new UseStaticImport("java.util.List remove(..)");
+        Recipe recipe = new UseStaticImport("java.util.Collections emptyList()");
 
         // create a JavaParser instance with your classpath
         JavaParser javaParser = JavaParser.fromJavaVersion()
