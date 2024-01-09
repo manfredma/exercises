@@ -21,6 +21,7 @@
         <module>java-thread</module>
         <module>java-collection</module>
         <module>java-generic</module>
+        <module>java8</module>
     </modules>
 
 
