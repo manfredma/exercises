@@ -1,4 +1,4 @@
-package lambdasinaction.chp3;
+package lambdasinaction.chap3;
 
 import java.util.*;
 import static java.util.Comparator.comparing;
