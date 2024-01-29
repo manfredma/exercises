@@ -1,9 +1,14 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
+
+@JsonRootName("xxx")
 public class Customer {
 
     private String name;
 
+    @JsonProperty("x.age")
     private int age;
 
     public Customer(String name, int age) {
