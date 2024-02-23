@@ -4,3 +4,7 @@
 [%hardbreaks]
 https://www.cnblogs.com/xiaolincoding/p/15628854.html[为了拿捏 Redis 数据结构，我画了 40 张图（完整版）]
 https://mp.weixin.qq.com/s/3TU9qxHJyxHJgVDaYXoluA[Redis系列文章——合集 -- 张铁蕾]
+*redisson:*
+https://zhuanlan.zhihu.com/p/135864820[Redisson 实现分布式锁原理分析]
+https://github.com/redisson/redisson-examples/tree/master[redisson-sample]
+https://www.cnblogs.com/keeya/p/14332131.html[Redisson 分布式锁实战与 watch dog 机制解读]

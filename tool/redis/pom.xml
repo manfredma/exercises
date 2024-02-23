@@ -14,6 +14,7 @@
     <modules>
         <module>jedis</module>
         <module>lettuce</module>
+        <module>redisson</module>
     </modules>
 
 
