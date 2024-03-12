@@ -1,4 +1,0 @@
-
-
-== 参考
-http://zhangtielei.com/posts/blog-redis-skiplist.html[Redis内部数据结构详解(6)——skiplist]
