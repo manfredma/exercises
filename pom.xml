@@ -11,6 +11,7 @@
         <module>java-language</module>
         <module>concurrent</module>
         <module>jvm</module>
+        <module>do-exercise</module>
         <module>design-pattern</module>
         <module>other</module>
         <module>test</module>
