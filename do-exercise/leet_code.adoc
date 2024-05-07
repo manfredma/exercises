@@ -1,0 +1,5 @@
+
+== 参考
+[%hardbreaks]
+https://github.com/wind-liang/leetcode[leet code 刷题]
+https://www.jianshu.com/p/9d8296562806[Skip List--跳表（全网最详细的跳表文章没有之一）]

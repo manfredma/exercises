@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>exercises</artifactId>
+        <groupId>manfred.end</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>do-exercise</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>leet-code_1-50</module>
+        <module>leet-code_51-100</module>
+        <module>leet-code_101-150</module>
+        <module>leet-code_151-200</module>
+        <module>leet-code_201-250</module>
+        <module>leet-code_251-300</module>
+        <module>leet-code_301-350</module>
+        <module>leet-code_351-400</module>
+        <module>leet-code_401-450</module>
+        <module>leet-code_451-500</module>
+        <module>leet-code_501-550</module>
+        <module>leet-code_551-600</module>
+        <module>leet-code_601-650</module>
+        <module>leet-code_651-700</module>
+        <module>leet-code_801-850</module>
+        <module>leet-code_951-1000</module>
+        <module>leet-code_901-950</module>
+        <module>leet-code_1101-1150</module>
+        <module>leet-code_1351-1400</module>
+        <module>leet-code_1201-1250</module>
+        <module>CTCI</module>
+    </modules>
+
+    <packaging>pom</packaging>
+</project>
