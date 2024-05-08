@@ -22,6 +22,7 @@
         <module>java-collection</module>
         <module>java-generic</module>
         <module>java8</module>
+        <module>jdk-concurrent</module>
     </modules>
 
 

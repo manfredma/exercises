@@ -8,6 +8,7 @@ import java.lang.reflect.Field;
  */
 public class Boot {
     public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException {
+        // 使用反射读取 threadLocal 中的值
         ThreadLocal<String> threadLocal = new ThreadLocal<>();
         threadLocal.set("xxx");
 
