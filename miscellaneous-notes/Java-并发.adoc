@@ -1,0 +1,7 @@
+=== 为何wait方法需要放在 synchronization 中？
+在wait()上进行同步是为了避免丢失唤醒问题。这个问题本质上代表了一个等待的线程错过了通知信号。它主要是由于线程之间的**竞态条件**造成的。
+
+
+
+=== 参考
+https://www.baeldung.com/java-wait-necessary-synchronization[为何wait方法需要放在 synchronization 中]
