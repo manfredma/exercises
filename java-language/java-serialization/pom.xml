@@ -18,7 +18,6 @@
         <module>proto-buf</module>
         <module>json</module>
         <module>html</module>
-        <module>excel</module>
     </modules>
 
 </project>
