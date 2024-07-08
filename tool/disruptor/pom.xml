@@ -17,7 +17,6 @@
     </properties>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/com.lmax/disruptor -->
         <dependency>
             <groupId>com.lmax</groupId>
             <artifactId>disruptor</artifactId>

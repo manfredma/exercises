@@ -2,3 +2,5 @@
 
 == 参考
 https://tech.meituan.com/2016/11/18/disruptor.html[高性能队列——Disruptor] +
+https://xie.infoq.cn/article/24a25e92be5baeb42b018c640[Disruptor 在撮合引擎的实践｜得物技术] +
+
