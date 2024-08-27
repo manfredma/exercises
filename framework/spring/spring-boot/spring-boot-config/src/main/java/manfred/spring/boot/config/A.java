@@ -20,4 +20,11 @@ public class A {
     public void setA(String a) {
         this.a = a;
     }
+
+    @Override
+    public String toString() {
+        return "A{" +
+                "a='" + a + '\'' +
+                '}';
+    }
 }

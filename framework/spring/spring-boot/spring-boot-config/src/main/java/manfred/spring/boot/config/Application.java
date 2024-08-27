@@ -19,13 +19,13 @@ public class Application {
 
     public static void main(String[] args) {
         ApplicationContext applicationContext = SpringApplication.run(Application.class, args);
-        LOGGER.info(applicationContext.getBean("a", A.class).getA());
-        LOGGER.info(applicationContext.getBean("b", B.class).getB() + "");
-        LOGGER.info(applicationContext.getBean("c") + "");
+        LOGGER.info("V1_" + applicationContext.getBean("a", A.class));
+        LOGGER.info("V1_" + applicationContext.getBean("b", B.class));
+        LOGGER.info("V1_" + applicationContext.getBean("c") + "");
 
-        LOGGER_V2.info("V2_" + applicationContext.getBean("a", A.class).getA());
-        LOGGER_V2.info("V2_" + applicationContext.getBean("b", B.class).getB() + "");
-        LOGGER_V2.info("V2_" + applicationContext.getBean("c") + "");
+        LOGGER_V2.info("V2_" + applicationContext.getBean("a", A.class));
+        LOGGER_V2.info("V2_" + applicationContext.getBean("b", B.class));
+        LOGGER_V2.info("V2_" + applicationContext.getBean("c"));
     }
 
 }
