@@ -6,7 +6,6 @@
 * -rf，-resume-from：在完整的反应堆构建顺序基础上指定从哪个模块开始构建
 
 ==== 支持 MavenWrapper +
-mvn -N io.takari:maven:0.7.6:wrapper -Dmaven=3.8.8
 mvn wrapper:wrapper -Dmaven=3.8.8
 
 
