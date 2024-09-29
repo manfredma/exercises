@@ -45,10 +45,4 @@ public class MyBatisBooks {
         System.out.println("result=" + result);
     }
 
-    @Test
-    public void updateBookCreated() {
-        int i = myMapper.updateBookCreated(new Date());
-        System.out.println("update=" + i);
-    }
-
 }

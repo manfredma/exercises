@@ -6,7 +6,7 @@
 <mapper namespace="com.zetcode">
 
     <select id="mysqlVersion" resultType="String">
-        SELECT VERSION()
+        SELECT h2VERSION() from dual
     </select>
 
 

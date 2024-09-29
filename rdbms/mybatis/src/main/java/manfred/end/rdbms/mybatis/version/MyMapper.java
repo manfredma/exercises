@@ -4,6 +4,6 @@ import org.apache.ibatis.annotations.Select;
 
 public interface MyMapper {
 
-    @Select("SELECT VERSION()")
+    @Select("SELECT h2VERSION() from dual")
     String getMySQLVersion();
 }

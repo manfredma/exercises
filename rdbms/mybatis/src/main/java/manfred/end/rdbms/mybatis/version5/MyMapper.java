@@ -20,7 +20,4 @@ public interface MyMapper {
             + "VALUES(#{author}, #{title}, #{published}, #{remark})")
     void insertBook(String author, String title, int published,
                     String remark);
-
-    @Update("update MyBooks set created = date_add(created, interval 1 second) where created < #{date}")
-    void updateBookCreated(Date date);
 }

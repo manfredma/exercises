@@ -28,6 +28,8 @@ grep [-acinv] [--color=auto] '查找字符串' filename
 grep --color=auto 'MANPATH' /etc/man.config
 # 把ls -l的输出中包含字母file（不区分大小写）的内容输出
 ls -l | grep -i file
+
+grep -r --include="*.properties" "jdbc:mysql" .
 ----
 
 == 基本正则表达式

@@ -1,10 +1,12 @@
+drop table IF EXISTS MyBooks;
 CREATE TABLE MyBooks
 (
     Id        INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
     Author    VARCHAR(30),
     Title     VARCHAR(60),
     Published INTEGER,
-    Remark    VARCHAR(150)
+    Remark    VARCHAR(150),
+    created   DATETIME
 );
 
 INSERT INTO MyBooks(Author, Title, Published, Remark) VALUES ('Leo Tolstoy', 'War and Peace', 1869, 'Napoleonic wars');

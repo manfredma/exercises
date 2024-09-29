@@ -49,12 +49,6 @@ public class MyBatisBooks {
         System.out.println("result=" + result);
     }
 
-    @Test
-    public void updateBookCreated() {
-        int i = session.update("updateBookCreated", new Date());
-        System.out.println("update=" + i);
-        session.commit();
-    }
 
     @AfterClass
     public static void clean() {
