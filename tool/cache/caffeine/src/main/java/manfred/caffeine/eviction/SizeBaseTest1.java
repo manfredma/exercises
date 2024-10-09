@@ -9,7 +9,7 @@ public class SizeBaseTest1 {
         Cache<Object, Object> cache = Caffeine.newBuilder()
                 //缓存最大条数,超过这个条数就是驱逐缓存
                 .maximumSize(20)
-                .removalListener((k, v, removalCause) -> System.out.println("removed " + k + " cause " + removalCause.toString()))
+                .removalListener((k, v, removalCause) -> System.out.println("removed " + k + " cause " + removalCause))
                 .build();
 
         for (int i = 0; i < 25; i++) {

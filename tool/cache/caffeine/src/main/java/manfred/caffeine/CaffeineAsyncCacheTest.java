@@ -14,10 +14,6 @@ import java.util.function.Function;
 
 import static java.lang.Thread.sleep;
 
-/**
- * @author cuishilei
- * @date 2019/8/23
- */
 public class CaffeineAsyncCacheTest {
     public static void main(String[] args) throws InterruptedException, ExecutionException {
         AsyncCache<Object, Object> asyncCache = Caffeine.newBuilder()
@@ -37,7 +33,7 @@ public class CaffeineAsyncCacheTest {
             System.out.println(System.currentTimeMillis() + "->" + o);
         });
 
-        sleep(101);
+        sleep(200);
 
         //如果 cache 中 key 为空，直接返回 null，不为空则异步取值
         CompletableFuture<Object> ifPresent = asyncCache.getIfPresent(key1);
@@ -61,7 +57,7 @@ public class CaffeineAsyncCacheTest {
         //批量异步获取
         all.thenAccept(System.out::println);
 
-        sleep(101);
+        sleep(200);
 
         ConcurrentMap<Object, CompletableFuture<Object>> asMap = asyncCache.asMap();
         System.out.println("all  after timeout: " + asMap);

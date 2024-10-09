@@ -5,7 +5,6 @@ import org.checkerframework.checker.index.qual.NonNegative;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
-
 public class SizeBaseTest2 {
 
     public static void main(String[] args) {
@@ -20,10 +19,10 @@ public class SizeBaseTest2 {
                         return (int) v;
                     }
                 })
-                .removalListener((k, v, removalCause) -> System.out.println("removed " + k + " cause " + removalCause.toString()))
+                .removalListener((k, v, removalCause) -> System.out.println("removed " + k + " cause " + removalCause))
                 .build();
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 200; i++) {
             cache.put(i, 10);
         }
         cache.cleanUp();
