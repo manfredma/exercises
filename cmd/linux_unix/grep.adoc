@@ -8,7 +8,6 @@ grep [-acinv] [--color=auto] '查找字符串' filename
 
 
 它的常用参数如下：
-[%hardbreaks]
 -a ：将binary文件以text文件的方式查找数据
 -e ：实现多个选项间的逻辑or关系
 -E ：扩展的正则表达式
@@ -30,6 +29,7 @@ grep --color=auto 'MANPATH' /etc/man.config
 ls -l | grep -i file
 
 grep -r --include="*.properties" "jdbc:mysql" .
+grep "getCatNodeProperty" --include \*.java -r .
 ----
 
 == 基本正则表达式
