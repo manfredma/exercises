@@ -45,6 +45,7 @@
         <module>chart</module>
         <module>draw</module>
         <module>java-language/java-gc</module>
+        <module>data</module>
     </modules>
     <packaging>pom</packaging>
 
