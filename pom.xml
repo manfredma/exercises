@@ -46,6 +46,7 @@
         <module>draw</module>
         <module>java-language/java-gc</module>
         <module>data</module>
+        <module>tool/cache/mapdb</module>
     </modules>
     <packaging>pom</packaging>
 
