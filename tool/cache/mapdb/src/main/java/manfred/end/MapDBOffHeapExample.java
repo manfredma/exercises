@@ -20,7 +20,7 @@ public class MapDBOffHeapExample {
                 .hashMap("offHeapMap")
                 .keySerializer(Serializer.STRING)
                 .valueSerializer(Serializer.STRING)
-                .expireMaxSize(1002)               // 最多存储1000个元素
+                .expireMaxSize(1000)               // 最多存储1000个元素
                 .expireStoreSize(100 * 1024 * 1024)    // 最大存储空间100MB
                 .expireAfterCreate(24 * 60 * 60 * 1000) // 24小时后过期
                 .createOrOpen();
