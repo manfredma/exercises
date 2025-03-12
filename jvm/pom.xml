@@ -23,6 +23,7 @@
         <module>jvm-gc</module>
         <module>jvm-method-invoke</module>
         <module>jvm-invoke</module>
+        <module>jvm-metaspace</module>
     </modules>
 
     <packaging>pom</packaging>
