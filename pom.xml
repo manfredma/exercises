@@ -47,6 +47,7 @@
         <module>java-language/java-gc</module>
         <module>data</module>
         <module>tool/cache/mapdb</module>
+        <module>tool/lombok</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -515,13 +516,22 @@
             <plugin>
                 <groupId>org.openrewrite.maven</groupId>
                 <artifactId>rewrite-maven-plugin</artifactId>
-                <version>5.5.2</version>
+                <version>5.17.1</version>
                 <configuration>
                     <activeRecipes>
-                        <recipe>org.openrewrite.java.OrderImports</recipe>
+                        <recipe>com.meituan.baobab.commons.openrewrite.java.recipes.LogScanRecipe
+                        </recipe>
                     </activeRecipes>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.meituan.baobab.commons</groupId>
+                        <artifactId>rewrite-baobab-commons</artifactId>
+                        <version>1.0.1-0515-sxl-SNAPSHOT</version>
+                    </dependency>
+                </dependencies>
             </plugin>
+
         </plugins>
     </build>
 

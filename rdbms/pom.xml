@@ -18,6 +18,7 @@
         <module>mybatis-spring</module>
         <module>dbcp</module>
         <module>shard-mybatis</module>
+        <module>dynamic_sql</module>
     </modules>
 
     <packaging>pom</packaging>

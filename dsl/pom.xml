@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>ognl</module>
+        <module>qlexpress</module>
     </modules>
 
     <properties>
