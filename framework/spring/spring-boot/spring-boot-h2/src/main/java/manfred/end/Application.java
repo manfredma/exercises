@@ -1,11 +1,15 @@
 package manfred.end;
 
 import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @SpringBootApplication
@@ -18,9 +22,10 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-
-        logger.info("Inserting -> {}", employeeRepository.insert(new Employee(10011L, "Ramesh",
-                "Fadatare", "ramesh@gmail.com")));
+        List<Employee> employees = new ArrayList<>();
+        employees.add(new Employee(10011L, "Ramesh", "Fadatare", "ramesh@gmail.com"));
+        employees.add(new Employee(10021L, null, "Fadatare", "ramesh@gmail.com"));
+        logger.info("Inserting -> {}", employeeRepository.batchInsert(employees));
         logger.info("Inserting -> {}", employeeRepository.insert(new Employee(10012L, "John",
                 "Cena", "john@gmail.com")));
         logger.info("Inserting -> {}", employeeRepository.insert(new Employee(10013L, "tony",

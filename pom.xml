@@ -48,6 +48,7 @@
         <module>data</module>
         <module>tool/cache/mapdb</module>
         <module>tool/lombok</module>
+        <module>tool/mapstruct</module>
     </modules>
     <packaging>pom</packaging>
 

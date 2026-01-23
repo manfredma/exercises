@@ -2,6 +2,7 @@ package manfred.end;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import javax.annotation.Resource;
@@ -54,6 +55,48 @@ public class EmployeeJDBCRepository {
                         employee.getEmailId()
                 });
     }
+
+    public int batchInsert(List<Employee> employee) {
+        String sql = "insert into employees (id, first_name, last_name, email_address) " +
+                "values";
+        List<Object> args = new ArrayList<>();
+        for (Employee e : employee) {
+            sql += "(";
+            Long id = e.getId();
+            if (id != null) {
+                sql += "?,";
+                args.add(id);
+            } else {
+                sql += "null,";
+            }
+
+            String firstName = e.getFirstName();
+            if (firstName != null) {
+                sql += "?,";
+                args.add(id);
+            } else {
+                sql += "null,";
+            }
+            String lastName = e.getLastName();
+            if (lastName != null) {
+                sql += "?,";
+                args.add(lastName);
+            } else {
+                sql += "null,";
+            }
+            String emailId = e.getEmailId();
+            if (emailId != null) {
+                sql += "?";
+                args.add(emailId);
+            } else {
+                sql += "null";
+            }
+            sql += "),";
+        };
+        sql = sql.substring(0, sql.length() - 1);
+        return jdbcTemplate.update(sql, args.toArray());
+    }
+
 
     public int update(Employee employee) {
         return jdbcTemplate.update(

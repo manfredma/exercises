@@ -22,26 +22,44 @@
 
     <build>
         <plugins>
+            <!-- Protobuf 编译插件 - 自动生成 Java 代码 -->
             <plugin>
                 <groupId>org.xolstice.maven.plugins</groupId>
                 <artifactId>protobuf-maven-plugin</artifactId>
-                <version>0.5.0</version>
+                <version>0.6.1</version>
                 <configuration>
+                    <!-- 指定 protoc 编译器版本 -->
                     <protocArtifact>
-                        com.google.protobuf:protoc:3.1.0:exe:${os.detected.classifier}
+                        com.google.protobuf:protoc:3.19.0:exe:${os.detected.classifier}
                     </protocArtifact>
-                    <pluginId>grpc-java</pluginId>
                 </configuration>
                 <executions>
                     <execution>
                         <goals>
-<!--                            <goal>compile</goal>-->
-<!--                            <goal>compile-custom</goal>-->
+                            <!-- compile: 编译 .proto 文件生成 Java 代码 -->
+                            <goal>compile</goal>
+                            <!-- test-compile: 编译测试目录下的 .proto 文件 -->
+                            <goal>test-compile</goal>
                         </goals>
                     </execution>
                 </executions>
             </plugin>
         </plugins>
+
+        <!-- 确保生成的源码被正确处理 -->
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.8.1</version>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 
 </project>
