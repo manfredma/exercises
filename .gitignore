@@ -1,23 +1,19 @@
-/.idea
-/*.iml
-/target
-/*/*.iml
-/**/target
-/*/*/*.iml
-/*/*/target
-/*/*/*/*.iml
-/*/*/*/target
-/*/*/*/*/*.iml
-/*/*/*/*/target
-/*/*/*/*/*/*.iml
-/*/*/*/*/*/target
-/*/*/*/*/*/*/*.iml
-/*/*/*/*/*/*/target
-/log4j
+# Build output
+**/target/
 
-/.DS_Store
-/*/.DS_Store
+# IDE
+.idea/
+*.iml
 
+# OS
+.DS_Store
+
+# Logs
+log4j
+
+# Tools
+tmp/
 ~/
-
-tmp
+.gstack/
+.omc/
+.claude/

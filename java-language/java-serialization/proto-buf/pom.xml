@@ -28,10 +28,8 @@
                 <artifactId>protobuf-maven-plugin</artifactId>
                 <version>0.6.1</version>
                 <configuration>
-                    <!-- 指定 protoc 编译器版本 -->
-                    <protocArtifact>
-                        com.google.protobuf:protoc:3.19.0:exe:${os.detected.classifier}
-                    </protocArtifact>
+                    <!-- 使用本地安装的 protoc，避免从仓库下载 exe artifact -->
+                    <protocExecutable>/opt/homebrew/bin/protoc</protocExecutable>
                 </configuration>
                 <executions>
                     <execution>

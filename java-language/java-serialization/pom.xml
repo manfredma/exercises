@@ -15,7 +15,6 @@
     <modules>
         <module>jdk-serialization</module>
         <module>message-pack</module>
-        <module>proto-buf</module>
         <module>json</module>
         <module>html</module>
     </modules>
