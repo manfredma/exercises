@@ -1,3 +1,0 @@
-
-== 参考
-https://plantuml.com/zh/[官方手册]
